@@ -37,6 +37,7 @@ span,
 
 body {
   background-color: #f4f4f4;
+  height: 1000px;
 }
 
 ul li {
@@ -44,7 +45,7 @@ ul li {
   margin: 0 0 0 1rem;
 }
 
-.nav-bar {
+header {
   height: 44px;
   background-color: white;
   transition: 0.4s;
@@ -93,7 +94,7 @@ header ul li:hover {
 }
 
 @media (min-width: 1024px) {
-  .nav-bar {
+  header {
     position: fixed;
     top: 0;
     left: 0;
@@ -101,6 +102,33 @@ header ul li:hover {
     height: 72px;
     transition: 0.4s;
     background-color: #0061FF;
+  }
+}
+
+@media (min-width: 1024px) {
+  header.scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    transition: 0.4s;
+    background-color: #FFF;
+    box-shadow: 0px 2px 3px 0px rgb(0 0 0 / 10%);
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.1)
+  }
+
+  header.scroll ul li {
+    color: rgba(0, 0, 0, 0.9)
+  }
+
+  header.scroll section h1 {
+    background: url('../img/logo2.png');
+    background-size: 96px auto;
+    width: 96px;
+    height: 23px;
+    margin: 0;
   }
 }
 

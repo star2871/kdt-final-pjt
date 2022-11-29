@@ -32,9 +32,24 @@
   </ul>
 
   <script>
+    // 햄버거 메뉴 토글
     document.querySelector('.btn-menu').addEventListener('click', function () {
       document.querySelector('.list-group').classList.toggle('show')
     })
+  </script>
+  <script>
+    // 스크롤 시 헤더 색상 변경
+    const header = document.querySelector('header');
+
+    window.onscroll = function () {
+      let top = window.scrollY;
+      console.log(top);
+      if (top >= 72) {
+        header.classList.add('scroll')
+      } else {
+        header.classList.remove('scroll');
+      }
+    }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
