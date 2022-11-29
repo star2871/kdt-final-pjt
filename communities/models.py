@@ -5,6 +5,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
 from datetime import datetime, timedelta
 from django.utils import timezone
+from countries.models import Country
 
 # Create your models here.
 class Article(models.Model):
@@ -14,7 +15,7 @@ class Article(models.Model):
     travel_end = models.DateField()
     # 신호등
     grade = models.IntegerField(default=1)
-    content = models.TextField()
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
     image = ProcessedImageField(blank=True, 
                                 processors=[Thumbnail(500, 700)], 
                                 format='JPEG', options={'quality':90}, 
@@ -45,6 +46,7 @@ class Feed(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=150)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
     image = ProcessedImageField(
         upload_to="images/",
         processors=[Thumbnail(500, 700)],
