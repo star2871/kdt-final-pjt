@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -34,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "countries",
-    "community",
+    "communities",
     "imagekit",
     "django_bootstrap5",
     "accounts",
@@ -127,6 +126,11 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
