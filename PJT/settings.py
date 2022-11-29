@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.naver",
+    "allauth.socialaccount.providers.google",
     "countries",
     "communities",
     "imagekit",

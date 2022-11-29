@@ -1,5 +1,4 @@
-
-
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block body %}
 {% if user.profile_image %}
@@ -9,5 +8,5 @@
 {% endif %}
 <h1>{{ user.username }}님의 id</h1>
 <h2>{{ user.nick_name }}님의 닉네임</h2>
-<a class="btn btn-outline-light rounded-0 font-space" href="{% url 'accounts:update' %}">수정하기</a>
+<a class="btn btn-primary rounded-0 font-space" href="{% url 'accounts:update' %}">수정하기</a>
 {% endblock %}
