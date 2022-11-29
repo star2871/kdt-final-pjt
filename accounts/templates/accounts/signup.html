@@ -1,8 +1,8 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load django_bootstrap5 %}
 {% block body %}
+<div style="margin-top: 60px">
   <h1>회원가입</h1>
 
   <form action="" method='POST'>
@@ -11,4 +11,5 @@
     {% comment %} {{ review_form.as_p }} {% endcomment %}
     {% bootstrap_button button_type="submit" content="작성" %}
   </form>
+</div>
 {% endblock %}
