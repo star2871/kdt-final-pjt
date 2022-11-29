@@ -11,7 +11,7 @@ from countries.models import Country
 class Article(models.Model):
     title = models.CharField(max_length=80)
     content = models.TextField()
-    travel_start = models.DateField()
+    travel_start = models.DateField(blank=True, )
     travel_end = models.DateField()
     # 신호등
     grade = models.IntegerField(default=1)
