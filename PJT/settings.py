@@ -122,6 +122,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 사용자가 업로드한 미디어파일들을 보관할 절대 경로(로컬 디렉토리)
+MEDIA_ROOT = BASE_DIR / 'media'
+# 업로드된 파일의 주소(url)을 만등러 주는 역할
+# 슬래시로 끝나야 한다.
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
