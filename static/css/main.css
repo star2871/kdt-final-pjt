@@ -1,0 +1,43 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body,
+table,
+th,
+td,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+blockquote,
+span,
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -1px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+
+.nav-bar {
+  height: 72px;
+}
