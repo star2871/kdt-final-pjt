@@ -7,4 +7,4 @@ def index(request):
 
 def country_detail_view(request, country_code):
     country = Country.objects.get(country_code=country_code)
-    return render(request , 'country/detail.html', {'country': country})
+    return render(request , 'country/detail.html', {'countries': country})

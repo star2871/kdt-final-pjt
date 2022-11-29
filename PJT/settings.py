@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "country",
-    "community",
+    "countries",
+    "communities",
     "imagekit",
     "django_bootstrap5",
     "accounts",
