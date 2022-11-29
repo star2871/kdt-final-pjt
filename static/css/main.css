@@ -152,6 +152,13 @@ header ul li:hover {
 
 .list-group {
   display: none;
+  transition: 1s;
+}
+
+@media (min-width: 1024px) {
+  .list-group.show {
+    display: none;
+  }
 }
 
 .show {
