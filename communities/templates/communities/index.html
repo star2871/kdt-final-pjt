@@ -14,9 +14,19 @@
   </head>
 
   <body>
-    <h1>
-      hi
-    </h1>
+    {% if request.resolver_match.url_name == 'review' %}
+      <h1>
+        후기
+      </h1>
+    {% elif request.resolver_match.url_name == 'advice' %}
+      <h1>
+        꿀팁
+      </h1>
+    {% elif request.resolver_match.url_name == 'feed' %}
+      <h1>
+        피드
+      </h1>
+    {% endif %}
   </body>
 
 </html>
