@@ -37,7 +37,6 @@ span,
 
 body {
   background-color: #f4f4f4;
-  height: 1000px;
 }
 
 ul li {
@@ -99,7 +98,7 @@ header ul li:hover {
     top: 0;
     left: 0;
     right: 0;
-    height: 72px;
+    height: 60px;
     transition: 0.4s;
     background-color: #0061FF;
   }
@@ -111,7 +110,7 @@ header ul li:hover {
     top: 0;
     left: 0;
     right: 0;
-    height: 72px;
+    height: 60px;
     transition: 0.4s;
     background-color: #FFF;
     box-shadow: 0px 2px 3px 0px rgb(0 0 0 / 10%);
@@ -152,7 +151,7 @@ header ul li:hover {
 
 .list-group {
   display: none;
-  transition: 1s;
+  text-align: center;
 }
 
 @media (min-width: 1024px) {
@@ -161,7 +160,7 @@ header ul li:hover {
   }
 }
 
-.show {
+.list-group.show {
   display: block;
 }
 
