@@ -245,3 +245,177 @@ ul li {
   text-decoration: none;
   color: #0062ff;
 }
+
+/* 회원가입 */
+.signup-form input {
+  width: 336px;
+  height: 48px;
+  margin-bottom: 1rem;
+  padding: 0 16px 0 48px;
+  border-radius: 5px;
+  border: 1px solid rgba(189, 189, 189, 0.5)
+}
+
+.signup-form input:focus {
+  outline: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(189, 189, 189, 0.9)
+}
+
+.signup-form input:focus~svg {
+  fill: rgba(155, 155, 155)
+}
+
+.join-id {
+  position: relative;
+}
+
+.join-id svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-username {
+  position: relative;
+}
+
+.join-username svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-password1 {
+  position: relative;
+}
+
+.join-password1 svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-password2 {
+  position: relative;
+}
+
+.join-password2 svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-photo {
+  position: relative;
+}
+
+.join-photo svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+/* 테스트 */
+.join-photo {
+  position: relative;
+}
+
+.input-file-trigger1 {
+  display: block;
+  padding: 10px 48px;
+  background: white;
+  color: #747574;
+  font-size: 1em;
+  /* transition: all .4s; */
+  cursor: pointer;
+  border: 1px solid rgba(189, 189, 189, 0.5);
+  border-radius: 5px;
+}
+
+.js .input-file1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.input-file-container {
+  position: relative;
+  width: 225px;
+}
+
+.signup-form button {
+  border: none;
+  width: 336px;
+  height: 56px;
+  background-color: #0061ff;
+  margin-top: 1rem;
+}
+
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: transparent;
+  color: #fff;
+  font-size: 1em;
+  /* transition: all .4s; */
+  cursor: pointer;
+}
+
+.js .input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.file-return {
+  margin: 0;
+}
+
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+
+.js .file-return {
+  font-size: .9em;
+  color: rgb(159, 159, 159)
+}
+
+.js .file-return:not(:empty):before {
+  content: "";
+  font-style: normal;
+  font-weight: normal;
+}
