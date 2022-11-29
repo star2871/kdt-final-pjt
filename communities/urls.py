@@ -4,7 +4,7 @@ from . import views
 app_name = "communities"
 
 urlpatterns = [
-    path("", views.review, name="review"),
-    # path("feed/", views.feed, name="feed"),
-    # path("advice/", views.advice, name="advice"),
+    path("<str:country_code>/review/", views.review, name="review"),
+    path("<str:country_code>/feed/", views.review, name="feed"),
+    path("<str:country_code>/advice/", views.review, name="advice"),
 ]
