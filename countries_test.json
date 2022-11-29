@@ -1,6 +1,6 @@
 [
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Ghana",
       "country_code": "GH",
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Gabon",
       "country_code": "GA",
@@ -96,7 +96,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guyana",
       "country_code": "GY",
@@ -144,7 +144,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Gambia",
       "country_code": "GM",
@@ -180,7 +180,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bailiwick of Guernsey",
       "country_code": "GG",
@@ -244,7 +244,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guadeloupe",
       "country_code": "GP",
@@ -267,7 +267,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guatemala",
       "country_code": "GT",
@@ -311,7 +311,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guam",
       "country_code": "GU",
@@ -363,7 +363,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Vatican",
       "country_code": "VA",
@@ -411,7 +411,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Grenada",
       "country_code": "GD",
@@ -467,7 +467,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Greece",
       "country_code": "GR",
@@ -533,7 +533,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Greenland",
       "country_code": "GL",
@@ -577,7 +577,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guinea",
       "country_code": "GN",
@@ -613,7 +613,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Guinea-Bissau",
       "country_code": "GW",
@@ -649,7 +649,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Namibia",
       "country_code": "NA",
@@ -713,7 +713,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Nauru",
       "country_code": "NR",
@@ -767,7 +767,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Nigeria",
       "country_code": "NG",
@@ -831,7 +831,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "South Sudan",
       "country_code": "SS",
@@ -867,7 +867,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "South Africa",
       "country_code": "ZA",
@@ -931,7 +931,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Netherlands",
       "country_code": "NL",
@@ -997,7 +997,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Netherlands Antilles",
       "country_code": "AN",
@@ -1018,7 +1018,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Nepal",
       "country_code": "NP",
@@ -1074,7 +1074,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Norway",
       "country_code": "NO",
@@ -1138,7 +1138,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "New Caledonia",
       "country_code": "NC",
@@ -1168,7 +1168,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "New Zealand",
       "country_code": "NZ",
@@ -1234,7 +1234,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Niue",
       "country_code": "NU",
@@ -1259,7 +1259,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Niger",
       "country_code": "NE",
@@ -1299,7 +1299,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Nicaragua",
       "country_code": "NI",
@@ -1335,7 +1335,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Taiwan",
       "country_code": "TW",
@@ -1399,7 +1399,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Korea",
       "country_code": "KR",
@@ -1459,7 +1459,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Denmark",
       "country_code": "DK",
@@ -1525,7 +1525,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Dominican Republic",
       "country_code": "DO",
@@ -1585,7 +1585,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Dominica",
       "country_code": "DM",
@@ -1643,7 +1643,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Germany",
       "country_code": "DE",
@@ -1709,7 +1709,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Timor-Leste",
       "country_code": "TL",
@@ -1755,7 +1755,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Laos",
       "country_code": "LA",
@@ -1791,7 +1791,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Liberia",
       "country_code": "LR",
@@ -1839,7 +1839,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Latvia",
       "country_code": "LV",
@@ -1901,7 +1901,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Russia",
       "country_code": "RU",
@@ -1965,7 +1965,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Lebanon",
       "country_code": "LB",
@@ -2009,7 +2009,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Lesotho",
       "country_code": "LS",
@@ -2043,7 +2043,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Réunion",
       "country_code": "RE",
@@ -2083,7 +2083,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Romania",
       "country_code": "RO",
@@ -2135,7 +2135,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Luxembourg",
       "country_code": "LU",
@@ -2201,7 +2201,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Rwanda",
       "country_code": "RW",
@@ -2253,7 +2253,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Libya",
       "country_code": "LY",
@@ -2285,7 +2285,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Lithuania",
       "country_code": "LT",
@@ -2335,7 +2335,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Liechtenstein",
       "country_code": "LI",
@@ -2399,7 +2399,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Madagascar",
       "country_code": "MG",
@@ -2431,7 +2431,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Martinique",
       "country_code": "MQ",
@@ -2467,7 +2467,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Marshall Islands",
       "country_code": "MH",
@@ -2513,7 +2513,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mayotte",
       "country_code": "YT",
@@ -2541,7 +2541,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Federated States of Micronesia",
       "country_code": "FM",
@@ -2595,7 +2595,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Macao",
       "country_code": "MO",
@@ -2659,7 +2659,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Malawi",
       "country_code": "MW",
@@ -2715,7 +2715,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Malaysia",
       "country_code": "MY",
@@ -2781,7 +2781,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mali",
       "country_code": "ML",
@@ -2817,7 +2817,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Isle of Man",
       "country_code": "IM",
@@ -2845,7 +2845,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mexico",
       "country_code": "MX",
@@ -2909,7 +2909,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Monaco",
       "country_code": "MC",
@@ -2959,7 +2959,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Morocco",
       "country_code": "MA",
@@ -3007,7 +3007,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mauritius",
       "country_code": "MU",
@@ -3063,7 +3063,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mauritania",
       "country_code": "MR",
@@ -3091,7 +3091,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mazambique",
       "country_code": "MZ",
@@ -3135,7 +3135,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Montenegro",
       "country_code": "ME",
@@ -3201,7 +3201,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Montserrat",
       "country_code": "MS",
@@ -3247,7 +3247,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Moldova",
       "country_code": "MD",
@@ -3287,7 +3287,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Maldives",
       "country_code": "MV",
@@ -3315,7 +3315,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Malta",
       "country_code": "MT",
@@ -3381,7 +3381,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Mongolia",
       "country_code": "MN",
@@ -3425,7 +3425,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Myanmar",
       "country_code": "MM",
@@ -3469,7 +3469,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "United States of America",
       "country_code": "US",
@@ -3535,7 +3535,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Vanuatu",
       "country_code": "VU",
@@ -3583,7 +3583,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bahrain",
       "country_code": "BH",
@@ -3631,7 +3631,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Barbados",
       "country_code": "BB",
@@ -3679,7 +3679,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bahamas",
       "country_code": "BS",
@@ -3743,7 +3743,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bangladesh",
       "country_code": "BD",
@@ -3807,7 +3807,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bermuda",
       "country_code": "BM",
@@ -3853,7 +3853,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Benin",
       "country_code": "BJ",
@@ -3893,7 +3893,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Venezuela",
       "country_code": "VE",
@@ -3957,7 +3957,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Vietnam",
       "country_code": "VN",
@@ -4021,7 +4021,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Belgium",
       "country_code": "BE",
@@ -4087,7 +4087,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Belarus",
       "country_code": "BY",
@@ -4127,7 +4127,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Belize",
       "country_code": "BZ",
@@ -4183,7 +4183,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bosnia-Herzegovina",
       "country_code": "BA",
@@ -4247,7 +4247,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Botswana",
       "country_code": "BW",
@@ -4307,7 +4307,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bolivia",
       "country_code": "BO",
@@ -4367,7 +4367,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Burundi",
       "country_code": "BI",
@@ -4415,7 +4415,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Burkina Faso",
       "country_code": "BF",
@@ -4467,7 +4467,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bhutan",
       "country_code": "BT",
@@ -4523,7 +4523,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Northern Mariana Islands",
       "country_code": "MP",
@@ -4575,7 +4575,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "North Macedonia",
       "country_code": "MK",
@@ -4635,7 +4635,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bulgaria",
       "country_code": "BG",
@@ -4699,7 +4699,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Brazil",
       "country_code": "BR",
@@ -4763,7 +4763,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Brunei",
       "country_code": "BN",
@@ -4821,7 +4821,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Samoa",
       "country_code": "WS",
@@ -4869,7 +4869,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Saudi Arabia",
       "country_code": "SA",
@@ -4897,7 +4897,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cyprus",
       "country_code": "CY",
@@ -4951,7 +4951,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sahara Arab Democratic Republic",
       "country_code": "EH",
@@ -4972,7 +4972,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "San Marino",
       "country_code": "SM",
@@ -5020,7 +5020,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sâo Tomé & Principe",
       "country_code": "ST",
@@ -5072,7 +5072,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "St. Pierre and Miquelon",
       "country_code": "PM",
@@ -5104,7 +5104,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Senegal",
       "country_code": "SN",
@@ -5136,7 +5136,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Serbia",
       "country_code": "RS",
@@ -5196,7 +5196,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Seychelles",
       "country_code": "SC",
@@ -5248,7 +5248,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "St Helena",
       "country_code": "SH",
@@ -5290,7 +5290,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "St. Lucia",
       "country_code": "LC",
@@ -5350,7 +5350,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "St. Vincent & the Grenadines",
       "country_code": "VC",
@@ -5398,7 +5398,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "St. Kitts-Nevis",
       "country_code": "KN",
@@ -5442,7 +5442,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Somalia",
       "country_code": "SO",
@@ -5472,7 +5472,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Solomon Islands",
       "country_code": "SB",
@@ -5524,7 +5524,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sudan",
       "country_code": "SD",
@@ -5560,7 +5560,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Suriname",
       "country_code": "SR",
@@ -5604,7 +5604,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sri Lanka",
       "country_code": "LK",
@@ -5664,7 +5664,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sweden",
       "country_code": "SE",
@@ -5730,7 +5730,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Swiss",
       "country_code": "CH",
@@ -5796,7 +5796,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Spain",
       "country_code": "ES",
@@ -5862,7 +5862,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Slovakia",
       "country_code": "SK",
@@ -5908,7 +5908,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Slovenia",
       "country_code": "SI",
@@ -5972,7 +5972,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Syria",
       "country_code": "SY",
@@ -6002,7 +6002,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Sierra Leone",
       "country_code": "SL",
@@ -6058,7 +6058,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Singapore",
       "country_code": "SG",
@@ -6124,7 +6124,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "United Arab Emirates : UAE",
       "country_code": "AE",
@@ -6190,7 +6190,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Aruba",
       "country_code": "AW",
@@ -6232,7 +6232,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Armenia",
       "country_code": "AM",
@@ -6276,7 +6276,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Argentina",
       "country_code": "AR",
@@ -6340,7 +6340,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Iceland",
       "country_code": "IS",
@@ -6392,7 +6392,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Haiti",
       "country_code": "HT",
@@ -6436,7 +6436,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Ireland",
       "country_code": "IE",
@@ -6500,7 +6500,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Azerbaijan",
       "country_code": "AZ",
@@ -6548,7 +6548,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Afghanistan",
       "country_code": "AF",
@@ -6576,7 +6576,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Andorra",
       "country_code": "AD",
@@ -6632,7 +6632,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Albania",
       "country_code": "AL",
@@ -6680,7 +6680,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Algeria",
       "country_code": "DZ",
@@ -6712,7 +6712,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Angola",
       "country_code": "AO",
@@ -6756,7 +6756,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Antigua and Barbuda",
       "country_code": "AG",
@@ -6820,7 +6820,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Anguilla",
       "country_code": "AI",
@@ -6870,7 +6870,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Eritrea",
       "country_code": "ER",
@@ -6910,7 +6910,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Eswatini",
       "country_code": "SZ",
@@ -6954,7 +6954,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Estonia",
       "country_code": "EE",
@@ -7020,7 +7020,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Ecuador",
       "country_code": "EC",
@@ -7074,7 +7074,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "ETC",
       "country_code": "ET",
@@ -7106,7 +7106,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "El Salvador",
       "country_code": "SV",
@@ -7136,7 +7136,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "United Kingdom",
       "country_code": "GB",
@@ -7200,7 +7200,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "British Antarctic Territory",
       "country_code": "AQ",
@@ -7221,7 +7221,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "British Virgin Islands",
       "country_code": "VG",
@@ -7265,7 +7265,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "British Indian Ocean Territory",
       "country_code": "IO",
@@ -7288,7 +7288,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Yemen",
       "country_code": "YE",
@@ -7309,7 +7309,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Oman",
       "country_code": "OM",
@@ -7341,7 +7341,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Austria",
       "country_code": "AT",
@@ -7407,7 +7407,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Honduras",
       "country_code": "HN",
@@ -7439,7 +7439,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Wallis and Futuna",
       "country_code": "WF",
@@ -7469,7 +7469,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Jordan",
       "country_code": "JO",
@@ -7503,7 +7503,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Uganda",
       "country_code": "UG",
@@ -7563,7 +7563,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Uruguay",
       "country_code": "UY",
@@ -7627,7 +7627,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Uzbekistan",
       "country_code": "UZ",
@@ -7659,7 +7659,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Ukraine",
       "country_code": "UA",
@@ -7687,7 +7687,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "European Union : EU",
       "country_code": "EU",
@@ -7708,7 +7708,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Iraq",
       "country_code": "IQ",
@@ -7752,7 +7752,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Iran",
       "country_code": "IR",
@@ -7788,7 +7788,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Israel",
       "country_code": "IL",
@@ -7852,7 +7852,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Egypt",
       "country_code": "EG",
@@ -7896,7 +7896,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Italia",
       "country_code": "IT",
@@ -7962,7 +7962,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "India",
       "country_code": "IN",
@@ -8026,7 +8026,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Indonesia",
       "country_code": "ID",
@@ -8090,7 +8090,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Japan",
       "country_code": "JP",
@@ -8154,7 +8154,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Jamaica",
       "country_code": "JM",
@@ -8214,7 +8214,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Zambia",
       "country_code": "ZM",
@@ -8262,7 +8262,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Bailiwick of Jersey",
       "country_code": "JE",
@@ -8326,7 +8326,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Equatorial Guinea",
       "country_code": "GQ",
@@ -8370,7 +8370,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Georgia",
       "country_code": "GE",
@@ -8414,7 +8414,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "China",
       "country_code": "CN",
@@ -8474,7 +8474,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Central African Republic",
       "country_code": "CF",
@@ -8506,7 +8506,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Djibouti",
       "country_code": "DJ",
@@ -8538,7 +8538,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Gibraltar",
       "country_code": "GI",
@@ -8596,7 +8596,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Zimbabwe",
       "country_code": "ZW",
@@ -8660,7 +8660,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Chad",
       "country_code": "TD",
@@ -8696,7 +8696,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Czech",
       "country_code": "CZ",
@@ -8760,7 +8760,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Chile",
       "country_code": "CL",
@@ -8824,7 +8824,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cameroon",
       "country_code": "CM",
@@ -8872,7 +8872,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cape Verde",
       "country_code": "CV",
@@ -8912,7 +8912,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kazakhstan",
       "country_code": "KZ",
@@ -8964,7 +8964,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Qatar",
       "country_code": "QA",
@@ -9000,7 +9000,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cambodia",
       "country_code": "KH",
@@ -9032,7 +9032,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Canada",
       "country_code": "CA",
@@ -9098,7 +9098,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kenya",
       "country_code": "KE",
@@ -9158,7 +9158,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cayman Islands",
       "country_code": "KY",
@@ -9212,7 +9212,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Comoros",
       "country_code": "KM",
@@ -9244,7 +9244,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kosovo",
       "country_code": "XK",
@@ -9265,7 +9265,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Costa Rica",
       "country_code": "CR",
@@ -9329,7 +9329,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Côte D'Ivoire",
       "country_code": "CI",
@@ -9369,7 +9369,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Colombia",
       "country_code": "CO",
@@ -9429,7 +9429,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Congo",
       "country_code": "CG",
@@ -9461,7 +9461,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Democratic Republic of Congo",
       "country_code": "CD",
@@ -9509,7 +9509,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cuba",
       "country_code": "CU",
@@ -9549,7 +9549,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kuwait",
       "country_code": "KW",
@@ -9591,7 +9591,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Cook Islands",
       "country_code": "CK",
@@ -9645,7 +9645,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Croatia",
       "country_code": "HR",
@@ -9701,7 +9701,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kyrgyz",
       "country_code": "KG",
@@ -9745,7 +9745,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Kiribati",
       "country_code": "KI",
@@ -9799,7 +9799,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Tajikistan",
       "country_code": "TJ",
@@ -9831,7 +9831,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Tanzania",
       "country_code": "TZ",
@@ -9879,7 +9879,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Thailand",
       "country_code": "TH",
@@ -9945,7 +9945,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Turks and Caicos Islands",
       "country_code": "TC",
@@ -9993,7 +9993,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Togo",
       "country_code": "TG",
@@ -10025,7 +10025,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Tonga",
       "country_code": "TO",
@@ -10073,7 +10073,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Turkmenistan",
       "country_code": "TM",
@@ -10105,7 +10105,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Tuvalu",
       "country_code": "TV",
@@ -10155,7 +10155,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Tunisia",
       "country_code": "TN",
@@ -10187,7 +10187,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Republic of Turkiye",
       "country_code": "TR",
@@ -10223,7 +10223,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Trinidad & Tobago",
       "country_code": "TT",
@@ -10287,7 +10287,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Panama",
       "country_code": "PA",
@@ -10351,7 +10351,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Paraguay",
       "country_code": "PY",
@@ -10391,7 +10391,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Pakistan",
       "country_code": "PK",
@@ -10447,7 +10447,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Papua New Guinea : PNG",
       "country_code": "PG",
@@ -10487,7 +10487,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Palau",
       "country_code": "PW",
@@ -10529,7 +10529,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Palestine",
       "country_code": "PS",
@@ -10550,7 +10550,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Peru",
       "country_code": "PE",
@@ -10606,7 +10606,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Portugal",
       "country_code": "PT",
@@ -10672,7 +10672,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Poland",
       "country_code": "PL",
@@ -10736,7 +10736,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Puerto Rico",
       "country_code": "PR",
@@ -10800,7 +10800,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "France",
       "country_code": "FR",
@@ -10864,7 +10864,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "French Guiana",
       "country_code": "GF",
@@ -10885,7 +10885,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "French Polynesia",
       "country_code": "PF",
@@ -10915,7 +10915,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Fiji",
       "country_code": "FJ",
@@ -10967,7 +10967,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Finland",
       "country_code": "FI",
@@ -11031,7 +11031,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Philippines",
       "country_code": "PH",
@@ -11095,7 +11095,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Pitcairn Islands",
       "country_code": "PN",
@@ -11116,7 +11116,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Hungary",
       "country_code": "HU",
@@ -11162,7 +11162,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Australia",
       "country_code": "AU",
@@ -11226,7 +11226,7 @@
     }
   },
   {
-    "model": "country.country",
+    "model": "countries.country",
     "fields": {
       "country_name": "Hongkong",
       "country_code": "HK",
