@@ -1,21 +1,22 @@
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block body %}
-  <h1>{{ user }}</h1>
-  {% if request.user.is_authenticated %}
-  <span>{{ request.user }}</span>
-  <a href="{% url 'accounts:logout' %}">로그아웃</a>
-  {% else %}
-  <a href="{% url 'accounts:login' %}">로그인</a>
-  {% endif %}
-  <form action="" method='post'>
-    {% csrf_token %}
-    {% comment %} {% bootstrap_form form %} {% endcomment %}
-    {% comment %} {{ review_form.as_p }} {% endcomment %}
-    <a href="{% url 'accounts:signup' %}">
-      회원가입
-    </a>
-    <a href="{% url 'accounts:list' %}">
-      회원목록
-    </a>
-  </form>
+<h1>{{ user }}</h1>
+{% if request.user.is_authenticated %}
+<span>{{ request.user }}</span>
+<a href="{% url 'accounts:logout' %}">로그아웃</a>
+{% else %}
+<a href="{% url 'accounts:login' %}">로그인</a>
+{% endif %}
+<form action="" method='post'>
+  {% csrf_token %}
+  {% comment %} {% bootstrap_form form %} {% endcomment %}
+  {% comment %} {{ review_form.as_p }} {% endcomment %}
+  <a href="{% url 'accounts:signup' %}">
+    회원가입
+  </a>
+  <a href="{% url 'accounts:list' %}">
+    회원목록
+  </a>
+</form>
 {% endblock %}
