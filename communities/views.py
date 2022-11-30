@@ -28,6 +28,8 @@ def review_create(request, country_code):
         article_form = ArticleForm(request.POST, request.FILES)
         if article_form.is_valid():
             article = article_form.save(commit=False)
+            article.country = country_code
+            article.category = "review"
             article.travel_start = request.POST["start"]
             article.travel_end = request.POST["end"]
             article.save()
@@ -40,12 +42,22 @@ def review_create(request, country_code):
     return render(request, 'communities/form.html', context=context)
 
 
-def review_detail(request, article_pk):
+def review_detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     context = {
         'article': article,
+        'country_code': country_code,
     }
     return render(request, 'communities/detail.html', context)
+
+
+def review_delete(request, article_pk, country_code):
+    article = get_object_or_404(Article, pk=article_pk)
+    if article.user == request.user:
+        if request.method == "POST":
+            article.delete()
+            return redirect("communities:review", country_code)
+    return redirect("communities:review_detail", article_pk, country_code)
 
 
 def calendar(request):
