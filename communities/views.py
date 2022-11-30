@@ -18,7 +18,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 def review(request, country_code):
     articles = Article.objects.order_by("-pk")
     context = {
-        "articles": articles
+        "articles": articles,
+        "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
 
