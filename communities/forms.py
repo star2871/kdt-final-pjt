@@ -16,3 +16,16 @@ class ArticleForm(forms.ModelForm):
         widgets = {
             'content': SummernoteWidget(),
         }
+
+class TipForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = [
+            "title",
+            "content",
+            "country",
+            "image",
+        ]
+        widgets = {
+            'content': SummernoteWidget(),
+        }
