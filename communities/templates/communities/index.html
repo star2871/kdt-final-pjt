@@ -7,17 +7,18 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
-{% block content %}
-<div style="height: 72px;">
+{% block body %}
+<!-- 네브바 높이 -->
+<div style="height: 60px;">
 
 </div>
 <!-- 후기 페이지 -->
 {% if request.resolver_match.url_name == 'review' %}
-<header class="community-header">
+<div class="community-header">
   <h1>
     후기
   </h1>
-</header>
+</div>
 <div class="container">
   <div class="review-wrapper">
     <div class="notion-card">
@@ -71,33 +72,238 @@
     <div class="notion-card">
       <div class="text">
         <div class="review-row">
-          <p class="review-title mb-0">
-            예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
-          </p>
-          <p class="review-date">코나코 | 22.11.30</p>
-          <div class="icons-wrapper">
-            <div class="icons">
-              <div class="icon">
-                <span class="material-icons md-18">
-                  thumb_up_alt
-                </span>
-                <span>3</span>
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
               </div>
-              <div class="icon">
-                <span class="material-icons md-18">
-                  chat_bubble_outline
-                </span>
-                2
-              </div>
-              <div class="icon">
-                <span class="material-icons md-18">
-                  visibility
-                </span>
-                <span>3</span>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
               </div>
             </div>
-
           </div>
+
+        </div>
+        <div class="review-row">
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="review-row">
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="review-row">
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="review-row">
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="review-row">
+          <div class="row row-cols-2">
+            <div class="col">
+              <p class="review-title mb-0">
+                예전 사진 뒤적뒤적..일본 다시 가고 싶다..!
+              </p>
+              <p class="review-date">코나코 | 22.11.30</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>3</span>
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      chat_bubble_outline
+                    </span>
+                    2
+                  </div>
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      visibility
+                    </span>
+                    <span>3</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col review-list">
+              <div>
+                <img class="review-img" src="{% static '/communities/img/header-review.jpg' %}" alt="">
+              </div>
+            </div>
+          </div>
+
         </div>
 
 
