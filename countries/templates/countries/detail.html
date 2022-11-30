@@ -1,9 +1,170 @@
-<h1>hi, detail</h1>
-<p><strong>이름</strong>: {{country.country_name}}</p>
-<div><strong>상태</strong>: {{country.status}}</div>
-<p><strong>상태 작성일자</strong>:{{country.status_wrt_dt}}</p>
-<p><strong>통화 CODE</strong>:{{country.exchange_rate_code}}</p>
-<p><strong>어제자 환율</strong>:{{country.ysd_er}}</p>
-<p><strong>통화 이름</strong>: {{country.cur_nm}}</p>
-<p><strong>이벤트</strong>:{{country.events}}</p>
-<p><strong>비자</strong> : {{country.visa}}</p>
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<section class="detail-top" style="background-color: #0061FF; height: 395px; padding: 24px 0">
+  <div style="padding: 0 18px">
+    <div style="max-width: 732px; margin:0 auto; display: flex; align-items: center;">
+      <p class="gif-icon"
+        style="width:48px; height:24px; border-radius:50px; background-color: white; background-image: url(/ico_now_moving.gif); background-size: 31px; background-position: center center; background-repeat: no-repeat;">
+      </p>
+      <div id="date" style="margin-left: 5px; font-size: 19px; font-weight: 700; letter-spacing: -0.5px; color:white">
+        2022년
+        11월 26일 여행수칙
+      </div>
+    </div>
+    <article
+      style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
+      <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
+        <span style="font-size: 14px; font-weight: 700">4월18일 - 기한없음</span>
+      </div>
+      <ul style="padding-top: 15px;">
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
+          <h2>사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
+          <h2>사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
+          <h2>사적모임 인원제한 없음</h2>
+        </li>
+      </ul>
+    </article>
+  </div>
+</section>
+<section style="margin-top: 24px; padding: 0 18px">
+  <div class="rollingbanner" style="margin: 0 auto;">
+    <div class="title">소식 > </div>
+    <div class="wrap">
+      <ul>
+        <li class="current"><a href="#">12월부터 일본여행 무료</a></li>
+        <li class="next"><a href="#">얼어붙은 투심에…현대엔지니어링 상장 철회</a></li>
+        <li><a href="#">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
+        <li><a href="#">"공법변경 구조검토 요구, 현산 측이 묵살했다"</a></li>
+        <li class="prev"><a href="#">12월 주담대 금리 연 3.63%…7년7개월 만에 최고</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top: 45px; padding: 0 18px">
+  <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto;">날씨 정보 <span
+      style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Weather</span></h2>
+  <div
+    style="margin: 17px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 200px;">
+    <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+      <span>일 | 월 | 화 | 수 | 목 | 금 | 토 </span>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top: 45px; padding: 0 18px">
+  <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto;">축제 정보 <span
+      style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Festival</span></h2>
+  <div style="margin: 17px auto 0; max-width: 732px; height: 300px;">
+    <div>
+      <div style="margin: 0 auto;">
+        <div
+          style="margin: 0 auto; max-width: 732px; height: 300px; overflow-x: scroll; overflow: hidden; display: flex; flex-wrap: nowrap; justify-content: space-between;">
+          <div class="scrollMenu">
+            <article style="width:190px; height:290px; position: relative;">
+              <img src="./images/축제1.jpg"
+                style="object-fit: cover; position: absolute; width: 100%; height: 100%; left: 0; top: 0; overflow: hidden; border-radius: 18px;">
+              <div class="black-gradient"
+                style="background-image: linear-gradient(142deg,rgba(0,0,0,.7),hsla(0,0%,100%,0) 65%); width: 100%; height: 100%; position: absolute; top:0; left:0;">
+              </div>
+              <div class="festival-content" style="position: absolute;">
+                <h2 style="font-size: 19px; text-align: start; color: white;">도쿄 불꽃축제</h2>
+                <p style="font-size: 12px; color: white">2023.01.11 ~ 2023.01.22</p>
+              </div>
+            </article>
+            <article style="width:190px; height:290px; position: relative;">
+              <img src="./images/축제2.jpeg"
+                style="object-fit: cover; position: absolute; width: 100%; height: 100%; left: 0; top: 0; overflow: hidden; border-radius: 18px;">
+              <div class="black-gradient"
+                style="background-image: linear-gradient(142deg,rgba(0,0,0,.7),hsla(0,0%,100%,0) 65%); width: 100%; height: 100%; position: absolute; top:0; left:0;">
+              </div>
+              <div class="festival-content" style="position: absolute;">
+                <h2 style="font-size: 19px; text-align: start; color: white;">마쓰리 전통축제</h2>
+                <p style="font-size: 12px; color: white">2023.01.11 ~ 2023.01.22</p>
+              </div>
+            </article>
+            <article style="width:190px; height:290px; position: relative;">
+              <img src="./images/축제4.jpeg"
+                style="object-fit: cover; position: absolute; width: 100%; height: 100%; left: 0; top: 0; overflow: hidden; border-radius: 18px;">
+              <div class="black-gradient"
+                style="background-image: linear-gradient(142deg,rgba(0,0,0,.7),hsla(0,0%,100%,0) 65%); width: 100%; height: 100%; position: absolute; top:0; left:0;">
+              </div>
+              <div class="festival-content" style="position: absolute;">
+                <h2 style="font-size: 19px; text-align: start; color: white;">오사카 등불축제</h2>
+                <p style="font-size: 12px; color: white">2023.01.11 ~ 2023.01.22</p>
+              </div>
+            </article>
+            <article style="width:190px; height:290px; position: relative;">
+              <img src="./images/축제3.jpeg"
+                style="object-fit: cover; position: absolute; width: 100%; height: 100%; left: 0; top: 0; overflow: hidden; border-radius: 18px;">
+              <div class="black-gradient"
+                style="background-image: linear-gradient(142deg,rgba(0,0,0,.7),hsla(0,0%,100%,0) 65%); width: 100%; height: 100%; position: absolute; top:0; left:0;">
+              </div>
+              <div class="festival-content" style="position: absolute;">
+                <h2 style="font-size: 19px; text-align: start; color: white;">교토 기온축제</h2>
+                <p style="font-size: 12px; color: white">2023.01.11 ~ 2023.01.22</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 현지시간 / 환율정보 -->
+<section style="margin-top: 45px; padding: 0 18px;">
+  <div style="margin: 0 auto; display: flex; justify-content: center;">
+    <div style="min-width: 165px; width: 366px; margin: 0 15px 0 0 ">
+      <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto;">현지 시간 <span
+          style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Time</span></h2>
+      <div
+        style="margin: 17px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
+        <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+          <span>일 | 월 | 화 | 수 | 목 | 금 | 토 </span>
+        </div>
+      </div>
+    </div>
+    <div style="min-width: 165px; width: 366px;">
+      <h2 style="font-size: 19px; max-width: 732px;">환율 정보 <span
+          style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Exchange</span></h2>
+      <div
+        style="margin: 17px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
+        <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+          <span>일 | 월 | 화 | 수 | 목 | 금 | 토 </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div>
+  <h1>hi, detail</h1>
+  <p>이름: {{country.country_name}}</p>
+  <p>상태: {{country.status|safe}}</p>
+  <p>상태 작성일자:{{country.status_wrt_dt}}</p>
+  <p>통화 CODE:{{country.exchange_rate_code}}</p>
+  <p>어제자 환율:{{country.ysd_er}}</p>
+  <p>통화 이름: {{country.cur_nm}}</p>
+  <p>이벤트:{{country.events}}</p>
+  <p>비자 : {{country.visa}}</p>
+</div>
+
+<script>
+  // 오늘 날짜 가져오기
+  let today = new Date();
+
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1;  // 월
+  let date = today.getDate();  // 날짜
+
+  document.getElementById('date').innerHTML = (year + '년 ' + month + '월 ' + date + '일' + ' 여행수칙');
+</script>
+{% endblock %}

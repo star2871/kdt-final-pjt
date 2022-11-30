@@ -18,15 +18,19 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 def review(request, country_code):
     articles = Article.objects.order_by("-pk")
     context = {
-        "articles": articles
+        "articles": articles,
+        "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
+
 
 def review_create(request, country_code):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
         if article_form.is_valid():
             article = article_form.save(commit=False)
+            article.country = country_code
+            article.category = "review"
             article.travel_start = request.POST["start"]
             article.travel_end = request.POST["end"]
             article.save()
@@ -38,16 +42,29 @@ def review_create(request, country_code):
     }
     return render(request, 'communities/form.html', context=context)
 
-def review_detail(request, article_pk):
+
+def review_detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     context = {
         'article': article,
+        'country_code': country_code,
     }
     return render(request, 'communities/detail.html', context)
 
 
+def review_delete(request, article_pk, country_code):
+    article = get_object_or_404(Article, pk=article_pk)
+    if article.user == request.user:
+        if request.method == "POST":
+            article.delete()
+            return redirect("communities:review", country_code)
+    return redirect("communities:review_detail", article_pk, country_code)
+
+
 def test(request):
     return render(request, 'communities/test.html')
+
+
 def calendar(request):
     flow = InstalledAppFlow.from_client_secrets_file(creds_filename, SCOPES)
     creds = flow.run_local_server(port=0)
@@ -84,7 +101,7 @@ def calendar(request):
     }
 
     # calendarId : 캘린더 ID. primary이 기본 값입니다.
-    event = service.events().insert(calendarId='travel', body=event).execute()
+    event = service.events().insert(calendarId='primary', body=event).execute()
     print('Event created: %s' % (event.get('htmlLink')))
 
     return render(request, 'communities/test.html')

@@ -8,10 +8,12 @@ from django.utils import timezone
 from countries.models import Country
 from django.template.defaultfilters import slugify
 
+
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=80)
     content = models.TextField()
+    category = models.CharField(max_length=80, blank=True)
     travel_start = models.DateField()
     travel_end = models.DateField()
     # 신호등
