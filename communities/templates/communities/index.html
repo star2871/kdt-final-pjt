@@ -18,6 +18,11 @@
       <h1>
         후기
       </h1>
+      <div class="container">
+        {% for article in articles %}
+          <a href="{% url 'communities:review_detail' article.pk %}">{{ article.title }}</a>
+        {% endfor %}
+      </div>
     {% elif request.resolver_match.url_name == 'advice' %}
       <h1>
         꿀팁

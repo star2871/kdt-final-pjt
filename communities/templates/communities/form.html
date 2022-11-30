@@ -1,0 +1,26 @@
+{% load django_bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <body>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form article_form %}
+        <label for="travel_start">여행시작:</label>
+        <input id="travel_start" type="date" name="start"/>
+        <label for="travel_end">여행끝:</label>
+        <input id="travel_end" type="date" name="end"/>
+        <div class="text-right">
+          <button type="submit" id="write" class="btn btn-sm">작성하기</button>
+        </div>
+      </form>
+    </body>
+
+  </html>
