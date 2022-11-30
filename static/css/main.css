@@ -94,7 +94,7 @@ header ul li:hover {
 
 @media (min-width: 1024px) {
   header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -168,4 +168,121 @@ header ul li:hover {
   margin: 0;
   padding: .825rem;
   font-size: .825rem;
+}
+
+/* 국가 디테일 */
+.rollingbanner {
+  position: relative;
+  max-width: 732px;
+  height: 52px;
+  font-size: .925rem;
+  letter-spacing: -1px;
+  padding: 16px 15px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 16px;
+}
+
+/* 타이틀 */
+.rollingbanner>.title {
+  font-weight: bold;
+  float: left;
+  padding-right: 10px;
+}
+
+/* 롤링 배너 */
+.rollingbanner>.wrap {
+  position: relative;
+  width: auto;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.rolling ul {
+  list-style: none;
+}
+
+.rollingbanner li {
+  position: absolute;
+  top: -36px;
+  left: 0;
+}
+
+/* 이전, 현재, 다음 롤링 배너 표시 */
+.rollingbanner li.prev {
+  top: 55px;
+  transition: top 0.5s ease;
+}
+
+.rollingbanner li.current {
+  top: 0;
+  transition: top 0.5s ease;
+}
+
+.rollingbanner li.next {
+  top: -36px;
+}
+
+.rollingbanner a {
+  display: block;
+  display: -webkit-box;
+  text-decoration: none;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #000;
+}
+
+div.scrollMenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollMenu article {
+  background-color: white;
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  padding: 32px 24px;
+  border-radius: 18px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+div.scrollMenu article img {
+  transition-duration: 1.5s;
+}
+
+div.scrollMenu article:hover img {
+  transform: scale(1.1);
+  transition-duration: 1.5s;
+  transition-timing-function: ease-out;
+}
+
+div.scrollMenu article:hover {
+  background-color: rgba(229, 242, 208, 0.797);
+}
+
+.gif-icon {
+  margin: 0;
+}
+
+article p {
+  margin: 0;
+}
+
+article h2 {
+  font-weight: 700;
+  font-size: 24px !important;
+}
+
+article ul {
+  padding: 0;
+}
+
+article li {
+  margin: 0;
+  padding: 10px 30px;
 }
