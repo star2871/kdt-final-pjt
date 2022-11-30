@@ -19,7 +19,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 def review(request, country_code):
     articles = Article.objects.filter(category="review").order_by("-pk")
     context = {
-        "articles": articles
+        "articles": articles,
+        "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
 
@@ -113,6 +114,10 @@ def tip_create(request, country_code):
     }
     return render(request, 'communities/form.html', context=context)
 
+
+
+def test(request):
+    return render(request, 'communities/test.html')
 
 
 def calendar(request):
