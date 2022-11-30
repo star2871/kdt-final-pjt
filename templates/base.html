@@ -2,17 +2,18 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>비포트립 :: 여행전날 체크하자</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>비포트립 :: 여행전날 체크하자</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    {% block css %}{% endblock css %}
+  {% block css %}{% endblock css %}
 
-  </head>
+</head>
 
 <body>
   <header class="nav-bar d-flex align-items-center">
@@ -34,6 +35,38 @@
 
   {% block body %}{% endblock %}
 
+  <script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(window).on('load', function () {
+      $("#load").hide();
+    });
+  </script>
+
+  <style type="text/css">
+    #load {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: fixed;
+      display: block;
+      opacity: 0.8;
+      background: white;
+      z-index: 99;
+      text-align: center;
+    }
+
+    #load>img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 100;
+    }
+  </style>
+  <div id="load">
+    <img src="{% static 'images/Rocket.gif' %}" alt="loading">
+  </div>
   <script>
     // 햄버거 메뉴 토글
     document.querySelector('.btn-menu').addEventListener('click', function () {
@@ -46,26 +79,16 @@
 
     window.onscroll = function () {
       let top = window.scrollY;
-      console.log(top);
-      if (top >= 72) {
+      if (top >= 60) {
         header.classList.add('scroll')
       } else {
         header.classList.remove('scroll');
       }
     }
   </script>
-
-    <script>
-      document
-        .querySelector('.btn-menu')
-        .addEventListener('click', function () {
-          document
-            .querySelector('.list-group')
-            .classList
-            .toggle('show')
-        })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>

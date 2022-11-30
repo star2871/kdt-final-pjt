@@ -1,9 +1,15 @@
-<h1>hi, detail</h1>
-<p><strong>이름</strong>: {{country.country_name}}</p>
-<div><strong>상태</strong>: {{country.status}}</div>
-<p><strong>상태 작성일자</strong>:{{country.status_wrt_dt}}</p>
-<p><strong>통화 CODE</strong>:{{country.exchange_rate_code}}</p>
-<p><strong>어제자 환율</strong>:{{country.ysd_er}}</p>
-<p><strong>통화 이름</strong>: {{country.cur_nm}}</p>
-<p><strong>이벤트</strong>:{{country.events}}</p>
-<p><strong>비자</strong> : {{country.visa}}</p>
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div>
+  <h1>hi, detail</h1>
+  <p>이름: {{country.country_name}}</p>
+  <div>상태: {{country.status}}</div>
+  <p>상태 작성일자:{{country.status_wrt_dt}}</p>
+  <p>통화 CODE:{{country.exchange_rate_code}}</p>
+  <p>어제자 환율:{{country.ysd_er}}</p>
+  <p>통화 이름: {{country.cur_nm}}</p>
+  <p>이벤트:{{country.events}}</p>
+  <p>비자 : {{country.visa}}</p>
+</div>
+{% endblock %}

@@ -93,21 +93,21 @@
 /* 전체 게시글 */
 .review-row {
     border-top: solid 1px rgb(0 0 0 / 27%);
-    border-bottom: solid 1px rgba(0, 0, 0, 27%);
-    height: 80px;
-    background-color: #F4F4F4;
+    height: 96px;
+    background-color: #F8F9FA;
+    padding: 7px 12px;
 }
 
 .icons {
-    width: 15%;
+    width: 30%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .icon {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     font-size: 13px;
 }
 .material-icons.md-18 { 
@@ -120,4 +120,28 @@
 
 .review-date {
     font-size: 12px;
+    color: #000000a6;
+    letter-spacing: 0.5px;
+}
+.review-list > img {
+    border-radius: 10px;
+    width : 45px;
+}
+
+.review-row > .row, .row-cols-2, .row > .col, .review-list > div, .review-list > div > img {
+    height: 100%;
+}
+
+.row > .review-list > div {
+    display : flex;
+    justify-content: end;
+}
+
+.review-list > div > .review-img {
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.review-list > div {
+    padding: 0px 10px;
 }
