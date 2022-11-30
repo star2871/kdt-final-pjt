@@ -12,6 +12,12 @@
     <div>
       {{article.content|safe}}
     </div>
+    <form class="text-end" action="{% url "communities:review_delete" article.pk %}" method="POST">
+      {% csrf_token %}
+      <a href="" method="POST">수정</a>
+      <input type="submit" value="삭제">
+      <a href="{% url "communities:review" %}">뒤로</a>
+    </form>
   </body>
 
 </html>
