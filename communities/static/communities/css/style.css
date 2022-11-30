@@ -1,3 +1,147 @@
-h1{
-    color: aqua;
+.community-header {
+    height: 300px;
+    background-image: url('/static/communities/img/header-review.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    background-position: center;
+    filter: brightness(0.5);
+}
+
+
+.review-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.notion-card {
+    width: 442px;
+    margin: 13px 0px;
+    background-color: white;
+    border-radius: 13px;
+    min-height: 200px;
+}
+@media (min-width: 769px) {
+    .notion-card {
+        width: 732px;
+    }
+}
+
+.text {
+    padding: 20px;
+}
+
+.best-review {
+    display: flex;
+}
+.rank {
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+.rank_num {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #428ce8;
+    color: white;
+    font-size: 8px;
+    margin: 0px 5px;
+}
+
+/* 글쓰기 버튼 */
+.create-wrapper {
+    display: flex;
+    justify-content: start;
+    width: 442px;
+}
+
+@media (min-width: 769px) {
+    .create-wrapper {
+        width: 56%;
+
+    }
+}
+
+.create {
+    line-height: 34px;
+    border-radius: 7px;
+    color: white;
+    padding: 1px 8px;
+    overflow: hidden;
+    background-color: #0061FF;
+}
+.plane {
+    margin-bottom: 4px;
+    margin-left: 3px;
+    width: 25px;
+    transition: all 0.3s linear;
+}
+
+.create:hover .plane {
+    transform: translate( 30px, -50% )
+}
+
+/* 전체 게시글 */
+.review-row {
+    border-top: solid 1px rgb(0 0 0 / 27%);
+    height: 96px;
+    background-color: #F8F9FA;
+    padding: 7px 12px;
+}
+
+.icons {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+.material-icons.md-18 { 
+    margin: 0px 2px;
+    font-size: 15px; }
+
+.review-title {
+    font-size: 16px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #000000a6;
+    letter-spacing: 0.5px;
+}
+.review-list > img {
+    border-radius: 10px;
+    width : 45px;
+}
+
+.review-row > .row, .row-cols-2, .row > .col, .review-list > div, .review-list > div > img {
+    height: 100%;
+}
+
+.row > .review-list > div {
+    display : flex;
+    justify-content: end;
+}
+
+.review-list > div > .review-img {
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.review-list > div {
+    padding: 0px 10px;
 }

@@ -16,7 +16,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()  # ModelForm의 save 메서드의 리턴값은 해당 모델의 인스턴스다!
-            auth_login(request, user)  # 로그인
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')  # 로그인
             return redirect("accounts:index")
     else:
         form = CustomUserCreationForm()
