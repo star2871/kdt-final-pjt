@@ -61,6 +61,10 @@ def review_delete(request, article_pk, country_code):
     return redirect("communities:review_detail", article_pk, country_code)
 
 
+def test(request):
+    return render(request, 'communities/test.html')
+
+
 def calendar(request):
     flow = InstalledAppFlow.from_client_secrets_file(creds_filename, SCOPES)
     creds = flow.run_local_server(port=0)

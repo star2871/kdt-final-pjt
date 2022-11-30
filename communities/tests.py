@@ -16,7 +16,7 @@ today = datetime.date.today().isoformat()
 service = build('calendar', 'v3', credentials=creds)
 
 event = {
-    'summary': 'itsplay의 OpenAPI 수업',  # 일정 제목
+    'summary': 'test',  # 일정 제목
     'location': '서울특별시 성북구 정릉동 정릉로 77',  # 일정 장소
     'description': 'itsplay와 OpenAPI 수업에 대한 설명입니다.',  # 일정 설명
     'start': {  # 시작 날짜
