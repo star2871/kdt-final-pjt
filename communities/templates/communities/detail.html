@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
+{% block body %}
+  <!-- 네브바 높이 -->
+  <div style="height: 60px;"></div>
 
-  <body>
-    <div>
-      {{article.content|safe}}
-    </div>
-    <form class="text-end" action="{% url "communities:review_delete" article.pk %}" method="POST">
-      {% csrf_token %}
-      <a href="" method="POST">수정</a>
-      <input type="submit" value="삭제">
-      <a href="{% url "communities:review" %}">뒤로</a>
-    </form>
-  </body>
-
-</html>
+  <div>
+    {{article.content|safe}}
+  </div>
+  <form class="text-end" action="{% url 'communities:review_delete' country_code article.pk %}" method="POST">
+    {% csrf_token %}
+    <a href="" method="POST">수정</a>
+    <input type="submit" value="삭제">
+    <a href="{% url 'communities:review' country_code %}">뒤로</a>
+  </form>
+{% endblock body %}
