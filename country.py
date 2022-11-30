@@ -43,7 +43,7 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
     json_file = json.load(json_file)
     a = json_file[165]["fields"]  # 일본
     b = json_file[71]["fields"]  # 미국
-    c = json_file[230]["fields"]  # 홍콩
+    c = json_file[229]["fields"]  # 호주
     d = json_file[116]["fields"]  # 스페인
     e = json_file[143]["fields"]  # 영국
     # for g, data in a.items():
