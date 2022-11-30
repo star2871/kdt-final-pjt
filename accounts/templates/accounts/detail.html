@@ -1,1 +1,12 @@
-<h1>{{ user.username }}님의 프로필</h1>
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+{% if user.profile_image %}
+<div class="text-end me-3">
+  <img src="{{ user.profile_image.url}}" class="mb-3 profile-image-border" alt="{{ user.profile_image }}">
+</div>
+{% endif %}
+<h1>{{ user.username }}님의 id</h1>
+<h2>{{ user.nick_name }}님의 닉네임</h2>
+<a class="btn btn-primary rounded-0 font-space" href="{% url 'accounts:update' %}">수정하기</a>
+{% endblock %}
