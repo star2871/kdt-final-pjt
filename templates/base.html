@@ -34,6 +34,39 @@
 
   {% block body %}{% endblock %}
 
+<script src="https://code.jquery.com/jquery-1.8.0.js"
+  integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+ $(window).on('load', function () {
+      $("#load").hide();
+ });
+</script>
+
+<style type="text/css">
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+}
+</style>
+<div id="load">
+	<img src="{% static 'images/Rocket.gif' %}" alt="loading">
+</div>
   <script>
     // 햄버거 메뉴 토글
     document.querySelector('.btn-menu').addEventListener('click', function () {
