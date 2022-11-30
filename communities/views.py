@@ -46,7 +46,8 @@ def review_detail(request, article_pk):
     return render(request, 'communities/detail.html', context)
 
 
-
+def test(request):
+    return render(request, 'communities/test.html')
 def calendar(request):
     flow = InstalledAppFlow.from_client_secrets_file(creds_filename, SCOPES)
     creds = flow.run_local_server(port=0)
@@ -83,7 +84,7 @@ def calendar(request):
     }
 
     # calendarId : 캘린더 ID. primary이 기본 값입니다.
-    event = service.events().insert(calendarId='primary', body=event).execute()
+    event = service.events().insert(calendarId='travel', body=event).execute()
     print('Event created: %s' % (event.get('htmlLink')))
 
     return render(request, 'communities/test.html')
