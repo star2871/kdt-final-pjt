@@ -22,6 +22,7 @@ def review(request, country_code):
     }
     return render(request, 'communities/index.html', context)
 
+
 def review_create(request, country_code):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
@@ -38,13 +39,13 @@ def review_create(request, country_code):
     }
     return render(request, 'communities/form.html', context=context)
 
+
 def review_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     context = {
         'article': article,
     }
     return render(request, 'communities/detail.html', context)
-
 
 
 def calendar(request):
