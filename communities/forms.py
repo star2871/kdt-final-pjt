@@ -11,6 +11,7 @@ class ArticleForm(forms.ModelForm):
             "content",
             "grade",
             "country",
+            "image",
         ]
         widgets = {
             'content': SummernoteWidget(),
