@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 app_name = 'countries'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:country_code>/', views.country_detail_view, name='detail')
+    re_path(r'^(?P<country_code>[A-Z]{2})/$', views.country_detail_view, name='detail'),
 ]

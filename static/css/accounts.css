@@ -1,0 +1,421 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body,
+table,
+th,
+td,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+blockquote,
+span,
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+
+ul li {
+  list-style: none;
+  margin: 0 0 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .layer_fix .fix_title .logo {
+    width: 112px;
+    height: 44px;
+    background: url('../img/logo2.png') 50% 50% no-repeat;
+    background-size: 112px 23px;
+    /* text-indent: -9999px; */
+  }
+}
+
+.layer_fix .fix_title {
+  position: relative;
+  margin-bottom: 16px;
+  /* background: #fff; */
+  border-bottom: none;
+}
+
+/* .layer_fix .fix_title .logo a {
+  display: block;
+  text-indent: -9999px;
+} */
+
+.layer_fix h1 {
+  background: url('../img/logo2.png') 50% 50% no-repeat;
+  background-size: 96px auto;
+  width: 112px;
+  height: 23px;
+  margin: 0 0 1rem;
+}
+
+.layer_fix h1 a {
+  display: block;
+  text-indent: -9999px;
+}
+
+.social-login-btn {
+  display: block;
+  width: 336px;
+  height: 56px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 8px;
+}
+
+.login_logo_naver {
+  -webkit-filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);
+  width: 18px;
+  height: 18px;
+  margin-right: 1rem;
+}
+
+.login_logo_google {
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .space_or span {
+    width: 60px;
+    height: 56px;
+    margin: 0 0 0 -25px;
+    font-size: 16px;
+    line-height: 56px;
+  }
+}
+
+.space_or span {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 10;
+  width: 50px;
+  height: 40px;
+  margin: 0 0 0 -25px;
+  background: #fff;
+  font-size: 14px;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.38);
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+
+  .space_or::after,
+  .space_or::before {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 16px;
+  }
+}
+
+.hr-sect {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 16px;
+  margin: 1rem 0px;
+}
+
+.hr-sect span {
+  width: 60px;
+  height: 50px;
+  background-color: #f4f4f4;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hr-sect::before,
+.hr-sect::after {
+  content: "";
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.35);
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px;
+}
+
+.login-form input {
+  width: 336px;
+  height: 48px;
+  margin-bottom: 8px;
+  padding: 0 16px 0 48px;
+  border-radius: 5px;
+  border: 1px solid rgba(189, 189, 189, 0.5)
+}
+
+.login-id {
+  position: relative;
+}
+
+.login-id svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.login-pw {
+  position: relative;
+}
+
+.login-pw svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.login-form input:focus {
+  outline: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(189, 189, 189, 0.9)
+}
+
+.login-form input:focus~svg {
+  fill: rgba(155, 155, 155)
+}
+
+.login-form button {
+  border: none;
+  width: 336px;
+  height: 56px;
+  background-color: #0061ff;
+  margin-top: 1rem;
+}
+
+.login-form p {
+  text-decoration: none;
+  color: rgba(189, 189, 189, 0.9);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-form a {
+  text-decoration: none;
+}
+
+.login-form p:hover {
+  text-decoration: none;
+  color: #0062ff;
+}
+
+/* 회원가입 */
+.signup-form input {
+  width: 336px;
+  height: 48px;
+  margin-bottom: 1rem;
+  padding: 0 16px 0 48px;
+  border-radius: 5px;
+  border: 1px solid rgba(189, 189, 189, 0.5)
+}
+
+.signup-form input:focus {
+  outline: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(189, 189, 189, 0.9)
+}
+
+.signup-form input:focus~svg {
+  fill: rgba(155, 155, 155)
+}
+
+.join-id {
+  position: relative;
+}
+
+.join-id svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-username {
+  position: relative;
+}
+
+.join-username svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-password1 {
+  position: relative;
+}
+
+.join-password1 svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-password2 {
+  position: relative;
+}
+
+.join-password2 svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+.join-photo {
+  position: relative;
+}
+
+.join-photo svg {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  fill: rgba(189, 189, 189, 0.9);
+}
+
+/* 테스트 */
+.join-photo {
+  position: relative;
+}
+
+.input-file-trigger1 {
+  display: block;
+  padding: 10px 48px;
+  background: white;
+  color: #747574;
+  font-size: 1em;
+  /* transition: all .4s; */
+  cursor: pointer;
+  border: 1px solid rgba(189, 189, 189, 0.5);
+  border-radius: 5px;
+}
+
+.js .input-file1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.input-file-container {
+  position: relative;
+  width: 225px;
+}
+
+.signup-form button {
+  border: none;
+  width: 336px;
+  height: 56px;
+  background-color: #0061ff;
+  margin-top: 1rem;
+}
+
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: transparent;
+  color: #fff;
+  font-size: 1em;
+  /* transition: all .4s; */
+  cursor: pointer;
+}
+
+.js .input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.file-return {
+  margin: 0;
+}
+
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+
+.js .file-return {
+  font-size: .9em;
+  color: rgb(159, 159, 159)
+}
+
+.js .file-return:not(:empty):before {
+  content: "";
+  font-style: normal;
+  font-weight: normal;
+}
