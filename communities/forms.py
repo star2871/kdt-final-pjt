@@ -16,3 +16,7 @@ class ArticleForm(forms.ModelForm):
         widgets = {
             'content': SummernoteWidget(),
         }
+        labels = {
+            # 후기 미리보기 이미지 불러오기 쉽게
+            'image' :'대표 이미지를 설정해주세요.'
+        }
