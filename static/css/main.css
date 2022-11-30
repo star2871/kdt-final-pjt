@@ -154,14 +154,14 @@ header ul li:hover {
   text-align: center;
 }
 
+.list-group.show {
+  display: block;
+}
+
 @media (min-width: 1024px) {
   .list-group.show {
     display: none;
   }
-}
-
-.list-group.show {
-  display: block;
 }
 
 .list-group-item {
