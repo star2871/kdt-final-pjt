@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ArticleForm
-from .models import Article
+from .forms import ArticleForm, TipForm
+from .models import Article, Country
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
@@ -14,22 +14,24 @@ creds_filename = 'credentials.json'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 # Create your views here.
-## 리뷰, 꿀팁, 피드 홈
+## 리뷰 파트
+## 리뷰 인덱스
 def review(request, country_code):
-    articles = Article.objects.order_by("-pk")
+    articles = Article.objects.filter(category="review").order_by("-pk")
     context = {
         "articles": articles,
         "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
 
-
+## 리뷰 생성
 def review_create(request, country_code):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
         if article_form.is_valid():
+            country = Country.objects.get(country_code=country_code)
             article = article_form.save(commit=False)
-            article.country = country_code
+            article.country = country
             article.category = "review"
             article.travel_start = request.POST["start"]
             article.travel_end = request.POST["end"]
@@ -42,7 +44,7 @@ def review_create(request, country_code):
     }
     return render(request, 'communities/form.html', context=context)
 
-
+## 리뷰 상세보기
 def review_detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     context = {
@@ -51,7 +53,7 @@ def review_detail(request, article_pk, country_code):
     }
     return render(request, 'communities/detail.html', context)
 
-
+## 리뷰 삭제
 def review_delete(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     if article.user == request.user:
@@ -59,6 +61,63 @@ def review_delete(request, article_pk, country_code):
             article.delete()
             return redirect("communities:review", country_code)
     return redirect("communities:review_detail", article_pk, country_code)
+
+## 리뷰 수정
+def review_update(request, article_pk, country_code):
+    article = get_object_or_404(Article, pk=article_pk)
+    if article.user == request.user:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, request.FILES, instance=article)
+            if form.is_valid:
+                article_ = form.save(commit=False)
+                country = Country.objects.get(country_code=country_code)
+                article_.country = country
+                article_.category = "review"
+                article_.travel_start = request.POST["start"]
+                article_.travel_end = request.POST["end"]
+                article_.save()
+                return redirect("communities:review_detail", country_code, article_pk)
+        else:
+            form = ArticleForm(instance=article)
+        context = {
+            "article": article,
+            "article_form": form,
+        }
+        return render(request, "communities/form.html", context)
+    return redirect("communities:review_detail", country_code, article_pk)
+
+
+## 꿀팁 파트
+## 꿀팁 인덱스
+def tip(request, country_code):
+    articles = Article.objects.filter(category="tip").order_by("-pk")
+    context = {
+        "articles": articles
+    }
+    return render(request, 'communities/index.html', context)
+
+## 꿀팁 생성
+def tip_create(request, country_code):
+    if request.method == 'POST':
+        article_form = TipForm(request.POST, request.FILES)
+        if article_form.is_valid():
+            country = Country.objects.get(country_code=country_code)
+            article = article_form.save(commit=False)
+            article.country = country
+            article.category = "tip"
+            article.save()
+            return redirect('communities:review', country_code)
+    else:
+        article_form = TipForm()
+    context = {
+        'article_form': article_form
+    }
+    return render(request, 'communities/form.html', context=context)
+
+
+
+def test(request):
+    return render(request, 'communities/test.html')
 
 
 def calendar(request):

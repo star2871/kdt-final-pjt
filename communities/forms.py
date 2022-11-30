@@ -20,3 +20,19 @@ class ArticleForm(forms.ModelForm):
             # 후기 미리보기 이미지 불러오기 쉽게
             'image' :'대표 이미지를 설정해주세요.'
         }
+
+class TipForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = [
+            "title",
+            "content",
+            "country",
+            "image",
+        ]
+        widgets = {
+            'content': SummernoteWidget(),
+        labels = {
+            # 후기 미리보기 이미지 불러오기 쉽게
+            'image' :'대표 이미지를 설정해주세요.'
+        }

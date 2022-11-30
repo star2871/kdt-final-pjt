@@ -14,10 +14,10 @@ class Article(models.Model):
     title = models.CharField(max_length=80)
     content = models.TextField()
     category = models.CharField(max_length=80, blank=True)
-    travel_start = models.DateField()
-    travel_end = models.DateField()
+    travel_start = models.DateField(blank=True)
+    travel_end = models.DateField(blank=True)
     # 신호등
-    grade = models.IntegerField(default=1)
+    grade = models.IntegerField(default=1, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
     image = ProcessedImageField(blank=True, 
                                 processors=[Thumbnail(500, 700)], 
