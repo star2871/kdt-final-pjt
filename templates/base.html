@@ -57,16 +57,26 @@
       text-align: center;
     }
 
-#load > img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	z-index: 100;
-}
-</style>
-<div id="load">
-	<img src="{% static 'images/loading.gif' %}" alt="loading">
-</div>
+    #load>img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 100;
+    }
+  </style>
+  <div id="load">
+    <img src="{% static 'images/loading.gif' %}" alt="loading">
+  </div>
+  <script>
+    // 반응형 햄버거 메뉴 제거
+    window.onresize = function () {
+      const width = window.innerWidth;
+
+      if (width >= 1024) {
+        document.querySelector('.list-group').classList.remove('show')
+      }
+    }
+  </script>
   <script>
     // 햄버거 메뉴 토글
     document.querySelector('.btn-menu').addEventListener('click', function () {
