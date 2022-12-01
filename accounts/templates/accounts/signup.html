@@ -65,17 +65,6 @@
   </div>
 </div>
 
-<!-- <h1>Flat UI - Custom Input:file</h1>
-<h2>With JS return</h2>
-
-<form action="#">
-  <div class="input-file-container">
-    <input class="input-file" id="my-file" type="file">
-    <label tabindex="0" for="my-file" class="input-file-trigger">프로필 사진을 넣어주세요</label>
-  </div>
-
-</form> -->
-
 <script>
 @Controller
 @RequestMapping("/upload")
@@ -98,7 +87,7 @@ public class FileUploadController {
   document.querySelector("html").classList.add('js');
 
   var fileInput = document.querySelector(".input-file1"),
-    button = document.querySelector(".input-file-trigger"),
+    button = document.querySelector(".input-file-trigger1"),
     the_return = document.querySelector(".file-return");
 
   button.addEventListener("keydown", function (event) {
