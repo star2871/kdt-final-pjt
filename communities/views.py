@@ -49,9 +49,11 @@ def review_create(request, country_code):
 ## 리뷰 상세보기
 def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
+    comments = article.articlecomment_set.order_by("-pk")
     context = {
         'article': article,
         'country_code': country_code,
+        'comments' : comments,
     }
     return render(request, 'communities/detail.html', context)
 
@@ -78,7 +80,7 @@ def review_update(request, article_pk, country_code):
                 article_.travel_start = request.POST["start"]
                 article_.travel_end = request.POST["end"]
                 article_.save()
-                return redirect("communities:review_detail", country_code, article_pk)
+                return redirect("communities:detail", country_code, article_pk)
         else:
             form = ArticleForm(instance=article)
         context = {

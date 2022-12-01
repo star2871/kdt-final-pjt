@@ -176,7 +176,7 @@ span,
     font-size: 13px;
 }
 
-.material-icons.md-18 {
+.icon .material-icons.md-18 { 
     margin: 0px 2px;
     font-size: 15px;
 }
@@ -229,7 +229,10 @@ span,
     margin: auto;
     background-color: white;
     padding: 35px;
+    padding-bottom: 200px;
     min-height: 100vh;
+    border: solid 1px #e0e0e0;
+    box-shadow: 12px 0px 29px -15px rgb(0 0 0 / 30%);
 }
 
 @media(min-width: 1024px) {
@@ -300,12 +303,14 @@ span,
 .detail-content {
     padding: 0px 10px;
     min-height: 400px;
+    padding-bottom: 200px;
 }
 
 .detail-content p img {
-    object-fit: contain;
+    max-width: 100% !important;
 }
 
+/* 사이드바 */
 .side-bar {
     display: none;
 }
@@ -321,17 +326,69 @@ span,
 }
 
 .remote {
-    background-color: #fbfbfb;
     padding: 10px;
     border-radius: 16px;
-    box-shadow: 1px 5px 6px #8f8f8f57;
+    box-shadow: 4px 4px 7px 0px #00000024;
     text-align: center;
+    background: linear-gradient(89deg,#ffffff 0%,#f4f4f452 100%, #f4f4f4 51%,#f4f4f4 100%);
 }
 
 .remote span {
-    color: black;
+    color: #3c7ed2;
 }
 
 .remote span:hover {
     opacity: 0.5;
+}
+
+/* 댓글 */
+.comment-section {
+    min-height: 200px;
+    margin-top: 400px;
+    color: black;
+    text-decoration: none;
+}
+.comment-section:hover {
+    color: inherit;
+}
+
+.comment-section span {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+.comment-list {
+    border-top: 1px solid;
+    border-color: rgba(0,0,0,.05);
+}
+
+.comment-list :first-child {
+    border-top: 0;
+}
+
+.comment-row {
+    display: flex;
+    min-height: 100px;
+    padding: 10px 0px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.comment-profile-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+}
+
+.comment-main {
+    width: 100%;
+    padding: 0px 14px;
+}
+
+.comment-user-date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-user-date p {
+    font-size: 16px;
 }
