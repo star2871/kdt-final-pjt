@@ -13,10 +13,12 @@
       <form action="" method="POST">
         {% csrf_token %}
         {% bootstrap_form article_form %}
-        <label for="travel_start">여행시작:</label>
-        <input id="travel_start" type="date" name="start"/>
-        <label for="travel_end">여행끝:</label>
-        <input id="travel_end" type="date" name="end"/>
+        {% if request.resolver_match.url_name == 'review_create' %}
+          <label for="travel_start">여행시작:</label>
+          <input id="travel_start" type="date" name="start"/>
+          <label for="travel_end">여행끝:</label>
+          <input id="travel_end" type="date" name="end"/>
+        {% endif %}
         <div class="text-right">
           <button type="submit" id="write" class="btn btn-sm">작성하기</button>
         </div>

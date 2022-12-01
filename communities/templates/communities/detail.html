@@ -58,9 +58,8 @@
       {{article.content|safe}}
     </div>
 
-
     <!-- 리뷰 수정 삭제 -->
-    <form class="text-end" action="{% url 'communities:review_delete' country_code article.pk %}" method="POST">
+    <form class="text-end" action="{% url "communities:delete" country_code article.pk %}" method="POST">
       {% csrf_token %}
       <a href="" method="POST">수정</a>
       <input type="submit" value="삭제">

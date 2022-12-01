@@ -1,12 +1,13 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ArticleForm, TipForm
-from .models import Article, Country
+from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm
+from .models import Article, Country, Feed, FeedImages
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
 # 구글 캘린더 API 서비스 객체 생성
 from googleapiclient.discovery import build
+from django.forms import modelformset_factory
 
 
 creds_filename = 'credentials.json'
@@ -31,6 +32,7 @@ def review_create(request, country_code):
         if article_form.is_valid():
             country = Country.objects.get(country_code=country_code)
             article = article_form.save(commit=False)
+            article.user = request.user
             article.country = country
             article.category = "review"
             article.travel_start = request.POST["start"]
@@ -45,7 +47,7 @@ def review_create(request, country_code):
     return render(request, 'communities/form.html', context=context)
 
 ## 리뷰 상세보기
-def review_detail(request, article_pk, country_code):
+def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     context = {
         'article': article,
@@ -54,7 +56,7 @@ def review_detail(request, article_pk, country_code):
     return render(request, 'communities/detail.html', context)
 
 ## 리뷰 삭제
-def review_delete(request, article_pk, country_code):
+def delete(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     if article.user == request.user:
         if request.method == "POST":
@@ -89,31 +91,73 @@ def review_update(request, article_pk, country_code):
 
 ## 꿀팁 파트
 ## 꿀팁 인덱스
-def tip(request, country_code):
-    articles = Article.objects.filter(category="tip").order_by("-pk")
+def advice(request, country_code):
+    articles = Article.objects.filter(category="advice").order_by("-pk")
     context = {
-        "articles": articles
+        "articles": articles,
+        "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
 
 ## 꿀팁 생성
-def tip_create(request, country_code):
+def advice_create(request, country_code):
     if request.method == 'POST':
-        article_form = TipForm(request.POST, request.FILES)
+        article_form = AdviceForm(request.POST, request.FILES)
         if article_form.is_valid():
             country = Country.objects.get(country_code=country_code)
             article = article_form.save(commit=False)
+            article.user = request.user
             article.country = country
-            article.category = "tip"
+            article.category = "advice"
             article.save()
-            return redirect('communities:review', country_code)
+            return redirect('communities:advice', country_code)
     else:
-        article_form = TipForm()
+        article_form = AdviceForm()
     context = {
         'article_form': article_form
     }
     return render(request, 'communities/form.html', context=context)
 
+
+## 피드 파트
+## 피드 인덱스
+def feed(request, country_code):
+    feed = Feed.objects.filter(category="feed").order_by("-pk")
+    context = {
+        "feed": feed,
+        "country_code" : country_code,
+    }
+    return render(request, 'communities/index.html', context)
+
+## 피드 생성
+def feed_create(request, country_code):
+    ImageFormSet = modelformset_factory(FeedImages, form=FeedImageForm, extra=3)
+    if request.method == 'POST':
+        feed_form = FeedForm(request.POST)
+        formset = ImageFormSet(
+            request.POST, request.FILES, queryset=FeedImages.objects.none()
+        )
+        if feed_form.is_valid() and formset.is_valid():
+            country = Country.objects.get(country_code=country_code)
+            feed = feed_form.save(commit=False)
+            feed.user = request.user
+            feed.country = country
+            feed.category = "feed"
+            feed.save()
+            for forms in formset.cleaned_data:
+                if forms:
+                    image = forms["image"]
+                    photo = FeedImages(feed=feed, image=image)
+                    photo.save()
+            return redirect('communities:feed', country_code)
+    else:
+        feed_form = FeedForm()
+        formset = ImageFormSet(queryset=FeedImages.objects.none())
+    context = {
+        'feed_form': feed_form,
+        "formset": formset,
+    }
+    return render(request, 'communities/feed_form.html', context=context)
 
 
 def test(request):
