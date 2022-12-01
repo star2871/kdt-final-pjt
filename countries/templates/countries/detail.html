@@ -55,7 +55,40 @@
   <div
     style="margin: 17px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 200px;">
     <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-      <span>일 | 월 | 화 | 수 | 목 | 금 | 토 </span>
+      <div class="box">
+        <article class="media d-flex">
+            <div class="media-left">
+                <figure class="image is-50x50">
+                    <img src="http://openweathermap.org/img/w/{{ weather.icon1 }}.png" alt="Image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <span class="title">{{ weather.city1 }}</span>
+                        <br>
+                        <span class="subtitle">{{ weather.temperature1 }}° C</span>
+                        <br> {{ weather.description1 }}
+                    </p>
+                </div>
+            </div>
+            <div class="media-right">
+              <figure class="image is-50x50">
+                  <img src="http://openweathermap.org/img/w/{{ weather.icon2 }}.png" alt="Image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                    <p>
+                      <span class="title">{{ weather.city2 }}</span>
+                      <br>
+                      <span class="subtitle">{{ weather.temperature2 }}° C</span>
+                      <br> {{ weather.description2 }}
+                    </p>
+              </div>
+            </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
