@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
@@ -95,22 +95,23 @@
                     </span>
                     <span>{{ article.like_users.count }}</span>
                   </div>
-
+                </div>
+              </div>
             </div>
             <div class="col-4 review-list">
               {% if article.image %}
               <div>
                 <img class="review-img" src="{{ article.image.url }}" alt="">
               </div>
+              {% endif %}
             </div>
-          {% endfor %}
+          </div>
         </div>
         {% endfor %}
       </ul>
     </div>
   </section>
 </div>
-
 
 <!-- <div class="container">
   <div class="review-wrapper">
@@ -168,4 +169,3 @@
 </h1>
 {% endif %}
 {% endblock %}
-
