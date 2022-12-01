@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
@@ -95,22 +95,6 @@
                     </span>
                     <span>{{ article.like_users.count }}</span>
                   </div>
-                  <!-- 댓글 수 -->
-                  <div class="icon">
-                    <span class="material-icons md-18">
-                      chat_bubble_outline
-                    </span>
-                    {{ article.articlecomment_set.all|length }}
-                  </div>
-                  <!-- 조회수 -->
-                  <div class="icon">
-                    <span class="material-icons md-18">
-                      visibility
-                    </span>
-                    <span>3</span>
-                  </div>
-                </div>
-              </div>
 
             </div>
             <div class="col-4 review-list">
@@ -118,15 +102,15 @@
               <div>
                 <img class="review-img" src="{{ article.image.url }}" alt="">
               </div>
-              {% endif %}
             </div>
-          </div>
+          {% endfor %}
         </div>
         {% endfor %}
       </ul>
     </div>
   </section>
 </div>
+
 
 <!-- <div class="container">
   <div class="review-wrapper">
@@ -184,3 +168,4 @@
 </h1>
 {% endif %}
 {% endblock %}
+

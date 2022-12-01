@@ -6,62 +6,89 @@
 {% endblock css %}
 
 {% block body %}
-<div class="detail-section">
-  <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
-  <div class="eye" style="height: 200px;"></div>
-  <div class="detail-title">
-    {{ article.title }}
-  </div>
-  <div class="detail-meta-section">
-    <div class="detail-user">
-      <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
-      <div class="detail-img-div">
-        {% if not article.user.profile_image %}
-        <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
-        {% else %}
-        <img src="{{ article.user.image.url }}" alt="" class="profile-img">
-        {% endif %}
+<div class="container">
+  <div class="detail-section">
+    <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
+    <div class="eye" style="height: 200px;"></div>
+    <div class="detail-title">
+      {{ article.title }}
+    </div>
+    <div class="detail-meta-section">
+      <!-- 리모컨 추가(뒤로, 수정, 삭제) -->
+      <div class="detail-user">
+        <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
+        <div class="detail-img-div">
+          {% if not article.user.profile_image %}
+          <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
+          {% else %}
+          <img src="{{ article.user.image.url }}" alt="" class="profile-img">
+          {% endif %}
+        </div>
+        <div class="detail-username">
+          {{ article.user.nick_name }}
+        </div>
+        <!-- 작성일 -->
+        <div class="detail-created">
+          <!-- 작성일자 : ~시간 전 표시 -->
+          {% if article.created_string == False %}
+          <!-- 7일이 지나면 날짜로 출력 -->
+          {{ article.created_at|date:'m월 d일' }}
+          {% else %}
+          <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+          {{ article.created_string }}
+          {% endif %}
+        </div>
+        <!-- 조회 수 -->
+        <div>
+          조회 32
+        </div>
       </div>
-      <div class="detail-username">
-        {{ article.user.nick_name }}
-      </div>
-      <!-- 작성일 -->
-      <div class="detail-created">
-        <!-- 작성일자 : ~시간 전 표시 -->
-        {% if article.created_string == False %}
-        <!-- 7일이 지나면 날짜로 출력 -->
-        {{ article.created_at|date:'m월 d일' }}
-        {% else %}
-        <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-        {{ article.created_string }}
-        {% endif %}
-      </div>
-      <!-- 조회 수 -->
-      <div>
-        조회 32
+      <!-- 여행 기간 -->
+      <div class="detail-date">
+        <!-- 달력 아이콘 -->
+        <span class="material-icons">
+          event_available
+        </span>
+        <span>{{ article.travel_start|date:"o. n. j" }} ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
       </div>
     </div>
-    <!-- 여행 기간 -->
-    <div class="detail-date">
-      <!-- 달력 아이콘 -->
-      <span class="material-icons">
-        event_available
-      </span>
-      <span>{{ article.travel_start|date:"o. n. j" }} ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
+    <hr>
+    <!-- 리뷰 내용 -->
+    <div class="detail-content">
+      {{article.content|safe}}
     </div>
-  </div>
-  <hr>
-  <!-- 리뷰 내용 -->
-  <div class="detail-content">
-    {{article.content|safe}}
-  </div>
 
-  <!-- 리뷰 수정 삭제 -->
-  <form class="text-end" action="{% url 'communities:review_delete' country_code article.pk %}" method="POST">
-    {% csrf_token %}
-    <a href="" method="POST">수정</a>
-    <input type="submit" value="삭제">
-    <a href="{% url 'communities:review' country_code %}">뒤로</a>
-  </form>
+    <!-- 리뷰 수정 삭제 -->
+    <form class="text-end" action="{% url "communities:delete" country_code article.pk %}" method="POST">
+      {% csrf_token %}
+      <a href="" method="POST">수정</a>
+      <input type="submit" value="삭제">
+      <a href="{% url 'communities:review' country_code %}">뒤로</a>
+    </form>
+  </div>
+  <!-- 사이드바 리모컨 -->
+  <div class="side-bar">
+    <div class="remote">
+      <a href="{% url 'communities:review_update' country_code article.pk %}">
+        <span class="material-icons">
+          edit
+        </span>
+      </a>
+      <hr>
+      <span id="review_delete" class="material-icons">
+        delete
+      </span>
+      <hr>
+      <a href="{% url 'communities:review' country_code %}">
+        <span class="material-icons">
+          arrow_back
+        </span>
+      </a>
+    </div>
+  </div>
 </div>
+
+
+
+
 {% endblock body %}

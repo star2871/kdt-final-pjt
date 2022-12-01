@@ -1,7 +1,8 @@
 from django import forms
-from .models import Article, Feed, ArticleComment, FeedComment
+from .models import Article, Feed, FeedImages, ArticleComment, FeedComment
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+from django.utils.translation import gettext_lazy as _
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -10,7 +11,6 @@ class ArticleForm(forms.ModelForm):
             "title",
             "content",
             "grade",
-            "country",
             "image",
         ]
         widgets = {
@@ -21,18 +21,34 @@ class ArticleForm(forms.ModelForm):
             'image' :'대표 이미지를 설정해주세요.'
         }
 
-class TipForm(forms.ModelForm):
+class AdviceForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = [
             "title",
             "content",
-            "country",
             "image",
         ]
         widgets = {
-            'content': SummernoteWidget(),}
+            'content': SummernoteWidget(),
+        }
+
         labels = {
             # 후기 미리보기 이미지 불러오기 쉽게
             'image' :'대표 이미지를 설정해주세요.'
+        }
+
+class FeedForm(forms.ModelForm):
+    class Meta:
+        model = Feed
+        fields = [
+            "content",
+        ]
+
+class FeedImageForm(forms.ModelForm):
+    class Meta:
+        model = FeedImages
+        fields = ("image",)
+        labels = {
+            "image": _("Image"),
         }
