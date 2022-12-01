@@ -9,7 +9,7 @@
   </div>
 
   <div style="margin-top: 1rem;">
-    <form action="" method='POST' class="signup-form">
+    <form action="" method='POST' class="signup-form" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="join-id">
         <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus=""
@@ -77,6 +77,24 @@
 </form> -->
 
 <script>
+@Controller
+@RequestMapping("/upload")
+public class FileUploadController {
+    @Value("${custom.genFileDirPath}")
+    private String genFileDirPath;    // 하드코딩 되어 있는 링크를 이렇게 변수로 관리한다.
+
+    @RequestMapping("")
+    @ResponseBody
+    public String upload(@RequestParam("profile_image") MultipartFile profile_image) {
+        try {
+            profile_image.transferTo(new File(genFileDirPath + "/media"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "업로드 완료!";
+    }
+}
   document.querySelector("html").classList.add('js');
 
   var fileInput = document.querySelector(".input-file1"),
@@ -96,4 +114,16 @@
     the_return.innerHTML = this.value;
   });  
 </script>
+{% comment %} <div class="background-size d-flex flex-column align-items-center justify-content-center">
+  <div class="d-flex flex-column bg-white border border-2 border border-opacity-75 border-start-0 border-end-0 rounded-4 border-secondary shadow-lg">
+    <h1 class="text-center mt-5 mb-3 fw-bold text-space">회원가입</h1>
+    <form action="" method="POST" class="p-5 border-dark" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <div class="text-end">
+        {% bootstrap_button button_type="submit" content="가입완료" button_class="btn btn-outline-info" %}
+      </div>
+    </form>
+  </div>
+</div> {% endcomment %}
 {% endblock %}
