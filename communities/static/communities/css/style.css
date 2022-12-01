@@ -147,6 +147,11 @@
 }
 
 /* 리뷰 디테일 */
+.container {
+    display: flex;
+    flex-flow:nowrap;
+}
+
 .detail-section {
     width: 540px;
     margin: auto;
@@ -220,4 +225,38 @@
 .detail-content {
     padding: 0px 10px;
     min-height: 400px;
+}
+
+.detail-content p img {
+    object-fit: contain;
+}
+
+.side-bar {
+    display: none;
+}
+@media (min-width: 1024px) {
+    .side-bar {
+        display: block;
+        position: sticky;
+        top: 0px;
+        width: 50px;
+        height: 400px;
+        padding-top: 200px;
+    }
+}
+
+.remote {
+    background-color: #fbfbfb;
+    padding: 10px;
+    border-radius: 16px;
+    box-shadow: 1px 5px 6px #8f8f8f57;
+    text-align: center;
+}
+
+.remote span {
+    color: black;
+}
+
+.remote span:hover {
+    opacity: 0.5;
 }
