@@ -9,7 +9,7 @@
   </div>
 
   <div style="margin-top: 1rem;">
-    <form action="" method='POST' class="signup-form">
+    <form action="" method='POST' class="signup-form" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="join-id">
         <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus=""
@@ -77,6 +77,24 @@
 </form> -->
 
 <script>
+@Controller
+@RequestMapping("/upload")
+public class FileUploadController {
+    @Value("${custom.genFileDirPath}")
+    private String genFileDirPath;    // 하드코딩 되어 있는 링크를 이렇게 변수로 관리한다.
+
+    @RequestMapping("")
+    @ResponseBody
+    public String upload(@RequestParam("profile_image") MultipartFile profile_image) {
+        try {
+            profile_image.transferTo(new File(genFileDirPath + "/media"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "업로드 완료!";
+    }
+}
   document.querySelector("html").classList.add('js');
 
   var fileInput = document.querySelector(".input-file1"),
