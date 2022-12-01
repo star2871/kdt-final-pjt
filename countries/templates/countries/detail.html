@@ -156,7 +156,11 @@
   <p>이벤트:{{country.events}}</p>
   <p>비자 : {{country.visa}}</p>
 </div>
-
+<div>
+  {% for country_new in country_news %}
+    <a href="{{ country_new.url }}"><p>기사제목: {{ country_new.title }}</p></a>
+  {% endfor %}
+</div>
 <script>
   // 오늘 날짜 가져오기
   let today = new Date();

@@ -13,4 +13,8 @@ class Country(models.Model):
     cur_nm = models.CharField(max_length=255, null=True)
     events = models.JSONField(null=True)
     visa = models.JSONField(null=True)
-    
+
+class Country_news(models.Model):
+    country_code = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, null=True)
+    url = models.URLField(max_length=200)
