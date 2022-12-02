@@ -64,7 +64,7 @@ def delete(request, article_pk, country_code):
         if request.method == "POST":
             article.delete()
             return redirect("communities:review", country_code)
-    return redirect("communities:review_detail", article_pk, country_code)
+    return redirect("communities:detail", article_pk, country_code)
 
 ## 리뷰 수정
 def review_update(request, article_pk, country_code):
