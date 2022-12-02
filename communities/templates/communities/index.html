@@ -3,123 +3,130 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
-  <!-- 후기 페이지 -->
-  {% if request.resolver_match.url_name == 'review' %}
-    <!-- 커뮤니티 메인 -->
-    <div class="community-header"></div>
+<!-- 후기 페이지 -->
+{% if request.resolver_match.url_name == 'review' %}
+<!-- 커뮤니티 메인 -->
+<div class="community-header"></div>
 
-    <!-- 커뮤니티 공지사항 -->
-    <div style="max-width: 733px; background-color: white; margin: 0 auto;">
-      <section style="padding: 0 18px">
-        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
-          <span style='margin-right: 14px'>✈️</span>공지사항</h2>
-        <div style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
-          <ul style="padding-top: 30px; padding: 0px;">
-            <div class="reviews-row" style="padding: 0">asdasd
-            </div>
-          </ul>
+<!-- 커뮤니티 공지사항 -->
+<div style="max-width: 733px; background-color: white; margin: 0 auto;">
+  <section style="padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
+      <span style='margin-right: 14px'>✈️</span>공지사항
+    </h2>
+    <div
+      style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
+      <ul style="padding-top: 30px; padding: 0px;">
+        <div class="reviews-row" style="padding: 0">asdasd
         </div>
-      </section>
+      </ul>
+    </div>
+  </section>
 
-      <!-- 커뮤니티 베스트리뷰 -->
-      <section style="margin-top: 45px; padding: 0 18px">
-        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700;">
-          <span style='margin-right: 14px'>🏆</span>베스트리뷰</h2>
-        <div style="margin: 8px auto 0; padding: 14px 14px 11px; background-color: white; border-radius: 16px; max-width: 732px; border: 1px solid rgb(235, 237, 244);">
-          <ul style="padding-top: 15px; padding: 0px;">
-            <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-              <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-            </li>
-            <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-              <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-            </li>
-            <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-              <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-            </li>
-          </ul>
-        </div>
-      </section>
+  <!-- 커뮤니티 베스트리뷰 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700;">
+      <span style='margin-right: 14px'>🏆</span>베스트리뷰
+    </h2>
+    <div
+      style="margin: 8px auto 0; padding: 14px 14px 11px; background-color: white; border-radius: 16px; max-width: 732px; border: 1px solid rgb(235, 237, 244);">
+      <ul style="padding-top: 15px; padding: 0px;">
+        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
+          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
+          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
+          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-      <!-- 커뮤니티 리뷰 -->
-      <section style="margin-top: 45px; padding: 0 18px">
-        <div class="d-flex justify-content-between align-items-center">
-          <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">
-            <span style='margin-right: 14px'>🖥️</span>리뷰목록
-          </h2>
-          <div class="create-wrapper">
+  <!-- 커뮤니티 리뷰 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">
+        <span style='margin-right: 14px'>🖥️</span>리뷰목록
+      </h2>
+      <!-- <div class="create-wrapper">
             <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;">
               <div class="create">
                 리뷰작성
                 <img class="plane" src="{% static 'communities/img/create.png' %}" alt="">
               </div>
             </a>
+          </div> -->
+      <div class="create-wrapper">
+        <a href="{% url 'communities:review_create' country_code %}"
+          style="text-decoration: none; color:rgb(51, 51, 51)">
+          <div class="m-create" style="font-size: 14px;">
+            리뷰작성
           </div>
-          <div class="create-wrapper-m">
-            <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none; color:rgb(51, 51, 51)">
-              <div class="m-create" style="font-size: 14px;">
-                리뷰작성
-              </div>
-            </a>
-          </div>
-        </div>
-        <div style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
-          <ul style="padding-top: 15px; padding: 0px;">
-            {% for article in articles %}
-              <div class="review-row">
-                <div class="row">
-                  <div class="col-8" style="padding:0">
-                    <a href="{% url 'communities:detail' country_code article.pk %}" style="text-decoration: none; color: rgb(51, 51, 51)">
-                      <p class="review-title mb-0">
-                        {{ article.title }}
-                      </p>
-                    </a>
-                    <!-- 닉네임|작성일 -->
-                    <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-                    <div class="icons-wrapper">
-                      <div class="icons">
-                        <!-- 좋아요 -->
-                        <div class="icon">
-                          <span class="material-icons md-18">
-                            thumb_up_alt
-                          </span>
-                          <span>{{ article.like_users.count }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 review-list">
-                    {% if article.image %}
-                      <div>
-                        <img class="review-img" src="{{ article.image.url }}" alt="">
-                      </div>
-                    {% endif %}
+        </a>
+      </div>
+    </div>
+    <div
+      style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
+      <ul style="padding-top: 15px; padding: 0px;">
+        {% for article in articles %}
+        <div class="review-row">
+          <div class="row">
+            <div class="col-8" style="padding:0">
+              <a href="{% url 'communities:detail' country_code article.pk %}"
+                style="text-decoration: none; color: rgb(51, 51, 51)">
+                <p class="review-title mb-0">
+                  {{ article.title }}
+                </p>
+              </a>
+              <!-- 닉네임|작성일 -->
+              <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
+              <div class="icons-wrapper">
+                <div class="icons">
+                  <!-- 좋아요 -->
+                  <div class="icon">
+                    <span class="material-icons md-18">
+                      thumb_up_alt
+                    </span>
+                    <span>{{ article.like_users.count }}</span>
                   </div>
                 </div>
               </div>
-            {% endfor %}
-          </ul>
+            </div>
+            <div class="col-4 review-list">
+              {% if article.image %}
+              <div>
+                <img class="review-img" src="{{ article.image.url }}" alt="">
+              </div>
+              {% endif %}
+            </div>
+          </div>
         </div>
-      </section>
+        {% endfor %}
+      </ul>
     </div>
+  </section>
+</div>
 
-    <!-- <div class="container"> <div class="review-wrapper"> <div class="notion-card"> <div class="text"> <p class="fw-bold">공지 사항</p> <hr> 새로운 사항이 생겼습니다. <hr> 새로운 공지사항2 </div> </div> <div class="notion-card"> <div class="text"> <p class="fw-bold">베스트 리뷰</p> <hr> <div class="best-review row row-cols-2 g-4"> <div class="col best-box"> <div class="rank"> <span class="rank_num">1</span>내용입니다. </div> <div class="rank"> <span class="rank_num">2</span>내용입니다. </div> <div class="rank"> <span class="rank_num">3</span>내용입니다. </div> </div> <div class="col best-box"> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> </div> </div> </div> </div> -->
+<!-- <div class="container"> <div class="review-wrapper"> <div class="notion-card"> <div class="text"> <p class="fw-bold">공지 사항</p> <hr> 새로운 사항이 생겼습니다. <hr> 새로운 공지사항2 </div> </div> <div class="notion-card"> <div class="text"> <p class="fw-bold">베스트 리뷰</p> <hr> <div class="best-review row row-cols-2 g-4"> <div class="col best-box"> <div class="rank"> <span class="rank_num">1</span>내용입니다. </div> <div class="rank"> <span class="rank_num">2</span>내용입니다. </div> <div class="rank"> <span class="rank_num">3</span>내용입니다. </div> </div> <div class="col best-box"> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> </div> </div> </div> </div> -->
 
-    <!-- 글쓰기 -->
+<!-- 글쓰기 -->
 
-    <!-- 전체 글 목록 -->
+<!-- 전체 글 목록 -->
 
-  {% elif request.resolver_match.url_name == 'advice' %}
-    <h1>
-      꿀팁
-    </h1>
-  {% elif request.resolver_match.url_name == 'feed' %}
-    <h1>
-      피드
-    </h1>
-  {% endif %}
+{% elif request.resolver_match.url_name == 'advice' %}
+<h1>
+  꿀팁
+</h1>
+{% elif request.resolver_match.url_name == 'feed' %}
+<h1>
+  피드
+</h1>
+{% endif %}
 {% endblock %}
