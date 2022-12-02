@@ -10,7 +10,7 @@
     <title>Document</title>
 
     <body>
-      <form action="" method="POST">
+      <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form article_form %}
         {% if request.resolver_match.url_name == 'review_create' or 'review_update' %}
