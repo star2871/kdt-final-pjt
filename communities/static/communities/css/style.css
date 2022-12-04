@@ -392,3 +392,16 @@ span,
 .comment-user-date p {
     font-size: 16px;
 }
+
+#comment-none {
+    width: 100%;
+    display: block;
+    text-align: center;
+    line-height: 200px;
+    opacity: 0.4;
+    font-weight: 300;
+}
+
+#review_delete:hover {
+    cursor: pointer;
+}

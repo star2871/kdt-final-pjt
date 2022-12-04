@@ -92,6 +92,8 @@
             <p>{{ comment.content }}</p>
           </div>
         </div>
+        {% empty %}
+        <span id="comment-none">작성된 댓글이 없습니다.</span>
         {% endfor %}
       </div>
     </a>
@@ -107,9 +109,12 @@
         </span>
       </a>
       <hr>
-      <span id="review_delete" class="material-icons">
-        delete
-      </span>
+      <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
+        {% csrf_token %}
+        <span id="review_delete" class="material-icons">
+          delete
+        </span>
+      </form>
       {% else %}
       <a href="#comment">
         <span class="material-icons md-18">
@@ -132,4 +137,13 @@
 </div>
 </div>
 
+<script>
+  const reviewDelete = document.querySelector('#review_delete')
+  reviewDelete.addEventListener('click', function (e) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      const deleteForm = document.querySelector('#delete_form')
+      deleteForm.submit();
+    }
+  })
+</script>
 {% endblock body %}
