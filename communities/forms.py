@@ -46,6 +46,10 @@ class FeedForm(forms.ModelForm):
         ]
 
 class FeedImageForm(forms.ModelForm):
+    image = forms.ImageField(
+        label="사진",
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )
     class Meta:
         model = FeedImages
         fields = ("image",)
