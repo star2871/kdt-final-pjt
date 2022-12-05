@@ -1,12 +1,142 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block body %}
-{% if user.profile_image %}
-<div class="text-end me-3">
-  <img src="{{ user.profile_image.url}}" class="mb-3 profile-image-border" alt="{{ user.profile_image }}">
-</div>
-{% endif %}
-<h1>{{ user.username }}님의 id</h1>
-<h2>{{ user.nick_name }}님의 닉네임</h2>
-<a class="btn btn-primary rounded-0 font-space" href="{% url 'accounts:update' %}">수정하기</a>
+<style>
+  ul.list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  ul.list::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .tab-button {
+    display: block;
+    padding: 10px 20px 10px 20px;
+    float: left;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .blue {
+    border-top: 2px solid #0061FF;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid white;
+    border-left: 1px solid #ccc;
+    color: black;
+    margin-top: -2px;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 10px;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .test {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sections {
+    margin-top: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .test {
+      display: grid;
+      grid-template-columns: 5fr 5fr;
+      max-width: 550px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+
+    .sections {
+      margin-top: 72px;
+    }
+  }
+</style>
+
+<section class="sections" style="padding: 0 24px;">
+  <div class='test'>
+    <article class="d-flex align-items-center justify-content-between"
+      style="max-width: 550px; height: auto; background-color: white; border-radius: 12px; padding: 26px;">
+      {% if user.profile_image %}
+      <div class="text-center">
+        <img src="{{ user.profile_image.url}}" class="profile-image-border" alt="{{ user.profile_image }}"
+          style="object-fit: cover; border-radius: 50%; width: 90px; height: 90px;">
+      </div>
+      {% endif %}
+      <div class="text-start">
+        <p style="font-size: 24px; font-weight: 700;">{{ user.nick_name }}</p>
+        <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
+        </p>
+        <a class="btn font-space" href="{% url 'accounts:update' %}">수정하기</a>
+      </div>
+    </article>
+    <article class="d-flex align-items-center; justify-content-between"
+      style="max-width: 550px; height: auto; background-color: white; border-radius: 12px; padding: 26px;">
+      <div class="">
+        <p style="font-size: 16px; font-weight: 700;">작성 게시글 수</p>
+        <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
+      </div>
+      <div>
+        <p style="font-size: 16px; font-weight: 700;">작성 댓글 수</p>
+        <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
+      </div>
+    </article>
+  </div>
+
+  <div class="main-container"
+    style="background-color: white; border-radius: 12px; max-width: 550px; margin: 20px auto 0;">
+    <ul class="list" style="font-size: 14px;">
+      <li class="tab-button">작성 게시글</li>
+      <li class="tab-button blue">작성 댓글</li>
+      <li class="tab-button">스크랩</li>
+    </ul>
+    <div class="tab-content">
+      <p>작성한 아티클 목록</p>
+    </div>
+    <div class="tab-content show">
+      <p>작성한 댓글</p>
+    </div>
+    <div class="tab-content">
+      <p>스크랩 목록</p>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  const allBtn = document.querySelectorAll('.tab-button');
+  const allContent = document.querySelectorAll('.tab-content');
+
+  for (let i = 0; i < allBtn.length; i++) {
+    allBtn[i].addEventListener('click', function () {
+      for (let i = 0; i < allBtn.length; i++) {
+        allBtn[i].classList.remove('blue');
+      }
+
+      for (let i = 0; i < allContent.length; i++) {
+        allContent[i].classList.remove('show');
+      }
+
+      allBtn[i].classList.add('blue');
+      allContent[i].classList.add('show');
+    })
+  }
+</script>
 {% endblock %}

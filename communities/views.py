@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm
-from .models import Article, Country, Feed, FeedImages
+from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm
+from .models import Article, Country, Feed, FeedImages, ArticleComment
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
@@ -9,6 +9,7 @@ import datetime
 from googleapiclient.discovery import build
 from django.forms import modelformset_factory
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 creds_filename = 'credentials.json'
@@ -91,6 +92,53 @@ def review_update(request, article_pk, country_code):
         return render(request, "communities/form.html", context)
     return redirect("communities:review_detail", country_code, article_pk)
 
+## 게시글 댓글 (리뷰, 꿀팁 동일)
+## 댓글 생성
+def article_comment_create(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    comment_form = ArticleCommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.user = request.user
+        comment.article = article
+        comment.save()
+        context = {
+            'content': comment.content,
+            'userName': comment.user.username,
+        }
+    return JsonResponse(context)
+
+## 댓글 삭제
+def comment_delete(request, article_pk, comment_pk, country_code):
+    comment = get_object_or_404(ArticleComment, pk=comment_pk)
+    if request.user == comment.user:
+        if request.method == "POST":
+            comment.delete()
+        return redirect("communities:detail", article_pk, country_code)
+    return redirect("communities:detail", article_pk, country_code)
+
+## 대댓글 생성
+def sub_comment_create(request, article_pk, comment_pk, country_code):
+    article = get_object_or_404(Article, pk=article_pk)
+    parent = ArticleComment.objects.get(pk=comment_pk)
+    comment_form = ArticleCommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.Articles = article
+        comment.user = request.user
+        comment.parent = parent
+        comment.save()
+        return redirect("communities:detail", article_pk, country_code)
+    return redirect("communities:detail", article_pk, country_code)
+
+## 대댓글 삭제
+def sub_comment_delete(request, article_pk, comment_pk, country_code):
+    comment = get_object_or_404(ArticleComment, pk=comment_pk)
+    if request.user == comment.user:
+        if request.method == "POST":
+            comment.delete()
+        return redirect("communities:detail", article_pk, country_code)
+    return redirect("communities:detail", article_pk, country_code)
 
 ## 꿀팁 파트
 ## 꿀팁 인덱스
