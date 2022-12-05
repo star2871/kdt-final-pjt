@@ -111,13 +111,12 @@ class ArticleComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     secret = models.BooleanField(default=False)
-    profile = ProcessedImageField(blank=True,
-                                processors=[Thumbnail(500, 700)], 
-                                format='JPEG', options={'quality':90}, 
-                                upload_to='images/')
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    like = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="like_article_comments"
+    )
     
     @property
     def created_string(self):
@@ -137,6 +136,7 @@ class ArticleComment(models.Model):
 
 class FeedComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     content = models.CharField(max_length=150)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     secret = models.BooleanField(default=False)

@@ -52,7 +52,12 @@ class FeedImageForm(forms.ModelForm):
     )
     class Meta:
         model = FeedImages
-        fields = ("image",)
+        fields = ["image",]
         labels = {
             "image": _("Image"),
         }
+
+class ArticleCommentForm(forms.ModelForm):
+    class Meta:
+        model = ArticleComment
+        fields = ["content",]
