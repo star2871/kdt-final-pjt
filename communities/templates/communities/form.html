@@ -10,10 +10,10 @@
     <title>Document</title>
 
     <body>
-      <form action="" method="POST">
+      <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form article_form %}
-        {% if request.resolver_match.url_name == 'review_create' %}
+        {% if request.resolver_match.url_name == 'review_create' or 'review_update' %}
           <label for="travel_start">여행시작:</label>
           <input id="travel_start" type="date" name="start"/>
           <label for="travel_end">여행끝:</label>

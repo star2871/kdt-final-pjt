@@ -3,6 +3,8 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 {% endblock css %}
 
 {% block body %}
@@ -14,7 +16,6 @@
       {{ article.title }}
     </div>
     <div class="detail-meta-section">
-      <!-- 리모컨 추가(뒤로, 수정, 삭제) -->
       <div class="detail-user">
         <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
         <div class="detail-img-div">
@@ -49,7 +50,8 @@
         <span class="material-icons">
           event_available
         </span>
-        <span>{{ article.travel_start|date:"o. n. j" }} ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
+        <span>{{ article.travel_start|date:"o. n. j" }}
+          ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
       </div>
     </div>
     <hr>
@@ -58,26 +60,72 @@
       {{article.content|safe}}
     </div>
 
-    <!-- 리뷰 수정 삭제 -->
-    <form class="text-end" action="{% url "communities:delete" country_code article.pk %}" method="POST">
-      {% csrf_token %}
-      <a href="" method="POST">수정</a>
-      <input type="submit" value="삭제">
-      <a href="{% url 'communities:review' country_code %}">뒤로</a>
-    </form>
+    <!-- 댓글 영역 -->
+    <a name="comment" class="comment-section">
+      <span><span style="color: #428ce8;">{{article.articlecomment_set.count}}</span>개의 댓글</span>
+      <div class="comment-list">
+        {% for comment in comments %}
+        <div class="comment-row">
+          <div class="comment-user">
+            <div class="comment-img-div">
+              {% if not comment.user.profile_image %}
+              <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진" class="comment-profile-img">
+              {% else %}
+              <img src="{{ comment.user.image.url }}" alt="" class="comment-profile-img">
+              {% endif %}
+            </div>
+          </div>
+          <div class="comment-main">
+            <div class="comment-user-date">
+              <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
+              <p>
+                <!-- 작성일자 : ~시간 전 표시 -->
+                {% if comment.created_string == False %}
+                <!-- 7일이 지나면 날짜로 출력 -->
+                {{ comment.created_at|date:'m월 d일' }}
+                {% else %}
+                <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                {{ comment.created_string }}
+                {% endif %}
+              </p>
+            </div>
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
+        {% empty %}
+        <span id="comment-none">작성된 댓글이 없습니다.</span>
+        {% endfor %}
+      </div>
+    </a>
   </div>
+
   <!-- 사이드바 리모컨 -->
   <div class="side-bar">
     <div class="remote">
+      {% if user == article.user %}
       <a href="{% url 'communities:review_update' country_code article.pk %}">
         <span class="material-icons">
           edit
         </span>
       </a>
       <hr>
-      <span id="review_delete" class="material-icons">
-        delete
+      <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
+        {% csrf_token %}
+        <span id="review_delete" class="material-icons">
+          delete
+        </span>
+      </form>
+      {% else %}
+      <a href="#comment">
+        <span class="material-icons md-18">
+          chat_bubble_outline
+        </span>
+      </a>
+      <hr>
+      <span class="material-icons md-18">
+        thumb_up_alt
       </span>
+      {% endif %}
       <hr>
       <a href="{% url 'communities:review' country_code %}">
         <span class="material-icons">
@@ -87,8 +135,15 @@
     </div>
   </div>
 </div>
+</div>
 
-
-
-
+<script>
+  const reviewDelete = document.querySelector('#review_delete')
+  reviewDelete.addEventListener('click', function (e) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      const deleteForm = document.querySelector('#delete_form')
+      deleteForm.submit();
+    }
+  })
+</script>
 {% endblock body %}
