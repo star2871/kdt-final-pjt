@@ -16,6 +16,7 @@
         {% if request.resolver_match.url_name == 'review_create' or request.resolver_match.url_name == 'review_update' %}
           <label for="travel_start">여행시작:</label>
           <input id="travel_start" type="date" name="start"/>
+          <br>
           <label for="travel_end">여행끝:</label>
           <input id="travel_end" type="date" name="end"/>
         {% endif %}
