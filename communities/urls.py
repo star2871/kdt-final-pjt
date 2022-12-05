@@ -13,5 +13,6 @@ urlpatterns = [
     path("<str:country_code>/advice/advice_create", views.advice_create, name="advice_create"),
     path("<str:country_code>/feed/", views.review, name="feed"),
     path("<str:country_code>/feed/feed_create", views.feed_create, name="feed_create"),
+    path("<str:country_code>/review/<int:article_pk>/review_detail/comment_create", views.article_comment_create, name="comment_create"),
     path("test", views.test, name="test"),
 ]

@@ -52,10 +52,12 @@ def review_create(request, country_code):
 def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.articlecomment_set.order_by("-pk")
+    comment_form = ArticleCommentForm()
     context = {
         'article': article,
         'country_code': country_code,
         'comments' : comments,
+        'comment_form': comment_form,
     }
     return render(request, 'communities/detail.html', context)
 
@@ -94,7 +96,7 @@ def review_update(request, article_pk, country_code):
 
 ## 게시글 댓글 (리뷰, 꿀팁 동일)
 ## 댓글 생성
-def article_comment_create(request, article_pk):
+def article_comment_create(request, article_pk,country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comment_form = ArticleCommentForm(request.POST)
     if comment_form.is_valid():
@@ -106,7 +108,8 @@ def article_comment_create(request, article_pk):
             'content': comment.content,
             'userName': comment.user.username,
         }
-    return JsonResponse(context)
+        return render('communities/detail.html',article_pk)
+    # return JsonResponse(context)
 
 ## 댓글 삭제
 def comment_delete(request, article_pk, comment_pk, country_code):

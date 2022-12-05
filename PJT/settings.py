@@ -15,7 +15,6 @@ import os
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -63,7 +61,6 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -94,7 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "PJT.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -104,7 +100,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -124,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -138,15 +132,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -163,10 +154,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.User"
 
 ## 썸머노트 설정
+# SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
+    'iframe': False,
+
     'summernote': {
         'width': '100%',
         'height': '480',
-    }
+    },
+    'toolbar': [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        # ['para', ['ul', 'ol', 'paragraph']],
+        ['fontsize', ['fontsize']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture']],
+        ['view', ['codeview', 'help']],
+    ],
 }
 X_FRAME_OPTIONS = 'SAMEORIGIN'

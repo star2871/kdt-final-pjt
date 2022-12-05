@@ -1,341 +1,284 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 {% endblock css %}
 
 {% block body %}
-  <div class="container">
-    <div class="detail-section">
-      <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
-      <div class="eye" style="height: 200px;"></div>
-      <div class="detail-title">
-        {{ article.title }}
-      </div>
-      <div class="detail-meta-section">
-        <div class="detail-user">
-          <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
-          <div class="detail-img-div">
-            {% if not article.user.profile_image %}
-              <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
-            {% else %}
-              <img src="{{ article.user.image.url }}" alt="" class="profile-img">
-            {% endif %}
-          </div>
-          <div class="detail-username">
-            {{ article.user.nick_name }}
-          </div>
-          <!-- 작성일 -->
-          <div class="detail-created">
-            <!-- 작성일자 : ~시간 전 표시 -->
-            {% if article.created_string == False %}
-              <!-- 7일이 지나면 날짜로 출력 -->
-              {{ article.created_at|date:'m월 d일' }}
-            {% else %}
-              <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-              {{ article.created_string }}
-            {% endif %}
-          </div>
-          <!-- 조회 수 -->
-          <div>
-            조회 32
-          </div>
-        </div>
-        <!-- 여행 기간 -->
-        <div class="detail-date">
-          <!-- 달력 아이콘 -->
-          <span class="material-icons">
-            event_available
-          </span>
-          <span>{{ article.travel_start|date:"o. n. j" }}
-            ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
-        </div>
-      </div>
-      <hr>
-      <!-- 리뷰 내용 -->
-      <div class="detail-content">
-        {{ article.content|safe }}
-      </div>
-
-      <div id="comment_footer" class="comment-ft">
-        확인용
-        <p>dasd</p>
-        <p>dasd</p>
-        <p>dasd</p>
-        <p>dasd</p>
-        <p>dasd</p>
-        <p>dasd</p>
-        <p>dasd</p>
-      </div>
-
-      <!-- 댓글 영역 -->
-      <a name="comment" class="comment-section">
-        <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
-        <div class="comment-list">
-          {% for comment in comments %}
-            <div class="comment-row">
-              <div class="comment-user">
-                <div class="comment-img-div">
-                  {% if not comment.user.profile_image %}
-                    <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진" class="comment-profile-img">
-                  {% else %}
-                    <img src="{{ comment.user.image.url }}" alt="" class="comment-profile-img">
-                  {% endif %}
-                </div>
-              </div>
-              <div class="comment-main">
-                <div class="comment-user-date">
-                  <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
-                  <p>
-                    <!-- 작성일자 : ~시간 전 표시 -->
-                    {% if comment.created_string == False %}
-                      <!-- 7일이 지나면 날짜로 출력 -->
-                      {{ comment.created_at|date:'m월 d일' }}
-                    {% else %}
-                      <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                      {{ comment.created_string }}
-                    {% endif %}
-                  </p>
-                </div>
-                <p>{{ comment.content }}</p>
-              </div>
+    <div class="container">
+        <div class="detail-section">
+            <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
+            <div class="eye" style="height: 200px;"></div>
+            <div class="detail-title">
+                {{ article.title }}
             </div>
-            {% empty %}
-            <span id="comment-none">작성된 댓글이 없습니다.</span>
-          {% endfor %}
+            <div class="detail-meta-section">
+                <div class="detail-user">
+                    <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
+                    <div class="detail-img-div">
+                        {% if not article.user.profile_image %}
+                            <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
+                        {% else %}
+                            <img src="{{ article.user.image.url }}" alt="" class="profile-img">
+                        {% endif %}
+                    </div>
+                    <div class="detail-username">
+                        {{ article.user.nick_name }}
+                    </div>
+                    <!-- 작성일 -->
+                    <div class="detail-created">
+                        <!-- 작성일자 : ~시간 전 표시 -->
+                        {% if article.created_string == False %}
+                            <!-- 7일이 지나면 날짜로 출력 -->
+                            {{ article.created_at|date:'m월 d일' }}
+                        {% else %}
+                            <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                            {{ article.created_string }}
+                        {% endif %}
+                    </div>
+                    <!-- 조회 수 -->
+                    <div>
+                        조회 32
+                    </div>
+                </div>
+                <!-- 여행 기간 -->
+                <div class="detail-date">
+                    <!-- 달력 아이콘 -->
+                    <span class="material-icons">
+          event_available
+        </span>
+                    <span>{{ article.travel_start|date:"o. n. j" }}
+          ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
+                </div>
+            </div>
+            <hr>
+            <!-- 리뷰 내용 -->
+            <div class="detail-content">
+                {{ article.content|safe }}
+            </div>
+
+            <div id="comment_footer" class="comment-ft">
+                확인용
+                <p>dasd</p>
+                <p>dasd</p>
+                <p>dasd</p>
+                <p>dasd</p>
+                <p>dasd</p>
+                <p>dasd</p>
+                <p>dasd</p>
+            </div>
+            <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}" data-country-id="{{ country_code }}"
+                  onsubmit="submitComment(this.id)">
+                {% csrf_token %}
+                {% bootstrap_form comment_form %}
+                <button type="submit" id="write" class="btn btn-sm">작성하기</button>
+            </form>
+            <!-- 댓글 영역 -->
+            <a name="comment" class="comment-section">
+                <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
+                <div class="{{ article.pk }}-comment-list" data-article-id="{{ article.pk }}">
+                    {% for comment in comments %}
+                        <div class="comment-row">
+                            <div class="comment-user">
+                                <div class="comment-img-div">
+                                    {% if not comment.user.profile_image %}
+                                        <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
+                                             class="comment-profile-img">
+                                    {% else %}
+                                        <img src="{{ comment.user.image.url }}" alt="" class="comment-profile-img">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="comment-main">
+                                <div class="comment-user-date">
+                                    <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
+                                    <p>
+                                        <!-- 작성일자 : ~시간 전 표시 -->
+                                        {% if comment.created_string == False %}
+                                            <!-- 7일이 지나면 날짜로 출력 -->
+                                            {{ comment.created_at|date:'m월 d일' }}
+                                        {% else %}
+                                            <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                                            {{ comment.created_string }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                            {% if user.pk == comment.user_id %}
+                                <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}"
+                                        data-comment-id="{{ comment.pk }}"
+                                        class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정
+                                </button>
+                                <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}"
+                                        data-comment-id="{{ comment.pk }}"
+                                        class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제
+                                </button>
+                                <div id="comment-{{ comment.pk }}-update-form" class="d-none">
+                                    <input id="comment-{{ comment.pk }}-update-content" type="text"
+                                           value="{{ comment.content }}">
+                                    <button id="comment-{{ comment.pk }}-update-btn" class="btn btn-primary"
+                                            data-article-id="{{ article.pk }}"
+                                            data-comment-id="{{ comment.pk }}" onclick="updateComment(this.id)">확인
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% empty %}
+                        <span id="comment-none">작성된 댓글이 없습니다.</span>
+                    {% endfor %}
+                </div>
+            </a>
         </div>
-      </a>
+
+        <!-- 사이드바 리모컨 -->
+        <div class="side-bar">
+            <div class="remote">
+                {% if user == article.user %}
+                    <a href="{% url 'communities:review_update' country_code article.pk %}">
+        <span class="material-icons">
+          edit
+        </span>
+                    </a>
+                    <hr>
+                    <form action="{% url 'communities:delete' country_code article.pk %}" method="POST"
+                          id="delete_form">
+                        {% csrf_token %}
+                        <span id="review_delete" class="material-icons">
+          delete
+        </span>
+                    </form>
+                {% else %}
+                    <a href="#comment">
+        <span class="material-icons md-18">
+          chat_bubble_outline
+        </span>
+                    </a>
+                    <hr>
+                    <span class="material-icons md-18">
+        thumb_up_alt
+      </span>
+                {% endif %}
+                <hr>
+                <a href="{% url 'communities:review' country_code %}">
+        <span class="material-icons">
+          arrow_back
+        </span>
+                </a>
+            </div>
+        </div>
     </div>
-
-    <!-- 사이드바 리모컨 -->
-    <div class="side-bar">
-      <div class="remote">
-        {% if user == article.user %}
-          <a href="{% url 'communities:review_update' country_code article.pk %}">
-            <span class="material-icons">
-              edit
-            </span>
-          </a>
-          <hr>
-          <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
-            {% csrf_token %}
-            <span id="review_delete" class="material-icons">
-              delete
-            </span>
-          </form>
-        {% else %}
-          <a href="#comment">
-            <span class="material-icons md-18">
-              chat_bubble_outline
-            </span>
-          </a>
-          <hr>
-          <span class="material-icons md-18">
-            thumb_up_alt
-          </span>
-        {% endif %}
-        <hr>
-        <a href="{% url 'communities:review' country_code %}">
-          <span class="material-icons">
-            arrow_back
-          </span>
-        </a>
-      </div>
     </div>
-  </div>
-</div>
-<nav id="test" class="test1" style="background-color: yellow; width: 100%; position: fixed ; height:65px; bottom:0; z-index: 1">
-  <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
-</nav>
-<script>
-  window.onload = () => {
-    const commentft = document.querySelector('.comment-ft');
+    <nav id="test" class="test1"
+         style="background-color: yellow; width: 100%; position: fixed ; height:65px; bottom:0; z-index: 1">
+        <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
 
-    // 스크롤 이벤트를 감지하는 이벤트 리스너를 만들어줍니다.
-    window.addEventListener('scroll', function () {
-      console.log('스크롤 이벤트 감지!!');
 
-      //뷰포트 총 길이 = 현재 보이는 화면의 바닥 좌표
-      let viewheight = document.documentElement.clientHeight
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-      // 뷰포트 시작점과 푸터까지의 거리
-      const distanceFromViewport = commentft
-        .getBoundingClientRect()
-        .top;
-      if (distanceFromViewport > viewheight) {
-        document
-          .getElementById("test")
-          .style
-          .display = "block"
-      } else {
-        document
-          .getElementById("test")
-          .style
-          .display = "none"
-      }
+        const getComment = function (e) {
+            const comments = document.querySelector(`#${e}`);
+            const commentsList = document.querySelector(`#${e}-list`);
+            commentsList.classList.toggle('display-none');
 
-      console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);
+            if (commentsList.classList.contains('display-none')) {
+                comments.innerText = "댓글보기"
+            } else {
+                comments.innerText = "댓글닫기"
+            }
+        };
 
-      console.log('뷰포트의 총 높이', viewheight);
-
-    });
-  };
-</script>
-<script>
-  const reviewDelete = document.querySelector('#review_delete')
-  reviewDelete.addEventListener('click', function (e) {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-      const deleteForm = document.querySelector('#delete_form')
-      deleteForm.submit();
-    }
-  })
-</script>
-
-<script>
-  const csrftoken = document
-    .querySelector('[name=csrfmiddlewaretoken]')
-    .value;
-
-  const getComment = function (e) {
-    const comments = document.querySelector(`#${e}`);
-    const commentsList = document.querySelector(`#${e}-list`);
-    commentsList
-      .classList
-      .toggle('display-none');
-
-    if (commentsList.classList.contains('display-none')) {
-      comments.innerText = "댓글보기"
-    } else {
-      comments.innerText = "댓글닫기"
-    };
-  };
-
-  const getCreateComment = function (e) {
-    const commentForm = document.querySelector(`#${e}-form`);
-    commentForm
-      .classList
-      .toggle('display-none');
-  }
-
-  const submitComment = function (e) {
-    event.preventDefault();
-    const commentForm = document.querySelector(`#${e}`);
-
-    const pk = event.target.dataset.reviewId;
-
-    axios({
-      method: 'post',
-      url: `/reviews/${pk}/comments/`,
-      headers: {
-        'X-CSRFToken': csrftoken
-      },
-      data: new FormData(commentForm)
-    }).then(response => {
-      const commentsList = document.querySelector(`#review-${response.data.comments_data[0].study_id}-comments-list`)
-      commentsList.textContent = "";
-      for (let i = 0; i < response.data.comments_data.length; i++) {
-        if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
-          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정</button>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제</button>
-          <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="display-none">
-          <input id="comment-${response.data.comments_data[i].comment_pk}-update-content" type="text" value="${response.data.comments_data[i].content}">
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="btn btn-primary" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인</button>
-          </div><br>`);
-        } else {
-          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span><br>`);
+        const getCreateComment = function (e) {
+            const commentForm = document.querySelector(`#${e}-form`);
+            commentForm.classList.toggle('display-none');
         }
 
-      }
-      commentForm.reset();
-      let counter = document.getElementById("counter_id_content");
-      counter.innerText = "0/500";
+        const submitComment = function (e) {
+            event.preventDefault();
+            const commentForm = document.querySelector(`#${e}`);
 
-      //코멘트 작성 후 코멘트리스트 보여주기
-      commentsList
-        .classList
-        .remove('display-none');
+            const pk = event.target.dataset.articleId;
+            const country = event.target.dataset.countryId;
+            axios({
+                method: 'post',
+                url: `/communities/${country}/review/${pk}/review_detail/comment_create/`,
+                headers: {'X-CSRFToken': csrftoken},
+                data: new FormData(commentForm)
+            })
+                .then(response => {
+                    const commentsList = document.querySelector(`#${response.data.comments_data[0].article_id}-comments-list`)
+                    commentsList.textContent = "";
+                    console.log(response.data.comments_data)
+                    for (let i = 0; i < response.data.comments_data.length; i++) {
+                        if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
+                            commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span>
+            <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정</button>
+            <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제</button>
+            <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="display-none">
+            <input id="comment-${response.data.comments_data[i].comment_pk}-update-content" type="text" value="${response.data.comments_data[i].content}">
+            <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="btn btn-primary" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인</button>
+            </div><br>`);
+                        } else {
+                            commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span><br>`);
+                        }
 
-    })
+                    }
+                    commentForm.reset();
+                    let counter = document.getElementById("counter_id_content");
+                    counter.innerText = "0/500";
 
-  }
+                    //코멘트 작성 후 코멘트리스트 보여주기
+                    commentsList.classList.remove('display-none');
 
-  const getUpdateComment = function (e) {
-    const updateComment = document.querySelector(`#${e}-form`);
-    updateComment
-      .classList
-      .toggle('display-none');
-  }
-
-  const updateComment = function (e) {
-    const commentValue = document
-      .querySelector(`#comment-${event.target.dataset.commentId}-update-content`)
-      .value;
-    const pk1 = event.target.dataset.reviewId;
-
-    axios({
-      method: 'post',
-      url: `/reviews/${pk1}/${event.target.dataset.commentId}/update/`,
-      headers: {
-        'X-CSRFToken': csrftoken
-      },
-      data: {
-        'content': commentValue
-      }
-    }).then(response => {
-      const commentsList = document.querySelector(`#review-${response.data.comments_data[0].study_id}-comments-list`);
-      commentsList.textContent = "";
-      for (let i = 0; i < response.data.comments_data.length; i++) {
-        if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
-          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정</button>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제</button>
-          <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="display-none">
-          <input id="comment-${response.data.comments_data[i].comment_pk}-update-content" type="text" value="${response.data.comments_data[i].content}">
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="btn btn-primary" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인</button>
-          </div><br>`);
-        } else {
-          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span><br>`);
-        }
-
-      }
-    })
-  }
-
-  const deleteComment = function (e) {
-    const reviewPk = event.target.dataset.reviewId
-    if (confirm("정말 삭제하시겠습니까??") == true) {
-      axios({
-        method: 'post',
-        url: `/reviews/${event.target.dataset.reviewId}/${event.target.dataset.commentId}/delete/`,
-        headers: {
-          'X-CSRFToken': csrftoken
-        }
-      }).then(response => {
-        const commentsList = document.querySelector(`#review-${reviewPk}-comments-list`)
-        commentsList.textContent = "";
-
-        for (let i = 0; i < response.data.comments_data.length; i++) {
-          if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
-            commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정</button>
-          <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제</button>
-          <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="display-none">
-          <input id="comment-${response.data.comments_data[i].comment_pk}-update-content" type="text" value="${response.data.comments_data[i].content}">
-          <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="btn btn-primary" data-review-id="${response.data.comments_data[i].study_id}" data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인</button>
-          </div><br>`)
-          } else {
-            commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span><br>`)
-          }
+                })
 
         }
-      })
-    } else {
-      return;
-    }
-  }
-</script>
+
+    </script>
+
+    <script>
+
+        window.onload = () => {
+            const commentft = document.querySelector('.comment-ft');
+
+            // 스크롤 이벤트를 감지하는 이벤트 리스너를 만들어줍니다.
+            window.addEventListener('scroll', function () {
+                console.log('스크롤 이벤트 감지!!');
+
+                //뷰포트 총 길이 = 현재 보이는 화면의 바닥 좌표
+                let viewheight = document.documentElement.clientHeight
+
+                // 뷰포트 시작점과 푸터까지의 거리
+                const distanceFromViewport = commentft.getBoundingClientRect().top;
+                if (distanceFromViewport > viewheight) {
+                    document.getElementById("test").style.display = "block"
+                } else {
+                    document.getElementById("test").style.display = "none"
+                }
+
+                console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);
+
+                console.log('뷰포트의 총 높이', viewheight);
+
+            });
+        };
+
+
+    </script>
+    <script>
+        const reviewDelete = document.querySelector('#review_delete')
+        reviewDelete.addEventListener('click', function (e) {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                const deleteForm = document.querySelector('#delete_form')
+                deleteForm.submit();
+            }
+        })
+    </script>
 {% endblock body %}
