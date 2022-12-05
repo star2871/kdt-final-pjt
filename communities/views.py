@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm
 from .models import Article, Country, Feed, FeedImages, ArticleComment
+from accounts.models import User
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
@@ -104,12 +105,31 @@ def article_comment_create(request, article_pk,country_code):
         comment.user = request.user
         comment.article = article
         comment.save()
+
+        comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+
+        comments_data = []
+        for co in comments:
+            comments_data.append(
+                {
+                    'request_user_pk': request.user.pk,
+                    'comment_pk': co.pk,
+                    'user_pk': co.user.pk,
+                    'img_url':img,
+                    'nick_name':co.user.nick_name,
+                    'content': co.content,
+                    'created_at': co.created_at,
+                    'updated_at': co.updated_at,
+                    'article_id': co.article_id,
+                    'parent': co.parent,
+                    'secret': co.secret,
+                    'like': co.like.count(),
+                })
         context = {
-            'content': comment.content,
-            'userName': comment.user.username,
+            'comments_data': comments_data
         }
-        return render('communities/detail.html',article_pk)
-    # return JsonResponse(context)
+        print(context)
+        return JsonResponse(context)
 
 ## 댓글 삭제
 def comment_delete(request, article_pk, comment_pk, country_code):
