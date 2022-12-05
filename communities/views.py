@@ -205,7 +205,12 @@ def feed_create(request, country_code):
 
 
 def test(request):
-    return render(request, 'communities/test.html')
+    country = Country.objects.values('events')
+    print(country)
+    context = {
+        "country": country,
+    }
+    return render(request, 'communities/test.html',context=context)
 
 
 def calendar(request):

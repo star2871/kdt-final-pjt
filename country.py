@@ -45,13 +45,12 @@ client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
 
-def translations(list):
+def translation(list):
     title = []
     description = []
     result = []
-    # 설명 해석에 필요한 언어감지
     for i in range(len(list["events"])):
-        encQuery = urllib.parse.quote(list["events"][i]["description"])  # 언어감지, 변역을 위한 설명문 삽입
+        encQuery = urllib.parse.quote(list["events"][i]["description"])  # 언어감지를 위한 설명문 삽입
         if encQuery != "":
             data = "query=" + encQuery
             url = "https://openapi.naver.com/v1/papago/detectLangs"
@@ -62,17 +61,11 @@ def translations(list):
             rescode = response.getcode()
             if (rescode == 200):
                 response_body = response.read()
-                response_body = response_body.decode("utf-8")  # bytes 타입으로 날아온 response_body를 utf-8로 디코딩
-                response_body = json.loads(response_body)  # Json타입으로 변환하여 데이터 추출이 가능하게 변경
+                response_body = response_body.decode("utf-8")
+                response_body = json.loads(response_body)
             else:
                 print("Error Code:" + rescode)
-
-            # 설명 번역 시작
-            # langCode가 빈칸이면 설명이 없다는 뜻이므로 빈칸이 아닐때만 번역 실행
             if response_body["langCode"] != "":
-                #  source - 원본 언어
-                #  target - 번역 언어
-                #  text - 번역할 설명
                 data = "source=" + response_body["langCode"] + "&target=ko&text=" + encQuery
                 url = "https://openapi.naver.com/v1/papago/n2mt"
                 request = urllib.request.Request(url)
@@ -88,15 +81,11 @@ def translations(list):
                     description.append(translate)
                 else:
                     print("Error Code:" + rescode)
-        # 설명이 빈칸일 경우 해석을 할 필요가 없음(API 실행시 오류 발생)
-        # description 배열에 빈값 삽입
         else:
             description.append("")
             continue
-
-    # 파파고 API 활용 축제 이름 해석 시작
     for i in range(len(list["events"])):
-        encText = urllib.parse.quote(list["events"][i]["title"])  # 축제 이름
+        encText = urllib.parse.quote(list["events"][i]["title"])
         data = "source=en&target=ko&text=" + encText
         url = "https://openapi.naver.com/v1/papago/n2mt"
         request = urllib.request.Request(url)
@@ -112,11 +101,14 @@ def translations(list):
             title.append(fix)
         else:
             print("Error Code:" + rescode)
-
-        # 완성된 title과 description을 딕셔너리로 변환하여 리스트에 삽입
         temp = {title[i] : description[i]}
         result.append(temp)
+
     return result
+
+
+
+
 
 # countries_test.json에서 생성한 데이터 가져오기
 with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_file:
@@ -135,8 +127,8 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
     # Country 모델 형식에 맞춰서 입력
 
 
+    event = translation(a)
 
-    events = translations(a)
     p = Country(
         country_name=a.get("country_name"),
         country_code=a.get("country_code"),
@@ -145,14 +137,14 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
         ysd_er=a.get("ysd_er"),
         cur_nm=a.get("cur_nm"),
         status_wrt_dt=a.get("status_wrt_dt"),
-        events=events,
+        events=event,
         visa=a.get("visa"),
     )
 
     p.save()  # 저장
     print('일본 완료')
 
-    events = translations(b)
+    event = translation(b)
     o = Country(
         country_name=b.get("country_name"),
         country_code=b.get("country_code"),
@@ -161,14 +153,14 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
         ysd_er=b.get("ysd_er"),
         cur_nm=b.get("cur_nm"),
         status_wrt_dt=b.get("status_wrt_dt"),
-        events=events,
+        events=event,
         visa=b.get("visa"),
     )
 
     o.save()  # 저장
     print('미국 완료')
 
-    events = translations(c)
+    event = translation(c)
     q = Country(
         country_name=c.get("country_name"),
         country_code=c.get("country_code"),
@@ -177,15 +169,13 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
         ysd_er=c.get("ysd_er"),
         cur_nm=c.get("cur_nm"),
         status_wrt_dt=c.get("status_wrt_dt"),
-        events=events,
+        events=event,
         visa=c.get("visa"),
     )
     q.save()  # 저장
     print('호주 완료')
 
-
-    events = translations(d)
-
+    event = translation(d)
     r = Country(
         country_name=d.get("country_name"),
         country_code=d.get("country_code"),
@@ -194,13 +184,13 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
         ysd_er=d.get("ysd_er"),
         cur_nm=d.get("cur_nm"),
         status_wrt_dt=d.get("status_wrt_dt"),
-        events=events,
+        events=event,
         visa=d.get("visa"),
     )
     r.save()  # 저장
     print("스페인 완료")
 
-    events = translations(e)
+    event = translation(e)
     s = Country(
         country_name=e.get("country_name"),
         country_code=e.get("country_code"),
@@ -209,9 +199,11 @@ with open(os.path.join("countries_test.json"), "r", encoding="UTF-8") as json_fi
         ysd_er=e.get("ysd_er"),
         cur_nm=e.get("cur_nm"),
         status_wrt_dt=e.get("status_wrt_dt"),
-        events=events,
+        events=event,
         visa=e.get("visa"),
     )
     s.save()  # 저장
     print("영국 완료")
     print("최종 완료")
+
+
