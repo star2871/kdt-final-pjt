@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% load django_bootstrap5 %}
 {% block body %}
 
     <iframe src="https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%237CB342&ctz=Asia%2FSeoul&title=%EB%AF%B8%EA%B5%AD%20%EC%97%AC%ED%96%89&src=a28uamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%234285F4"
             style="border-width:0" width="400" height="400" frameborder="0" scrolling="no"></iframe>
 
+    {% for a in country %}
+        {% for b in a.events %}
+        {% for key,values in b.items %}
+           <p>{{ key }} : {{ values }}</p>
+
+            {#        {{ a | festival:"title" }}#}
+
+        {% endfor %}
+        {% endfor %}
+    {% endfor %}
 
 {% endblock %}
