@@ -75,12 +75,12 @@
                   onsubmit="submitComment(this.id)">
                 {% csrf_token %}
                 {% bootstrap_form comment_form %}
-                <button type="submit" id="write" class="btn btn-sm">작성하기</button>
+                {% bootstrap_button button_type="submit" content="OK" %}
             </form>
             <!-- 댓글 영역 -->
             <a name="comment" class="comment-section">
                 <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
-                <div class="{{ article.pk }}-comment-list" data-article-id="{{ article.pk }}">
+                <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
                     {% for comment in comments %}
                         <div class="comment-row">
                             <div class="comment-user">
@@ -89,7 +89,7 @@
                                         <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
                                              class="comment-profile-img">
                                     {% else %}
-                                        <img src="{{ comment.user.image.url }}" alt="" class="comment-profile-img">
+                                        <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
                                     {% endif %}
                                 </div>
                             </div>
@@ -204,6 +204,7 @@
             event.preventDefault();
             const commentForm = document.querySelector(`#${e}`);
 
+
             const pk = event.target.dataset.articleId;
             const country = event.target.dataset.countryId;
             axios({
@@ -213,9 +214,12 @@
                 data: new FormData(commentForm)
             })
                 .then(response => {
-                    const commentsList = document.querySelector(`#${response.data.comments_data[0].article_id}-comments-list`)
+                    console.log(response)
+
+                    const commentsList = document.querySelector(`#comment-list-${pk}`)
+
                     commentsList.textContent = "";
-                    console.log(response.data.comments_data)
+
                     for (let i = 0; i < response.data.comments_data.length; i++) {
                         if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
                             commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.comments_data[i].username} | ${response.data.comments_data[i].content} | ${response.data.comments_data[i].created_at} </span>
@@ -263,9 +267,9 @@
                     document.getElementById("test").style.display = "none"
                 }
 
-                console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);
-
-                console.log('뷰포트의 총 높이', viewheight);
+                {#console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);#}
+                {##}
+                {#console.log('뷰포트의 총 높이', viewheight);#}
 
             });
         };
