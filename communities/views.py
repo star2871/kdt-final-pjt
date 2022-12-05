@@ -8,6 +8,7 @@ import datetime
 # 구글 캘린더 API 서비스 객체 생성
 from googleapiclient.discovery import build
 from django.forms import modelformset_factory
+from django.contrib import messages
 
 
 creds_filename = 'credentials.json'
@@ -133,33 +134,26 @@ def feed(request, country_code):
 
 ## 피드 생성
 def feed_create(request, country_code):
-    ImageFormSet = modelformset_factory(FeedImages, form=FeedImageForm, extra=3)
-    if request.method == 'POST':
-        feed_form = FeedForm(request.POST)
-        formset = ImageFormSet(
-            request.POST, request.FILES, queryset=FeedImages.objects.none()
-        )
-        if feed_form.is_valid() and formset.is_valid():
+    if request.method == "POST":
+        form = FeedForm(request.POST)
+        files = request.FILES.getlist("image")
+        if form.is_valid():
             country = Country.objects.get(country_code=country_code)
-            feed = feed_form.save(commit=False)
-            feed.user = request.user
-            feed.country = country
-            feed.category = "feed"
-            feed.save()
-            for forms in formset.cleaned_data:
-                if forms:
-                    image = forms["image"]
-                    photo = FeedImages(feed=feed, image=image)
-                    photo.save()
+            f = form.save(commit=False)
+            f.user = request.user
+            f.country = country
+            f.category = "feed"
+            f.user = request.user
+            f.save()
+            for i in files:
+                FeedImages.objects.create(feed=f, image=i)
             return redirect('communities:feed', country_code)
+        else:
+            print(form.errors)
     else:
-        feed_form = FeedForm()
-        formset = ImageFormSet(queryset=FeedImages.objects.none())
-    context = {
-        'feed_form': feed_form,
-        "formset": formset,
-    }
-    return render(request, 'communities/feed_form.html', context=context)
+        form = FeedForm()
+        imageform = FeedImageForm()
+    return render(request, 'communities/feed_form.html', {"form": form, "imageform": imageform})
 
 
 def test(request):

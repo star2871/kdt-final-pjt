@@ -52,6 +52,7 @@ class Article(models.Model):
 class Feed(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=150)
+    category = models.CharField(max_length=80, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
     like = models.ManyToManyField(
