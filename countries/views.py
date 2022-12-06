@@ -40,7 +40,7 @@ def country_detail_view(request, country_code):
         city2 = 'Sydney'
     city_weather1 = requests.get(url.format(city1)).json() #request the API data and convert the JSON to Python data types
     city_weather2 = requests.get(url.format(city2)).json()
-
+    
     # print(city_weather1['city']['name'])
     # a = city_weather1['list']
     list_day1=[]
@@ -81,11 +81,38 @@ def country_detail_view(request, country_code):
         'description2' : list_des2,
         'icon2' : list_icon2,
     }
-    
-
+    api = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=SthDQi9wM06s2PTo8YSafUGNB0b6Mlkj&data=AP01"
+    if country_code == "JP":
+        cur_unit = "JPY"
+    # elif country_code == 'US':
+    #     cur_unit = "USD"
+    country_exchange = requests.get(api.format(cur_unit)).json()
+    for a in country_exchange:
+    # 호주
+    # for a in country_exchange:
+        # # 호주 
+        # a = country_exchange[1]
+        # # 유로화
+        # b = country_exchange[8]
+        # # 영국 파운드
+        # c = country_exchange[9]
+        # # 일본
+        # d = country_exchange[12]
+        # # 미국
+        # e = country_exchange[22]
+        # print(a, b, c, d, e)
+        exchange = {
+            'country_exchange': country_exchange,
+            # 'money' : a['kftc_deal_bas_r'],
+            # 'cur_nm': a['cur_nm'],
+            # 'cur_unit': a['cur_unit'],
+            # 'money_jp': d['kftc_deal_bas_r'],
+            # 'cur_nm_jp': d['cur_nm'],
+        }
+        # print(exchange)
 # for a in weather:
 #     print('time1')
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather,})
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'country_exchange':country_exchange,})
