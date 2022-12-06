@@ -371,11 +371,15 @@ span,
 
 .comment-row {
     display: flex;
-    min-height: 100px;
+    position: relative;
+    min-height: 120px;
     padding: 10px 0px;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
+.comment-row:hover .buttons {
+    display: block;
 
+}
 .comment-profile-img {
     width: 48px;
     height: 48px;
@@ -408,4 +412,29 @@ span,
 
 #review_delete:hover {
     cursor: pointer;
+}
+
+/* 수정, 삭제 버튼 */
+.comment-row > .buttons {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    right: 0px
+}
+
+.buttons > button {
+    border: 0px;
+    color: #3168ae;
+}
+/* 
+.update-form {
+    display: none;
+} */
+
+.update-form > textarea {
+    font-size: 14px;
+    resize: none;
+    height: 200px;
+    width: 100%;
+    padding: 10px;
 }
