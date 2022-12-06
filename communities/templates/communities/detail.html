@@ -96,7 +96,7 @@
                     <div class="comment-main">
                         <div class="comment-user-date">
                             <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
-                            <p>
+                            <p class="comment-date">
                                 <!-- 작성일자 : ~시간 전 표시 -->
                                 {% if comment.created_string == False %}
                                 <!-- 7일이 지나면 날짜로 출력 -->
@@ -108,7 +108,7 @@
                             </p>
                         </div>
                         <p id="comment-{{ comment.pk }}-update-hide">{{ comment.content }}</p>
-                        <div id="comment-{{ comment.pk }}-update-form" class="update-form d-none">
+                        <div id="comment-{{ comment.pk }}-update-form" class="update-form">
                             <textarea id="comment-{{ comment.pk }}-update-content"
                                 type="text">{{ comment.content }}</textarea>
                             <button id="comment-{{ comment.pk }}-update-btn" class="btn btn-primary"
@@ -321,27 +321,22 @@
 
     const getUpdateComment = function (e) {
         const updateCommentForm = document.querySelector(`#${e}-form`);
-        const commentContent = document.querySelector(`#${e}-hide`)
-        // commentContent.style.display = "none";
-        // updateCommentForm.style.display = "block";
-        commentContent.classList.toggle("d-none")
-        updateCommentForm.classList.toggle("d-none")
+        const commentContent = document.querySelector(`#${e}-hide`);
+        const commentBase = document.querySelector(`#${e}-hide`).innerText;
+
+        commentContent.style.display = "none";
+        updateCommentForm.style.display = "block";
     }
 
 
     const updateCommentCancel = function (e) {
         const comPk = event.target.dataset.commentId
         const updateCommentForm = document.querySelector(`#comment-${comPk}-update-form`);
-        const commentContent = document.querySelector(`#comment-${comPk}-update-hide`);
-        console.log(commentContent)
-        // commentContent.style.display = "none";
-        // updateCommentForm.style.display = "block";
+        const commentContent = document.querySelector(`#comment-${comPk}-update-hide`)
         const commentBase = document.querySelector(`#comment-${comPk}-update-hide`).innerText
         const commentUpdateContent = document.querySelector(`#comment-${comPk}-update-content`)
-        commentUpdateContent.value = `${commentBase}`
-        console.log(commentUpdateContent.value)
-        commentContent.classList.toggle("d-none")
-        updateCommentForm.classList.toggle("d-none")
+        commentContent.style.display = "block";
+        updateCommentForm.style.display = "none";
     }
 
 

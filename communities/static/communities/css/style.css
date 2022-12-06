@@ -395,10 +395,17 @@ span,
 .comment-user-date {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    font-size: 16px;
+    margin-bottom: 1rem;
 }
 
-.comment-user-date p {
-    font-size: 16px;
+.comment-user-date > p { 
+    margin-bottom: 0;
+}
+
+.comment-date {
+    font-size: 14px;
 }
 
 #comment-none {
@@ -426,15 +433,28 @@ span,
     border: 0px;
     color: #3168ae;
 }
-/* 
+
+.buttons > button:hover {
+    text-decoration: underline;
+    color: #3168ae;
+    background-color: transparent;
+}
+
 .update-form {
     display: none;
-} */
+}
 
 .update-form > textarea {
     font-size: 14px;
     resize: none;
-    height: 200px;
+    height: 130px;
     width: 100%;
     padding: 10px;
+    border-radius: 5px;
+    border-width: 0.5px;
+    border-color: #cccccc5c;
+}
+
+.update-form > textarea:focus {
+    outline: none;
 }
