@@ -60,8 +60,6 @@ def country_detail_view(request, country_code):
     list_temp2=[]
     list_des2=[]
     list_icon2=[]
-    city_weather2['city']['name']
-    
     for b in city_weather2['list']:
         list_day2.append(b['dt_txt'])
         list_temp2.append(b['main']['temp'])
@@ -81,13 +79,28 @@ def country_detail_view(request, country_code):
         'description2' : list_des2,
         'icon2' : list_icon2,
     }
-    api = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=SthDQi9wM06s2PTo8YSafUGNB0b6Mlkj&data=AP01"
+    
+    api = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?q={}&authkey=SthDQi9wM06s2PTo8YSafUGNB0b6Mlkj&data=AP01"
     if country_code == "JP":
         cur_unit = "JPY"
-    # elif country_code == 'US':
-    #     cur_unit = "USD"
+    elif country_code == 'US':
+        cur_unit = "USD"
+    elif country_code == 'AU':
+        cur_unit = "AUD"
+    elif country_code == 'GB':
+        cur_unit = "GPB"
+    elif country_code == 'ES':
+        cur_unit = "EUR"    
     country_exchange = requests.get(api.format(cur_unit)).json()
-    for a in country_exchange:
+    
+    
+        
+        
+    # c['cur_nm']
+    # c['deal_bas_r']
+    # c['ttb']
+    # c['tts']
+   
     # 호주
     # for a in country_exchange:
         # # 호주 
@@ -101,18 +114,23 @@ def country_detail_view(request, country_code):
         # # 미국
         # e = country_exchange[22]
         # print(a, b, c, d, e)
-        exchange = {
-            'country_exchange': country_exchange,
-            # 'money' : a['kftc_deal_bas_r'],
-            # 'cur_nm': a['cur_nm'],
-            # 'cur_unit': a['cur_unit'],
-            # 'money_jp': d['kftc_deal_bas_r'],
-            # 'cur_nm_jp': d['cur_nm'],
-        }
-        # print(exchange)
+    exchange = {
+        'country_exchange': country_exchange,
+        # 'cur_unit1' : c['cur_unit'],
+        # 'cur_nm1': c['cur_nm'],
+        # 'deal_bas_r1': c['deal_bas_r'],
+        # 'ttb1': c['ttb'],
+        # 'tts1': c['tts'],
+        # 'cur_unit2' : d['cur_unit'],
+        # 'cur_nm2': d['cur_nm'],
+        # 'deal_bas_r2': d['deal_bas_r'],
+        # 'ttb2': d['ttb'],
+        # 'tts2': d['tts'],
+    }
+    
 # for a in weather:
 #     print('time1')
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'country_exchange':country_exchange,})
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'country_exchange':country_exchange, 'exchange': exchange,})
