@@ -112,7 +112,7 @@ def article_comment_create(request, article_pk,country_code):
 
             img = f'/media/{co.user.profile_image}'
 
-            if len(img) == 0:
+            if img == '/media/':
                 comments_data.append(
                     {
                         'created_string':co.created_string,
@@ -165,7 +165,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
 
             img = f'/media/{co.user.profile_image}'
 
-            if len(img) == 0:
+            if img == '/media/':
                 comments_data.append(
                     {
                         'created_string': co.created_string,
@@ -208,7 +208,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
 ## 댓글 삭제
 def article_comment_delete(request, article_pk, comment_pk, country_code):
     if request.user.is_authenticated:
-        comment = ArticleComment.objects.get(comment_pk=comment_pk)
+        comment = ArticleComment.objects.get(pk=comment_pk)
         comment.delete()
 
         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
@@ -217,7 +217,7 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
 
             img = f'/media/{co.user.profile_image}'
 
-            if len(img) == 0:
+            if img == '/media/':
                 comments_data.append(
                     {
                         'created_string': co.created_string,
