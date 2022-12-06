@@ -111,6 +111,7 @@ def article_comment_create(request, article_pk,country_code):
         for co in comments:
 
             img = f'/media/{co.user.profile_image}'
+
             if img == '/media/':
                 comments_data.append(
                     {
@@ -151,7 +152,7 @@ def article_comment_create(request, article_pk,country_code):
         return JsonResponse(context)
 
 ## 댓글 수정
-def article_comment_update(request, article_pk, comment_pk, country_code, ):
+def article_comment_update(request, article_pk, comment_pk, country_code):
     if request.user.is_authenticated:
         jsonObject = json.loads(request.body)
         comment = ArticleComment.objects.get(pk=comment_pk)
@@ -163,7 +164,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code, ):
         for co in comments:
 
             img = f'/media/{co.user.profile_image}'
-            
+
             if img == '/media/':
                 comments_data.append(
                     {
@@ -216,7 +217,7 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
 
             img = f'/media/{co.user.profile_image}'
 
-            if len(img) == 0:
+            if img == '/media/':
                 comments_data.append(
                     {
                         'created_string': co.created_string,
