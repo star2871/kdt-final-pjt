@@ -155,7 +155,7 @@ def article_comment_create(request, article_pk,country_code):
 def article_comment_update(request, article_pk, comment_pk, country_code):
     if request.user.is_authenticated:
         jsonObject = json.loads(request.body)
-        comment = ArticleComment.objects.get(comment_pk =comment_pk)
+        comment = ArticleComment.objects.get(pk=comment_pk)
         comment.content = jsonObject.get('content')
         comment.save()
 

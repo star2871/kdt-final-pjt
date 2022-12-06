@@ -2,140 +2,129 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 {% endblock css %}
 
 {% block body %}
-    <div class="container">
-        <div class="detail-section">
-            <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
-            <div class="eye" style="height: 200px;"></div>
-            <div class="detail-title">
-                {{ article.title }}
-            </div>
-            <div class="detail-meta-section">
-                <div class="detail-user">
-                    <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
-                    <div class="detail-img-div">
-                        {% if not article.user.profile_image %}
-                            <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
-                        {% else %}
-                            <img src="{{ article.user.image.url }}" alt="" class="profile-img">
-                        {% endif %}
-                    </div>
-                    <div class="detail-username">
-                        {{ article.user.nick_name }}
-                    </div>
-                    <!-- 작성일 -->
-                    <div class="detail-created">
-                        <!-- 작성일자 : ~시간 전 표시 -->
-                        {% if article.created_string == False %}
-                            <!-- 7일이 지나면 날짜로 출력 -->
-                            {{ article.created_at|date:'m월 d일' }}
-                        {% else %}
-                            <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                            {{ article.created_string }}
-                        {% endif %}
-                    </div>
-                    <!-- 조회 수 -->
-                    <div>
-                        조회 32
-                    </div>
-                </div>
-                <!-- 여행 기간 -->
-                <div class="detail-date">
-                    <!-- 달력 아이콘 -->
-                    <span class="material-icons">
-          event_available
-        </span>
-                    <span>{{ article.travel_start|date:"o. n. j" }}
-          ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
-                </div>
-            </div>
-            <hr>
-            <!-- 리뷰 내용 -->
-            <div class="detail-content">
-                {{ article.content|safe }}
-            </div>
-
-            <div id="comment_footer" class="comment-ft">
-                확인용
-                <p>dasd</p>
-                <p>dasd</p>
-                <p>dasd</p>
-                <p>dasd</p>
-                <p>dasd</p>
-                <p>dasd</p>
-                <p>dasd</p>
-            </div>
-            <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}"
-                  data-country-id="{{ country_code }}"
-                  onsubmit="submitComment(this.id)">
-                {% csrf_token %}
-                {% bootstrap_form comment_form %}
-                {% bootstrap_button button_type="submit" content="OK" %}
-            </form>
-            <!-- 댓글 영역 -->
-            <a name="comment" class="comment-section">
-                <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
-                <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
-                    {% for comment in comments %}
-                        <div class="comment-row">
-                            <div class="comment-user">
-                                <div class="comment-img-div">
-                                    {% if not comment.user.profile_image %}
-                                        <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
-                                             class="comment-profile-img">
-                                    {% else %}
-                                        <img src="{{ comment.user.profile_image.url }}" alt=""
-                                             class="comment-profile-img">
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="comment-main">
-                                <div class="comment-user-date">
-                                    <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
-                                    <p>
-                                        <!-- 작성일자 : ~시간 전 표시 -->
-                                        {% if comment.created_string == False %}
-                                            <!-- 7일이 지나면 날짜로 출력 -->
-                                            {{ comment.created_at|date:'m월 d일' }}
-                                        {% else %}
-                                            <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                                            {{ comment.created_string }}
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <p>{{ comment.content }}</p>
-                            </div>
-                            {% if user.pk == comment.user_id %}
-                                <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}"
-                                        data-comment-id="{{ comment.pk }}"
-                                        class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정
-                                </button>
-                                <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}"
-                                        data-comment-id="{{ comment.pk }}"
-                                        class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제
-                                </button>
-                                <div id="comment-{{ comment.pk }}-update-form" class="d-none">
-                                    <input id="comment-{{ comment.pk }}-update-content" type="text"
-                                           value="{{ comment.content }}">
-                                    <button id="comment-{{ comment.pk }}-update-btn" class="btn btn-primary"
-                                            data-article-id="{{ article.pk }}"
-                                            data-comment-id="{{ comment.pk }}" onclick="updateComment(this.id)">확인
-                                    </button>
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% empty %}
-                        <span id="comment-none">작성된 댓글이 없습니다.</span>
-                    {% endfor %}
-                </div>
-            </a>
+  <div class="container">
+    <div class="detail-section">
+      <!-- 눈높이 맞추기용 div 나중에 수정할 것 -->
+      <div class="eye" style="height: 200px;"></div>
+      <div class="detail-title">
+        {{ article.title }}
+      </div>
+      <div class="detail-meta-section">
+        <div class="detail-user">
+          <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
+          <div class="detail-img-div">
+            {% if not article.user.profile_image %}
+              <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
+            {% else %}
+              <img src="{{ article.user.image.url }}" alt="" class="profile-img">
+            {% endif %}
+          </div>
+          <div class="detail-username">
+            {{ article.user.nick_name }}
+          </div>
+          <!-- 작성일 -->
+          <div class="detail-created">
+            <!-- 작성일자 : ~시간 전 표시 -->
+            {% if article.created_string == False %}
+              <!-- 7일이 지나면 날짜로 출력 -->
+              {{ article.created_at|date:'m월 d일' }}
+            {% else %}
+              <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+              {{ article.created_string }}
+            {% endif %}
+          </div>
+          <!-- 조회 수 -->
+          <div>
+            조회 32
+          </div>
         </div>
+        <!-- 여행 기간 -->
+        <div class="detail-date">
+          <!-- 달력 아이콘 -->
+          <span class="material-icons">
+            event_available
+          </span>
+          <span>{{ article.travel_start|date:"o. n. j" }}
+            ~</span><span>{{ article.travel_end|date:" o. n. j" }}</span>
+        </div>
+      </div>
+      <hr>
+      <!-- 리뷰 내용 -->
+      <div class="detail-content">
+        {{ article.content|safe }}
+      </div>
+
+      <div id="comment_footer" class="comment-ft">
+        확인용
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+      </div>
+      <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}" data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
+        {% csrf_token %}
+        {% bootstrap_form comment_form %}
+        {% bootstrap_button "OK" %}
+      </form>
+      <!-- 댓글 영역 -->
+      <a name="comment" class="comment-section">
+        <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
+        <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
+          {% for comment in comments %}
+            <div class="comment-row">
+              <div class="comment-user">
+                <div class="comment-img-div">
+                  {% if not comment.user.profile_image %}
+                    <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진" class="comment-profile-img">
+                  {% else %}
+                    <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
+                  {% endif %}
+                </div>
+              </div>
+              <div class="comment-main">
+                <div class="comment-user-date">
+                  <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
+                  <p>
+                    <!-- 작성일자 : ~시간 전 표시 -->
+                    {% if comment.created_string == False %}
+                      <!-- 7일이 지나면 날짜로 출력 -->
+                      {{ comment.created_at|date:'m월 d일' }}
+                    {% else %}
+                      <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                      {{ comment.created_string }}
+                    {% endif %}
+                  </p>
+                </div>
+                <p>{{ comment.content }}</p>
+              </div>
+              {% if user.pk == comment.user_id %}
+                <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정
+                </button>
+                <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제
+                </button>
+                <div id="comment-{{ comment.pk }}-update-form" class="d-none">
+                  <input id="comment-{{ comment.pk }}-update-content" type="text" value="{{ comment.content }}">
+                  <button id="comment-{{ comment.pk }}-update-btn" class="btn btn-primary" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" onclick="updateComment(this.id)">확인
+                  </button>
+                </div>
+              {% endif %}
+            </div>
+            {% empty %}
+            <span id="comment-none">작성된 댓글이 없습니다.</span>
+          {% endfor %}
+        </div>
+      </a>
+    </div>
 
         <!-- 사이드바 리모컨 -->
         <div class="side-bar">
@@ -289,21 +278,90 @@
                                 </div>
                                 <p>${response.data.comments_data[i].content}</p>
                             </div>`);
-                        }
-
-                    }
-                    commentForm.reset();
-                    let counter = document.getElementById("counter_id_content");
-                    counter.innerText = "0/500";
-
-                    //코멘트 작성 후 코멘트리스트 보여주기
-                    commentsList.classList.remove('display-none');
-
-                })
-
         }
 
-        const deleteComment = function (e) {
+      }
+      // 우리(비트)는 안쓰는 코드
+      commentForm.reset();
+      let counter = document.getElementById("counter_id_content");
+      counter.innerText = "0/500";
+
+      // 우리(비트)는 안쓰는 코드
+      //코멘트 작성 후 코멘트리스트 보여주기
+      commentsList
+        .classList
+        .remove('display-none');
+    })
+
+  }
+
+  const getUpdateComment = function (e) {
+    const updateCommentForm = document.querySelector(`#${e}-form`);
+    updateCommentForm
+      .classList
+      .toggle(`d-none`);
+  }
+
+  const updateComment = function (e) {
+    const commentValue = document
+      .querySelector(`#comment-${event.target.dataset.commentId}-update-content`)
+      .value;
+    const pk = event.target.dataset.articleId;
+    const coPk = event.target.dataset.commentId;
+    const country = event.target.dataset.countryId;
+    console.log(country)
+
+    axios({
+      method: 'post',
+      url: `/communities/${conPK}/review/${pk}/review_detail/${coPk}/comment_update/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      },
+      data: {
+        'content': commentValue
+      }
+    }).then(response => {
+      const commentsList = document.querySelector(`#comment-list-${pk}`)
+      //const commentList = document.querySelector(`#comment-${response.data.comments_data[0].comment_id}-update-content`);
+      commentsList.textContent = "";
+      for (let i = 0; i < response.data.comments_data.length; i++) {
+        let date = displayedAt(response.data.comments_data[i].created_at)
+        if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
+          commentsList.insertAdjacentHTML('beforeend', `<div class="comment-row">
+            <div class="comment-user">
+                <div class="comment-img-div">
+                        <img src="${response.data.comments_data[i].img_url}" alt="" class="comment-profile-img">
+                </div>
+            </div>
+            <div class="comment-main">
+                <div class="comment-user-date">
+                    <p style="font-weight: 400;">${response.data.comments_data[i].nick_name}</p>
+                    <p>${date}</p>
+                </div>
+                <p>${response.data.comments_data[i].content}</p>
+            </div>
+                <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
+                        data-comment-id="${response.data.comments_data[i].comment_pk}"
+                        class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정
+                </button>
+                <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-article-id="${response.data.comments_data[i].article_id}"
+                        data-comment-id="${response.data.comments_data[i].comment_pk}"
+                        class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제
+                </button>
+                <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="d-none">
+                    <input id="comment-${response.data.comments_data[i].comment_pk}-update-content" type="text"
+                           value="${response.data.comments_data[i].content}">
+                    <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="btn btn-primary"
+                            data-article-id="${response.data.comments_data[i].article_id}"
+                            data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인
+                    </button>
+                </div>
+        </div>`)
+        }
+      }
+    })
+  }
+const deleteComment = function (e) {
             const pk = event.target.dataset.articleId;
             const compk = event.target.dataset.commentId;
             if (confirm("정말 삭제하시겠습니까??") === true) {
@@ -371,7 +429,6 @@
                 return;
             }
         }
-
     </script>
 
     <script>
