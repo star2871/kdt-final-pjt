@@ -97,7 +97,7 @@ def review_update(request, article_pk, country_code):
 
 ## 게시글 댓글 (리뷰, 꿀팁 동일)
 ## 댓글 생성
-def article_comment_create(request, article_pk,country_code):
+def article_comment_create(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comment_form = ArticleCommentForm(request.POST)
     if comment_form.is_valid():
@@ -257,18 +257,80 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
         return JsonResponse(context)
 
 ## 대댓글 생성
-def sub_comment_create(request, article_pk, comment_pk, country_code):
+def article_sub_comment_create(request, article_pk, country_code, comment_pk):
+    user = User.objects.get(pk=request.user.pk)
     article = get_object_or_404(Article, pk=article_pk)
     parent = ArticleComment.objects.get(pk=comment_pk)
     comment_form = ArticleCommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
-        comment.Articles = article
-        comment.user = request.user
+        comment.article = article
+        comment.user = user
         comment.parent = parent
         comment.save()
-        return redirect("communities:detail", article_pk, country_code)
-    return redirect("communities:detail", article_pk, country_code)
+
+    comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+    sub_comments_data = []
+    for co in comments:
+        print(co.parent_id,5)
+        if not co.parent_id == None:
+            img = f'/media/{co.user.profile_image}'
+            if img == '/media/':
+                sub_comments_data.append(
+                        {
+                            'created_string':co.created_string,
+                            'request_user_pk': request.user.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url': str('https://dummyimage.com/48x48/ededed/0011ff'),
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'updated_at': co.updated_at,
+                            'article_id': co.article_id,
+                            'parent': co.parent.pk,
+                            'secret': co.secret,
+                            'like': co.like.count(),
+                        })
+                print(parent.pk,1)
+            else:
+                sub_comments_data.append(
+                    {
+                        'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url': str(img),
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'updated_at': co.updated_at,
+                        'article_id': co.article_id,
+                        'parent': co.parent.pk,
+                        'secret': co.secret,
+                        'like': co.like.count(),
+                    })
+                print(parent.pk,2)
+    context = {
+        'sub_comments_data': sub_comments_data
+    }
+    return JsonResponse(context)
+
+## 비동기 아닌 대댓글 생성
+## 비동기 아닌 대댓글 생성
+# def article_sub_comment_create(request, article_pk, country_code, comment_pk):
+#     article = get_object_or_404(Article, pk=article_pk)
+#     parent = ArticleComment.objects.get(pk=comment_pk)
+#     comments = article.articlecomment_set.order_by("-pk")
+#     comment_form = ArticleCommentForm(request.POST)
+#     if comment_form.is_valid():
+#         comment = comment_form.save(commit=False)
+#         comment.article = article
+#         comment.user = request.user
+#         comment.parent = parent
+#         comment.save()
+#         return redirect("communities:detail", country_code, article_pk)
+#     return redirect("communities:detail", country_code, article_pk)
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
