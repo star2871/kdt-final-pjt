@@ -329,85 +329,11 @@
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
           
-          {% comment %} {% for a in exchange.country_exchange %}
-
-              {{ a.cur_unit }}
-              <span>{{ a.cur_nm }}
-              {{ a.deal_bas_r }}|원
-              송금 받을때:{{ a.ttb }}|원
-              송금 할때:{{ a.tts }}|원</span> 
-              <br>
-
-          {% endfor %}
-          {{ exchange.cur_unit2 }}
-          <span>{{ exchange.cur_nm2 }}
-            {{ exchange.deal_bas_r2 }}|원
-            송금 받을때:{{ exchange.ttb2 }}|원
-            송금 할때:{{ exchange.tts2 }}|원</span> 
-            <br> {% endcomment %}
             1000|{{ exchange.exchange_code }}당
             <br>
             {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
             <br>
-            {% comment %} <br>
-            {{ exchange.country_exchange_US }}
-            <br>
-            {{ exchange.country_exchange_AU }}
-            <br>
-            {{ exchange.country_exchange_GB }}
-            <br>
-            {{ exchange.country_exchange_ES }}
-            <br> {% endcomment %}
 
-            {% comment %} {% for key, value in exchange.country_exchange.items %}
-              
-              {{ value }}
-             
-            {% endfor %} {% endcomment %}
-            
-          {% comment %} <span>{{ country_exchange.1.cur_nm }}
-          {{ country_exchange.1.deal_bas_r }}|원
-          송금 받을때:{{ country_exchange.1.ttb }}|원
-          송금 할때:{{ country_exchange.1.tts }}|원</span> 
-          <br>
-          
-          <span>{{ country_exchange.8.cur_nm }}
-          {{ country_exchange.8.deal_bas_r }}|원
-          송금 받을때:{{ country_exchange.8.ttb }}|원
-          송금 할때:{{ country_exchange.8.tts }}|원</span> 
-          <br>
-          
-          <span>{{ country_exchange.9.cur_nm }}
-          {{ country_exchange.9.deal_bas_r }}|원
-          송금 받을때:{{ country_exchange.9.ttb }}|원
-          송금 할때:{{ country_exchange.9.tts }}|원</span> 
-          <br>
-          
-          <span>{{ country_exchange.12.cur_nm }}
-          {{ country_exchange.12.deal_bas_r|mul:0.01 }}|원
-          송금 받을때:{{ country_exchange.12.ttb|mul:0.01|floatformat:4 }}|원
-          송금 할때:{{ country_exchange.12.tts|mul:0.01 }}|원</span> 
-          <br>
-          
-          <span>{{ country_exchange.22.cur_nm }}
-          {{ country_exchange.22.deal_bas_r }}|원
-          송금 받을때:{{ country_exchange.22.ttb }}|원
-          송금 할때:{{ country_exchange.22.tts }}|원</span> 
-          <br> {% endcomment %}
-
-          
-          
-          {% comment %} {% if country_exchange in 'JPY' %}
-          {{ country_exchange.cur_unit }}
-          {% endif %}
-          {% endfor %} {% endcomment %}
-          {% comment %} <span> {{ exchange.cur_unit }} </span>
-          <span> {{ exchange.cur_nm }} </span>
-          <span> {{ exchange.money }} </span> {% endcomment %}
-          {% comment %} {% elif 'JPY' == country_exchange.cur_unit %}
-          <span> {{ exchange.cur_nm_jp }} </span>
-          <span> {{ exchange.money_jp }} </span> {% endcomment %}
-          
         </div>
       </div>
     </div>
