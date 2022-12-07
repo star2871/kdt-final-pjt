@@ -285,11 +285,11 @@
           style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Exchange</span></h2>
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-          
-            1000|{{ exchange.exchange_code }}당
+            <!-- 환율 나오는 곳 -->
+            {% comment %} 1000|{{ exchange.exchange_code }}당
             <br>
             {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
-            <br> 
+            <br>  {% endcomment %}
         </div>
       </div>
     </div>
