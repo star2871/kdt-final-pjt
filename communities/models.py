@@ -161,3 +161,9 @@ class FeedComment(models.Model):
             return str(time.days) + "일 전"
         else:
             return False
+
+class Notice(models.Model):
+    title = models.CharField(max_length=80)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
