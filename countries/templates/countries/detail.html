@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+{% load mathfilters %}
 {% load static %}
+<style> 
+</style>
 {% block body %}
 <section class="detail-top" style="background-color: #0061FF; height: 395px; padding: 24px 0">
   <div style="padding: 0 18px">
@@ -38,13 +41,11 @@
   <div class="rollingbanner" style="margin: 0 auto;">
     <div class="title">소식 > </div>
     <div class="wrap">
-      <ul>
-        <li class="current"><a href="#">12월부터 일본여행 무료</a></li>
-        <li class="next"><a href="#">얼어붙은 투심에…현대엔지니어링 상장 철회</a></li>
-        <li><a href="#">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
-        <li><a href="#">"공법변경 구조검토 요구, 현산 측이 묵살했다"</a></li>
-        <li class="prev"><a href="#">12월 주담대 금리 연 3.63%…7년7개월 만에 최고</a></li>
-      </ul>
+      <div>
+        {% for country_new in country_news %}
+          <a href="{{ country_new.url }}"><p>{{ country_new.title }}</p></a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -261,7 +262,7 @@
   </div>
 </section>
 
-<!-- 현지시간 / 환율정보 -->
+<!-- 현지시간 새로고침 누르면 그 시간대로 새로고침 된다. -->
 <section style="margin-top: 45px; padding: 0 18px;">
   <div style="margin: 0 auto; display: flex; justify-content: center;">
     <div style="min-width: 165px; width: 366px; margin: 0 15px 0 0 ">
@@ -269,82 +270,86 @@
           style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Time</span></h2>
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-          <span>일 | 월 | 화 | 수 | 목 | 금 | 토 </span>
+          <script type="text/javascript">
+
+            
+            document.write('CET (스페인 시간):',  getWorldTime(+1), '<br>');
+            
+            document.write('PST (LA 시간):',         getWorldTime(-8), '<br>');
+            document.write('EST (뉴욕 시간):',     getWorldTime(-5), '<br>');
+            
+            document.write('GMT (영국 시간):',        getWorldTime(0), '<br>');
+            
+            document.write('AEST (호주 동부 시간):',      getWorldTime(+10), '<br>');
+            
+          
+            document.write('JST (일본 시간):',       getWorldTime(+9),  '<br>');
+            
+            
+            
+            
+            function getWorldTime(tzOffset) { // 24시간제
+              var now = new Date();
+              var tz = now.getTime() + (now.getTimezoneOffset() * 60000) + (tzOffset * 3600000);
+              now.setTime(tz);
+            
+            
+              var s =
+                leadingZeros(now.getFullYear(), 4) + '-' +
+                leadingZeros(now.getMonth() + 1, 2) + '-' +
+                leadingZeros(now.getDate(), 2) + ' ' +
+            
+                leadingZeros(now.getHours(), 2) + ':' +
+                leadingZeros(now.getMinutes(), 2) + ':' +
+                leadingZeros(now.getSeconds(), 2);
+            
+              return s;
+            }
+            
+            
+            function leadingZeros(n, digits) {
+              var zero = '';
+              n = n.toString();
+            
+              if (n.length < digits) {
+                for (i = 0; i < digits - n.length; i++)
+                  zero += '0';
+              }
+              return zero + n;
+            }
+            
+          </script>
         </div>
       </div>
     </div>
+    <!-- 환율정보 초기화되고 오전10시에 다시 가져 올 수 있다. -->
     <div style="min-width: 165px; width: 366px;">
       <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">환율 정보 <span
           style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Exchange</span></h2>
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-         
           
-          <span>{{ country_exchange.1.cur_nm }}
-          {{ country_exchange.1.deal_bas_r }}
-          송금 받을때:{{ country_exchange.1.ttb }}
-          송금 할때:{{ country_exchange.1.tts }}</span> 
-          <br>
-          
-          <span>{{ country_exchange.8.cur_nm }}
-          {{ country_exchange.8.deal_bas_r }}
-          송금 받을때:{{ country_exchange.8.ttb }}
-          송금 할때:{{ country_exchange.8.tts }}</span> 
-          <br>
-          
-          <span>{{ country_exchange.9.cur_nm }}
-          {{ country_exchange.9.deal_bas_r }}
-          송금 받을때:{{ country_exchange.9.ttb }}
-          송금 할때:{{ country_exchange.9.tts }}</span> 
-          <br>
-          
-          <span>{{ country_exchange.12.cur_nm }}
-          {{ country_exchange.12.deal_bas_r }}
-          송금 받을때:{{ country_exchange.12.ttb }}
-          송금 할때:{{ country_exchange.12.tts }}</span> 
-          <br>
-          
-          <span>{{ country_exchange.22.cur_nm }}
-          {{ country_exchange.22.deal_bas_r }}
-          송금 받을때:{{ country_exchange.22.ttb }}
-          송금 할때:{{ country_exchange.22.tts }}</span> 
-          <br>
+            1000|{{ exchange.exchange_code }}당
+            <br>
+            {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
+            <br>
 
-          
-          
-          {% comment %} {% if country_exchange in 'JPY' %}
-          {{ country_exchange.cur_unit }}
-          {% endif %}
-          {% endfor %} {% endcomment %}
-          {% comment %} <span> {{ exchange.cur_unit }} </span>
-          <span> {{ exchange.cur_nm }} </span>
-          <span> {{ exchange.money }} </span> {% endcomment %}
-          {% comment %} {% elif 'JPY' == country_exchange.cur_unit %}
-          <span> {{ exchange.cur_nm_jp }} </span>
-          <span> {{ exchange.money_jp }} </span> {% endcomment %}
-          
         </div>
       </div>
     </div>
   </div>
 </section>
 <div>
-  <h1>hi, detail</h1>
   <p>이름: {{country.country_name}}</p>
   <p>상태: {{country.status|safe}}</p>
-  <p>상태 작성일자:{{country.status_wrt_dt}}</p>
-  <p>통화 CODE:{{country.exchange_rate_code}}</p>
-  <p>어제자 환율:{{country.ysd_er}}</p>
-  <p>통화 이름: {{country.cur_nm}}</p>
-  <p>이벤트:{{country.events}}</p>
-  <p>비자 : {{country.visa}}</p>
+  
+  {% comment %} <p>비자 : {{country.visa}}</p> {% endcomment %}
 </div>
-<div>
-  {% for country_new in country_news %}
-    <a href="{{ country_new.url }}"><p>기사제목: {{ country_new.title }}</p></a>
-  {% endfor %}
-</div>
+
+
+
 <script>
+  
   // 오늘 날짜 가져오기
   let today = new Date();
 

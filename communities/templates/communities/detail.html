@@ -531,4 +531,51 @@
         }
     })
 </script>
+  // 대댓글 생성 창 띄우기
+  // 대댓글 생성 창 띄우기
+  const getCreateSubComment = function (e) {
+    const createSubCommentForm = document.querySelector(`#${e}-form`);
+    createSubCommentForm
+      .classList
+      .toggle(`d-none`);
+  }
+
+  // 대댓글 생성
+  // 대댓글 생성
+  const submitSubComment = function (e) {
+    event.preventDefault();
+    const commentForm = document.querySelector(`#${e}`);
+    const articlePk = event.target.dataset.articleId;
+    const parentPk = event.target.dataset.parentId;
+    axios({
+      method: 'post',
+      url: `/communities/${conPK}/review/${articlePk}/review_detail/${parentPk}/sub_comment_create/`,
+      headers: {
+        'X-CSRFToken': csrftoken
+      },
+      data: new FormData(commentForm)
+    }).then(response => {
+      console.log(response)
+
+      const commentsList = document.querySelector(`#comment-list-${articlePk}`)
+
+      commentsList.textContent = "";
+
+      for (let i = 0; i < response.data.sub_comments_data.length; i++) {
+        let date = displayedAt(response.data.sub_comments_data[i].created_at)
+        if (response.data.sub_comments_data[i].request_user_pk === response.data.sub_comments_data[i].user_pk) {
+          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.sub_comments_data[i].nickname} | ${response.data.sub_comments_data[i].content} | ${response.data.sub_comments_data[i].created_at} </span>
+            <button id="comment-${response.data.sub_comments_data[i].comment_pk}-update" data-review-id="${response.data.sub_comments_data[i].study_id}" data-comment-id="${response.data.sub_comments_data[i].comment_pk}" class="btn btn-outline-success" onclick="getUpdateComment(this.id)">수정</button>
+            <button id="comment-${response.data.sub_comments_data[i].comment_pk}-delete" data-review-id="${response.data.sub_comments_data[i].study_id}" data-comment-id="${response.data.sub_comments_data[i].comment_pk}" class="btn btn-outline-danger" onclick="deleteComment(this.id)">삭제</button>
+            <div id="comment-${response.data.sub_comments_data[i].comment_pk}-update-form" class="display-none">
+            <input id="comment-${response.data.sub_comments_data[i].comment_pk}-update-content" type="text" value="${response.data.sub_comments_data[i].content}">
+            <button id="comment-${response.data.sub_comments_data[i].comment_pk}-update-btn" class="btn btn-primary" data-review-id="${response.data.sub_comments_data[i].study_id}" data-comment-id="${response.data.sub_comments_data[i].comment_pk}" onclick="updateComment(this.id)">확인</button>
+            </div><br>`);
+        } else {
+          commentsList.insertAdjacentHTML('beforeend', `<span>${response.data.sub_comments_data[i].nickname} | ${response.data.sub_comments_data[i].content} | ${response.data.sub_comments_data[i].created_at} </span>`);
+        }
+      }
+    })
+  }
+</script>
 {% endblock body %}

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'mathfilters',
     "django.contrib.sites",
     "allauth",
     "allauth.account",
