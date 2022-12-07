@@ -270,59 +270,16 @@
           style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Time</span></h2>
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-          <script type="text/javascript">
-
-            
-            document.write('CET (스페인 시간):',  getWorldTime(+1), '<br>');
-            
-            document.write('PST (LA 시간):',         getWorldTime(-8), '<br>');
-            document.write('EST (뉴욕 시간):',     getWorldTime(-5), '<br>');
-            
-            document.write('GMT (영국 시간):',        getWorldTime(0), '<br>');
-            
-            document.write('AEST (호주 동부 시간):',      getWorldTime(+10), '<br>');
-            
-          
-            document.write('JST (일본 시간):',       getWorldTime(+9),  '<br>');
-            
-            
-            
-            
-            function getWorldTime(tzOffset) { // 24시간제
-              var now = new Date();
-              var tz = now.getTime() + (now.getTimezoneOffset() * 60000) + (tzOffset * 3600000);
-              now.setTime(tz);
-            
-            
-              var s =
-                leadingZeros(now.getFullYear(), 4) + '-' +
-                leadingZeros(now.getMonth() + 1, 2) + '-' +
-                leadingZeros(now.getDate(), 2) + ' ' +
-            
-                leadingZeros(now.getHours(), 2) + ':' +
-                leadingZeros(now.getMinutes(), 2) + ':' +
-                leadingZeros(now.getSeconds(), 2);
-            
-              return s;
-            }
-            
-            
-            function leadingZeros(n, digits) {
-              var zero = '';
-              n = n.toString();
-            
-              if (n.length < digits) {
-                for (i = 0; i < digits - n.length; i++)
-                  zero += '0';
-              }
-              return zero + n;
-            }
-            
-          </script>
+          <span>한국시간 | {{ 한국 }}</span>
+          <br>
+          <span>{{ country_time1.0 }}  {{ country_time1.1 }}</span>
+          <br>
+          <span>{{ country_time2.0 }}  {{ country_time2.1 }}</span>
+          <br>
         </div>
       </div>
     </div>
-    <!-- 환율정보 초기화되고 오전10시에 다시 가져 올 수 있다. -->
+    <!-- 환율 api 횟수 제한 250회 이므로 발표때 새로 받아와야한다. -->
     <div style="min-width: 165px; width: 366px;">
       <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">환율 정보 <span
           style="color: rgba(0, 0, 0, 0.4); font-weight: 400; font-size: 12px;">Exchange</span></h2>
@@ -332,8 +289,7 @@
             1000|{{ exchange.exchange_code }}당
             <br>
             {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
-            <br>
-
+            <br> 
         </div>
       </div>
     </div>

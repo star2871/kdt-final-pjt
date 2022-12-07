@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from .models import Country, Country_news
 import requests
+from datetime import datetime
+from pytz import timezone
 def index(request):
     countries = Country.objects.all()
     return render(request, 'countries/index.html', {'countries': countries})
 
 def country_detail_view(request, country_code):
+    # 날씨
     url = 'https://api.openweathermap.org/data/2.5/forecast?q={}&appid=8b2ecb443e51f61ba8afcf78c940e833&units=metric&lang=kr'
     if country_code == "JP":
         city1 = 'Tokyo'
@@ -59,7 +62,8 @@ def country_detail_view(request, country_code):
         'description2' : list_des2,
         'icon2' : list_icon2,
     }
-       
+    # 환율 
+    # 나중에 발표할때 날짜 바꿔야 한다, 또한 250번만 가져올 수있으므로 api_key를 다시 받아야한다.
     url = "https://api.apilayer.com/exchangerates_data/2022-12-07&base=KRW"
    
     headers = {
@@ -90,8 +94,24 @@ def country_detail_view(request, country_code):
         'country_exchange' : response['rates'],
         'exchange_code' : exchange_code,
     }
+    # 실시간 나라별 현지 시간
+    한국 = datetime.now(timezone('Asia/Seoul')).strftime('%Y/%m/%d %p %I:%M:%S')
+    country_time1 = []
+    country_time2 = []
+    if country_code == 'US':
+        country_time1 = ['LA시간', datetime.now(timezone('America/Los_Angeles')).strftime('%Y/%m/%d %p %I:%M:%S')]
+        country_time2 = ['뉴욕시간', datetime.now(timezone('America/Atikokan')).strftime('%Y/%m/%d %p %I:%M:%S')]
+    elif country_code == 'GB':   
+        country_time1 = ['영국시간', datetime.now(timezone('Atlantic/Reykjavik')).strftime('%Y/%m/%d %p %I:%M:%S')]
+    elif country_code == 'JP':
+        country_time1 = ['일본시간', datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %p %I:%M:%S')]
+    elif country_code == 'AU':
+        country_time1 = ['호주시간', datetime.now(timezone('Australia/ACT')).strftime('%Y/%m/%d %p %I:%M:%S')]
 
+    
+    
+    
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'headers': headers, 'exchange': exchange,'exchange_code': exchange_code,})
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather,'country_time1':country_time1,'한국':한국, 'country_time2' : country_time2, 'headers': headers, 'exchange': exchange, 'exchange_code': exchange_code,})
