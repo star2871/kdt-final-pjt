@@ -80,21 +80,97 @@ def country_detail_view(request, country_code):
         'icon2' : list_icon2,
     }
     
-    api = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?q={}&authkey=SthDQi9wM06s2PTo8YSafUGNB0b6Mlkj&data=AP01"
+    # api = "https://api.exchangeratesapi.io/v1/latest?access_key=4uRZaoBihyNtPoOeHE9VM0YACEGJEUUM&base=KRW&symbols=GBP,JPY,EUR,USD,AUD"
+    # if country_code == "JP":
+    #     rates = "JPY"
+    # elif country_code == 'US':
+    #     rates = "USD"
+    # elif country_code == 'AU':
+    #     rates = "AUD"
+    # elif country_code == 'GB':
+    #     rates = "GBP"
+    # elif country_code == 'ES':
+    #     rates = "EUR"    
+    url = "https://api.apilayer.com/exchangerates_data/2022-12-07&base=KRW"
+    # url ='https://api.exchangeratesapi.io/v1/latest?access_key=4uRZaoBihyNtPoOeHE9VM0YACEGJEUUM&base=KRW'
+    
+    
+    headers = {
+        "apikey":'4uRZaoBihyNtPoOeHE9VM0YACEGJEUUM'
+    }
+    response = requests.get(url, headers=headers).json()
+    exchange_code = ''
     if country_code == "JP":
-        cur_unit = "JPY"
+        exchange_code = '엔'
+        response['rates']=response['rates']['JPY']
     elif country_code == 'US':
-        cur_unit = "USD"
+        exchange_code = '달러'
+        response['rates']=response['rates']['USD']
     elif country_code == 'AU':
-        cur_unit = "AUD"
+        exchange_code = '호주달러'
+        response['rates']=response['rates']["AUD"]
     elif country_code == 'GB':
-        cur_unit = "GPB"
+        exchange_code = '파운드'
+        response['rates']=response['rates']["GBP"]
     elif country_code == 'ES':
-        cur_unit = "EUR"    
-    country_exchange = requests.get(api.format(cur_unit)).json()
+        exchange_code = '유로'
+        response['rates']=response['rates']["EUR"]
+    # status_code = response.status_code
+    # # if country_code == "JP":
+    # #     symbols = "JPY"
+    # # elif country_code == 'US':
+    # #     symbols = "USD"
+    # # elif country_code == 'AU':
+    # #     symbols = "AUD"
+    # # elif country_code == 'GB':
+    # #     symbols = "GBP"
+    # # elif country_code == 'ES':
+    # #     symbols = "EUR"
+    # result = response.text
+        print(response['rates'])
     
+    exchange = {
+        'base_country': response['base'],
+        'country_exchange' : response['rates'],
+        'exchange_code' : exchange_code,
+        # 'country_exchange_US' : response['rates']['USD'],
+        # 'country_exchange_AU' : response['rates']['AUD'],
+        # 'country_exchange_GB' : response['rates']['GBP'],
+        # 'country_exchange_ES' : response['rates']['EUR'],
+    }
+    # if country_code == "JP":
+    #     symbols = "JPY"
+    # elif country_code == 'US':
+    #     symbols = "USD"
+    # elif country_code == 'AU':
+    #     symbols = "AUD"
+    # elif country_code == 'GB':
+    #     symbols = "GBP"
+    # elif country_code == 'ES':
+    #     symbols = "EUR"
+    # exchange = result.format(symbols)
+    # if country_code == "JP":
+    #     symbols = "JPY"
+    # elif country_code == 'US':
+    #     symbols = "USD"
+    # elif country_code == 'AU':
+    #     symbols = "AUD"
+    # elif country_code == 'GB':
+    #     symbols = "GBP"
+    # elif country_code == 'ES':
+    #     symbols = "EUR"
+    # exchange = result.get(url.format(symbols)).json()
+    # if country_code == "JP":
+    #     print(result['rates']['JPY'])
+    # elif country_code == 'US':
+    #     rates = "USD"
+    # elif country_code == 'AU':
+    #     rates = "AUD"
+    # elif country_code == 'GB':
+    #     rates = "GBP"
+    # elif country_code == 'ES':
+    #     rates = "EUR"
     
-        
         
     # c['cur_nm']
     # c['deal_bas_r']
@@ -114,8 +190,8 @@ def country_detail_view(request, country_code):
         # # 미국
         # e = country_exchange[22]
         # print(a, b, c, d, e)
-    exchange = {
-        'country_exchange': country_exchange,
+    # exchange = {
+    #     'country_exchange': country_exchange,
         # 'cur_unit1' : c['cur_unit'],
         # 'cur_nm1': c['cur_nm'],
         # 'deal_bas_r1': c['deal_bas_r'],
@@ -126,11 +202,11 @@ def country_detail_view(request, country_code):
         # 'deal_bas_r2': d['deal_bas_r'],
         # 'ttb2': d['ttb'],
         # 'tts2': d['tts'],
-    }
+    # }
     
 # for a in weather:
 #     print('time1')
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'country_exchange':country_exchange, 'exchange': exchange,})
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather, 'headers': headers, 'exchange': exchange,'exchange_code': exchange_code,})

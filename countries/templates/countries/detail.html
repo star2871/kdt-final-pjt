@@ -345,8 +345,27 @@
             송금 받을때:{{ exchange.ttb2 }}|원
             송금 할때:{{ exchange.tts2 }}|원</span> 
             <br> {% endcomment %}
-          
-          <span>{{ country_exchange.1.cur_nm }}
+            1000|{{ exchange.exchange_code }}당
+            <br>
+            {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
+            <br>
+            {% comment %} <br>
+            {{ exchange.country_exchange_US }}
+            <br>
+            {{ exchange.country_exchange_AU }}
+            <br>
+            {{ exchange.country_exchange_GB }}
+            <br>
+            {{ exchange.country_exchange_ES }}
+            <br> {% endcomment %}
+
+            {% comment %} {% for key, value in exchange.country_exchange.items %}
+              
+              {{ value }}
+             
+            {% endfor %} {% endcomment %}
+            
+          {% comment %} <span>{{ country_exchange.1.cur_nm }}
           {{ country_exchange.1.deal_bas_r }}|원
           송금 받을때:{{ country_exchange.1.ttb }}|원
           송금 할때:{{ country_exchange.1.tts }}|원</span> 
@@ -374,7 +393,7 @@
           {{ country_exchange.22.deal_bas_r }}|원
           송금 받을때:{{ country_exchange.22.ttb }}|원
           송금 할때:{{ country_exchange.22.tts }}|원</span> 
-          <br>
+          <br> {% endcomment %}
 
           
           
