@@ -111,23 +111,23 @@
                         <div id="comment-{{ comment.pk }}-update-form" class="update-form">
                             <textarea id="comment-{{ comment.pk }}-update-content"
                                 type="text">{{ comment.content }}</textarea>
-                            <button id="comment-{{ comment.pk }}-update-btn" class="btn btn-primary"
-                                data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}"
-                                onclick="updateComment(this.id)">확인
-                            </button>
-                            <button id="comment-{{ comment.pk }}-update-cancel" data-comment-id="{{ comment.pk }}"
-                                onclick="updateCommentCancel(this.id)">작성 취소</button>
+                            <div class="buttons-update">
+                                <button id="comment-{{ comment.pk }}-update-cancel" data-comment-id="{{ comment.pk }}"
+                                    onclick="updateCommentCancel(this.id)">취소</button>
+                                <button id="comment-{{ comment.pk }}-update-btn" class="update-comment"
+                                    data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}"
+                                    onclick="updateComment(this.id)">작성
+                                </button>
+                            </div>
                         </div>
                     </div>
                     {% if user.pk == comment.user_id %}
-                    <div class="buttons">
+                    <div id="comment-{{comment.pk}}-update-buttons" class="buttons">
                         <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}"
-                            data-comment-id="{{ comment.pk }}" class="btn btn-outline-success"
-                            onclick="getUpdateComment(this.id)">수정
+                            data-comment-id="{{ comment.pk }}" onclick="getUpdateComment(this.id)">수정
                         </button>
                         <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}"
-                            data-comment-id="{{ comment.pk }}" class="btn btn-outline-danger"
-                            onclick="deleteComment(this.id)">삭제
+                            data-comment-id="{{ comment.pk }}" onclick="deleteComment(this.id)">삭제
                         </button>
                     </div>
                     {% endif %}
@@ -229,8 +229,7 @@
     // 여기도 안씀
     const getCreateComment = function (e) {
         const commentForm = document.querySelector(`#${e}-form`);
-        commentForm
-            .classList
+        commentForm.classList
             .toggle('display-none');
     }
 
@@ -320,10 +319,12 @@
     }
 
     const getUpdateComment = function (e) {
+        const btNs = document.querySelector(`#${e}-buttons`)
         const updateCommentForm = document.querySelector(`#${e}-form`);
         const commentContent = document.querySelector(`#${e}-hide`);
         const commentBase = document.querySelector(`#${e}-hide`).innerText;
 
+        btNs.style.display = "none";
         commentContent.style.display = "none";
         updateCommentForm.style.display = "block";
     }
@@ -331,12 +332,14 @@
 
     const updateCommentCancel = function (e) {
         const comPk = event.target.dataset.commentId
+        const btNs = document.querySelector(`#comment-${comPk}-update-buttons`)
         const updateCommentForm = document.querySelector(`#comment-${comPk}-update-form`);
         const commentContent = document.querySelector(`#comment-${comPk}-update-hide`)
         const commentBase = document.querySelector(`#comment-${comPk}-update-hide`).innerText
         const commentUpdateContent = document.querySelector(`#comment-${comPk}-update-content`)
         commentContent.style.display = "block";
         updateCommentForm.style.display = "none";
+        btNs.style.display = "";
     }
 
 
