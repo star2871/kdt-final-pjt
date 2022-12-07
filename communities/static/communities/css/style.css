@@ -371,11 +371,17 @@ span,
 
 .comment-row {
     display: flex;
-    min-height: 100px;
+    position: relative;
+    min-height: 120px;
     padding: 10px 0px;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
+.comment-row:hover .buttons {
+    display: flex;
+    width: 12%;
+    justify-content: space-between;
 
+}
 .comment-profile-img {
     width: 48px;
     height: 48px;
@@ -388,13 +394,24 @@ span,
     padding: 0px 14px;
 }
 
+.comment-main > p {
+    min-height: 55px;
+}
+
 .comment-user-date {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    font-size: 16px;
+    margin-bottom: 1rem;
 }
 
-.comment-user-date p {
-    font-size: 16px;
+.comment-user-date > p { 
+    margin-bottom: 0;
+}
+
+.comment-date {
+    font-size: 14px;
 }
 
 #comment-none {
@@ -408,4 +425,80 @@ span,
 
 #review_delete:hover {
     cursor: pointer;
+}
+
+/* 수정, 삭제 버튼 */
+.comment-row > .buttons {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+    padding-right: 8px;
+}
+
+.buttons > button {
+    border: 0px;
+    color: #3c7ed2;
+    background-color: transparent;
+}
+
+.buttons > button:hover {
+    text-decoration: underline;
+    color: #3c7ed2;
+    background-color: transparent;
+}
+
+.update-form {
+    display: none;
+}
+
+.update-form > textarea {
+    font-size: 14px;
+    resize: none;
+    height: 130px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border-width: 0.5px;
+    border-color: #cccccc5c;
+    margin-bottom: 30px;
+}
+
+.update-form > textarea:focus {
+    outline: none;
+}
+/* 댓글 수정, 작성취소 버튼 */
+
+.update-form button {
+    padding: 0px 2rem;
+    border : 0;
+    line-height: 30px;
+    border-radius: 3px;    
+}
+
+.update-form button:not(.update-comment) {
+    color: #3c7ed2;
+    background-color: transparent;
+}
+
+.update-form button:hover:not(.update-comment:hover) {
+    color: #3c7ed2;
+    background-color: #cccccc52;
+}
+
+.buttons-update {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.update-comment {
+    background-color: #3c7ed2;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.update-comment:hover {
+    opacity: 0.8;
 }
