@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
@@ -16,9 +18,7 @@
 <!-- 커뮤니티 공지사항 -->
 <div style="max-width: 733px; background-color: white; margin: 0 auto;">
   <section style="padding: 0 18px">
-    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
-      <span style='margin-right: 14px'>✈️</span>공지사항
-    </h2>
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">공지사항</h2>
     <div
       style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
       <ul style="padding-top: 30px; padding: 0px;">
@@ -28,33 +28,133 @@
     </div>
   </section>
 
-  <!-- 커뮤니티 베스트리뷰 -->
+  <!-- 테스트-->
   <section style="margin-top: 45px; padding: 0 18px">
-    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700;">
-      <span style='margin-right: 14px'>🏆</span>베스트리뷰
-    </h2>
-    <div
-      style="margin: 8px auto 0; padding: 14px 14px 11px; background-color: white; border-radius: 16px; max-width: 732px; border: 1px solid rgb(235, 237, 244);">
-      <ul style="padding-top: 15px; padding: 0px;">
-        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 0px; margin: 0;">
-          <p style="font-size: 16px; color: rgba(0, 0, 0, 0.4); margin: 0;">인원제한</p>
-        </li>
-      </ul>
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;"><a class="sc-jgrJph dYjA-dM"
+          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+        </a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
+            <div class="description-wrapper">
+              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
+                더
+                쉽고 재밌는 컨텐츠로 결제
+                연동을
+                학습할
+                수 있도록 도울게요.
+
+              </p>
+            </div>
+          </a>
+          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
+              <!-- -->개의 댓글
+            </span></div>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
+              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
+              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
+          <div class="likes"><svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+            </svg>53</div>
+        </div>
+      </div>
+
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;"><a class="sc-jgrJph dYjA-dM"
+          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+        </a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
+            <div class="description-wrapper">
+              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
+                더
+                쉽고 재밌는 컨텐츠로 결제
+                연동을
+                학습할
+                수 있도록 도울게요.
+
+              </p>
+            </div>
+          </a>
+          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
+              <!-- -->개의 댓글
+            </span></div>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
+              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
+              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
+          <div class="likes"><svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+            </svg>53</div>
+        </div>
+      </div>
+
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;"><a class="sc-jgrJph dYjA-dM"
+          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+        </a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
+            <div class="description-wrapper">
+              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
+                더
+                쉽고 재밌는 컨텐츠로 결제
+                연동을
+                학습할
+                수 있도록 도울게요.
+
+              </p>
+            </div>
+          </a>
+          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
+              <!-- -->개의 댓글
+            </span></div>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
+              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
+              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
+          <div class="likes"><svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+            </svg>53</div>
+        </div>
+      </div>
+
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;"><a class="sc-jgrJph dYjA-dM"
+          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+        </a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
+            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
+            <div class="description-wrapper">
+              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
+                더
+                쉽고 재밌는 컨텐츠로 결제
+                연동을
+                학습할
+                수 있도록 도울게요.
+
+              </p>
+            </div>
+          </a>
+          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
+              <!-- -->개의 댓글
+            </span></div>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
+              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
+              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
+          <div class="likes"><svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+            </svg>53</div>
+        </div>
+      </div>
     </div>
   </section>
+  <!-- 커뮤니티 베스트리뷰 -->
 
   <!-- 커뮤니티 리뷰 -->
   <section style="margin-top: 45px; padding: 0 18px">
     <div class="d-flex justify-content-between align-items-center">
-      <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">
-        <span style='margin-right: 14px'>🖥️</span>리뷰목록
-      </h2>
+      <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">리뷰목록</h2>
       <!-- <div class="create-wrapper">
             <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;">
               <div class="create">
