@@ -52,7 +52,7 @@
     <a href="{% url 'accounts:signup' %}">
       <p>회원가입</p>
     </a>
-    {% bootstrap_form form %}
+    {% comment %} {% bootstrap_form form %} {% endcomment %}
     {% comment %} {{ review_form.as_p }} {% endcomment %}
 
   </form>
