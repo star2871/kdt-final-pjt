@@ -272,8 +272,11 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
     comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
     sub_comments_data = []
     for co in comments:
+        test = []
         print(co.parent_id,5)
         if not co.parent_id == None:
+            son = "해당 리스트는 잘 받아와집니다"
+            test.append(son)
             img = f'/media/{co.user.profile_image}'
             if img == '/media/':
                 sub_comments_data.append(
@@ -291,6 +294,7 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
                             'parent': co.parent.pk,
                             'secret': co.secret,
                             'like': co.like.count(),
+                            'test' : test
                         })
                 print(parent.pk,1)
             else:
@@ -309,6 +313,7 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
                         'parent': co.parent.pk,
                         'secret': co.secret,
                         'like': co.like.count(),
+                        'test' : test
                     })
                 print(parent.pk,2)
     context = {

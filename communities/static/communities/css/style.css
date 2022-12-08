@@ -382,7 +382,7 @@ span,
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 
-.comment-row:hover .buttons {
+.comment-row:hover > .comment-wrapper .buttons {
     display: flex;
     width: 12%;
     justify-content: space-between;
@@ -531,6 +531,10 @@ span,
     background-color: #cccccc21;
 }
 
-/* 출력할 목록이 없으면 답글 작성 */
-.sub-comment-create {
+.sub-comment-list .comment-main > p {
+    min-height: 36px;
+}
+
+.sub-comment-list .comment-wrapper {
+    min-height: 0;
 }
