@@ -374,35 +374,93 @@ def advice_create(request, country_code):
 ## 피드 파트
 ## 피드 인덱스
 def feed(request, country_code):
-    feed = Feed.objects.filter(category="feed").order_by("-pk")
+    feeds = Feed.objects.filter(category="feed").order_by("-pk")
+    feed_form = FeedForm()
+    feed_image_form = FeedImageForm()
     context = {
-        "feed": feed,
-        "country_code" : country_code,
+        "feeds": feeds,
+        "country_code": country_code,
+        "feed_form": feed_form,
+        "feed_image_form": feed_image_form,
     }
-    return render(request, 'communities/index.html', context)
+    return render(request, 'communities/feed_index.html', context)
 
 ## 피드 생성
 def feed_create(request, country_code):
-    if request.method == "POST":
-        form = FeedForm(request.POST)
-        files = request.FILES.getlist("image")
-        if form.is_valid():
-            country = Country.objects.get(country_code=country_code)
-            f = form.save(commit=False)
-            f.user = request.user
-            f.country = country
-            f.category = "feed"
-            f.user = request.user
-            f.save()
-            for i in files:
-                FeedImages.objects.create(feed=f, image=i)
-            return redirect('communities:feed', country_code)
-        else:
-            print(form.errors)
+    user = User.objects.get(pk=request.user.pk)
+    form = FeedForm(request.POST)
+    files = request.FILES.getlist("image")
+    country = Country.objects.get(country_code=country_code)
+    if form.is_valid():
+        f = form.save(commit=False)
+        f.user = user
+        f.country = country
+        f.category = "feed"
+        f.save()
+        for i in files:
+            FeedImages.objects.create(feed=f, image=i)
+       
+        feeds = Feed.objects.all().order_by('-pk')
+        feeds_data = []
+        for co in feeds:
+
+            img = f'/media/{co.user.profile_image}'
+
+            if img == '/media/':
+                feeds_data.append(
+                    {
+                        'created_string':co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'like': co.like.count(),
+                    })
+            else:
+                feeds_data.append(
+                    {
+                        'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url':img,
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'like': co.like.count(),
+                    })
+        context = {
+            'feeds_data': feeds_data
+        }
+        return JsonResponse(context)
     else:
-        form = FeedForm()
-        imageform = FeedImageForm()
-    return render(request, 'communities/feed_form.html', {"form": form, "imageform": imageform})
+        print(form.errors)
+    
+## 동기식
+# def feed_create(request, country_code):
+#     if request.method == "POST":
+#         form = FeedForm(request.POST)
+#         files = request.FILES.getlist("image")
+#         if form.is_valid():
+#             country = Country.objects.get(country_code=country_code)
+#             f = form.save(commit=False)
+#             f.user = request.user
+#             f.country = country
+#             f.category = "feed"
+#             f.user = request.user
+#             f.save()
+#             for i in files:
+#                 FeedImages.objects.create(feed=f, image=i)
+#             return redirect('communities:feed', country_code)
+#         else:
+#             print(form.errors)
+#     else:
+#         form = FeedForm()
+#         imageform = FeedImageForm()
+#     return render(request, 'communities/feed_form.html', {"form": form, "imageform": imageform})
 
 
 def test(request):

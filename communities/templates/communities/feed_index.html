@@ -1,0 +1,239 @@
+{% extends 'trans_navbar.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+{% endblock css %}
+
+{% block body %}
+
+  <!-- 피드 메인 -->
+  <div class="community-header"></div>
+
+  <!-- 피드 공지사항 -->
+  <div style="max-width: 733px; background-color: white; margin: 0 auto;">
+    <section style="padding: 0 18px">
+      <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
+        <span style='margin-right: 14px'>✈️</span>공지사항
+      </h2>
+      <div style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
+        <ul style="padding-top: 30px; padding: 0px;">
+          <div class="reviews-row" style="padding: 0">asdasd
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 피드 리뷰 -->
+    <button id="create-feed" class="btn btn-outline-success" onclick="getCreateFeed(this.id)">수정
+    </button>
+    <div id="create-feed-form" class="d-none">
+      <form id="feed-create" data-country-id="{{ country_code }}" onsubmit="createFeed(this.id)">
+        {% csrf_token %}
+        {% bootstrap_form feed_form %}
+        {% bootstrap_button "OK" %}
+      </form>
+    </div>
+    <section style="margin-top: 45px; padding: 0 18px">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">
+          <span style='margin-right: 14px'>🖥️</span>리뷰목록
+        </h2>
+        <!-- <div class="create-wrapper"> <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;"> <div class="create"> 리뷰작성 <img class="plane" src="{% static 'communities/img/create.png' %}" alt=""> </div> </a> </div> -->
+        <div class="create-wrapper">
+          <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none; color:rgb(51, 51, 51)">
+            <div class="m-create" style="font-size: 14px;">
+              리뷰작성
+            </div>
+          </a>
+        </div>
+      </div>
+      <div id="feed-list" style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
+        <ul style="padding-top: 15px; padding: 0px;">
+          {% for feed in feeds %}
+            <div class="review-row">
+              <div class="row">
+                <div class="col-8" style="padding:0">
+                  <a href="" style="text-decoration: none; color: rgb(51, 51, 51)">
+                    <p class="review-title mb-0">
+                      {{ feed.content }}
+                    </p>
+                  </a>
+                  <!-- 닉네임|작성일 -->
+                  <p class="review-date">{{ feed.user }}|{{ feed.created_at }}</p>
+                  <div class="icons-wrapper">
+                    <div class="icons">
+                      <!-- 좋아요 -->
+                      <div class="icon">
+                        <span class="material-icons md-18">
+                          thumb_up_alt
+                        </span>
+                        <span>{{ feed.like.count }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 review-list">
+                  {% if feed.image %}
+                    <div>
+                      <img class="review-img" src="{{ feed.image.url }}" alt="">
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    //국가 코드 선언
+    //국가 코드 선언
+    let conPK = '{{ country_code }}';
+    console.log(conPK)
+
+    function displayedAt(createdAt) {
+      let time = new Date(createdAt)
+      const milliSeconds = new Date() - time
+      const seconds = milliSeconds / 1000
+      if (seconds < 60) 
+        return `방금 전`
+      const minutes = seconds / 60
+      if (minutes < 60) 
+        return `${Math.floor(minutes)}분 전`
+      const hours = minutes / 60
+      if (hours < 24) 
+        return `${Math.floor(hours)}시간 전`
+      const days = hours / 24
+      if (days < 7) 
+        return `${Math.floor(days)}일 전`
+      const weeks = days / 7
+      if (weeks < 5) 
+        return `${Math.floor(weeks)}주 전`
+      const months = days / 30
+      if (months < 12) 
+        return `${Math.floor(months)}개월 전`
+      const years = days / 365
+      return `${Math.floor(years)}년 전`
+    }
+
+    //csrf토큰 추가
+    //csrf토큰 추가
+    const csrftoken = document
+      .querySelector('[name=csrfmiddlewaretoken]')
+      .value;
+
+    // 피드 생성 창 띄우기
+    // 피드 생성 창 띄우기
+    const getCreateFeed = function (e) {
+      const createFeedForm = document.querySelector(`#${e}-form`);
+      createFeedForm
+        .classList
+        .toggle(`d-none`);
+    }
+
+    // 피드 생성
+    // 피드 생성
+    const createFeed = function (e) {
+      event.preventDefault();
+      const feedForm = document.querySelector(`#${e}`);
+
+      const pk = event.target.dataset.articleId;
+      const country = event.target.dataset.countryId;
+      axios({
+        method: 'post',
+        url: `/communities/${conPK}/feed/feed_create`,
+        headers: {
+          'X-CSRFToken': csrftoken
+        },
+        data: new FormData(feedForm)
+      }).then(response => {
+        console.log(response)
+
+        const feedList = document.querySelector(`#feed-list`)
+
+        feedList.textContent = "";
+
+        for (let i = 0; i < response.data.feeds_data.length; i++) {
+          let date = displayedAt(response.data.feeds_data[i].created_at)
+          if (response.data.feeds_data[i].request_user_pk === response.data.feeds_data[i].user_pk) {
+            feedList.insertAdjacentHTML('beforeend', `
+            <div class="review-row">
+              <div class="row">
+                <div class="col-8" style="padding:0">
+                  <a href="" style="text-decoration: none; color: rgb(51, 51, 51)">
+                    <p class="review-title mb-0">
+                      ${response.data.feeds_data[i].content}
+                    </p>
+                  </a>
+                  <!-- 닉네임|작성일 -->
+                  <p class="review-date"> ${response.data.feeds_data[i].user}| ${response.data.feeds_data[i].created_at}</p>
+                  <div class="icons-wrapper">
+                    <div class="icons">
+                      <!-- 좋아요 -->
+                      <div class="icon">
+                        <span class="material-icons md-18">
+                          thumb_up_alt
+                        </span>
+                        <span> ${response.data.feeds_data[i].like.count}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 review-list">
+                  {% if feed.image %}
+                    <div>
+                      <img class="review-img" src="${response.data.feeds_data[i].img_url}" alt="">
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>`);
+          } else {
+            feedList.insertAdjacentHTML('beforeend', `
+            <div class="review-row">
+              <div class="row">
+                <div class="col-8" style="padding:0">
+                  <a href="" style="text-decoration: none; color: rgb(51, 51, 51)">
+                    <p class="review-title mb-0">
+                      ${response.data.feeds_data[i].content}
+                    </p>
+                  </a>
+                  <!-- 닉네임|작성일 -->
+                  <p class="review-date"> ${response.data.feeds_data[i].user}| ${response.data.feeds_data[i].created_at}</p>
+                  <div class="icons-wrapper">
+                    <div class="icons">
+                      <!-- 좋아요 -->
+                      <div class="icon">
+                        <span class="material-icons md-18">
+                          thumb_up_alt
+                        </span>
+                        <span> ${response.data.feeds_data[i].like.count}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 review-list">
+                  {% if feed.image %}
+                    <div>
+                      <img class="review-img" src="${response.data.feeds_data[i].img_url}" alt="">
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>`);
+          }
+        }
+      })
+    }
+
+  </script>
+
+{% endblock %}
