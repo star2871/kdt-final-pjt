@@ -369,19 +369,27 @@ span,
     border-top: 0;
 }
 
-.comment-row {
+.comment-wrapper {
     display: flex;
     position: relative;
+    overflow: hidden;
+    min-height: 160px;
+}
+
+.comment-row {
     min-height: 120px;
-    padding: 10px 0px;
+    padding: 16px 0px;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
+
 .comment-row:hover .buttons {
     display: flex;
     width: 12%;
     justify-content: space-between;
 
 }
+
+
 .comment-profile-img {
     width: 48px;
     height: 48px;
@@ -428,10 +436,10 @@ span,
 }
 
 /* 수정, 삭제 버튼 */
-.comment-row > .buttons {
+.comment-row .buttons {
     display: none;
     position: absolute;
-    bottom: 5px;
+    top: 0;
     right: 0px;
     padding-right: 8px;
 }
@@ -501,4 +509,28 @@ span,
 
 .update-comment:hover {
     opacity: 0.8;
+}
+
+/* 답글 */
+/* 답글 버튼 */
+.subcomment-btn {
+    position: absolute;
+    padding: 0px 2rem;
+    border : 0;
+    line-height: 30px;
+    border-radius: 3px; 
+    bottom: 0;
+}
+
+/* 답글 목록 */
+.sub-comment-list {
+    display: none;
+    margin: auto;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #cccccc21;
+}
+
+/* 출력할 목록이 없으면 답글 작성 */
+.sub-comment-create {
 }

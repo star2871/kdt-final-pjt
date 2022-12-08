@@ -125,7 +125,7 @@ def article_comment_create(request, article_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
@@ -142,7 +142,7 @@ def article_comment_create(request, article_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
@@ -178,7 +178,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
@@ -195,7 +195,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
@@ -230,7 +230,7 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
@@ -247,7 +247,7 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent,
+                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
                     })
