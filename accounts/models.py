@@ -8,8 +8,7 @@ class User(AbstractUser):
     nick_name = models.CharField(max_length=30, null=False, blank=False)
     profile_image = ProcessedImageField(
         upload_to="media/",
-        blank=True,
-        null=True,
+        default="images/none_avatar.jpg",
         processors=[ResizeToFill(200, 200)],
         format="JPEG",
         options={"quality": 80},
