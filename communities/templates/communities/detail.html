@@ -917,12 +917,16 @@
             const commentList = document.querySelector(`#comment-list-${articlePk}`)
 
             commentList.textContent = "";
+            console.log(parentPk, response.data.parents_set)
+            /* const parentNum = Number(parentPk)
 
+            console.log(typeof arr[0], typeof parentPk)
+            if (!response.data.parents_set.includes(parentNum)) {
+                alert("삭제된 댓글입니다.")
+                console.log("hi")
+            } */
             for (let i = 0; i < response.data.comments_data.length; i++) {
 
-                if () {
-                    alert("삭제된 댓글입니다.")
-                }
 
                 let date = displayedAt(response.data.comments_data[i].created_at)
                 commentList.insertAdjacentHTML('beforeend', `
