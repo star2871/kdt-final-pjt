@@ -107,34 +107,63 @@
       <li class="tab-button">작성 게시글</li>
       {% if request.user == user %}
       <li class="tab-button">작성 댓글</li>
-      <li class="tab-button">스크랩</li>
       {% endif %}
       {% if request.user != user %}
       <li class="tab-button">꿀팀</li>
-      <li class="tab-button">좋아요한 글</li>
       {% endif %}
+      <li class="tab-button">사용자가 좋아한 글</li>
     </ul>
-    {% for a in article %}
-    <div class="tab-content current">
-      <p>{{ a.content|safe }}</p>
-    </div>
-    {% endfor %}
-    {% if request.user == user %}
-    {% for b in articleComment %}
+    
+    
+    <!-- 게시글 목록 -->
     <div class="tab-content show">
-      <p>{{ b.content }}</p>
+      {% for a in article %}
+      <div>
+      <span>
+        <a href="{% url 'communities:detail' a.country a.pk %}", style="text-decoration: none; color: rgb(51, 51, 51)">       
+          {{ a.title }} {{ a.content|safe }}
+        </a> 
+      </span>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-    <div class="tab-content current">
-      <p>꿀팁</p>
+    <!-- 댓글 목록 -->
+    {% if request.user == user %}
+    <div class="tab-content">
+      {% for b in articleComment %}
+      <div>
+        <span>
+        {{ b.content }}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="tab-content">
+      <div>
+        <span>사용자가 좋아한 글</span>
+      </div>
     </div>
     {% endif %}
+    <!-- 꿀팁 목록 -->
     {% if request.user != user %}
     <div class="tab-content">
-      <p>좋아요한 글</p>
+      {% for c in advice %}
+      <div>
+        <span>
+        {{ c.title }}
+        {{ c.content|safe }}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="tab-content">
+      <div>
+        <span>사용자가 좋아한 글</span>
+      </div>
     </div>
     {% endif %}
   </div>
+
 </section>
 
 
