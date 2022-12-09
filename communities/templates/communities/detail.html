@@ -730,10 +730,6 @@
         })
     }
 
-
-
-
-    // 대댓글 생성 창 띄우기
     // 대댓글 생성 창 띄우기
     const getCreateSubComment = function (e) {
         const getSubBtn = document.querySelector(`#${e}`)
@@ -760,13 +756,14 @@
         // 모든 댓글의 각 답글 영역
         const subComListAll = document.querySelectorAll('.sub-comment-list')
         console.log(subComListAll, 1)
-        const anoDisplay = []
+        const displayObj = {}
         for (let n = 0; n < subComListAll.length; n++) {
+            let subcomId = subComListAll[n].dataset.commentId
+            displayObj[`${subcomId}`] = getDisplay(subComListAll[n])
+            // displayObj.base = getDisplay(subComListAll[n])
             // console.log(`${n}번째 댓글 영역입니다.`)
-            let bsDisplay = getDisplay(subComListAll[n])
-            anoDisplay.push(bsDisplay)
         }
-        // console.log(anoDisplay)
+        console.log(displayObj, "이건 baseDisplay 배열")
 
         axios({
             method: 'post',
@@ -862,15 +859,18 @@
 
                 // i 번째 댓글을 지금 돌면서 그 안에 답글이 있으면 답글 개수(j)만큼 반복하는 중
                 // 우리가 필요한 건 i번째 댓글의 스타일 정보
-                const subCommentList = document.querySelector(`#subcomment-${response.data.comments_data[i].comment_pk}-commentlist`)
-                const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[i].comment_pk}`)
-                subCommentList.style.cssText = `display: ${anoDisplay[i]}`;
 
-                if (subCommentList.style.display === "block") {
-                    getSubBtn.innerText = "숨기기"
-                } else {
-                    getSubBtn.innerText = "답글달기"
-                }
+
+
+                /* for (let m = 0; m < baseDisplay.length; m++) {
+                    let displayPk = baseDisplay[m].pk
+                    let base = baseDisplay[m].base
+                    let subCommentList = document.querySelector(`#subcomment-${displayPk}-commentlist`)
+                    // console.log(subCommentList, displayPk)
+                    subCommentList.style.cssText = `display: ${base}`;
+                    const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[i].comment_pk}`)
+
+                } */
 
                 if ("sub_comments_data" in response.data.comments_data[i]) {
                     const comment = response.data.comments_data[i]
@@ -934,6 +934,24 @@
 
                 }
             }
+
+            // 마지막 탭 위치 가져오는 함수
+            for (let m = 0; m < response.data.comments_data.length; m++) {
+                let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+                const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+                // console.log(subComLi)
+                // console.log(displayObj[`${response.data.comments_data[m].comment_pk}`])
+                const base = displayObj[`${response.data.comments_data[m].comment_pk}`]
+                subComLi.style.cssText = `display: ${base}`
+                if (subComLi.style.display === "block") {
+                    getSubBtn.innerText = "숨기기"
+                } else {
+                    getSubBtn.innerText = "답글달기"
+                }
+                // console.log(getDisplay(subComLi))
+            }
+
+
         })
     }
 
