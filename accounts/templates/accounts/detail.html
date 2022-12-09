@@ -83,17 +83,19 @@
         <p style="font-size: 24px; font-weight: 700;">{{ user.nick_name }}</p>
         <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
         </p>
+        {% if request.user == user %}
         <a class="btn font-space" href="{% url 'accounts:update' %}">수정하기</a>
+        {% endif %}
       </div>
     </article>
     <article class="d-flex align-items-center; justify-content-between"
       style="max-width: 550px; height: auto; background-color: white; border-radius: 12px; padding: 26px;">
       <div class="">
-        <p style="font-size: 16px; font-weight: 700;">작성 게시글 수</p>
+        <p style="font-size: 16px; font-weight: 700;">작성한 게시글수|{{ article.count }}</p>
         <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
       </div>
       <div>
-        <p style="font-size: 16px; font-weight: 700;">작성 댓글 수</p>
+        <p style="font-size: 16px; font-weight: 700;">작성한 댓글수|{{ articleComment.count }}</p>
         <p style="font-size: 14px; font-weight: 400; color:rgb(100, 100, 100);">{{user.date_joined|date:'Y년 m월 d일'}}
       </div>
     </article>
@@ -103,18 +105,35 @@
     style="background-color: white; border-radius: 12px; max-width: 550px; margin: 20px auto 0;">
     <ul class="list" style="font-size: 14px;">
       <li class="tab-button">작성 게시글</li>
-      <li class="tab-button blue">작성 댓글</li>
+      {% if request.user == user %}
+      <li class="tab-button">작성 댓글</li>
       <li class="tab-button">스크랩</li>
+      {% endif %}
+      {% if request.user != user %}
+      <li class="tab-button">꿀팀</li>
+      <li class="tab-button">좋아요한 글</li>
+      {% endif %}
     </ul>
-    <div class="tab-content">
-      <p>작성한 아티클 목록</p>
+    {% for a in article %}
+    <div class="tab-content current">
+      <p>{{ a.content|safe }}</p>
     </div>
+    {% endfor %}
+    {% if request.user == user %}
+    {% for b in articleComment %}
     <div class="tab-content show">
-      <p>작성한 댓글</p>
+      <p>{{ b.content }}</p>
     </div>
+    {% endfor %}
+    <div class="tab-content current">
+      <p>꿀팁</p>
+    </div>
+    {% endif %}
+    {% if request.user != user %}
     <div class="tab-content">
-      <p>스크랩 목록</p>
+      <p>좋아요한 글</p>
     </div>
+    {% endif %}
   </div>
 </section>
 
