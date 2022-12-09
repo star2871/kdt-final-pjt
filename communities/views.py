@@ -272,38 +272,48 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
 
         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
         comments_data = []
-    # delete하고 댓글 수가 있을 때만,
-    if not comments:
-        context = {
-            "comments" : False,
-        }
-        return JsonResponse(context)
-    else:
-        for co in comments:
-            # 부모 댓글이 없는 댓글만
-            if co.parent_id == None:
-                img = f'/media/{co.user.profile_image}'
-                # 대댓글
-                sub_comments = co.articlecomment_set.all()
-                
-                sub_comments_data = []
-                if len(sub_comments):
-                    for sub in sub_comments:
-                        sub_img = f'/media/{sub.user.profile_image}'
-                        sub_comments_data.append({
-                                    'created_string':sub.created_string,
-                                    'request_user_pk': request.user.pk,
-                                    'comment_pk': sub.pk,
-                                    'user_pk': sub.user.pk,
-                                    'img_url': sub_img,
-                                    'nick_name':sub.user.nick_name,
-                                    'content': sub.content,
-                                    'created_at': sub.created_at,
-                                    'updated_at': sub.updated_at,
-                                    'article_id': sub.article_id,
-                                    'parent': sub.parent.pk                    
-                        })
-                        
+    for co in comments:
+        # 부모 댓글이 없는 댓글만
+        if co.parent_id == None:
+            img = f'/media/{co.user.profile_image}'
+            # 대댓글
+            sub_comments = co.articlecomment_set.all()
+            
+            sub_comments_data = []
+            if len(sub_comments):
+                for sub in sub_comments:
+                    sub_img = f'/media/{sub.user.profile_image}'
+                    sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
+                    })
+                    
+                comments_data.append(
+                    {
+                        'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url': img,
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'updated_at': co.updated_at,
+                        'article_id': co.article_id,
+                        'secret': co.secret,
+                        'like': co.like.count(),
+                        'sub_comments_data' : sub_comments_data
+                    })
+            else:
                     comments_data.append(
                         {
                             'created_string': co.created_string,
@@ -318,24 +328,8 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
                             'article_id': co.article_id,
                             'secret': co.secret,
                             'like': co.like.count(),
-                            'sub_comments_data' : sub_comments_data
                         })
-                else:
-                        comments_data.append(
-                            {
-                                'created_string': co.created_string,
-                                'request_user_pk': request.user.pk,
-                                'comment_pk': co.pk,
-                                'user_pk': co.user.pk,
-                                'img_url': img,
-                                'nick_name':co.user.nick_name,
-                                'content': co.content,
-                                'created_at': co.created_at,
-                                'updated_at': co.updated_at,
-                                'article_id': co.article_id,
-                                'secret': co.secret,
-                                'like': co.like.count(),
-                            })
+                    
     context = {
         'comments_data': comments_data,
     }
