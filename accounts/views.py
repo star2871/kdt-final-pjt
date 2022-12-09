@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
-
+from communities.models import Article, ArticleComment
 # Create your views here.
 def index(request):
     return render(request, "accounts/index.html")
@@ -47,9 +47,17 @@ def login(request):
 
 def detail(request, pk):
     user = get_user_model().objects.get(pk=pk)
+    article = Article.objects.filter(user=user,category='review')
+    articleComment=ArticleComment.objects.filter(user=user)
+    advice = Article.objects.filter(user=user,category='advice')
+    
     context = {
         "user": user,
+        'article': article,
+        'articleComment': articleComment,
+        'advice': advice,
     }
+
     return render(request, "accounts/detail.html", context)
 
 

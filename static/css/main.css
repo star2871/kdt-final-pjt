@@ -64,7 +64,7 @@ header section h1 a {
 }
 
 header section .btn-menu {
-  background: url('../img/menu.png') 50% 50% no-repeat;
+  background: url('../img/menu.svg') 50% 50% no-repeat;
   background-size: 24px auto;
   text-indent: -9999px;
   border: none;
@@ -90,6 +90,18 @@ header ul li {
 header ul li:hover {
   color: #feffff;
   opacity: 1;
+}
+
+.gif-icon {
+  width: 48px;
+  height: 24px;
+  color: #0061FF;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+  background-image: url('../img/ico_now_moving.gif');
+  background-size: 31px;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 @media (min-width: 1024px) {
