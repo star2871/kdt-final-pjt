@@ -95,18 +95,18 @@ def country_detail_view(request, country_code):
     #     'exchange_code' : exchange_code,
     # }
     # 실시간 나라별 현지 시간
-    한국 = datetime.now(timezone('Asia/Seoul')).strftime('%Y/%m/%d %p %I:%M:%S')
+    한국 = datetime.now(timezone('Asia/Seoul')).strftime('%I:%M:%S')
     country_time1 = []
     country_time2 = []
     if country_code == 'US':
-        country_time1 = ['LA시간', datetime.now(timezone('America/Los_Angeles')).strftime('%Y/%m/%d %p %I:%M:%S')]
-        country_time2 = ['뉴욕시간', datetime.now(timezone('America/Atikokan')).strftime('%Y/%m/%d %p %I:%M:%S')]
+        country_time1 = ['LA시간', datetime.now(timezone('America/Los_Angeles')).strftime('%I:%M:%S')]
+        country_time2 = ['뉴욕시간', datetime.now(timezone('America/Atikokan')).strftime('%I:%M:%S')]
     elif country_code == 'GB':   
-        country_time1 = ['영국시간', datetime.now(timezone('Atlantic/Reykjavik')).strftime('%Y/%m/%d %p %I:%M:%S')]
+        country_time1 = ['영국시간', datetime.now(timezone('Atlantic/Reykjavik')).strftime('%I:%M:%S')]
     elif country_code == 'JP':
-        country_time1 = ['일본시간', datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %p %I:%M:%S')]
+        country_time1 = ['일본시간', datetime.now(timezone('Asia/Tokyo')).strftime('%I:%M:%S')]
     elif country_code == 'AU':
-        country_time1 = ['호주시간', datetime.now(timezone('Australia/ACT')).strftime('%Y/%m/%d %p %I:%M:%S')]
+        country_time1 = ['호주시간', datetime.now(timezone('Australia/ACT')).strftime('%I:%M:%S')]
 
     
     
