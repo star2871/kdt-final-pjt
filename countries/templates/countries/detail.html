@@ -358,28 +358,29 @@
       <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 165px;">
         <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
           <!-- 일본 시계-->
+          <p class='country-code'>{{country.country_code}}</p>
           <div class="layer-intro" id="pic-JP">
-           일본시간| <h5 class="clock-JP"></h5>
+            <h5 class="clock-JP clock"></h5>
           </div>
           <!-- 스페인 시계-->
           <div class="layer-intro" id="pic-ES">
-           스페인시간| <h5 class="clock-ES"></h5>
+           <h5 class="clock-ES clock"></h5>
           </div>
           <!-- LA 시계-->
           <div class="layer-intro" id="pic-LA">
-          LA시간| <h5 class="clock-LA"></h5>
+           <h5 class="clock-LA clock"></h5>
           </div>
           <!-- 뉴욕 시계-->
           <div class="layer-intro" id="pic-NY">
-          뉴욕시간| <h5 class="clock-NY"></h5>
+            <h5 class="clock-NY clock"></h5>
           </div>
           <!-- 영국 시계-->
           <div class="layer-intro" id="pic-GB">
-          영국시간| <h5 class="clock-GB"></h5>
+           <h5 class="clock-GB clock"></h5>
           </div>
           <!-- 호주 시계-->
           <div class="layer-intro" id="pic-AU">
-          호주시간| <h5 class="clock-AU"></h5>
+            <h5 class="clock-AU clock"></h5>
           </div>
           <br> 
         </div>
@@ -412,6 +413,23 @@
 
 <script>
   // clock-kr 클래스를 clock_kr 변수에 저장
+  const time = document.querySelector('.country-code').innerText
+  if (time == 'JP') {
+    document.querySelector('.clock-JP').style.display = 'block'
+  }
+  else if (time == 'ES') {
+    document.querySelector('.clock-ES').style.display = 'block'
+  }
+  else if (time == 'US') {
+    document.querySelector('.clock-LA').style.display = 'block'
+    document.querySelector('.clock-NY').style.display = 'block'
+  }
+  else if (time == 'GB') {
+    document.querySelector('.clock-GB').style.display = 'block'
+  }
+  else if (time == 'AU') {
+    document.querySelector('.clock-AU').style.display = 'block'
+  }
 var clock_JP = document.querySelector(".clock-JP");
 var clock_ES = document.querySelector(".clock-ES");
 var clock_LA = document.querySelector(".clock-LA");
