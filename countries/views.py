@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import Country, Country_news
+from .models import Country, Country_news, Festival
 import requests
 from datetime import datetime
 from pytz import timezone
 def index(request):
     countries = Country.objects.all()
-    return render(request, 'countries/index.html', {'countries': countries})
+    return render(request, 'countries/index.html', {'countries': countries,})
 
 def country_detail_view(request, country_code):
     # 날씨
@@ -110,9 +110,9 @@ def country_detail_view(request, country_code):
 
     
     
-    
+    festivals = Festival.objects.all()
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather,'country_time1':country_time1,'한국':한국, 'country_time2' : country_time2, })
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2,'weather':weather,'country_time1':country_time1,'한국':한국, 'country_time2' : country_time2, 'festivals': festivals})
     # 'headers': headers, 'exchange': exchange, 'exchange_code': exchange_code,
