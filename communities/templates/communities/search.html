@@ -93,11 +93,11 @@
     <div class="card-body p-3" style="height: 131px;">
       <!-- 글작성자 -->
       <p style="font-size: 13px; font-weight: 400; margin-bottom: 4px;">
-        <a class="non_a" href="{% url 'accounts:profile' article.user.pk %}">{{ article.user }}</a> <span>|
+        <a class="non_a" href="{% url 'accounts:detail' article.user.pk %}">{{ article.user }}</a> <span>|
           {{ article.created_at|date:'Y.m.d' }}</span>
       </p>
       <!-- 카드 타이틀 -->
-      <a href="{% url 'articles:detail' article.pk %}" class="non_a"
+      <a href="{% url 'communities:detail' article.country article.pk %}" class="non_a"
         style="font-size:1.2rem; font-weight:600; min-height: 1.5rem; text-overflow: ellipsis; overflow: hidden; word-break: break-word; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical">
         {{ article.title }}
       </a>
