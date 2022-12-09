@@ -4,6 +4,6 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 class CountryAdmin(SummernoteModelAdmin):
-    summernote_fields = ('status',)
+    summernote_fields = ('',)
 
 admin.site.register(Country, CountryAdmin)

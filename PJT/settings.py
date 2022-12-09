@@ -174,4 +174,5 @@ SUMMERNOTE_CONFIG = {
         ['view', ['codeview', 'help']],
     ],
 }
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'

@@ -340,45 +340,46 @@
                 let date = displayedAt(response.data.comments_data[i].created_at)
                 commentList.insertAdjacentHTML('beforeend',
                     `<div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
-                                            <div class="comment-user">
-                                                <div class="comment-img-div">
-                                                    <img src="${response.data.comments_data[i].img_url}" alt="프사 없을 시 사진"
-                                                        class="comment-profile-img">
-                                                </div>
-                                            </div>
-                                            <div class="comment-main">
-                                                <div class="comment-user-date">
-                                                    <p style="font-weight: 400;">${response.data.comments_data[i].nick_name}</p>
-                                                    <p class="comment-date">
-                                                        ${date}
-                                                    </p>
-                                                </div>
-                                                <p id="comment-${response.data.comments_data[i].comment_pk}-update-hide">${response.data.comments_data[i].content}</p>
-                                                <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="update-form">
-                                                    <textarea id="comment-${response.data.comments_data[i].comment_pk}-update-content"
-                                                        type="text">${response.data.comments_data[i].content}</textarea>
-                                                    <div class="buttons-update">
-                                                        <button id="comment-${response.data.comments_data[i].comment_pk}-update-cancel" data-comment-id="${response.data.comments_data[i].comment_pk}"
-                                                            onclick="updateCommentCancel(this.id)">취소</button>
-                                                        <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="update-comment"
-                                                            data-article-id="${response.data.comments_data[i].article_id}" data-comment-id="${response.data.comments_data[i].comment_pk}"
-                                                            onclick="updateComment(this.id)">작성
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`)
+                        <div class="comment-user">
+                            <div class="comment-img-div">
+                                <img src="${response.data.comments_data[i].img_url}" alt="프사 없을 시 사진"
+                                    class="comment-profile-img">
+                            </div>
+                        </div>
+                        <div class="comment-main">
+                            <div class="comment-user-date">
+                                <p style="font-weight: 400;">${response.data.comments_data[i].nick_name}</p>
+                                <p class="comment-date">
+                                    ${date}
+                                </p>
+                            </div>
+                            <p id="comment-${response.data.comments_data[i].comment_pk}-update-hide">${response.data.comments_data[i].content}</p>
+                            <div id="comment-${response.data.comments_data[i].comment_pk}-update-form" class="update-form">
+                                <textarea id="comment-${response.data.comments_data[i].comment_pk}-update-content"
+                                    type="text">${response.data.comments_data[i].content}</textarea>
+                                <div class="buttons-update">
+                                    <button id="comment-${response.data.comments_data[i].comment_pk}-update-cancel" data-comment-id="${response.data.comments_data[i].comment_pk}"
+                                        onclick="updateCommentCancel(this.id)">취소</button>
+                                    <button id="comment-${response.data.comments_data[i].comment_pk}-update-btn" class="update-comment"
+                                        data-article-id="${response.data.comments_data[i].article_id}" data-comment-id="${response.data.comments_data[i].comment_pk}"
+                                        onclick="updateComment(this.id)">작성
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`)
                 // 수정, 삭제 버튼 넣을 row
                 if (response.data.comments_data[i].request_user_pk === response.data.comments_data[i].user_pk) {
                     const commentRow = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-row`)
-                    commentRow.insertAdjacentHTML('beforeend', `<div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
-                                            <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
-                                                data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
-                                            </button>
-                                            <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-article-id="${response.data.comments_data[i].article_id}"
-                                                data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
-                                            </button>
-                                        </div>`)
+                    commentRow.insertAdjacentHTML('beforeend', 
+                    `<div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
+                        <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
+                            data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
+                        </button>
+                        <button id="comment-${response.data.comments_data[i].comment_pk}-delete" data-article-id="${response.data.comments_data[i].article_id}"
+                            data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
+                        </button>
+                    </div>`)
                 }
                 commentForm.reset();
             }
