@@ -12,6 +12,7 @@ from django.forms import modelformset_factory
 from django.contrib import messages
 from django.http import JsonResponse
 import json
+from django.db.models import Q
 
 creds_filename = 'credentials.json'
 
@@ -454,3 +455,16 @@ def calendar(request):
     print('Event created: %s' % (event.get('htmlLink')))
 
     return render(request, 'communities/test.html')
+
+def search(request):
+    keyword = request.GET.get("keyword", "")  # 검색어
+
+    if keyword:
+        articles = Article.objects.filter(
+            Q(title__icontains=keyword) | Q(content__icontains=keyword)
+        ).distinct()
+        context = {
+            "articles": articles,
+            "keyword": keyword,
+        }
+        return render(request, "communities/search.html", context)
