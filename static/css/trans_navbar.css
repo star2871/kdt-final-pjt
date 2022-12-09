@@ -495,3 +495,6 @@ body .mobile-search-comp .search-inner .search-bg .bg-lt {
 /* .mobile-search-comp.is--open {
   display: none;
 } */
+.clock {
+  display: none;
+}

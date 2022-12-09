@@ -538,3 +538,7 @@ span,
 .sub-comment-list .comment-wrapper {
     min-height: 0;
 }
+
+.red {
+    color: red;
+}
