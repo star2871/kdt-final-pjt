@@ -105,51 +105,80 @@ def article_comment_create(request, article_pk, country_code):
         comment.user = request.user
         comment.article = article
         comment.save()
-
-        comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
-        comments_data = []
-        for co in comments:
-
+        
+    comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+    
+    comments_data = []
+    for co in comments:
+        # 부모 댓글이 없는 댓글만
+        if co.parent_id == None:
             img = f'/media/{co.user.profile_image}'
-
-            if img == '/media/':
-                comments_data.append(
-                    {
-                        'created_string':co.created_string,
-                        'request_user_pk': request.user.pk,
-                        'comment_pk': co.pk,
-                        'user_pk': co.user.pk,
-                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
-                        'nick_name':co.user.nick_name,
-                        'content': co.content,
-                        'created_at': co.created_at,
-                        'updated_at': co.updated_at,
-                        'article_id': co.article_id,
-                        'parent': co.parent_id,
-                        'secret': co.secret,
-                        'like': co.like.count(),
+            # 대댓글
+            sub_comments = co.articlecomment_set.all()
+            
+            sub_comments_data = []
+            if len(sub_comments):
+                for sub in sub_comments:
+                    sub_img = f'/media/{sub.user.profile_image}'
+                    sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
                     })
-            else:
+                    
                 comments_data.append(
                     {
                         'created_string': co.created_string,
                         'request_user_pk': request.user.pk,
                         'comment_pk': co.pk,
                         'user_pk': co.user.pk,
-                        'img_url':img,
+                        'img_url': img,
                         'nick_name':co.user.nick_name,
                         'content': co.content,
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
+                        'sub_comments_data' : sub_comments_data
                     })
+            else:
+                    comments_data.append(
+                        {
+                            'created_string': co.created_string,
+                            'request_user_pk': request.user.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url': img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'updated_at': co.updated_at,
+                            'article_id': co.article_id,
+                            'secret': co.secret,
+                            'like': co.like.count(),
+                        })
+    if comments[0].parent:
+        recent_comment = comments[0].parent.pk
+        print(recent_comment)
         context = {
-            'comments_data': comments_data
+            "comments_data" : comments_data,
+            "recent_comment" : recent_comment     
         }
-        return JsonResponse(context)
+    
+    else:
+        context = {
+            'comments_data': comments_data,
+        }
+    return JsonResponse(context)
 
 ## 댓글 수정
 def article_comment_update(request, article_pk, comment_pk, country_code):
@@ -161,28 +190,32 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
 
         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
         comments_data = []
-        for co in comments:
-
+        comments_data = []
+    for co in comments:
+        # 부모 댓글이 없는 댓글만
+        if co.parent_id == None:
             img = f'/media/{co.user.profile_image}'
-
-            if img == '/media/':
-                comments_data.append(
-                    {
-                        'created_string': co.created_string,
-                        'request_user_pk': request.user.pk,
-                        'comment_pk': co.pk,
-                        'user_pk': co.user.pk,
-                        'img_url': 'https://dummyimage.com/48x48/ededed/0011ff',
-                        'nick_name': co.user.nick_name,
-                        'content': co.content,
-                        'created_at': co.created_at,
-                        'updated_at': co.updated_at,
-                        'article_id': co.article_id,
-                        'parent': co.parent_id,
-                        'secret': co.secret,
-                        'like': co.like.count(),
+            # 대댓글
+            sub_comments = co.articlecomment_set.all()
+            
+            sub_comments_data = []
+            if len(sub_comments):
+                for sub in sub_comments:
+                    sub_img = f'/media/{sub.user.profile_image}'
+                    sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
                     })
-            else:
+                    
                 comments_data.append(
                     {
                         'created_string': co.created_string,
@@ -190,19 +223,44 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
                         'comment_pk': co.pk,
                         'user_pk': co.user.pk,
                         'img_url': img,
-                        'nick_name': co.user.nick_name,
+                        'nick_name':co.user.nick_name,
                         'content': co.content,
                         'created_at': co.created_at,
                         'updated_at': co.updated_at,
                         'article_id': co.article_id,
-                        'parent': co.parent_id,
                         'secret': co.secret,
                         'like': co.like.count(),
+                        'sub_comments_data' : sub_comments_data
                     })
+            else:
+                    comments_data.append(
+                        {
+                            'created_string': co.created_string,
+                            'request_user_pk': request.user.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url': img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'updated_at': co.updated_at,
+                            'article_id': co.article_id,
+                            'secret': co.secret,
+                            'like': co.like.count(),
+                        })
+    if comments[0].parent:
+        recent_comment = comments[0].parent.pk
+        print(recent_comment)
         context = {
-            'comments_data': comments_data
+            "comments_data" : comments_data,
+            "recent_comment" : recent_comment     
         }
-        return JsonResponse(context)
+    
+    else:
+        context = {
+            'comments_data': comments_data,
+        }
+    return JsonResponse(context)
 
 
 ## 댓글 삭제
@@ -273,80 +331,75 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
     
     comments_data = []
     for co in comments:
-        img = f'/media/{co.user.profile_image}'
-        sub_comments = co.articlecomment_set.all()
-        
-        sub_comments_data = []
-        if len(sub_comments):
-            print(sub_comments)
-            for sub in sub_comments:
-                sub_img = f'/media/{sub.user.profile_image}'
-                sub_comments_data.append({
-                            'created_string':sub.created_string,
+        # 부모 댓글이 없는 댓글만
+        if co.parent_id == None:
+            img = f'/media/{co.user.profile_image}'
+            # 대댓글
+            sub_comments = co.articlecomment_set.all()
+            
+            sub_comments_data = []
+            if len(sub_comments):
+                for sub in sub_comments:
+                    sub_img = f'/media/{sub.user.profile_image}'
+                    sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
+                    })
+                    
+                comments_data.append(
+                    {
+                        'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url': img,
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'updated_at': co.updated_at,
+                        'article_id': co.article_id,
+                        'secret': co.secret,
+                        'like': co.like.count(),
+                        'sub_comments_data' : sub_comments_data
+                    })
+            else:
+                    comments_data.append(
+                        {
+                            'created_string': co.created_string,
                             'request_user_pk': request.user.pk,
-                            'comment_pk': sub.pk,
-                            'user_pk': sub.user.pk,
-                            'img_url': sub_img,
-                            'nick_name':sub.user.nick_name,
-                            'content': sub.content,
-                            'created_at': sub.created_at,
-                            'updated_at': sub.updated_at,
-                            'article_id': sub.article_id,
-                            'parent': sub.parent.pk                    
-                })
-
-            comments_data.append(
-                {
-                    'created_string': co.created_string,
-                    'request_user_pk': request.user.pk,
-                    'comment_pk': co.pk,
-                    'user_pk': co.user.pk,
-                    'img_url': img,
-                    'nick_name':co.user.nick_name,
-                    'content': co.content,
-                    'created_at': co.created_at,
-                    'updated_at': co.updated_at,
-                    'article_id': co.article_id,
-                    'secret': co.secret,
-                    'like': co.like.count(),
-                    'sub_comments_data' : sub_comments_data
-                })
-        else:
-            comments_data.append(
-                {
-                    'created_string': co.created_string,
-                    'request_user_pk': request.user.pk,
-                    'comment_pk': co.pk,
-                    'user_pk': co.user.pk,
-                    'img_url': img,
-                    'nick_name':co.user.nick_name,
-                    'content': co.content,
-                    'created_at': co.created_at,
-                    'updated_at': co.updated_at,
-                    'article_id': co.article_id,
-                    'secret': co.secret,
-                    'like': co.like.count(),
-                })
-    context = {
-        'comments_data': comments_data
-    }
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url': img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'updated_at': co.updated_at,
+                            'article_id': co.article_id,
+                            'secret': co.secret,
+                            'like': co.like.count(),
+                        })
+    if comments[0].parent:
+        recent_comment = comments[0].parent.pk
+        print(recent_comment)
+        context = {
+            "comments_data" : comments_data,
+            "recent_comment" : recent_comment     
+        }
+    
+    else:
+        context = {
+            'comments_data': comments_data,
+        }
     return JsonResponse(context)
-
-## 비동기 아닌 대댓글 생성
-## 비동기 아닌 대댓글 생성
-# def article_sub_comment_create(request, article_pk, country_code, comment_pk):
-#     article = get_object_or_404(Article, pk=article_pk)
-#     parent = ArticleComment.objects.get(pk=comment_pk)
-#     comments = article.articlecomment_set.order_by("-pk")
-#     comment_form = ArticleCommentForm(request.POST)
-#     if comment_form.is_valid():
-#         comment = comment_form.save(commit=False)
-#         comment.article = article
-#         comment.user = request.user
-#         comment.parent = parent
-#         comment.save()
-#         return redirect("communities:detail", country_code, article_pk)
-#     return redirect("communities:detail", country_code, article_pk)
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
