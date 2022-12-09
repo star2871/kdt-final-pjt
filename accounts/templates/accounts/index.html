@@ -3,7 +3,7 @@
 {% block body %}
 <h1>{{ user }}</h1>
 {% if request.user.is_authenticated %}
-<span>{{ request.user }}</span>
+<a href="{% url 'accounts:detail' user.pk %}"><span>{{ request.user }}</span></a>
 <a href="{% url 'accounts:logout' %}">로그아웃</a>
 {% else %}
 <a href="{% url 'accounts:login' %}">로그인</a>
