@@ -95,7 +95,7 @@ header section .search-icn2 {
   }
 
   .search-result {
-    padding-top: 325px;
+    padding-top: 200px;
   }
 }
 
@@ -137,7 +137,7 @@ header ul li:hover {
 
 @media (min-width: 1024px) {
   header.scroll {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
