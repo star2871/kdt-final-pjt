@@ -91,6 +91,59 @@
     </div>
     <div class="modal-overlay"></div>
   </div>
+  <div class="mobile-search-comp is--open" style="height: 180px; box-shadow: 10px 20px 30px 0 rgb(92 95 112 / 10%)">
+    <div class="search-inner">
+      <div class="search-input">
+        <form action="{% url 'communities:search' %}" method="">
+          {% csrf_token %}
+          <input type="text" name="keyword" placeholder="검색어를 입력해주세요.">
+        </form>
+        <!---->
+      </div>
+      <div class="search-bg">
+        <div class="bg-dk">
+          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+              <defs>
+                <linearGradient id="circle-gradient03">
+                  <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
+                  <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
+            </svg></div>
+          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+              <defs>
+                <linearGradient id="circle-gradient04">
+                  <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
+                  <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
+            </svg></div>
+        </div>
+        <div class="bg-lt">
+          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+              <defs>
+                <linearGradient id="circle-gradient03">
+                  <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
+                  <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
+            </svg></div>
+          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+              <defs>
+                <linearGradient id="circle-gradient04">
+                  <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
+                  <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
+            </svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <ul class="list-group">
     <li class="list-group-item">메인</li>
     <li class="list-group-item">커뮤니티</li>
@@ -107,6 +160,10 @@
 
     document.querySelector('.modal-overlay').addEventListener('click', function () {
       document.querySelector('.search-comp').classList.remove('is--open')
+    })
+
+    document.querySelector('.search-icn2').addEventListener('click', function () {
+      document.querySelector('.mobile-search-comp').classList.toggle('is--open')
     })
   </script>
 
@@ -158,7 +215,7 @@
       document.querySelector('.list-group').classList.toggle('show')
     })
   </script>
-  <script>
+  <!-- <script>
     // 스크롤 시 헤더 색상 변경
     const header = document.querySelector('header');
 
@@ -170,7 +227,7 @@
         header.classList.remove('scroll');
       }
     }
-  </script>
+  </script> -->
   <script>
     // 소식 스크롤링
     document.addEventListener('DOMContentLoaded', () => {
