@@ -717,6 +717,13 @@
 
                 commentList.textContent = "";
 
+                // 비동기 삭제 후 댓글이 하나도 없을 경우
+                if (response.data.comments === false) {
+                    commentList.insertAdjacentHTML('beforeend', `
+                    <span id="comment-none">작성된 댓글이 없습니다.</span>`)
+                }
+                return
+
                 for (let i = 0; i < response.data.comments_data.length; i++) {
                     let date = displayedAt(response.data.comments_data[i].created_at)
                     commentList.insertAdjacentHTML('beforeend', `
