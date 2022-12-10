@@ -80,7 +80,7 @@
         </form>
         <!-- 댓글 영역 -->
         <a name="comment" class="comment-section">
-            <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
+            <span><span style="color: #428ce8;" class="comment_count">{{ comment_count }}</span>개의 댓글</span>
             <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
                 {% for comment in comments %}
                 {% if not comment.parent_id %}
@@ -143,7 +143,6 @@
                         <!-- 이 댓글을 참조하고 있는 모든 대댓글을 순회 -->
                         <div id="comment-{{ comment.pk }}-sub-comments-section">
                             {% for sub_comment in comment.articlecomment_set.all %}
-                            <span>{{ sub_comment.pk }}</span>
                             <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
                                 <div class="comment-wrapper" id="comment-{{ sub_comment.pk }}-wrapper">
                                     <div class="comment-user">
@@ -333,6 +332,9 @@
 
             commentList.textContent = "";
 
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
+
             for (let i = 0; i < response.data.comments_data.length; i++) {
                 let date = displayedAt(response.data.comments_data[i].created_at)
                 commentList.insertAdjacentHTML('beforeend', `
@@ -516,8 +518,7 @@
         btNs.style.display = "";
     }
 
-
-
+    // 댓글 수정
     const updateComment = function (e) {
         const commentValue = document.querySelector(`#comment-${event.target.dataset.commentId}-update-content`).value;
         const pk = event.target.dataset.articleId;
@@ -541,6 +542,9 @@
             const commentList = document.querySelector(`#comment-list-${pk}`)
 
             commentList.textContent = "";
+
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
 
             for (let i = 0; i < response.data.comments_data.length; i++) {
                 let date = displayedAt(response.data.comments_data[i].created_at)
@@ -721,8 +725,13 @@
                 if (!response.data.comments_data.length) {
                     commentList.insertAdjacentHTML('beforeend', `
                     <span id="comment-none">작성된 댓글이 없습니다.</span>`)
+                    const commentCount = document.querySelector('.comment_count')
+                    commentCount.innerText = 0
                     return
                 }
+
+                const commentCount = document.querySelector('.comment_count')
+                commentCount.innerText = response.data.comments_data.length
 
                 for (let i = 0; i < response.data.comments_data.length; i++) {
                     let date = displayedAt(response.data.comments_data[i].created_at)
@@ -917,17 +926,19 @@
             const commentList = document.querySelector(`#comment-list-${articlePk}`)
 
             commentList.textContent = "";
-            console.log(parentPk, response.data.parents_set)
-            /* const parentNum = Number(parentPk)
+            /* console.log(parentPk, response.data.parents_set)
+            const parentNum = Number(parentPk)
 
             console.log(typeof arr[0], typeof parentPk)
             if (!response.data.parents_set.includes(parentNum)) {
                 alert("삭제된 댓글입니다.")
                 console.log("hi")
             } */
+
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
+
             for (let i = 0; i < response.data.comments_data.length; i++) {
-
-
                 let date = displayedAt(response.data.comments_data[i].created_at)
                 commentList.insertAdjacentHTML('beforeend', `
                     <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
@@ -1078,6 +1089,8 @@
 
         })
     }
+
+
 
 
 

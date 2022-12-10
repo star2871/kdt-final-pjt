@@ -55,12 +55,19 @@ def review_create(request, country_code):
 def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.articlecomment_set.order_by("-pk")
+    comment_count = 0
+    
+    for comment in comments:
+        if comment.parent_id == None:
+            comment_count += 1
+            
     comment_form = ArticleCommentForm()
     context = {
         'article': article,
         'country_code': country_code,
         'comments' : comments,
         'comment_form': comment_form,
+        'comment_count': comment_count,
     }
     return render(request, 'communities/detail.html', context)
 
