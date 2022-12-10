@@ -144,36 +144,10 @@
       .querySelector('[name=csrfmiddlewaretoken]')
       .value;
 
-    // 피드 생성 창 띄우기
-    // 피드 생성 창 띄우기
-    const getCreateFeed = function (e) {
-      const createFeedForm = document.querySelector(`#${e}-form`);
-      createFeedForm
-        .classList
-        .toggle(`d-none`);
-    }
-
-    // 피드 생성
-    // 피드 생성
-    const createFeed = function (e) {
-      event.preventDefault();
-      const feedForm = document.querySelector(`#${e}`);
-      const pk = event.target.dataset.articleId;
-      axios({
-        method: 'post',
-        url: `/communities/${conPK}/feed/feed_create`,
-        headers: {
-          'X-CSRFToken': csrftoken
-        },
-        data: new FormData(feedForm)
-      }).then(response => {
-        console.log(response)
-
-        const feedList = document.querySelector(`#feed-list`)
-
-        feedList.textContent = "";
-
-        for (let i = 0; i < response.data.feeds_data.length; i++) {
+    //비동기로 그려줄 피드 리스트
+    //비동기로 그려줄 피드 리스트
+    function crateFeedList(response, feedList){
+      for (let i = 0; i < response.data.feeds_data.length; i++) {
           let date = displayedAt(response.data.feeds_data[i].created_at)
           if (response.data.feeds_data[i].request_user_pk === response.data.feeds_data[i].user_pk) {
             feedList.insertAdjacentHTML('beforeend', `
@@ -250,6 +224,38 @@
             </div>`);
           }
         }
+      return
+    }
+
+
+    // 피드 생성 창 띄우기
+    // 피드 생성 창 띄우기
+    const getCreateFeed = function (e) {
+      const createFeedForm = document.querySelector(`#${e}-form`);
+      createFeedForm
+        .classList
+        .toggle(`d-none`);
+    }
+
+
+    // 피드 생성
+    // 피드 생성
+    const createFeed = function (e) {
+      event.preventDefault();
+      const feedForm = document.querySelector(`#${e}`);
+      const pk = event.target.dataset.articleId;
+      axios({
+        method: 'post',
+        url: `/communities/${conPK}/feed/feed_create`,
+        headers: {
+          'X-CSRFToken': csrftoken
+        },
+        data: new FormData(feedForm)
+      }).then(response => {
+        console.log(response)
+        const feedList = document.querySelector(`#feed-list`)
+        feedList.textContent = "";
+        crateFeedList(response, feedList)
       })
     }
 
@@ -265,95 +271,16 @@
               'X-CSRFToken': csrftoken
           }
         }).then(response => {
-
           console.log(response)
-
           const feedList = document.querySelector(`#feed-list`)
-
           feedList.textContent = "";
-
-          for (let i = 0; i < response.data.feeds_data.length; i++) {
-            let date = displayedAt(response.data.feeds_data[i].created_at)
-            if (response.data.feeds_data[i].request_user_pk === response.data.feeds_data[i].user_pk) {
-            feedList.insertAdjacentHTML('beforeend', `
-            <div class="feed-row" id="feed-${response.data.feeds_data[i].feed_pk}-row">
-              <div class="feed-wrapper">
-                <div class="feed-user">
-                  <div class="feed-img-div">
-                    <img src="${response.data.feeds_data[i].img_url}" alt="" class="feed-profile-img">
-                  </div>
-                </div>
-                  <div class="feed-main">
-                    <div class="feed-user-date">
-                      <p style="font-weight: 400;">${response.data.feeds_data[i].nick_name}</p>
-                      <p class="feed-date">
-                        ${date}
-                      </p>
-                    </div>
-                      <p id="feed-${response.data.feeds_data[i].feed_pk}-update-hide">${response.data.feeds_data[i].content}</p>
-                      <div id="feed-${response.data.feeds_data[i].feed_pk}-update-form" class="update-form">
-                        <textarea id="feed-${response.data.feeds_data[i].feed_pk}-update-content"
-                          type="text">${response.data.feeds_data[i].content}</textarea>
-                        <div class="buttons-update">
-                          <button id="feed-${response.data.feeds_data[i].feed_pk}-update-cancel"
-                            data-feed-id="${response.data.feeds_data[i].feed_pk}"
-                            onclick="updateFeedCancel(this.id)">취소</button>
-                          <button id="feed-${response.data.feeds_data[i].feed_pk}-update-btn" class="update-feed"
-                            data-feed-id="${response.data.feeds_data[i].feed_pk}"
-                            onclick="updateFeed(this.id)">작성
-                          </button>
-                        </div>
-                      </div>
-                  </div>
-                  <button id="feed-${response.data.feeds_data[i].feed_pk}" class="feed-comment-btn"
-                    onclick="getCreateFeed(this.id)">답글달기</button>
-                  <div id="feed-${response.data.feeds_data[i].feed_pk}-update-buttons" class="buttons">
-                    <button id="feed-${response.data.feeds_data[i].feed_pk}-update"
-                      data-feed-id="${response.data.feeds_data[i].feed_pk}" onclick="getUpdateFeed(this.id)">수정
-                    </button>
-                    <button id="feed-${response.data.feeds_data[i].feed_pk}-delete"
-                      data-feed-id="${response.data.feeds_data[i].feed_pk}" onclick="deleteFeed(this.id)">삭제
-                    </button>
-                  </div>
-              </div>
-            </div>`);
-          } else {
-            feedList.insertAdjacentHTML('beforeend', `
-            <div class="feed-row" id="feed-${response.data.feeds_data[i].feed_pk}-row">
-              <div class="feed-wrapper">
-                <div class="feed-user">
-                  <div class="feed-img-div">
-                    <img src="${response.data.feeds_data[i].img_url}" alt="" class="feed-profile-img">
-                  </div>
-                </div>
-                  <div class="feed-main">
-                    <div class="feed-user-date">
-                      <p style="font-weight: 400;">${response.data.feeds_data[i].nick_name}</p>
-                      <p class="feed-date">
-                        ${date}
-                      </p>
-                    </div>
-                      <p id="feed-${response.data.feeds_data[i].feed_pk}-update-hide">${response.data.feeds_data[i].content}</p>
-                  </div>
-                  <button id="feed-${response.data.feeds_data[i].feed_pk}" class="feed-comment-btn"
-                    onclick="getCreateFeed(this.id)">답글달기</button>
-                  <div id="feed-${response.data.feeds_data[i].feed_pk}-update-buttons" class="buttons">
-                    <button id="feed-${response.data.feeds_data[i].feed_pk}-update"
-                      data-feed-id="${response.data.feeds_data[i].feed_pk}" onclick="getUpdateFeed(this.id)">수정
-                    </button>
-                    <button id="feed-${response.data.feeds_data[i].feed_pk}-delete"
-                      data-feed-id="${response.data.feeds_data[i].feed_pk}" onclick="deleteFeed(this.id)">삭제
-                    </button>
-                  </div>
-              </div>
-            </div>`);
-          }
-          }
-        }
-        )
+          crateFeedList(response, feedList)
+        })
       }
     }
 
+    // 피드 수정폼 보이기
+    // 피드 수정폼 보이기
     const getUpdateFeed = function (e) {
         console.log(e)
         const btNs = document.querySelector(`#${e}-buttons`)
@@ -366,133 +293,43 @@
         updateFeedForm.style.display = "block";
     }
 
+    // 피드 수정폼 가리기
+    // 피드 수정폼 가리기
+    const updateFeedCancel = function (e) {
+        const comPk = event.target.dataset.feedId
+        const btNs = document.querySelector(`#feed-${comPk}-update-buttons`)
+        const updateFeedForm = document.querySelector(`#feed-${comPk}-update-form`);
+        const feedContent = document.querySelector(`#feed-${comPk}-update-hide`)
+        const feedBase = document.querySelector(`#feed-${comPk}-update-hide`).innerText
+        const feedUpdateContent = document.querySelector(`#feed-${comPk}-update-content`)
+        feedContent.style.display = "block";
+        updateFeedForm.style.display = "none";
+        btNs.style.display = "";
+    }
+
+    // 피드 수정버튼
+    // 피드 수정버튼
+    const updateFeed = function (e) {
+      const feedValue = document.querySelector(`#feed-${event.target.dataset.feedId}-update-content`).value;
+      const pk = event.target.dataset.feedId;
+      console.log(feedValue, pk)
+      // const baseDisplay = getDisplay()
+      axios({
+        method: 'post',
+        url: `/communities/${conPK}/feed/${pk}/feed_update/`,
+        headers: {
+          'X-CSRFToken': csrftoken
+        },
+        data: {
+          'content': feedValue
+        }
+      }).then(response => {
+        console.log(response)
+        const feedList = document.querySelector(`#feed-list`)
+        feedList.textContent = "";
+        crateFeedList(response, feedList)
+      })
+    }
   </script>
 
 {% endblock %}
-
-<!-- 피드 처음에 쓴거 for 문 안에 넣으면 돌아감 -->
-<div class="review-row">
-  <div class="row">
-    <div class="col-8" style="padding:0">
-      <a style="text-decoration: none; color: rgb(51, 51, 51)">
-        <p id="feed-{{ feed.pk }}-update-hide">{{ feed.content }}</p>
-          <div id="feed-{{ feed.pk }}-update-form" class="update-form">
-            <textarea id="feed-{{ feed.pk }}-update-content"
-              type="text">{{ feed.content }}</textarea>
-            <div class="buttons-update">
-              <button id="feed-{{ feed.pk }}-update-cancel"
-                data-feed-id="{{ feed.pk }}"
-                onclick="updatefeedCancel(this.id)">취소</button>
-              <button id="feed-{{ feed.pk }}-update-btn" class="update-feed"
-                data-article-id="{{ article.pk }}" data-feed-id="{{ feed.pk }}"
-                onclick="updatefeed(this.id)">작성
-              </button>
-            </div>
-          </div>
-      </a>
-      <!-- 닉네임|작성일 -->
-      <!-- 닉네임|작성일 -->
-      <!-- 닉네임|작성일 -->
-      <p class="review-date">{{ feed.user }}|{{ feed.created_at }}</p>
-      {% if user.pk == feed.user_id %}
-        <div id="feed-{{ feed.pk }}-update-buttons" class="buttons">
-            <button id="feed-{{ feed.pk }}-update" data-feed-id="{{ feed.pk }}"
-                onclick="getUpdateFeed(this.id)">수정
-            </button>
-            <button id="feed-{{ feed.pk }}-delete" data-feed-id="{{ feed.pk }}"
-                onclick="deleteFeed(this.id)">삭제
-            </button>
-        </div>
-      {% endif %}
-      <div class="icons-wrapper">
-        <div class="icons">
-          <!-- 좋아요 -->
-          <!-- 좋아요 -->
-          <!-- 좋아요 -->
-          <div class="icon">
-            <span class="material-icons md-18">
-              thumb_up_alt
-            </span>
-            <span>{{ feed.like.count }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-4 review-list">
-      {% if feed.image %}
-        <div>
-          <img class="review-img" src="{{ feed.image.url }}" alt="">
-        </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<!-- 댓글 부분 추가하면 되 sub 빼고 -->
-<div id="subcomment-{{ comment.pk }}-commentlist" data-comment-id="{{ comment.pk }}"
-  class="sub-comment-list">
-  <!-- 이 댓글을 참조하고 있는 모든 대댓글을 순회 -->
-  {% for sub_comment in comment.articlecomment_set.all %}
-  <span>{{ sub_comment.pk }}</span>
-  <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
-    <div class="comment-wrapper">
-      <div class="comment-user">
-        <div class="comment-img-div">
-          <img src="{{ sub_comment.user.profile_image.url }}" alt=""
-            class="comment-profile-img">
-        </div>
-      </div>
-        <div class="comment-main">
-          <div class="comment-user-date">
-            <p style="font-weight: 400;">{{ sub_comment.user.nick_name }}</p>
-            <p class="comment-date">
-              <!-- 작성일자 : ~시간 전 표시 -->
-              {% if comment.created_string == False %}
-              <!-- 7일이 지나면 날짜로 출력 -->
-              {{ comment.created_at | date:'m월 d일' }}
-              {% else %}
-              <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-              {{ comment.created_string }}
-              {% endif %}
-            </p>
-          </div>
-            <p id="comment-{{ sub_comment.pk }}-update-hide">{{ sub_comment.content }}</p>
-            <div id="comment-{{ sub_comment.pk }}-update-form" class="update-form">
-              <textarea id="comment-{{ sub_comment.pk }}-update-content"
-                type="text">{{ sub_comment.content }}</textarea>
-              <div class="buttons-update">
-                <button id="comment-{{ sub_comment.pk }}-update-cancel"
-                  data-comment-id="{{ sub_comment.pk }}"
-                  onclick="updateCommentCancel(this.id)">취소</button>
-                <button id="comment-{{ sub_comment.pk }}-update-btn" class="update-comment"
-                  data-article-id="{{ article.pk }}"
-                  data-comment-id="{{ sub_comment.pk }}"
-                  onclick="updateComment(this.id)">작성
-                </button>
-              </div>
-            </div>
-        </div>
-        {% if user.pk == sub_comment.user_id %}
-        <div id="comment-{{ sub_comment.pk}}-update-buttons" class="buttons">
-          <button id="comment-{{ sub_comment.pk }}-update" data-article-id="{{ article.pk }}"
-            data-comment-id="{{ sub_comment.pk }}" onclick="getUpdateComment(this.id)">수정
-          </button>
-          <button id="comment-{{ sub_comment.pk }}-delete" data-article-id="{{ article.pk }}"
-            data-comment-id="{{ sub_comment.pk }}" onclick="deleteComment(this.id)">삭제
-          </button>
-        </div>
-        {% endif %}
-    </div>
-  </div>
-  {% endfor %}
-  <div id="comment-{{ comment.pk }}-create-sub-comment" class="sub-comment-create">
-    <form id="comment-{{ comment.pk }}-create-sub-comment-form"
-      data-article-id="{{ article.pk }}" data-parent-id="{{ comment.pk }}"
-      data-country-id="{{ country_code }}" onsubmit="submitSubComment(this.id)">
-      <div class="mb-3"><label class="form-label" for="id_content">Content</label><input
-        type="text" name="content" maxlength="150" class="form-control"
-        placeholder="Content" required="" id="id_content"></div>
-      <input type="submit" value="제출">
-    </form>
-  </div>
-</div>

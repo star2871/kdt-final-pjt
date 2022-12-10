@@ -656,6 +656,54 @@ def feed_delete(request, feed_pk, country_code):
         }
         return JsonResponse(context)
     
+
+## 피드 수정
+def feed_update(request, feed_pk, country_code):
+    feed = Feed.objects.get(pk=feed_pk)
+    user = User.objects.get(pk=request.user.pk)
+    if request.user.is_authenticated and user == feed.user:
+        jsonObject = json.loads(request.body)
+        feed = Feed.objects.get(pk=feed_pk)
+        feed.content = jsonObject.get('content')
+        feed.save()
+
+        feeds = Feed.objects.all().order_by('-pk')
+        feeds_data = []
+        for feed in feeds:
+
+            img = f'/media/{feed.user.profile_image}'
+
+            if img == '/media/':
+                feeds_data.append(
+                    {
+                        'created_string':feed.created_string,
+                        'request_user_pk': request.user.pk,
+                        'feed_pk': feed.pk,
+                        'user_pk': feed.user.pk,
+                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
+                        'nick_name': feed.user.nick_name,
+                        'content': feed.content,
+                        'created_at': feed.created_at,
+                        'like': feed.like.count(),
+                    })
+            else:
+                feeds_data.append(
+                    {
+                        'created_string': feed.created_string,
+                        'request_user_pk': request.user.pk,
+                        'feed_pk': feed.pk,
+                        'user_pk': feed.user.pk,
+                        'img_url':img,
+                        'nick_name':feed.user.nick_name,
+                        'content': feed.content,
+                        'created_at': feed.created_at,
+                        'like': feed.like.count(),
+                    })
+        context = {
+            'feeds_data': feeds_data
+        }
+        return JsonResponse(context)
+
 ## 동기식
 # def feed_create(request, country_code):
 #     if request.method == "POST":
