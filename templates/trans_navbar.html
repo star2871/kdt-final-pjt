@@ -29,6 +29,40 @@
           <li><a href="{% url 'countries:detail' country_code %}" style="text-decoration: none;">메인</a></li>
           <li><a href="{% url 'communities:review' country_code %}" style="text-decoration: none;">커뮤니티</a></li>
           <li>내 스케쥴</li>
+                    <li>
+            {% if request.user.is_authenticated %}
+            <div>
+              <a href="{% url 'accounts:detail' request.user.pk %}" style='text-decoration-line:none;'>
+                {% if request.user.profile_image %}
+                  <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;" alt="{{ request.user.profile_image }}">
+                  <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
+                {% else %}
+                  <lord-icon src="https://cdn.lordicon.com/bhfjfgqz.json" trigger="hover" style="width:33px;height:33px"></lord-icon>
+                  <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
+                {% endif %}
+              </a>
+            </div>
+          </li>
+              {% else %}
+              <li>
+                <a href="{% url 'accounts:login' %}" class="font-space me-2" style='text-decoration:none;'>
+                  Login
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'accounts:signup' %}" class="font-space " style='text-decoration:none;'>
+                  Signup
+                </a>
+              </li>
+              {% endif %}
+            
+          
+          {% if request.user.is_authenticated %}
+          <li>
+            <a href="{% url 'accounts:logout' %}" style='text-decoration:none;'>Logout</a>
+          </li>
+          {% endif %}
+        </ul>
         </ul>
       </div>
       <div class="small-menu">
