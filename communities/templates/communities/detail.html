@@ -20,11 +20,7 @@
             <div class="detail-user">
                 <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
                 <div class="detail-img-div">
-                    {% if not article.user.profile_image %}
-                    <img src="https://dummyimage.com/30x30/ededed/0011ff" alt="프사 없을 시 사진" class="profile-img">
-                    {% else %}
-                    <img src="{{ article.user.image.url }}" alt="" class="profile-img">
-                    {% endif %}
+                    <img src="{{ article.user.profile_image.url }}" alt="" class="profile-img">
                 </div>
                 <div class="detail-username">
                     {{ article.user.nick_name }}
