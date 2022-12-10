@@ -34,13 +34,8 @@
             {% if request.user.is_authenticated %}
             <div>
               <a href="{% url 'accounts:detail' request.user.pk %}" style='text-decoration-line:none;'>
-                {% if request.user.profile_image %}
-                  <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;" alt="{{ request.user.profile_image }}">
-                  <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
-                {% else %}
-                  <lord-icon src="https://cdn.lordicon.com/bhfjfgqz.json" trigger="hover" style="width:33px;height:33px"></lord-icon>
-                  <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
-                {% endif %}
+                <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;" alt="{{ request.user.profile_image }}">
+                <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
               </a>
             </div>
           </li>
