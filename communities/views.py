@@ -27,6 +27,13 @@ def review(request, country_code):
     context = {
         "articles": articles,
         "country_code" : country_code,
+        "country" : {
+            "JP" : "일본",
+            "US" : "미국",
+            "AU" : "호주",
+            "ES" : "스페인",
+            "GB" : "영국",            
+        }
     }
     return render(request, 'communities/index.html', context)
 
