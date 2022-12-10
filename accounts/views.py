@@ -20,7 +20,7 @@ def signup(request):
             if form.is_valid():
                 user = form.save()
                 auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect("accounts:index")
+                return redirect("countries:index")
         else:
             form = CustomUserCreationForm()
         context = {"form": form}
@@ -36,7 +36,7 @@ def login(request):
             # login 함수는 request, user 객체를 인자로 받음
             # user 객체는 어디있어요? 바로 form에서 인증된 유저 정보를 받을 수 있음
             auth_login(request, form.get_user())
-            return redirect(request.GET.get("next") or "accounts:index")
+            return redirect(request.GET.get("next") or "countries:index")
     else:
         form = AuthenticationForm()
     context = {
@@ -71,7 +71,7 @@ def list(request):
 
 def logout(request):
     auth_logout(request)
-    return redirect("accounts:index")
+    return redirect("countries:index")
 
 
 @login_required
