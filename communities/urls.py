@@ -18,6 +18,7 @@ urlpatterns = [
     path("<str:country_code>/review/<int:article_pk>/review_detail/<int:comment_pk>/comment_update/", views.article_comment_update, name="comment_update"),
     path("<str:country_code>/review/<int:article_pk>/review_detail/<int:comment_pk>/comment_delete/", views.article_comment_delete, name="comment_delete"),
     path("<str:country_code>/review/<int:article_pk>/review_detail/<int:comment_pk>/sub_comment_create/", views.article_sub_comment_create, name="article_sub_comment_create"),
+    path("<str:country_code>/review/<int:article_pk>/review_detail/<int:comment_pk>/sub_comment_update/", views.article_sub_comment_update, name="article_sub_comment_update"),
     path("test", views.test, name="test"),
     path("search/", views.search, name="search"),
 ]

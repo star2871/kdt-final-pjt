@@ -10,9 +10,10 @@ import datetime
 from googleapiclient.discovery import build
 from django.forms import modelformset_factory
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 import json
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 creds_filename = 'credentials.json'
 
@@ -54,12 +55,19 @@ def review_create(request, country_code):
 def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.articlecomment_set.order_by("-pk")
+    comment_count = 0
+    
+    for comment in comments:
+        if comment.parent_id == None:
+            comment_count += 1
+            
     comment_form = ArticleCommentForm()
     context = {
         'article': article,
         'country_code': country_code,
         'comments' : comments,
         'comment_form': comment_form,
+        'comment_count': comment_count,
     }
     return render(request, 'communities/detail.html', context)
 
@@ -191,7 +199,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
 
         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
         comments_data = []
-        comments_data = []
+        
     for co in comments:
         # 부모 댓글이 없는 댓글만
         if co.parent_id == None:
@@ -272,38 +280,48 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
 
         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
         comments_data = []
-    # delete하고 댓글 수가 있을 때만,
-    if not comments:
-        context = {
-            "comments" : False,
-        }
-        return JsonResponse(context)
-    else:
-        for co in comments:
-            # 부모 댓글이 없는 댓글만
-            if co.parent_id == None:
-                img = f'/media/{co.user.profile_image}'
-                # 대댓글
-                sub_comments = co.articlecomment_set.all()
-                
-                sub_comments_data = []
-                if len(sub_comments):
-                    for sub in sub_comments:
-                        sub_img = f'/media/{sub.user.profile_image}'
-                        sub_comments_data.append({
-                                    'created_string':sub.created_string,
-                                    'request_user_pk': request.user.pk,
-                                    'comment_pk': sub.pk,
-                                    'user_pk': sub.user.pk,
-                                    'img_url': sub_img,
-                                    'nick_name':sub.user.nick_name,
-                                    'content': sub.content,
-                                    'created_at': sub.created_at,
-                                    'updated_at': sub.updated_at,
-                                    'article_id': sub.article_id,
-                                    'parent': sub.parent.pk                    
-                        })
-                        
+    for co in comments:
+        # 부모 댓글이 없는 댓글만
+        if co.parent_id == None:
+            img = f'/media/{co.user.profile_image}'
+            # 대댓글
+            sub_comments = co.articlecomment_set.all()
+            
+            sub_comments_data = []
+            if len(sub_comments):
+                for sub in sub_comments:
+                    sub_img = f'/media/{sub.user.profile_image}'
+                    sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
+                    })
+                    
+                comments_data.append(
+                    {
+                        'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url': img,
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'updated_at': co.updated_at,
+                        'article_id': co.article_id,
+                        'secret': co.secret,
+                        'like': co.like.count(),
+                        'sub_comments_data' : sub_comments_data
+                    })
+            else:
                     comments_data.append(
                         {
                             'created_string': co.created_string,
@@ -318,24 +336,8 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
                             'article_id': co.article_id,
                             'secret': co.secret,
                             'like': co.like.count(),
-                            'sub_comments_data' : sub_comments_data
                         })
-                else:
-                        comments_data.append(
-                            {
-                                'created_string': co.created_string,
-                                'request_user_pk': request.user.pk,
-                                'comment_pk': co.pk,
-                                'user_pk': co.user.pk,
-                                'img_url': img,
-                                'nick_name':co.user.nick_name,
-                                'content': co.content,
-                                'created_at': co.created_at,
-                                'updated_at': co.updated_at,
-                                'article_id': co.article_id,
-                                'secret': co.secret,
-                                'like': co.like.count(),
-                            })
+                    
     context = {
         'comments_data': comments_data,
     }
@@ -345,7 +347,7 @@ def article_comment_delete(request, article_pk, comment_pk, country_code):
 def article_sub_comment_create(request, article_pk, country_code, comment_pk):
     user = User.objects.get(pk=request.user.pk)
     article = get_object_or_404(Article, pk=article_pk)
-    parent = ArticleComment.objects.get(pk=comment_pk)
+    parent = get_object_or_404(ArticleComment, pk=comment_pk)
     comment_form = ArticleCommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
@@ -355,6 +357,10 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
         comment.save()
 
     comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+    parents = comments.values_list('parent_id', flat=True)
+    # print(parents)
+    parents_set = set(list(parents))
+    # print(parents_set)
     
     comments_data = []
     for co in comments:
@@ -414,19 +420,90 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
                             'secret': co.secret,
                             'like': co.like.count(),
                         })
-    if comments[0].parent:
-        recent_comment = comments[0].parent.pk
-        print(recent_comment)
-        context = {
-            "comments_data" : comments_data,
-            "recent_comment" : recent_comment     
-        }
-    
-    else:
-        context = {
-            'comments_data': comments_data,
-        }
+    context = {
+        'comments_data': comments_data,
+        # 'parents_set' : list(parents_set),
+    }
     return JsonResponse(context)
+
+@login_required
+def article_sub_comment_update(request, article_pk, comment_pk, country_code):
+    
+    if not request.user == comment.user:
+        return HttpResponseForbidden()
+    
+    comment = get_object_or_404(ArticleComment, pk=comment_pk)
+    jsonObject = json.loads(request.body)
+    
+    if request.user == comment.user:
+        comment.content = jsonObject('content')
+        comment.save()
+            
+        comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+        comments_data = []
+            
+        for comment in comments:
+            if comment.parent_id == None:
+                img = f'/media/{comment.user.profile_image}'
+                sub_comments = co.articlecomment_set.all()
+                
+                sub_comments_data = []
+                if len(sub_comments):
+                    for sub in sub_comments:
+                        sub_img = f'/media/{sub.user.profile_image}'
+                        sub_comments_data.append({
+                                'created_string':sub.created_string,
+                                'request_user_pk': request.user.pk,
+                                'comment_pk': sub.pk,
+                                'user_pk': sub.user.pk,
+                                'img_url': sub_img,
+                                'nick_name':sub.user.nick_name,
+                                'content': sub.content,
+                                'created_at': sub.created_at,
+                                'updated_at': sub.updated_at,
+                                'article_id': sub.article_id,
+                                'parent': sub.parent.pk                    
+                    })
+                        
+                    comments_data.append(
+                        {
+                            'created_string': co.created_string,
+                            'request_user_pk': request.user.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url': img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'updated_at': co.updated_at,
+                            'article_id': co.article_id,
+                            'secret': co.secret,
+                            'like': co.like.count(),
+                            'sub_comments_data' : sub_comments_data
+                        })
+                            
+                else:
+                    comments_data.append
+                    (
+                        {'created_string': co.created_string,
+                        'request_user_pk': request.user.pk,
+                        'comment_pk': co.pk,
+                        'user_pk': co.user.pk,
+                        'img_url': img,
+                        'nick_name':co.user.nick_name,
+                        'content': co.content,
+                        'created_at': co.created_at,
+                        'updated_at': co.updated_at,
+                        'article_id': co.article_id,
+                        'secret': co.secret,
+                        'like': co.like.count(),
+                        }
+                        )
+        context = {
+            'comments_data' : comments_data,
+        }
+        return JsonResponse(context)
+                            
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
