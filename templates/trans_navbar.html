@@ -26,32 +26,33 @@
             search
           </span></a>
         <ul class="large-menu px-1">
-          <li><a href="{% url 'countries:detail' country_code %}" style="text-decoration: none;">메인</a></li>
-          <li><a href="{% url 'communities:review' country_code %}" style="text-decoration: none;">커뮤니티</a></li>
+          <li><a href="{% url 'countries:index' %}" style="text-decoration: none;">메인</a></li>
+          <li><a href="{% url 'communities:main' %}" style="text-decoration: none;">커뮤니티</a></li>
           <li>내 스케쥴</li>
-                    <li>
+          <li>
             {% if request.user.is_authenticated %}
             <div>
               <a href="{% url 'accounts:detail' request.user.pk %}" style='text-decoration-line:none;'>
-                <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;" alt="{{ request.user.profile_image }}">
+                <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;"
+                  alt="{{ request.user.profile_image }}">
                 <p class="mb-0 ms-2 font-space">{{ request.user }}</p>
               </a>
             </div>
           </li>
-              {% else %}
-              <li>
-                <a href="{% url 'accounts:login' %}" class="font-space me-2" style='text-decoration:none;'>
-                  Login
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'accounts:signup' %}" class="font-space " style='text-decoration:none;'>
-                  Signup
-                </a>
-              </li>
-              {% endif %}
-            
-          
+          {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}" class="font-space me-2" style='text-decoration:none;'>
+              Login
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:signup' %}" class="font-space " style='text-decoration:none;'>
+              Signup
+            </a>
+          </li>
+          {% endif %}
+
+
           {% if request.user.is_authenticated %}
           <li>
             <a href="{% url 'accounts:logout' %}" style='text-decoration:none;'>Logout</a>
@@ -121,8 +122,10 @@
     <div class="modal-overlay"></div>
   </div>
   <ul class="list-group">
-    <li class="list-group-item"><a href="{% url 'countries:detail' country_code %}" style="text-decoration: none; color: rgb(51, 51, 51)">메인</a></li>
-    <li class="list-group-item"><a href="{% url 'communities:review' country_code %}" style="text-decoration: none; color: rgb(51, 51, 51)">커뮤니티</a></li>
+    <li class="list-group-item"><a href="{% url 'countries:index' %}"
+        style="text-decoration: none; color: rgb(51, 51, 51)">메인</a></li>
+    <li class="list-group-item"><a href="{% url 'communities:main' %}"
+        style="text-decoration: none; color: rgb(51, 51, 51)">커뮤니티</a></li>
     <li class="list-group-item">내 스케쥴</li>
   </ul>
 
