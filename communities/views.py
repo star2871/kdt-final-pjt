@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm
 from .models import Article, Country, Feed, FeedImages, ArticleComment
 from accounts.models import User
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
@@ -204,6 +205,20 @@ def article_comment_create(request, article_pk, country_code):
             'comments_data': comments_data,
         }
     return JsonResponse(context)
+
+@login_required
+def article_likes(request, country_code, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    if not request.user == article.user:
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
+            likes = False
+        else:
+            article.like_users.add(request.user)
+            likes = True
+    else:
+        likes = "confirm"
+    return JsonResponse({"likes": likes,})
 
 ## 댓글 수정
 def article_comment_update(request, article_pk, comment_pk, country_code):
