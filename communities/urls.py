@@ -23,4 +23,5 @@ urlpatterns = [
     path("test", views.test, name="test"),
     path("search/", views.search, name="search"),
     path("<str:country_code>/review/<int:article_pk>/review_detail/likes/", views.article_likes, name="article_likes"),
+    path("main/", views.main, name="main"),
 ]
