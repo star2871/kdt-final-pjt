@@ -22,6 +22,15 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 # Create your views here.
 ## 리뷰 파트
 ## 리뷰 인덱스
+def main(request):
+    articles = Article.objects.all()
+
+    context = {
+        'articles': articles
+    }
+
+    return render(request, 'communities/main.html', context)
+
 def review(request, country_code):
     articles = Article.objects.filter(category="review").order_by("-pk")
     context = {
@@ -787,6 +796,7 @@ def calendar(request):
 
 def search(request):
     keyword = request.GET.get("keyword", "")  # 검색어
+    countries = Country.objects.all()
 
     if keyword:
         articles = Article.objects.filter(
@@ -795,5 +805,6 @@ def search(request):
         context = {
             "articles": articles,
             "keyword": keyword,
+            "countries": countries,
         }
         return render(request, "communities/search.html", context)
