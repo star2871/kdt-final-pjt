@@ -62,8 +62,6 @@ span,
     color: white;
     animation: cursor 0.4s ease infinite;
   }
-
-  .animation
   
 @keyframes cursor {
     0%{border-right: 1px solid transparent} 
@@ -322,6 +320,50 @@ span,
 
 .detail-content p img {
     max-width: 100% !important;
+}
+/* 리모컨 */
+
+/* 내려가는 애니메이션 */
+@keyframes slide-1 {
+    0%{
+      transform: translateY(0px)
+    }
+    100%{
+      transform: translateY(50px)
+    }
+  }
+  /* 올라오는 애니메이션 */
+  @keyframes slide-2 {
+    0%{
+      transform: translateY(50px)
+    }
+    100%{
+      transform: translateY(0px)
+    }
+  }
+
+/* 올라올 때 */
+#test {
+    visibility: hidden;
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: white;
+    backdrop-filter: blur(1px);
+}
+
+.fix {
+    position: fixed;
+    animation: slide-2 1s ease
+  }
+
+  /* 내려갈 때 */
+
+  .removed {
+    animation: slide-1 0.5s ease;
+    animation-fill-mode: forwards;
 }
 
 /* 사이드바 */
