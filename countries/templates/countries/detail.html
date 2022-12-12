@@ -229,8 +229,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </section>
 
@@ -306,6 +304,16 @@
           <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin: 70px 0; padding: 0 18px">
+  <div style="margin: 17px auto 0; max-width: 732px;">
+    <div style="text-align: center;">
+      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p><a
+        style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:review' country.country_code %}">커뮤니티</a>
     </div>
   </div>
 </section>
