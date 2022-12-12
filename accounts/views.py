@@ -44,7 +44,7 @@ def login(request):
     }
     return render(request, "accounts/login.html", context)
 
-
+@login_required
 def detail(request, pk):
     user = get_user_model().objects.get(pk=pk)
     articles = Article.objects.filter(user=user,category='review')
@@ -54,6 +54,7 @@ def detail(request, pk):
     context = {
         "user": user,
         'articles': articles,
+
         'articleComment': articleComment,
         'advice': advice,
         'likes_article' : likes_article,
