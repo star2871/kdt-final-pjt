@@ -273,19 +273,15 @@
           <div class="layer-intro" id="pic-ES">
             <h5 class="clock-ES clock"></h5>
           </div>
-          <!-- LA 시계-->
-          <div class="layer-intro" id="pic-LA">
-            <h5 class="clock-LA clock"></h5>
-          </div>
-          <!-- 뉴욕 시계-->
-          <div class="layer-intro" id="pic-NY">
-            <h5 class="clock-NY clock"></h5>
+          <!-- 미국 동부 시계-->
+          <div class="layer-intro" id="pic-US">
+            <h5 class="clock-US clock"></h5>
           </div>
           <!-- 영국 시계-->
           <div class="layer-intro" id="pic-GB">
             <h5 class="clock-GB clock"></h5>
           </div>
-          <!-- 호주 시계-->
+          <!-- 호주 동부 시계-->
           <div class="layer-intro" id="pic-AU">
             <h5 class="clock-AU clock"></h5>
           </div>
@@ -324,8 +320,7 @@
     document.querySelector('.clock-ES').style.display = 'block'
   }
   else if (time == 'US') {
-    document.querySelector('.clock-LA').style.display = 'block'
-    document.querySelector('.clock-NY').style.display = 'block'
+    document.querySelector('.clock-US').style.display = 'block'
   }
   else if (time == 'GB') {
     document.querySelector('.clock-GB').style.display = 'block'
@@ -335,8 +330,7 @@
   }
   var clock_JP = document.querySelector(".clock-JP");
   var clock_ES = document.querySelector(".clock-ES");
-  var clock_LA = document.querySelector(".clock-LA");
-  var clock_NY = document.querySelector(".clock-NY");
+  var clock_US = document.querySelector(".clock-US");
   var clock_GB = document.querySelector(".clock-GB");
   var clock_AU = document.querySelector(".clock-AU");
 
@@ -354,13 +348,9 @@
     const ES_TIME_DIFF = 1 * 60 * 60 * 1000;
     const ES_curr = new Date(utc + ES_TIME_DIFF);
 
-    // UTC to KST LA (UTC - 8시간)
-    const LA_TIME_DIFF = 8 * 60 * 60 * 1000;
-    const LA_curr = new Date(utc - LA_TIME_DIFF);
-
-    // UTC to CET 뉴욕 (UTC - 5시간)
-    const NY_TIME_DIFF = 5 * 60 * 60 * 1000;
-    const NY_curr = new Date(utc - NY_TIME_DIFF);
+    // UTC to CET 미국 동부 시간 (UTC - 5시간)
+    const US_TIME_DIFF = 5 * 60 * 60 * 1000;
+    const US_curr = new Date(utc - US_TIME_DIFF);
 
     // UTC to KST 영국 (UTC)
     const GB_curr = new Date(utc);
@@ -377,12 +367,9 @@
     let ES_hr = ES_curr.getHours();
     let ES_mm = ES_curr.getMinutes();
     let ES_se = ES_curr.getSeconds();
-    let LA_hr = LA_curr.getHours();
-    let LA_mm = LA_curr.getMinutes();
-    let LA_se = LA_curr.getSeconds();
-    let NY_hr = NY_curr.getHours();
-    let NY_mm = NY_curr.getMinutes();
-    let NY_se = NY_curr.getSeconds();
+    let US_hr = US_curr.getHours();
+    let US_mm = US_curr.getMinutes();
+    let US_se = US_curr.getSeconds();
     let GB_hr = GB_curr.getHours();
     let GB_mm = GB_curr.getMinutes();
     let GB_se = GB_curr.getSeconds();
@@ -392,8 +379,7 @@
     //am, pm 표시
     var JP_ampm = JP_hr >= 12 ? "pm" : "am";
     var ES_ampm = ES_hr >= 12 ? "pm" : "am";
-    var LA_ampm = LA_hr >= 12 ? "pm" : "am";
-    var NY_ampm = NY_hr >= 12 ? "pm" : "am";
+    var US_ampm = US_hr >= 12 ? "pm" : "am";
     var GB_ampm = GB_hr >= 12 ? "pm" : "am";
     var AU_ampm = AU_hr >= 12 ? "pm" : "am";
     // 10이하 숫자일때 보기 좋게 숫자 앞에 0 추가
@@ -401,10 +387,8 @@
       `${JP_hr < 10 ? `0${JP_hr}` : JP_hr}:${JP_mm < 10 ? `0${JP_mm}` : JP_mm}:${JP_se < 10 ? `0${JP_se}` : JP_se}`;
     clock_ES.innerHTML =
       `${ES_hr < 10 ? `0${ES_hr}` : ES_hr}:${ES_mm < 10 ? `0${ES_mm}` : ES_mm}:${ES_se < 10 ? `0${ES_se}` : ES_se} `;
-    clock_LA.innerHTML =
-      `${LA_hr < 10 ? `0${LA_hr}` : LA_hr}:${LA_mm < 10 ? `0${LA_mm}` : LA_mm}:${LA_se < 10 ? `0${LA_se}` : LA_se} `;
-    clock_NY.innerHTML =
-      `${NY_hr < 10 ? `0${NY_hr}` : NY_hr}:${NY_mm < 10 ? `0${NY_mm}` : NY_mm}:${NY_se < 10 ? `0${NY_se}` : NY_se} `;
+    clock_US.innerHTML =
+      `${US_hr < 10 ? `0${US_hr}` : US_hr}:${US_mm < 10 ? `0${US_mm}` : US_mm}:${US_se < 10 ? `0${US_se}` : US_se} `;
     clock_GB.innerHTML =
       `${GB_hr < 10 ? `0${GB_hr}` : GB_hr}:${GB_mm < 10 ? `0${GB_mm}` : GB_mm}:${GB_se < 10 ? `0${GB_se}` : GB_se} `;
     clock_AU.innerHTML =
@@ -414,8 +398,7 @@
     // pic-JP 아이디를 obj_JP 변수에 저장
     var obj_JP = document.getElementById("pic-JP");
     var obj_ES = document.getElementById("pic-ES");
-    var obj_LA = document.getElementById("pic-LA");
-    var obj_NY = document.getElementById("pic-NY");
+    var obj_US = document.getElementById("pic-US");
     var obj_GB = document.getElementById("pic-GB");
     var obj_AU = document.getElementById("pic-AU");
 
@@ -431,15 +414,10 @@
     } else {
       obj_ES.setAttribute("class", "Madrid-night");
     }
-    if (LA_hr > 7 && LA_hr < 18) {
-      obj_LA.setAttribute("class", "Los angeles-day");
+    if (US_hr > 7 && US_hr < 18) {
+      obj_US.setAttribute("class", "New York-day");
     } else {
-      obj_LA.setAttribute("class", "Los angeles-night");
-    }
-    if (NY_hr > 7 && NY_hr < 18) {
-      obj_NY.setAttribute("class", "New York-day");
-    } else {
-      obj_NY.setAttribute("class", "New York-night");
+      obj_US.setAttribute("class", "New York-night");
     }
     if (GB_hr > 7 && GB_hr < 18) {
       obj_GB.setAttribute("class", "London-day");
