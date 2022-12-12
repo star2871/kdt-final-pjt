@@ -47,17 +47,17 @@ def login(request):
 
 def detail(request, pk):
     user = get_user_model().objects.get(pk=pk)
-    article = Article.objects.filter(user=user,category='review')
+    articles = Article.objects.filter(user=user,category='review')
     articleComment=ArticleComment.objects.filter(user=user)
     advice = Article.objects.filter(user=user,category='advice')
-    
+    likes_article = user.likes_article.all()
     context = {
         "user": user,
-        'article': article,
+        'articles': articles,
         'articleComment': articleComment,
         'advice': advice,
+        'likes_article' : likes_article,
     }
-
     return render(request, "accounts/detail.html", context)
 
 
