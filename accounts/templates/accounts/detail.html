@@ -285,7 +285,7 @@
           <div class="emoji-section"><i class="gMqSnH"><!----> <span><img src="{% static 'img/note.png' %}"
                   alt="hushed icon"></span></i> <!----></div>
           <div class="bzpqmR" style="">
-            <div><span class="badge aNZmK">{{ article.count }}</span></div> <!---->
+            <div><span class="badge aNZmK">{{ articles.count }}</span></div> <!---->
           </div>
         </div>
         <div class="card-bottom">
@@ -303,6 +303,7 @@
         </div>
       </a>
 
+      {% if request.user == user %}
       <a href="" class="activity-card-wrapper">
         <div class="card-top">
           <div class="emoji-section"><i class="gMqSnH"><!----> <span><img src="{% static 'img/speech.png' %}"
@@ -325,17 +326,43 @@
           </svg> <!----></i>
         </div>
       </a>
+      {% endif %}
+
+      {% if request.user != user %}
+      <a href="" class="activity-card-wrapper">
+        <div class="card-top">
+          <div class="emoji-section"><i class="gMqSnH"><!----> <span><img src="{% static 'img/speech.png' %}"
+                  alt="hushed icon"></span></i> <!----></div>
+          <div class="bzpqmR" style="">
+            <div><span class="badge aNZmK">{{ advice.count }}</span></div> <!---->
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-info"><span class="main-info">꿀팁</span></div>
+          <!-- <title id="check">check icon</title> -->
+          <g fill-opacity="1">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z">
+            </path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M17.0717 8.33725C17.4619 8.72813 17.4613 9.36129 17.0704 9.75146L11.1468 15.6642C10.7562 16.0541 10.1235 16.0538 9.73325 15.6635L6.92961 12.8599C6.53909 12.4694 6.53909 11.8362 6.92961 11.4457C7.32014 11.0552 7.9533 11.0552 8.34383 11.4457L10.441 13.5429L15.6575 8.33594C16.0484 7.94578 16.6816 7.94636 17.0717 8.33725Z">
+            </path>
+          </g>
+          </svg> <!----></i>
+        </div>
+      </a>
+      {% endif %}
 
       <a href="" class="activity-card-wrapper">
         <div class="card-top">
           <div class="emoji-section"><i class="gMqSnH"><!----> <span><img src="{% static 'img/desktop.png' %}"
                   alt="hushed icon"></span></i> <!----></div>
           <div class="bzpqmR" style="">
-            <div><span class="badge aNZmK">{{ article.count }}</span></div> <!---->
+            <div><span class="badge aNZmK">{{ likes_article.count }}</span></div> <!---->
           </div>
         </div>
         <div class="card-bottom">
-          <div class="card-info"><span class="main-info">스크랩 게시글</span></div>
+          <div class="card-info"><span class="main-info">좋아요 게시글</span></div>
           <!-- <title id="check">check icon</title> -->
           <g fill-opacity="1">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -362,53 +389,23 @@
     {% if request.user != user %}
     <li class="tab-button">꿀팀</li>
     {% endif %}
-    <li class="tab-button">사용자가 좋아한 글</li>
+    <li class="tab-button">좋아요 게시글</li>
   </ul>
-
 
   <!-- 게시글 목록 -->
   <div class="tab-content show">
-    <ul style="padding-top: 15px; padding: 10px;">
-      {% for article in user.article_set.all %}
-      <div class="review-row">
-        <div class="row">
-          <div class="col-8" style="padding:5px">
-            <a href="{% url 'communities:detail' article.country.country_code article.pk %}"
-              style="text-decoration: none;">
-              <p class="review-title mb-0">
-                {{ article.title }}
-              </p>
-            </a>
-            <!-- 닉네임|작성일 -->
-            <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-            <div class="icons-wrapper">
-              <div class="icons">
-                <!-- 좋아요 -->
-                <div class="icon">
-                  <span class="material-icons md-18">
-                    thumb_up_alt
-                  </span>
-                  <span>{{ article.like_users.count }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 review-list">
-            {% if article.image %}
-            <div>
-              <img class="review-img" src="{{ article.image.url }}" alt="">
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      <span>좋아요한 게시물이 없습니다.</span>
-      {% endfor %}
-    </ul>
 
-
+    {% for a in articles %}
+    <div>
+      <span>
+        <a href="{% url 'communities:detail' a.country a.pk %}" , style="text-decoration: none; color: rgb(51, 51, 51)">
+          {{ a.title }} {{ a.content|safe }}
+        </a>
+      </span>
+    </div>
+    {% endfor %}
   </div>
+
   <!-- 댓글 목록 -->
   {% if request.user == user %}
   <div class="tab-content">
@@ -453,47 +450,9 @@
       {% endfor %}
     </ul>
   </div>
-  <div class="tab-content">
-    <ul style="padding-top: 15px; padding: 10px;">
-      {% for article in user.likes_article.all %}
-      <div class="review-row">
-        <div class="row">
-          <div class="col-8" style="padding:5px">
-            <a href="{% url 'communities:detail' article.country.country_code article.pk %}"
-              style="text-decoration: none;">
-              <p class="review-title mb-0">
-                {{ article.title }}
-              </p>
-            </a>
-            <!-- 닉네임|작성일 -->
-            <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-            <div class="icons-wrapper">
-              <div class="icons">
-                <!-- 좋아요 -->
-                <div class="icon">
-                  <span class="material-icons md-18">
-                    thumb_up_alt
-                  </span>
-                  <span>{{ article.like_users.count }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 review-list">
-            {% if article.image %}
-            <div>
-              <img class="review-img" src="{{ article.image.url }}" alt="">
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      <span>좋아요한 게시물이 없습니다.</span>
-      {% endfor %}
-    </ul>
-  </div>
+
   {% endif %}
+
   <!-- 꿀팁 목록 -->
   {% if request.user != user %}
   <div class="tab-content">
@@ -506,46 +465,16 @@
     </div>
     {% endfor %}
   </div>
-  <div class="tab-content">
-    <ul style="padding-top: 15px; padding: 0px;">
-      {% for article in articles %}
-      <div class="review-row">
-        <div class="row">
-          <div class="col-8" style="padding:5px">
-            <a href="{% url 'communities:detail' article.country_code article.pk %}" style="text-decoration: none;">
-              <p class="review-title mb-0">
-                {{ article.title }}
-              </p>
-            </a>
-            <!-- 닉네임|작성일 -->
-            <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-            <div class="icons-wrapper">
-              <div class="icons">
-                <!-- 좋아요 -->
-                <div class="icon">
-                  <span class="material-icons md-18">
-                    thumb_up_alt
-                  </span>
-                  <span>{{ article.like_users.count }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 review-list">
-            {% if article.image %}
-            <div>
-              <img class="review-img" src="{{ article.image.url }}" alt="">
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      <span>좋아요한 게시물이 없습니다.</span>
-      {% endfor %}
-    </ul>
-  </div>
   {% endif %}
+  
+  <!-- 좋아요 게시글 -->
+  <div class="tab-content">
+   {% for d in likes_article %}
+    <div>
+      <span>{{ d }}</span>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 
 </section>
