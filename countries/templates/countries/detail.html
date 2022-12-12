@@ -74,7 +74,7 @@
               </figure>
               <span>{{ weather.time1.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature1.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -83,7 +83,7 @@
               </figure>
               <span>{{ weather.time1.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature1.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -92,7 +92,7 @@
               </figure>
               <span>{{ weather.time1.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature1.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -101,7 +101,7 @@
               </figure>
               <span>{{ weather.time1.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature1.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -110,7 +110,7 @@
               </figure>
               <span>{{ weather.time1.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature1.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
@@ -126,47 +126,47 @@
           <article class="media d-flex">
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.0 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.0|slice:'5:10' }}</span>
+              <span>{{ weather.time2.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature2.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.8 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.8|slice:'5:10' }}</span>
+              <span>{{ weather.time2.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature2.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.16 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.16|slice:'5:10' }}</span>
+              <span>{{ weather.time2.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature2.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.24 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.24|slice:'5:10' }}</span>
+              <span>{{ weather.time2.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature2.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.32 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.32|slice:'5:10' }}</span>
+              <span>{{ weather.time2.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature2.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
@@ -177,52 +177,52 @@
     <div
       style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
       <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city2 }}</span>
+        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city3 }}</span>
         <div class="box">
           <article class="media d-flex">
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.0 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.0|slice:'5:10' }}</span>
+              <span>{{ weather.time3.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature3.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.8 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.8|slice:'5:10' }}</span>
+              <span>{{ weather.time3.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature3.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.16 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.16|slice:'5:10' }}</span>
+              <span>{{ weather.time3.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature3.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.24 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.24|slice:'5:10' }}</span>
+              <span>{{ weather.time3.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature3.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.32 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.32|slice:'5:10' }}</span>
+              <span>{{ weather.time3.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature3.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
