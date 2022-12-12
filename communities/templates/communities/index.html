@@ -16,29 +16,35 @@
 <div id="carouselExampleInterval" style="max-width:1900px; margin:0 auto 0;" class="carousel slide"
   data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="3000">
+    <div class="carousel-item active" data-bs-interval="5000">
       <div class="community-header"
         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/일본사진1.jpg' %}');">
+        <h1 class="index-text" data-country-code="일본" style="font-weight: 500"></h1>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <div class="community-header"
         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/호주-australia-시드니-2.jpg' %}');">
+        <h1 class="index-text" data-country-code="일본" style="font-weight: 500"><strong>호주</strong> 시드니 오페라 하우스 가보셨나요??
+        </h1>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <div class="community-header"
         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/스페인사진.jpg' %}');">
+        <h1 class="index-text" data-country-code="스페인"><strong>스페인</strong>의 12월은 우리나라의 늦가을 날씨입니다</h1>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <div class="community-header"
         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/영국 사진 3.jpg' %}');">
+        <h1 class="index-text" data-country-code="영국">12월 26일부터 <strong>EPL</strong>이 재개됩니다</h1>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="3000">
       <div class="community-header"
         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/미국사진1.jpg' %}');">
+        <h1 class="index-text" data-country-code="미국"><strong>미국</strong>으로 떠나볼까요?</h1>
       </div>
     </div>
   </div>
@@ -270,9 +276,7 @@
 
 <script>
   const text = document.querySelector(".index-text")
-  const content = `여행 전날 ${text
-    .dataset
-    .countryCode} 커뮤니티입니다.`
+  const content = `여행을 준비중인 당신을 위해 ☺️`
   console
     .log(text.dataset)
   let index = 0;
