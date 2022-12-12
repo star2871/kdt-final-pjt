@@ -9,13 +9,14 @@ class Country(models.Model):
     country_name = models.CharField(max_length=255, null=True)
     country_eng_name = models.CharField(max_length=255, null=True)
     country_code = models.CharField(max_length=255)
-    exchange_rate_code = models.CharField(max_length=255, null=True)
     status = models.TextField(null=True)
     status_wrt_dt = models.DateField(null=True)
-    ysd_er = models.CharField(max_length=255, null=True)
+    updated_at = models.DateTimeField(auto_now=True) # 갱신 시간
+    exchange_rate_code = models.CharField(max_length=255, null=True)
+    exchange_rate = models.CharField(max_length=255, null=True) # 환율
     cur_nm = models.CharField(max_length=255, null=True)
     events = models.JSONField(null=True)
-    visa = models.JSONField(null=True)
+    visa = models.CharField(max_length=30, null=True)
     country_image = ProcessedImageField(
         upload_to="media/",
         blank=True,

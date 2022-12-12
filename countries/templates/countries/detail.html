@@ -11,27 +11,33 @@
       <p class="gif-icon">
       </p>
       <div id="date" style="margin-left: 5px; font-size: 19px; font-weight: 700; letter-spacing: -0.5px; color:white">
-        2022년
-        11월 26일 여행수칙
       </div>
     </div>
     <article
       style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
       <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">4월18일 - 기한없음</span>
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} - 기한없음</span>
       </div>
-      <ul style="padding-top: 15px;">
+      <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">비자(VISA) 정보</p>
+          <h2 style="margin-top: 3px;">{{ country.visa }}</h2>
         </li>
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">국가 방역정책</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
         </li>
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">백신접종 필수여부</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">해외입국자 격리여부</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">기타 정보</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
         </li>
       </ul>
     </article>
@@ -68,7 +74,7 @@
               </figure>
               <span>{{ weather.time1.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature1.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -77,7 +83,7 @@
               </figure>
               <span>{{ weather.time1.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature1.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -86,7 +92,7 @@
               </figure>
               <span>{{ weather.time1.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature1.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -95,7 +101,7 @@
               </figure>
               <span>{{ weather.time1.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature1.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
@@ -104,7 +110,7 @@
               </figure>
               <span>{{ weather.time1.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature1.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
@@ -120,47 +126,47 @@
           <article class="media d-flex">
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.0 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.0|slice:'5:10' }}</span>
+              <span>{{ weather.time2.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature2.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.8 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.8|slice:'5:10' }}</span>
+              <span>{{ weather.time2.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature2.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.16 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.16|slice:'5:10' }}</span>
+              <span>{{ weather.time2.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature2.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.24 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.24|slice:'5:10' }}</span>
+              <span>{{ weather.time2.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature2.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.32 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.32|slice:'5:10' }}</span>
+              <span>{{ weather.time2.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature2.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
@@ -171,52 +177,52 @@
     <div
       style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
       <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city2 }}</span>
+        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city3 }}</span>
         <div class="box">
           <article class="media d-flex">
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.0 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.0|slice:'5:10' }}</span>
+              <span>{{ weather.time3.0|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.0 }}° C</span>
+              <span>{{ weather.temperature3.0|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.8 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.8|slice:'5:10' }}</span>
+              <span>{{ weather.time3.8|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.8 }}° C</span>
+              <span>{{ weather.temperature3.8|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.16 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.16|slice:'5:10' }}</span>
+              <span>{{ weather.time3.16|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.16 }}° C</span>
+              <span>{{ weather.temperature3.16|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.24 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.24|slice:'5:10' }}</span>
+              <span>{{ weather.time3.24|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.24 }}° C</span>
+              <span>{{ weather.temperature3.24|floatformat:0 }}° C</span>
               <br>
             </div>
             <div class="media-left mx-1">
               <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png" alt="Image">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.32 }}.png" alt="Image">
               </figure>
-              <span>{{ weather.time1.32|slice:'5:10' }}</span>
+              <span>{{ weather.time3.32|slice:'5:10' }}</span>
               <br>
-              <span>{{ weather.temperature1.32 }}° C</span>
+              <span>{{ weather.temperature3.32|floatformat:0 }}° C</span>
               <br>
             </div>
           </article>
@@ -298,9 +304,10 @@
           {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
           <br> {% endcomment %}
           <div style="margin: 0; font-size: 14px; font-weight: 500; color: rgb(61, 61, 61);">
-            {{ country.exchange_rate_code }}JPYㆍKRW 환율</div>
-          <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">958.45<span>원</span></div>
-          <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">12월 11일 오후 08:30 기준</div>
+            {{ country.exchange_rate_code }} 환율</div>
+          <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">
+            {{country.exchange_rate}}<span>원</span></div>
+          <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
     </div>
