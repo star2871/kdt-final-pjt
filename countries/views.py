@@ -18,7 +18,7 @@ def country_detail_view(request, country_code):
         city2 = 'Liverpool'
         city3 = 'Manchester'
     elif country_code == "US":
-        city1 = 'Los angeles'
+        city1 = 'New jersey'
         city2 = 'New York'
         city3 = 'Boston'
     elif country_code == "ES":
