@@ -16,7 +16,8 @@
     <article
       style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
       <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} - 기한없음</span>
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} -
+          {{country.country_name}}</span>
       </div>
       <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
