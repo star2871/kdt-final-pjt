@@ -11,27 +11,33 @@
       <p class="gif-icon">
       </p>
       <div id="date" style="margin-left: 5px; font-size: 19px; font-weight: 700; letter-spacing: -0.5px; color:white">
-        2022년
-        11월 26일 여행수칙
       </div>
     </div>
     <article
       style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
       <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">4월18일 - 기한없음</span>
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} - 기한없음</span>
       </div>
-      <ul style="padding-top: 15px;">
+      <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">비자(VISA) 정보</p>
+          <h2 style="margin-top: 3px;">{{ country.visa }}</h2>
         </li>
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">국가 방역정책</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
         </li>
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">인원제한</p>
-          <h2>사적모임 인원제한 없음</h2>
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">백신접종 필수여부</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">해외입국자 격리여부</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
+        </li>
+        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">기타 정보</p>
+          <h2 style="margin-top: 3px;">사적모임 인원제한 없음</h2>
         </li>
       </ul>
     </article>
@@ -298,9 +304,10 @@
           {{ 1000|div:exchange.country_exchange|floatformat:2 }}|원
           <br> {% endcomment %}
           <div style="margin: 0; font-size: 14px; font-weight: 500; color: rgb(61, 61, 61);">
-            {{ country.exchange_rate_code }}JPYㆍKRW 환율</div>
-          <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">958.45<span>원</span></div>
-          <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">12월 11일 오후 08:30 기준</div>
+            {{ country.exchange_rate_code }} 환율</div>
+          <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">
+            {{country.exchange_rate}}<span>원</span></div>
+          <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
     </div>
