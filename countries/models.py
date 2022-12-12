@@ -12,11 +12,14 @@ class Country(models.Model):
     status = models.TextField(null=True)
     status_wrt_dt = models.DateField(null=True)
     updated_at = models.DateTimeField(auto_now=True) # 갱신 시간
-    exchange_rate_code = models.CharField(max_length=255, null=True)
+    visa = models.CharField(max_length=30, null=True) # 비자 정보
+    quarantine = models.CharField(max_length=50, null=True) # 방역 정보
+    vaccine = models.CharField(max_length=50, null=True) # 백신접종 정보
+    isolation = models.CharField(max_length=50, null=True) # 격리여부 정보
+    etc = models.CharField(max_length=50, null=True) # 기타 추가 정보
+    exchange_rate_code = models.CharField(max_length=255, null=True) # 환율 코드
     exchange_rate = models.CharField(max_length=255, null=True) # 환율
-    cur_nm = models.CharField(max_length=255, null=True)
     events = models.JSONField(null=True)
-    visa = models.CharField(max_length=30, null=True)
     country_image = ProcessedImageField(
         upload_to="media/",
         blank=True,
