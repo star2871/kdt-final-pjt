@@ -76,7 +76,7 @@
         <div class="box">
           <article class="media d-flex">
             <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.0|slice:'10:'}}</span>
+              <span class="mt-2">{{ weather.time1.0|slice:'5:10'}}</span>
               <figure class="image is-50x50 m-0">
                 <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" style="width: 60px; height: 50px;"
                   alt="Image">
@@ -85,7 +85,7 @@
                 C</span>
             </div>
             <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.1 }}</span>
+              <span class="mt-2">{{ weather.time1.8|slice:'5:10' }}</span>
               <figure class="image is-50x50 m-0">
                 <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" style="width: 60px; height: 50px;"
                   alt="Image">
@@ -94,7 +94,7 @@
                 C</span>
             </div>
             <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.5 }}</span>
+              <span class="mt-2">{{ weather.time1.16|slice:'5:10' }}</span>
               <figure class="image is-50x50 m-0">
                 <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png"
                   style="width: 60px; height: 50px;" alt="Image">
