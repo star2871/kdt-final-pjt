@@ -340,7 +340,7 @@
           <div class="emoji-section"><i class="gMqSnH"><!----> <span><img src="{% static 'img/speech.png' %}"
                   alt="hushed icon"></span></i> <!----></div>
           <div class="bzpqmR" style="">
-            <div><span class="badge aNZmK">{{ advice.count }}</span></div> <!---->
+            <div><span class="badge aNZmK">{{ advices.count }}</span></div> <!---->
           </div>
         </div>
         <div class="card-bottom">
@@ -400,16 +400,44 @@
 
   <!-- 게시글 목록 -->
   <div class="tab-content show">
-
-    {% for a in articles %}
-    <div>
-      <span>
-        <a href="{% url 'communities:detail' a.country a.pk %}" , style="text-decoration: none; color: rgb(51, 51, 51)">
-          {{ a.title }} {{ a.content|safe }}
-        </a>
-      </span>
-    </div>
-    {% endfor %}
+    <ul style="padding-top: 15px; padding: 10px;">
+      {% for article in articles %}
+      <div class="review-row">
+        <div class="row">
+          <div class="col-8" style="padding:5px">
+            <a href="{% url 'communities:detail' article.country.country_code article.pk %}"
+              style="text-decoration: none;">
+              <p class="review-title mb-0">
+                {{ article.title }}
+              </p>
+            </a>
+            <!-- 닉네임|작성일 -->
+            <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
+            <div class="icons-wrapper">
+              <div class="icons">
+                <!-- 좋아요 -->
+                <div class="icon">
+                  <span class="material-icons md-18">
+                    thumb_up_alt
+                  </span>
+                  <span>{{ article.like_users.count }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 review-list">
+            {% if article.image %}
+            <div>
+              <img class="review-img" src="{{ article.image.url }}" alt="">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <span>작성한 게시물이 없습니다.</span>
+      {% endfor %}
+    </ul>
   </div>
 
   <!-- 댓글 목록 -->
@@ -462,24 +490,86 @@
   <!-- 꿀팁 목록 -->
   {% if request.user != user %}
   <div class="tab-content">
-    {% for c in advice %}
-    <div>
-      <span>
-        {{ c.title }}
-        {{ c.content|safe }}
-      </span>
-    </div>
-    {% endfor %}
+    <ul style="padding-top: 15px; padding: 10px;">
+      {% for advice in advices %}
+      <div class="review-row">
+        <div class="row">
+          <div class="col-8" style="padding:5px">
+            <a href="{% url 'communities:detail' advice.country.country_code advice.pk %}" style="text-decoration: none;">
+              <p class="review-title mb-0">
+                {{ advice.title }}
+              </p>
+            </a>
+            <!-- 닉네임|작성일 -->
+            <p class="review-date">{{ advice.user }}|{{ advice.created_at }}</p>
+            <div class="icons-wrapper">
+              <div class="icons">
+                <!-- 좋아요 -->
+                <div class="icon">
+                  <span class="material-icons md-18">
+                    thumb_up_alt
+                  </span>
+                  <span>{{ advice.like_users.count }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 review-list">
+            {% if advice.image %}
+            <div>
+              <img class="review-img" src="{{ advice.image.url }}" alt="">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <span>꿀팁 게시물이 없습니다.</span>
+      {% endfor %}
+    </ul>
   </div>
   {% endif %}
 
   <!-- 좋아요 게시글 -->
   <div class="tab-content">
-    {% for d in likes_article %}
-    <div>
-      <span>{{ d }}</span>
-    </div>
-    {% endfor %}
+    <ul style="padding-top: 15px; padding: 10px;">
+      {% for article in user.likes_article.all %}
+      <div class="review-row">
+        <div class="row">
+          <div class="col-8" style="padding:5px">
+            <a href="{% url 'communities:detail' article.country.country_code article.pk %}"
+              style="text-decoration: none;">
+              <p class="review-title mb-0">
+                {{ article.title }}
+              </p>
+            </a>
+            <!-- 닉네임|작성일 -->
+            <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
+            <div class="icons-wrapper">
+              <div class="icons">
+                <!-- 좋아요 -->
+                <div class="icon">
+                  <span class="material-icons md-18">
+                    thumb_up_alt
+                  </span>
+                  <span>{{ article.like_users.count }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 review-list">
+            {% if article.image %}
+            <div>
+              <img class="review-img" src="{{ article.image.url }}" alt="">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <span>좋아요한 게시물이 없습니다.</span>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 
