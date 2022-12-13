@@ -49,7 +49,7 @@ span,
 
 @media (min-width: 1024px) {
     .community-header {
-        height: 100vh;
+        height: 500px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -342,7 +342,7 @@ span,
         justify-content: space-around;
     }
 
-    .detail-user > * {
+    .detail-user>* {
         margin: 0px 5px;
     }
 
@@ -373,15 +373,16 @@ span,
     0% {
         transform: translateY(0px)
     }
-    100%{
-      transform: translateY(60px)
+
+    100% {
+        transform: translateY(60px)
     }
-  }
-  
-  /* 올라오는 애니메이션 */
-  @keyframes slide-2 {
-    0%{
-      transform: translateY(60px)
+}
+
+/* 올라오는 애니메이션 */
+@keyframes slide-2 {
+    0% {
+        transform: translateY(60px)
     }
 
     100% {
@@ -848,34 +849,39 @@ span,
     cursor: pointer;
     height: 50px;
     width: 50px;
-    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-image: url('https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
     background-position: left;
-    background-repeat:no-repeat;
-    background-size:2900%;
-  }
-  
-  .heart:hover {
-    background-position:right;
-  }
+    background-repeat: no-repeat;
+    background-size: 2900%;
+}
 
-  .heart-fill {
+.heart:hover {
+    background-position: right;
+}
+
+.heart-fill {
     cursor: pointer;
     height: 50px;
     width: 50px;
-    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
-    background-repeat:no-repeat;
-    background-size:2900%;
+    background-image: url('https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-repeat: no-repeat;
+    background-size: 2900%;
     background-position: right;
-  }
-  
-  .heartis {
+}
+
+.heartis {
     animation: heart-burst .8s steps(28) 1;
-  }
-  
-  @keyframes heart-burst {
-    from {background-position:left;}
-    to { background-position:right;}
-  }
+}
+
+@keyframes heart-burst {
+    from {
+        background-position: left;
+    }
+
+    to {
+        background-position: right;
+    }
+}
 
 .heart.vibration {
     animation: vibration .1s 2;
