@@ -72,14 +72,16 @@
         </div>
 
         <!-- 댓글 작성폼 -->
-        <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}"
-            data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
-            {% csrf_token %}
-            {% bootstrap_form comment_form %}
-            <input type="submit" value="제출">
-        </form>
+        <a name="comment">
+            <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}"
+                data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
+                {% csrf_token %}
+                {% bootstrap_form comment_form %}
+                <input type="submit" value="제출">
+            </form>
+        </a>
         <!-- 댓글 영역 -->
-        <a name="comment" class="comment-section">
+        <div class="comment-section">
             <span><span style="color: #428ce8;" class="comment_count">{{ comment_count }}</span>개의 댓글</span>
             <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
                 {% for comment in comments %}
@@ -222,12 +224,12 @@
                 <span id="comment-none">작성된 댓글이 없습니다.</span>
                 {% endfor %}
             </div>
-        </a>
+        </div>
     </div>
     <!-- 사이드바 리모컨 -->
     <div class="side-bar">
+        {% if user == article.user %}
         <div class="remote">
-            {% if user == article.user %}
             <a href="{% url 'communities:review_update' country_code article.pk %}">
                 <span class="material-icons">
                     edit
@@ -240,12 +242,6 @@
                     delete
                 </span>
             </form>
-            {% else %}
-            <hr>
-            <span class="material-icons md-18">
-                thumb_up_alt
-            </span>
-            {% endif %}
             <hr>
             <a href="{% url 'communities:review' country_code %}">
                 <span class="material-icons">
@@ -253,13 +249,14 @@
                 </span>
             </a>
         </div>
+        {% endif %}
     </div>
 </div>
 
 <nav id="test">
     <div class="nav-wrapper">
         {% if request.user.is_authenticated %}
-        <div class="hearts-wrapper" style="display: flex; align-items:center;">
+        <div class="hearts-wrapper">
             <!-- 좋아요 -->
             {% if request.user in article.like_users.all %}
             <div class="heart-fill like" id="heart" data-country-code="{{ country_code }}"
@@ -270,13 +267,14 @@
                 data-article-id="{{ article.pk }}">
             </div>
             {% endif %}
-            <span class="article-like">{{ article.like_users.count }}</span>
+            <span class="article-like" style="top: 2px;">{{ article.like_users.count }}</span>
         </div>
         {% endif %}
         <a href="#comment">
             <span class="material-icons md-18">
                 chat_bubble_outline
             </span>
+            <span id="comment-count">댓글 {{ article.articlecomment_set.count }}개</span>
         </a>
     </div>
 </nav>
