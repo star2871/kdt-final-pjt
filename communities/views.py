@@ -116,10 +116,16 @@ def review_update(request, article_pk, country_code):
                 article_.save()
                 return redirect("communities:detail", country_code, article_pk)
         else:
+            # 기존 날짜 데이터 가져오기
+            article_start = article.travel_start.strftime("%Y-%m-%d")
+            article_end = article.travel_end.strftime("%Y-%m-%d")
             form = ArticleForm(instance=article)
+            print(article_end)
         context = {
             "article": article,
             "article_form": form,
+            "article_start" : article_start,
+            "article_end" : article_end,
         }
         return render(request, "communities/form.html", context)
     return redirect("communities:review_detail", country_code, article_pk)

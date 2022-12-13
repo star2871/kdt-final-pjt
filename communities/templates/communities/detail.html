@@ -382,14 +382,11 @@
         return `${Math.floor(years)}년 전`
     }
 
-
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
     // 비동기로 그려줄 댓글 리스트
-    function createCommentList(response, commentList, baseDisplay){
-      for (let i = 0; i < response.data.comments_data.length; i++) {
-        let date = displayedAt(response.data.comments_data[i].created_at)
-        commentList.insertAdjacentHTML('beforeend', `
+    function createCommentList(response, commentList, baseDisplay) {
+        for (let i = 0; i < response.data.comments_data.length; i++) {
+            let date = displayedAt(response.data.comments_data[i].created_at)
+            commentList.insertAdjacentHTML('beforeend', `
           <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
             <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
             <!-- 작성자 프로필 사진-->
@@ -451,9 +448,9 @@
             </div>
           </div>`)
 
-        const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
-        if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
-          commentWrapper.insertAdjacentHTML('beforeend', `
+            const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
+            if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
+                commentWrapper.insertAdjacentHTML('beforeend', `
         <div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
           <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
             data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -462,16 +459,16 @@
             data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
           </button>
         </div>`)
-        }
+            }
 
-        if ("sub_comments_data" in response.data.comments_data[i]) {
-          const comment = response.data.comments_data[i]
-          const subAll = comment.sub_comments_data
+            if ("sub_comments_data" in response.data.comments_data[i]) {
+                const comment = response.data.comments_data[i]
+                const subAll = comment.sub_comments_data
 
-          for (let j = 0; j < subAll.length; j++) {
-            let sub_date = displayedAt(subAll[j].created_at)
-            const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
-            subSection.insertAdjacentHTML('beforeend', `
+                for (let j = 0; j < subAll.length; j++) {
+                    let sub_date = displayedAt(subAll[j].created_at)
+                    const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
+                    subSection.insertAdjacentHTML('beforeend', `
               <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                   <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                     <div class="comment-user">
@@ -504,9 +501,9 @@
                   </div>
               </div>`)
 
-            const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-            if (subAll[j].user_pk === subAll[j].request_user_pk) {
-              subCommentWrapper.insertAdjacentHTML('beforeend', `
+                    const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
+                    if (subAll[j].user_pk === subAll[j].request_user_pk) {
+                        subCommentWrapper.insertAdjacentHTML('beforeend', `
             <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
               <button id="comment-${subAll[j].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                 data-comment-id="${subAll[j].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -515,26 +512,26 @@
                 data-comment-id="${subAll[j].comment_pk}" onclick="deleteComment(this.id)">삭제
               </button>
             </div>`)
+                    }
+                }
             }
-          }
         }
-      }
 
-      // 저장된 답글 영역으로 돌려주기
-      for (let m = 0; m < response.data.comments_data.length; m++) {
-          let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
-          const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
-          // console.log(subComLi)
-          // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
-          const base = baseDisplay[`${response.data.comments_data[m].comment_pk}`]
-          subComLi.style.cssText = `display: ${base}`
-          if (subComLi.style.display === "block") {
-              getSubBtn.innerText = "숨기기"
-          } else {
-              getSubBtn.innerText = "답글달기"
-          }
-      }
-      return
+        // 저장된 답글 영역으로 돌려주기
+        for (let m = 0; m < response.data.comments_data.length; m++) {
+            let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+            const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+            // console.log(subComLi)
+            // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
+            const base = baseDisplay[`${response.data.comments_data[m].comment_pk}`]
+            subComLi.style.cssText = `display: ${base}`
+            if (subComLi.style.display === "block") {
+                getSubBtn.innerText = "숨기기"
+            } else {
+                getSubBtn.innerText = "답글달기"
+            }
+        }
+        return
     }
 
     const getDisplay = function () {
