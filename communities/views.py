@@ -1,8 +1,8 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm
-from .models import Article, Country, Feed, FeedImages, ArticleComment
 from countries.models import Country
+from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm, FeedCommentForm
+from .models import Article, Country, Feed, FeedImages, ArticleComment, FeedComment
 from accounts.models import User
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
@@ -463,83 +463,82 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
     return JsonResponse(context)
 
 @login_required
-def article_sub_comment_update(request, article_pk, comment_pk, country_code):
+# def article_sub_comment_update(request, article_pk, comment_pk, country_code):
     
-    if not request.user == comment.user:
-        return HttpResponseForbidden()
+#     if not request.user == comment.user:
+#         return HttpResponseForbidden()
     
-    comment = get_object_or_404(ArticleComment, pk=comment_pk)
-    jsonObject = json.loads(request.body)
+#     comment = get_object_or_404(ArticleComment, pk=comment_pk)
+#     jsonObject = json.loads(request.body)
     
-    if request.user == comment.user:
-        comment.content = jsonObject('content')
-        comment.save()
+#     if request.user == comment.user:
+#         comment.content = jsonObject('content')
+#         comment.save()
             
-        comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
-        comments_data = []
+#         comments = ArticleComment.objects.filter(article_id=article_pk).order_by('-pk')
+#         comments_data = []
             
-        for comment in comments:
-            if comment.parent_id == None:
-                img = f'/media/{comment.user.profile_image}'
-                sub_comments = co.articlecomment_set.all()
-                
-                sub_comments_data = []
-                if len(sub_comments):
-                    for sub in sub_comments:
-                        sub_img = f'/media/{sub.user.profile_image}'
-                        sub_comments_data.append({
-                                'created_string':sub.created_string,
-                                'request_user_pk': request.user.pk,
-                                'comment_pk': sub.pk,
-                                'user_pk': sub.user.pk,
-                                'img_url': sub_img,
-                                'nick_name':sub.user.nick_name,
-                                'content': sub.content,
-                                'created_at': sub.created_at,
-                                'updated_at': sub.updated_at,
-                                'article_id': sub.article_id,
-                                'parent': sub.parent.pk
-                    })
-
-                    comments_data.append(
-                        {
-                            'created_string': co.created_string,
-                            'request_user_pk': request.user.pk,
-                            'comment_pk': co.pk,
-                            'user_pk': co.user.pk,
-                            'img_url': img,
-                            'nick_name':co.user.nick_name,
-                            'content': co.content,
-                            'created_at': co.created_at,
-                            'updated_at': co.updated_at,
-                            'article_id': co.article_id,
-                            'secret': co.secret,
-                            'like': co.like.count(),
-                            'sub_comments_data' : sub_comments_data
-                        })
-
-                else:
-                    comments_data.append
-                    (
-                        {'created_string': co.created_string,
-                        'request_user_pk': request.user.pk,
-                        'comment_pk': co.pk,
-                        'user_pk': co.user.pk,
-                        'img_url': img,
-                        'nick_name':co.user.nick_name,
-                        'content': co.content,
-                        'created_at': co.created_at,
-                        'updated_at': co.updated_at,
-                        'article_id': co.article_id,
-                        'secret': co.secret,
-                        'like': co.like.count(),
-                        }
-                        )
-        context = {
-            'comments_data' : comments_data,
-        }
-        return JsonResponse(context)
-
+#         for comment in comments:
+#             if comment.parent_id == None:
+#                 img = f'/media/{comment.user.profile_image}'
+#                 sub_comments = co.articlecomment_set.all()
+               
+#                 sub_comments_data = []
+#                 if len(sub_comments):
+#                     for sub in sub_comments:
+#                         sub_img = f'/media/{sub.user.profile_image}'
+#                         sub_comments_data.append({
+#                                 'created_string':sub.created_string,
+#                                 'request_user_pk': request.user.pk,
+#                                 'comment_pk': sub.pk,
+#                                 'user_pk': sub.user.pk,
+#                                 'img_url': sub_img,
+#                                 'nick_name':sub.user.nick_name,
+#                                 'content': sub.content,
+#                                 'created_at': sub.created_at,
+#                                 'updated_at': sub.updated_at,
+#                                 'article_id': sub.article_id,
+#                                 'parent': sub.parent.pk                    
+#                     })
+                        
+#                     comments_data.append(
+#                         {
+#                             'created_string': co.created_string,
+#                             'request_user_pk': request.user.pk,
+#                             'comment_pk': co.pk,
+#                             'user_pk': co.user.pk,
+#                             'img_url': img,
+#                             'nick_name':co.user.nick_name,
+#                             'content': co.content,
+#                             'created_at': co.created_at,
+#                             'updated_at': co.updated_at,
+#                             'article_id': co.article_id,
+#                             'secret': co.secret,
+#                             'like': co.like.count(),
+#                             'sub_comments_data' : sub_comments_data
+#                         })
+                            
+#                 else:
+#                     comments_data.append
+#                     (
+#                         {'created_string': co.created_string,
+#                         'request_user_pk': request.user.pk,
+#                         'comment_pk': co.pk,
+#                         'user_pk': co.user.pk,
+#                         'img_url': img,
+#                         'nick_name':co.user.nick_name,
+#                         'content': co.content,
+#                         'created_at': co.created_at,
+#                         'updated_at': co.updated_at,
+#                         'article_id': co.article_id,
+#                         'secret': co.secret,
+#                         'like': co.like.count(),
+#                         }
+#                         )
+#         context = {
+#             'comments_data' : comments_data,
+#         }
+#         return JsonResponse(context)
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
@@ -584,14 +583,19 @@ def advice_create(request, country_code):
 ## 피드 인덱스
 def feed(request, country_code):
     feeds = Feed.objects.filter(category="feed").order_by("-pk")
+    feeds_images = FeedImages.objects.all()
     feed_form = FeedForm()
+    feed_comment_form = FeedCommentForm()
     feed_image_form = FeedImageForm()
     context = {
         "feeds": feeds,
+        "feeds_images": feeds_images,
         "country_code": country_code,
         "feed_form": feed_form,
+        "feed_comment_form": feed_comment_form,
         "feed_image_form": feed_image_form,
     }
+
     return render(request, 'communities/feed_index.html', context)
 
 ## 피드 생성
@@ -610,37 +614,54 @@ def feed_create(request, country_code):
             FeedImages.objects.create(feed=f, image=i)
        
         feeds = Feed.objects.all().order_by('-pk')
+        
         feeds_data = []
         for feed in feeds:
-
             img = f'/media/{feed.user.profile_image}'
-
-            if img == '/media/':
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
                 feeds_data.append(
-                    {
-                        'created_string':feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
-                        'nick_name': feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
             else:
                 feeds_data.append(
-                    {
-                        'created_string': feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':img,
-                        'nick_name':feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
         context = {
             'feeds_data': feeds_data
         }
@@ -656,37 +677,54 @@ def feed_delete(request, feed_pk, country_code):
         feed.delete()
 
         feeds = Feed.objects.all().order_by('-pk')
+        
         feeds_data = []
         for feed in feeds:
-
             img = f'/media/{feed.user.profile_image}'
-
-            if img == '/media/':
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
                 feeds_data.append(
-                    {
-                        'created_string':feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
-                        'nick_name': feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
             else:
                 feeds_data.append(
-                    {
-                        'created_string': feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':img,
-                        'nick_name':feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
         context = {
             'feeds_data': feeds_data
         }
@@ -704,37 +742,241 @@ def feed_update(request, feed_pk, country_code):
         feed.save()
 
         feeds = Feed.objects.all().order_by('-pk')
+        
         feeds_data = []
         for feed in feeds:
-
             img = f'/media/{feed.user.profile_image}'
-
-            if img == '/media/':
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
                 feeds_data.append(
-                    {
-                        'created_string':feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':'https://dummyimage.com/48x48/ededed/0011ff',
-                        'nick_name': feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
             else:
                 feeds_data.append(
-                    {
-                        'created_string': feed.created_string,
-                        'request_user_pk': request.user.pk,
-                        'feed_pk': feed.pk,
-                        'user_pk': feed.user.pk,
-                        'img_url':img,
-                        'nick_name':feed.user.nick_name,
-                        'content': feed.content,
-                        'created_at': feed.created_at,
-                        'like': feed.like.count(),
-                    })
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
+        context = {
+            'feeds_data': feeds_data
+        }
+        return JsonResponse(context)
+
+    ## 댓글 생성
+def feed_comment_create(request, feed_pk, country_code):
+    feed = get_object_or_404(Feed, pk=feed_pk)
+    comment_form = FeedCommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.user = request.user
+        comment.feed = feed
+        comment.save()
+    
+        feeds = Feed.objects.all().order_by('-pk')
+
+        feeds_data = []
+        for feed in feeds:
+            img = f'/media/{feed.user.profile_image}'
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
+            else:
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
+        context = {
+            'feeds_data': feeds_data
+        }
+        return JsonResponse(context)
+
+## 댓글 수정
+def feed_comment_update(request, feed_pk, comment_pk, country_code):
+    if request.user.is_authenticated:
+        jsonObject = json.loads(request.body)
+        comment = FeedComment.objects.get(pk=comment_pk)
+        comment.content = jsonObject.get('content')
+        comment.save()
+
+        feeds = Feed.objects.all().order_by('-pk')
+
+        feeds_data = []
+        for feed in feeds:
+            img = f'/media/{feed.user.profile_image}'
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
+            else:
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
+        context = {
+            'feeds_data': feeds_data
+        }
+        return JsonResponse(context)
+
+
+## 댓글 삭제
+def feed_comment_delete(request, feed_pk, comment_pk, country_code):
+    if request.user.is_authenticated:
+        comment = FeedComment.objects.get(pk=comment_pk)
+        comment.delete()
+
+        feeds = Feed.objects.all().order_by('-pk')
+
+        feeds_data = []
+        for feed in feeds:
+            img = f'/media/{feed.user.profile_image}'
+            comments = feed.feedcomment_set.all()
+            comments_data = []
+            if len(comments):
+                for co in comments:
+                    co_img = f'/media/{co.user.profile_image}'
+                    comments_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'comment_pk': co.pk,
+                            'user_pk': co.user.pk,
+                            'img_url':co_img,
+                            'nick_name':co.user.nick_name,
+                            'content': co.content,
+                            'created_at': co.created_at,
+                            'like': co.like.count(),
+                        })
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                            'comments_data' : comments_data
+                        })
+            else:
+                feeds_data.append(
+                        {
+                            'created_string': feed.created_string,
+                            'request_user_pk': request.user.pk,
+                            'feed_pk': feed.pk,
+                            'user_pk': feed.user.pk,
+                            'img_url':img,
+                            'nick_name':feed.user.nick_name,
+                            'content': feed.content,
+                            'created_at': feed.created_at,
+                            'like': feed.like.count(),
+                        })
         context = {
             'feeds_data': feeds_data
         }
