@@ -64,6 +64,21 @@
             </div>
             {% endif %}
             <span class="article-like">{{ article.like_users.count }}</span>
+            {% if request.user == article.user %}
+            <div class="edit-wrapper">
+                <a href="{% url 'communities:review_update' country_code article.pk %}">
+                    <span>
+                        수정
+                    </span>
+                </a>
+                <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
+                    {% csrf_token %}
+                    <span id="review_delete">
+                        삭제
+                    </span>
+                </form>
+            </div>
+            {% endif %}
         </div>
         <hr>
         <!-- 리뷰 내용 -->
