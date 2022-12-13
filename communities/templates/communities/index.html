@@ -94,8 +94,8 @@
                   </div>
                 </div>
                 <div class="sc-iNGGcK UXOKy">
-                  <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}"">
-                    <img src=" {{ review.user.profile_image.url }}" alt="user thumbnail of tosspayments">
+                  <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}">
+                    <img src="{{ review.user.profile_image.url }}" alt="user thumbnail of tosspayments">
                     <span>by
                       <b>{{ review.user.nick_name }}</b></span></a>
                   <div class="likes">
@@ -138,7 +138,7 @@
                         </p>
                       </a>
                       <!-- 닉네임|작성일 -->
-                      <p class="review-date">{{ review.user }}|{{ review.created_at }}</p>
+                      <p class="review-date">{{ review.user.nick_name }}|{{ review.created_at }}</p>
                       <div class="like-wrapper">
                         <!-- 좋아요 -->
                         <div class="likes">

@@ -129,7 +129,7 @@ video {
 }
 
 .review-row:active {
-    background: #428de84d;
+    background: #428de817;
 }
 
 /* 글쓰기 버튼 */
@@ -177,6 +177,7 @@ video {
     height: 96px;
     background-color: white;
     padding: 7px 12px;
+    transition: 0.2s;
 }
 
 .comments-row {
@@ -251,6 +252,10 @@ video {
     letter-spacing: 0.5px;
 }
 
+.review-list {
+    height: 100%;
+}
+
 .review-list>img {
     border-radius: 10px;
     width: 45px;
@@ -271,7 +276,8 @@ video {
 
 .review-list>div>.review-img {
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 14px;
+    width: 100%;
 }
 
 .review-list>div {
