@@ -26,9 +26,11 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 ## 리뷰 인덱스
 def main(request):
     articles = Article.objects.all()
+    countries = Country.objects.all()
 
     context = {
-        'articles': articles
+        'articles': articles,
+        'countries': countries
     }
 
     return render(request, 'communities/main.html', context)
