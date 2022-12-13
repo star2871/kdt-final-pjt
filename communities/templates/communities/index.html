@@ -83,8 +83,8 @@
                 <div class="sc-lbhJGD jhNfXV">
                   <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}">
                     <h4>{{ review.title }}</h4>
-                    <div class="description-wrapper" style="overflow:hidden; height: calc(63px + 1.5rem);">
-                      {{ review.content | safe }}
+                    <div class="description-wrapper">
+                      {{ review.content | striptags }}
                     </div>
                   </a>
                   <div class="sub-info">
