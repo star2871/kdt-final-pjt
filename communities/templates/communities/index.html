@@ -73,203 +73,94 @@
                 </div>
             </section>
 
-            <!-- 테스트-->
-            <section style="margin-top: 45px; padding: 0 18px">
-                <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
-                <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                        <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                        <div class="sc-lbhJGD jhNfXV">
-                            <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                                <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                                <div class="description-wrapper">
-                                    <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의
-                                        일환으로 기술 블로그를
-                                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="sub-info">
-                                <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                                <!-- -->개의 댓글
-                    </span>
-                            </div>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy">
-                            <a class="userinfo" href="/@tosspayments"><img
-                                    src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                                    alt="user thumbnail of tosspayments">
-                                <span>by
-                      <b>tosspayments</b></span></a>
-                            <div class="likes">
-                                <svg width="24" height="24" viewbox="0 0 24 24">
-                                    <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                                </svg>
-                                53
-                            </div>
-                        </div>
+          <!-- 테스트-->
+          <section style="margin-top: 45px; padding: 0 18px">
+            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
+            <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+              {% for review in best_reviews %}
+              <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
+                <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}"></a>
+                <div class="sc-lbhJGD jhNfXV">
+                  <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}">
+                    <h4>{{ review.title }}</h4>
+                    <div class="description-wrapper" style="overflow:hidden; height: calc(63px + 1.5rem);">
+                      {{ review.content | safe }}
                     </div>
-
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                        <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                        <div class="sc-lbhJGD jhNfXV">
-                            <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                                <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                                <div class="description-wrapper">
-                                    <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의
-                                        일환으로 기술 블로그를
-                                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="sub-info">
-                                <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                                <!-- -->개의 댓글
+                  </a>
+                  <div class="sub-info">
+                    <span>{{ review.created_at }}</span><span class="separator">·</span><span>
+                      {{ review.articlecomment_set.count }} <!-- -->개의 댓글
                     </span>
-                            </div>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy">
-                            <a class="userinfo" href="/@tosspayments"><img
-                                    src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                                    alt="user thumbnail of tosspayments">
-                                <span>by
-                      <b>tosspayments</b></span></a>
-                            <div class="likes">
-                                <svg width="24" height="24" viewbox="0 0 24 24">
-                                    <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                                </svg>
-                                53
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                        <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                        <div class="sc-lbhJGD jhNfXV">
-                            <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                                <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                                <div class="description-wrapper">
-                                    <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의
-                                        일환으로 기술 블로그를
-                                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="sub-info">
-                                <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                                <!-- -->개의 댓글
-                    </span>
-                            </div>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy">
-                            <a class="userinfo" href="/@tosspayments"><img
-                                    src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                                    alt="user thumbnail of tosspayments">
-                                <span>by
-                      <b>tosspayments</b></span></a>
-                            <div class="likes">
-                                <svg width="24" height="24" viewbox="0 0 24 24">
-                                    <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                                </svg>
-                                53
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                        <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                        <div class="sc-lbhJGD jhNfXV">
-                            <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                                <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                                <div class="description-wrapper">
-                                    <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의
-                                        일환으로 기술 블로그를
-                                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="sub-info">
-                                <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                                <!-- -->개의 댓글
-                    </span>
-                            </div>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy">
-                            <a class="userinfo" href="/@tosspayments"><img
-                                    src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                                    alt="user thumbnail of tosspayments">
-                                <span>by
-                      <b>tosspayments</b></span></a>
-                            <div class="likes">
-                                <svg width="24" height="24" viewbox="0 0 24 24">
-                                    <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                                </svg>
-                                53
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </section>
-            <!-- 커뮤니티 베스트리뷰 -->
+                <div class="sc-iNGGcK UXOKy">
+                  <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}"">
+                    <img src=" {{ review.user.profile_image.url }}" alt="user thumbnail of tosspayments">
+                    <span>by
+                      <b>{{ review.user.nick_name }}</b></span></a>
+                  <div class="likes">
+                    <svg width="24" height="24" viewbox="0 0 24 24">
+                      <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                    </svg>{{ review.like_users.count }}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </section>
+          <!-- 커뮤니티 베스트리뷰 -->
 
-            <!-- 커뮤니티 리뷰 -->
-            <section style="margin-top: 45px; padding: 0 18px">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">리뷰목록</h2>
-                    <!-- <div class="create-wrapper"> <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;"> <div class="create"> 리뷰작성 <img class="plane" src="{% static 'communities/img/create.png' %}" alt=""> </div> </a> </div> -->
-                    <div class="create-wrapper">
-                        <a href="{% url 'communities:review_create' country_code %}"
-                           style="text-decoration: none; color:rgb(51, 51, 51)">
-                            <div class="m-create" style="font-size: 14px;">
-                                리뷰작성
-                            </div>
-                        </a>
+          <!-- 커뮤니티 리뷰 -->
+          <section style="margin-top: 45px; padding: 0 18px">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">리뷰목록</h2>
+              <!-- <div class="create-wrapper"> <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;"> <div class="create"> 리뷰작성 <img class="plane" src="{% static 'communities/img/create.png' %}" alt=""> </div> </a> </div> -->
+              <div class="create-wrapper">
+                <a href="{% url 'communities:review_create' country_code %}"
+                  style="text-decoration: none; color:rgb(51, 51, 51)">
+                  <div class="m-create" style="font-size: 14px;">
+                    리뷰작성
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div
+              style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
+              <ul style="padding-top: 15px; padding: 0px;">
+                {% for review in reviews %}
+                <div class="review-row">
+                  <div class="row">
+                    <div class="col-8" style="padding:0">
+                      <a href="{% url 'communities:detail' country_code review.pk %}"
+                        style="text-decoration: none; color: rgb(51, 51, 51)">
+                        <p class="review-title mb-0">
+                          {{ review.title }}
+                        </p>
+                      </a>
+                      <!-- 닉네임|작성일 -->
+                      <p class="review-date">{{ review.user }}|{{ review.created_at }}</p>
+                      <div class="like-wrapper">
+                        <!-- 좋아요 -->
+                        <div class="likes">
+                          <svg width="24" height="24" viewbox="0 0 24 24">
+                            <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                          </svg>{{ review.like_users.count }}
+                        </div>
+                      </div>
                     </div>
+                    <div class="col-4 review-list">
+                      {% if review.image %}
+                      <div>
+                        <img class="review-img" src="{{ review.image.url }}" alt="">
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
-                <div
-                        style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
-                    <ul style="padding-top: 15px; padding: 0px;">
-                        {% for article in articles %}
-                            <div class="review-row">
-                                <div class="row">
-                                    <div class="col-8" style="padding:0">
-                                        <a href="{% url 'communities:detail' country_code article.pk %}"
-                                           style="text-decoration: none; color: rgb(51, 51, 51)">
-                                            <p class="review-title mb-0">
-                                                {{ article.title }}
-                                            </p>
-                                        </a>
-                                        <!-- 닉네임|작성일 -->
-                                        <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-                                        <div class="icons-wrapper">
-                                            <div class="icons">
-                                                <!-- 좋아요 -->
-                                                <div class="icon">
-                            <span class="material-icons md-18">
-                              thumb_up_alt
-                            </span>
-                                                    <span>{{ article.like_users.count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 review-list">
-                                        {% if article.image %}
-                                            <div>
-                                                <img class="review-img" src="{{ article.image.url }}" alt="">
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </section>
+                {% endfor %}
+              </ul>
+            </div>
+          </section>
         </div>
 
         <!-- <div class="container"> <div class="review-wrapper"> <div class="notion-card"> <div class="text"> <p class="fw-bold">공지 사항</p> <hr> 새로운 사항이 생겼습니다. <hr> 새로운 공지사항2 </div> </div> <div class="notion-card"> <div class="text"> <p class="fw-bold">베스트 리뷰</p> <hr> <div class="best-review row row-cols-2 g-4"> <div class="col best-box"> <div class="rank"> <span class="rank_num">1</span>내용입니다. </div> <div class="rank"> <span class="rank_num">2</span>내용입니다. </div> <div class="rank"> <span class="rank_num">3</span>내용입니다. </div> </div> <div class="col best-box"> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> </div> </div> </div> </div> -->
