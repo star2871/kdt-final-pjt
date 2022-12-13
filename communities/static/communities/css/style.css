@@ -34,11 +34,12 @@ span,
     padding: 0;
     margin: 0;
 }
-
+video { width: 100%; }
 .community-header {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -58,7 +59,9 @@ span,
 
 .index-text {
     display: inline;
+    position: absolute; top: 20%; width: 100%;
     vertical-align: middle;
+    text-align: center;
     border-right: .05em solid black;
     color: white;
     animation: cursor 0.4s ease infinite;
@@ -849,6 +852,7 @@ span,
 
 .feed-comment-list .comment-wrapper {
     min-height: 0;
+}
 
 .hearts-wrapper:not(.nav-wrapper .hearts-wrapper) {
     display: flex;
