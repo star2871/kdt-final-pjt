@@ -16,7 +16,8 @@
     <article
       style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
       <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} - 기한없음</span>
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} -
+          {{country.country_name}}</span>
       </div>
       <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
@@ -229,8 +230,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </section>
 
@@ -306,6 +305,16 @@
           <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin: 70px 0; padding: 0 18px">
+  <div style="margin: 17px auto 0; max-width: 732px;">
+    <div style="text-align: center;">
+      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p><a
+        style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:review' country.country_code %}">커뮤니티</a>
     </div>
   </div>
 </section>
