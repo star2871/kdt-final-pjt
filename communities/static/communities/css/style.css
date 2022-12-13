@@ -245,6 +245,10 @@ video { width: 100%; }
     letter-spacing: 0.5px;
 }
 
+.review-list {
+    height: 100%;
+}
+
 .review-list>img {
     border-radius: 10px;
     width: 45px;
@@ -265,7 +269,8 @@ video { width: 100%; }
 
 .review-list>div>.review-img {
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 14px;
+    width: 100%;
 }
 
 .review-list>div {
