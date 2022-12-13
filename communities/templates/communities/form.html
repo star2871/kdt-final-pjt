@@ -180,8 +180,7 @@
 
           <div class="row mt-1">
             <div class="col-auto">
-              현재:&nbsp;<a
-                href="/media/images/KakaoTalk_20221109_220640967_8TcgvmL.jpg">images/KakaoTalk_20221109_220640967_8TcgvmL.jpg</a>
+              현재:&nbsp;<a 현재:&nbsp;<a href="{{ article.image.url }}">{{ article.image.url|slice:"7:" }}</a>
             </div>
 
             <div class="col-auto">
@@ -190,12 +189,9 @@
                 <label for="image-clear_id" class="form-check-label">취소</label>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-
-      {% bootstrap_form article_form %}
 
       {% endif %}
       <section class="main2">

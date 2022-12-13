@@ -962,7 +962,7 @@ video {
         transform: rotate(-5deg);
     }
 }
-
+/* 인덱스 */
 .index-text {
     font-size: 1.4rem !important;
     font-weight: 500;
@@ -986,4 +986,16 @@ video {
     0%{border-right: 1px solid transparent} 
     50%{border-right: 1px solid #000} 
     100%{border-right: 1px solid transparent} 
+}
+
+.description-wrapper {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 80px;
+    white-space: normal;
+    word-break: break-all;
+    padding-top: 10px;
+    margin-bottom: 1.5rem;
 }
