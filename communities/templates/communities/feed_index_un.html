@@ -104,3 +104,121 @@
     </form>
   </div>
 </div>
+
+<!--댓글속 대댓글 부분-->
+<div id="subcomment-{{ comment.pk }}-commentlist" data-comment-id="{{ comment.pk }}" class="sub-comment-list">
+  <!-- 이 댓글을 참조하고 있는 모든 대댓글을 순회 -->
+  <div id="comment-{{ comment.pk }}-sub-comments-section">
+    {% for sub_comment in comment.articlecomment_set.all %}
+      <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
+        <div class="comment-wrapper" id="comment-{{ sub_comment.pk }}-wrapper">
+          <div class="comment-user">
+            <div class="comment-img-div">
+              {% if not comment.user.profile_image %}
+                <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진" class="comment-profile-img">
+              {% else %}
+                <img src="{{ sub_comment.user.profile_image.url }}" alt="" class="comment-profile-img">
+              {% endif %}
+            </div>
+          </div>
+          <div class="comment-main">
+            <div class="comment-user-date">
+              <p style="font-weight: 400;">{{ sub_comment.user.nick_name }}</p>
+              <p class="comment-date">
+                <!-- 작성일자 : ~시간 전 표시 -->
+                {% if comment.created_string == False %}
+                  <!-- 7일이 지나면 날짜로 출력 -->
+                  {{ comment.created_at | date:'m월 d일' }}
+                {% else %}
+                  <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                  {{ comment.created_string }}
+                {% endif %}
+              </p>
+            </div>
+            <p id="comment-{{ sub_comment.pk }}-update-hide">{{ sub_comment.content }}</p>
+            <div id="comment-{{ sub_comment.pk }}-update-form" class="update-form">
+              <textarea id="comment-{{ sub_comment.pk }}-update-content" type="text">{{ sub_comment.content }}</textarea>
+              <div class="buttons-update">
+                <button id="comment-{{ sub_comment.pk }}-update-cancel" data-comment-id="{{ sub_comment.pk }}" onclick="updateCommentCancel(this.id)">취소</button>
+                <button id="comment-{{ sub_comment.pk }}-update-btn" class="update-comment" data-article-id="{{ article.pk }}" data-comment-id="{{ sub_comment.pk }}" onclick="updateComment(this.id)">작성
+                </button>
+              </div>
+            </div>
+          </div>
+          {% if user.pk == sub_comment.user_id %}
+            <div id="comment-{{ sub_comment.pk}}-update-buttons" class="buttons">
+              <button id="comment-{{ sub_comment.pk }}-update" data-article-id="{{ article.pk }}" data-comment-id="{{ sub_comment.pk }}" onclick="getUpdateComment(this.id)">수정
+              </button>
+              <button id="comment-{{ sub_comment.pk }}-delete" data-article-id="{{ article.pk }}" data-comment-id="{{ sub_comment.pk }}" onclick="deleteComment(this.id)">삭제
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div id="comment-{{ comment.pk }}-create-sub-comment" class="sub-comment-create">
+    <form id="comment-{{ comment.pk }}-create-sub-comment-form" data-article-id="{{ article.pk }}" data-parent-id="{{ comment.pk }}" data-country-id="{{ country_code }}" onsubmit="submitSubComment(this.id)">
+      <div class="mb-3">
+        <label class="form-label" for="id_content">Content</label><input type="text" name="content" maxlength="150" class="form-control" placeholder="Content" required="" id="id_content"></div>
+      <input type="submit" value="제출">
+    </form>
+  </div>
+</div>
+
+<!--댓글 부분-->
+<div id="feed-{{ feed.pk }}-commentList" data-feed-id="{{ feed.pk }}" class="feed-comment-list">
+  {% for comment in feed.feedcomment_set.all %}
+    <div class="comment-row" id="comment-{{ comment.pk }}-row">
+      <div class="comment-wrapper" id="comment-{{ comment.pk }}-wrapper">
+        <div class="comment-user">
+          <div class="comment-img-div">
+            <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
+          </div>
+        </div>
+        <div class="comment-main">
+          <div class="comment-user-date">
+            <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
+            <p class="comment-date">
+              <!-- 작성일자 : ~시간 전 표시 -->
+              {% if comment.created_string == False %}
+                <!-- 7일이 지나면 날짜로 출력 -->
+                {{ comment.created_at | date:'m월 d일' }}
+              {% else %}
+                <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                {{ comment.created_string }}
+              {% endif %}
+            </p>
+          </div>
+          <p id="comment-{{ comment.pk }}-update-hide">{{ comment.content }}</p>
+          <div id="comment-{{ comment.pk }}-update-form" class="update-form">
+            <textarea id="comment-{{ comment.pk }}-update-content" type="text">{{ comment.content }}</textarea>
+            <div class="buttons-update">
+              <button id="comment-{{ comment.pk }}-update-cancel" data-comment-id="{{ comment.pk }}" onclick="updateCommentCancel(this.id)">취소</button>
+              <button id="comment-{{ comment.pk }}-update-btn" class="update-comment" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" onclick="updateComment(this.id)">작성
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- <button id="subcomment-{{ comment.pk }}" class="subcomment-btn" onclick="getCreateSubComment(this.id)">답글달기</button> -->
+        {% if user.pk == comment.user_id %}
+          <div id="comment-{{comment.pk}}-update-buttons" class="buttons">
+            <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" onclick="getUpdateComment(this.id)">수정
+            </button>
+            <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}" onclick="deleteComment(this.id)">삭제
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+
+<div id="comment-{{ feed.pk }}-create-comment">
+<form id="comment-{{ feed.pk }}-create-comment-form" data-feed-id="{{ feed.pk }}" data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
+  {% bootstrap_form feed_comment_form %}
+  {% bootstrap_button "답글 생성" %}
+</form>
+</div>

@@ -61,3 +61,8 @@ class ArticleCommentForm(forms.ModelForm):
     class Meta:
         model = ArticleComment
         fields = ["content",]
+
+class FeedCommentForm(forms.ModelForm):
+    class Meta:
+        model = FeedComment
+        fields = ["content",]
