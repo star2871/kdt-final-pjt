@@ -314,9 +314,13 @@
 <section style="margin: 70px 0; padding: 0 18px">
   <div style="margin: 17px auto 0; max-width: 732px;">
     <div style="text-align: center;">
-      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p><a
-        style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
-        href="{% url 'communities:review' country.country_code %}">커뮤니티</a>
+      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p>
+      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:review' country.country_code %}">후기</a>
+      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:advice' country.country_code %}">꿀팁</a>
+      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:feed' country.country_code %}">담벼락</a>
     </div>
   </div>
 </section>

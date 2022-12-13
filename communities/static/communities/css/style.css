@@ -34,7 +34,11 @@ span,
     padding: 0;
     margin: 0;
 }
-video { width: 100%; }
+
+video {
+    width: 100%;
+}
+
 .community-header {
     display: flex;
     justify-content: center;
@@ -50,7 +54,7 @@ video { width: 100%; }
 
 @media (min-width: 1024px) {
     .community-header {
-        height: 500px;
+        height: 700px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -59,7 +63,9 @@ video { width: 100%; }
 
 .index-text {
     display: inline;
-    position: absolute; top: 20%; width: 100%;
+    position: absolute;
+    top: 20%;
+    width: 100%;
     vertical-align: middle;
     text-align: center;
     border-right: .05em solid black;
@@ -232,7 +238,7 @@ video { width: 100%; }
     left: 62px;
     margin: 0px 2px;
     font-size: 23px;
-    color:  #8c959b;
+    color: #8c959b;
     top: 5px;
 }
 
@@ -772,7 +778,7 @@ video { width: 100%; }
 }
 
 
-.feed-update-form > textarea {
+.feed-update-form>textarea {
     font-size: 14px;
     resize: none;
     height: 60px;
@@ -785,7 +791,7 @@ video { width: 100%; }
 }
 
 
-.feed-update-form > textarea:focus {
+.feed-update-form>textarea:focus {
     outline: none;
 }
 
@@ -852,7 +858,7 @@ video { width: 100%; }
     background-color: #cccccc21;
 }
 
-.feed-comment-list .comment-main > p {
+.feed-comment-list .comment-main>p {
     min-height: 36px;
 }
 
@@ -908,15 +914,15 @@ video { width: 100%; }
     align-items: center;
 }
 
-.nav-wrapper > a {
+.nav-wrapper>a {
     color: inherit;
 }
 
-.nav-wrapper > a:hover {
+.nav-wrapper>a:hover {
     opacity: 0.5;
 }
 
-.nav-wrapper > a > span:not(.material-icons) {
+.nav-wrapper>a>span:not(.material-icons) {
     position: absolute;
     top: 2px;
     left: 95px;
