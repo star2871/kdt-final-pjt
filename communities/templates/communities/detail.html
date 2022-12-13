@@ -23,8 +23,9 @@
                     <img src="{{ article.user.profile_image.url }}" alt="" class="profile-img">
                 </div>
                 <div class="detail-username">
-                    {{ article.user.nick_name }}
+                    {{ article.user.nick_name|default:"여행전날"}}
                 </div>
+                ·
                 <!-- 작성일 -->
                 <div class="detail-created">
                     <!-- 작성일자 : ~시간 전 표시 -->
@@ -35,10 +36,6 @@
                     <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
                     {{ article.created_string }}
                     {% endif %}
-                </div>
-                <!-- 조회 수 -->
-                <div>
-                    조회 32
                 </div>
             </div>
             <!-- 여행 기간 -->
@@ -51,222 +48,257 @@
                     ~</span><span>{{ article.travel_end | date:" o. n. j" }}</span>
             </div>
         </div>
+        <div class="hearts-wrapper" style="display: flex; align-items:center;">
+            {% if request.user.is_authenticated %}
+            <!-- 좋아요 -->
+            {% if request.user in article.like_users.all %}
+            <div class="heart-fill like" data-country-code="{{ country_code }}" data-article-id="{{ article.pk }}">
+            </div>
+            {% else %}
+            <div class="heart like" data-country-code="{{ country_code }}" data-article-id="{{ article.pk }}">
+            </div>
+            {% endif %}
+            {% else %}
+            <div class="heart" id="none-login" data-country-code="{{ country_code }}"
+                data-article-id="{{ article.pk }}">
+            </div>
+            {% endif %}
+            <span class="article-like">{{ article.like_users.count }}</span>
+        </div>
         <hr>
         <!-- 리뷰 내용 -->
         <div class="detail-content">
             {{ article.content | safe }}
         </div>
 
-        {% if request.user in article.like_users.all %}
-        <div class="heart-fill" id="heart" data-country-code="{{ country_code }}" data-article-id="{{ article.pk }}">
-            {% else %}
-            <div class="heart" id="heart" data-country-code="{{ country_code }}" data-article-id="{{ article.pk }}">
-                {% endif %}
-
-            </div>
-            <!-- 댓글 작성폼 -->
-            <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}"
-                data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
-                {% csrf_token %}
-                {% bootstrap_form comment_form %}
-                <input type="submit" value="제출">
-            </form>
-            <!-- 댓글 영역 -->
-            <a name="comment" class="comment-section">
-                <span><span style="color: #428ce8;" class="comment_count">{{ comment_count }}</span>개의 댓글</span>
-                <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
-                    {% for comment in comments %}
-                    {% if not comment.parent_id %}
-                    <div class="comment-row" id="comment-{{ comment.pk }}-row">
-                        <div class="comment-wrapper" id="comment-{{ comment.pk }}-wrapper">
-                            <div class="comment-user">
-                                <div class="comment-img-div">
-                                    {% if not comment.user.profile_image %}
-                                    <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
-                                        class="comment-profile-img">
+        <!-- 댓글 작성폼 -->
+        <form id="article-{{ article.pk }}-comment-create-form" data-article-id="{{ article.pk }}"
+            data-country-id="{{ country_code }}" onsubmit="submitComment(this.id)">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            <input type="submit" value="제출">
+        </form>
+        <!-- 댓글 영역 -->
+        <a name="comment" class="comment-section">
+            <span><span style="color: #428ce8;" class="comment_count">{{ comment_count }}</span>개의 댓글</span>
+            <div id="comment-list-{{ article.pk }}" data-article-id="{{ article.pk }}">
+                {% for comment in comments %}
+                {% if not comment.parent_id %}
+                <div class="comment-row" id="comment-{{ comment.pk }}-row">
+                    <div class="comment-wrapper" id="comment-{{ comment.pk }}-wrapper">
+                        <div class="comment-user">
+                            <div class="comment-img-div">
+                                {% if not comment.user.profile_image %}
+                                <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
+                                    class="comment-profile-img">
+                                {% else %}
+                                <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="comment-main">
+                            <div class="comment-user-date">
+                                <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
+                                <p class="comment-date">
+                                    <!-- 작성일자 : ~시간 전 표시 -->
+                                    {% if comment.created_string == False %}
+                                    <!-- 7일이 지나면 날짜로 출력 -->
+                                    {{ comment.created_at | date:'m월 d일' }}
                                     {% else %}
-                                    <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
+                                    <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                                    {{ comment.created_string }}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <p id="comment-{{ comment.pk }}-update-hide">{{ comment.content }}</p>
+                            <div id="comment-{{ comment.pk }}-update-form" class="update-form">
+                                <textarea id="comment-{{ comment.pk }}-update-content"
+                                    type="text">{{ comment.content }}</textarea>
+                                <div class="buttons-update">
+                                    <button id="comment-{{ comment.pk }}-update-cancel"
+                                        data-comment-id="{{ comment.pk }}"
+                                        onclick="updateCommentCancel(this.id)">취소</button>
+                                    <button id="comment-{{ comment.pk }}-update-btn" class="update-comment"
+                                        data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}"
+                                        onclick="updateComment(this.id)">작성
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="subcomment-{{ comment.pk }}" class="subcomment-btn"
+                            onclick="getCreateSubComment(this.id)">답글달기</button>
+                        {% if user.pk == comment.user_id %}
+                        <div id="comment-{{comment.pk}}-update-buttons" class="buttons">
+                            <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}"
+                                data-comment-id="{{ comment.pk }}" onclick="getUpdateComment(this.id)">수정
+                            </button>
+                            <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}"
+                                data-comment-id="{{ comment.pk }}" onclick="deleteComment(this.id)">삭제
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div id="subcomment-{{ comment.pk }}-commentlist" data-comment-id="{{ comment.pk }}"
+                        class="sub-comment-list">
+                        <!-- 이 댓글을 참조하고 있는 모든 대댓글을 순회 -->
+                        <div id="comment-{{ comment.pk }}-sub-comments-section">
+                            {% for sub_comment in comment.articlecomment_set.all %}
+                            <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
+                                <div class="comment-wrapper" id="comment-{{ sub_comment.pk }}-wrapper">
+                                    <div class="comment-user">
+                                        <div class="comment-img-div">
+                                            {% if not comment.user.profile_image %}
+                                            <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
+                                                class="comment-profile-img">
+                                            {% else %}
+                                            <img src="{{ sub_comment.user.profile_image.url }}" alt=""
+                                                class="comment-profile-img">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="comment-main">
+                                        <div class="comment-user-date">
+                                            <p style="font-weight: 400;">{{ sub_comment.user.nick_name }}</p>
+                                            <p class="comment-date">
+                                                <!-- 작성일자 : ~시간 전 표시 -->
+                                                {% if comment.created_string == False %}
+                                                <!-- 7일이 지나면 날짜로 출력 -->
+                                                {{ comment.created_at | date:'m월 d일' }}
+                                                {% else %}
+                                                <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
+                                                {{ comment.created_string }}
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <p id="comment-{{ sub_comment.pk }}-update-hide">{{ sub_comment.content }}
+                                        </p>
+                                        <div id="comment-{{ sub_comment.pk }}-update-form" class="update-form">
+                                            <textarea id="comment-{{ sub_comment.pk }}-update-content"
+                                                type="text">{{ sub_comment.content }}</textarea>
+                                            <div class="buttons-update">
+                                                <button id="comment-{{ sub_comment.pk }}-update-cancel"
+                                                    data-comment-id="{{ sub_comment.pk }}"
+                                                    onclick="updateCommentCancel(this.id)">취소</button>
+                                                <button id="comment-{{ sub_comment.pk }}-update-btn"
+                                                    class="update-comment" data-article-id="{{ article.pk }}"
+                                                    data-comment-id="{{ sub_comment.pk }}"
+                                                    onclick="updateComment(this.id)">작성
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if user.pk == sub_comment.user_id %}
+                                    <div id="comment-{{ sub_comment.pk}}-update-buttons" class="buttons">
+                                        <button id="comment-{{ sub_comment.pk }}-update"
+                                            data-article-id="{{ article.pk }}" data-comment-id="{{ sub_comment.pk }}"
+                                            onclick="getUpdateComment(this.id)">수정
+                                        </button>
+                                        <button id="comment-{{ sub_comment.pk }}-delete"
+                                            data-article-id="{{ article.pk }}" data-comment-id="{{ sub_comment.pk }}"
+                                            onclick="deleteComment(this.id)">삭제
+                                        </button>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="comment-main">
-                                <div class="comment-user-date">
-                                    <p style="font-weight: 400;">{{ comment.user.nick_name }}</p>
-                                    <p class="comment-date">
-                                        <!-- 작성일자 : ~시간 전 표시 -->
-                                        {% if comment.created_string == False %}
-                                        <!-- 7일이 지나면 날짜로 출력 -->
-                                        {{ comment.created_at | date:'m월 d일' }}
-                                        {% else %}
-                                        <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                                        {{ comment.created_string }}
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <p id="comment-{{ comment.pk }}-update-hide">{{ comment.content }}</p>
-                                <div id="comment-{{ comment.pk }}-update-form" class="update-form">
-                                    <textarea id="comment-{{ comment.pk }}-update-content"
-                                        type="text">{{ comment.content }}</textarea>
-                                    <div class="buttons-update">
-                                        <button id="comment-{{ comment.pk }}-update-cancel"
-                                            data-comment-id="{{ comment.pk }}"
-                                            onclick="updateCommentCancel(this.id)">취소</button>
-                                        <button id="comment-{{ comment.pk }}-update-btn" class="update-comment"
-                                            data-article-id="{{ article.pk }}" data-comment-id="{{ comment.pk }}"
-                                            onclick="updateComment(this.id)">작성
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button id="subcomment-{{ comment.pk }}" class="subcomment-btn"
-                                onclick="getCreateSubComment(this.id)">답글달기</button>
-                            {% if user.pk == comment.user_id %}
-                            <div id="comment-{{comment.pk}}-update-buttons" class="buttons">
-                                <button id="comment-{{ comment.pk }}-update" data-article-id="{{ article.pk }}"
-                                    data-comment-id="{{ comment.pk }}" onclick="getUpdateComment(this.id)">수정
-                                </button>
-                                <button id="comment-{{ comment.pk }}-delete" data-article-id="{{ article.pk }}"
-                                    data-comment-id="{{ comment.pk }}" onclick="deleteComment(this.id)">삭제
-                                </button>
-                            </div>
-                            {% endif %}
+                            {% endfor %}
                         </div>
-                        <div id="subcomment-{{ comment.pk }}-commentlist" data-comment-id="{{ comment.pk }}"
-                            class="sub-comment-list">
-                            <!-- 이 댓글을 참조하고 있는 모든 대댓글을 순회 -->
-                            <div id="comment-{{ comment.pk }}-sub-comments-section">
-                                {% for sub_comment in comment.articlecomment_set.all %}
-                                <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
-                                    <div class="comment-wrapper" id="comment-{{ sub_comment.pk }}-wrapper">
-                                        <div class="comment-user">
-                                            <div class="comment-img-div">
-                                                {% if not comment.user.profile_image %}
-                                                <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
-                                                    class="comment-profile-img">
-                                                {% else %}
-                                                <img src="{{ sub_comment.user.profile_image.url }}" alt=""
-                                                    class="comment-profile-img">
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="comment-main">
-                                            <div class="comment-user-date">
-                                                <p style="font-weight: 400;">{{ sub_comment.user.nick_name }}</p>
-                                                <p class="comment-date">
-                                                    <!-- 작성일자 : ~시간 전 표시 -->
-                                                    {% if comment.created_string == False %}
-                                                    <!-- 7일이 지나면 날짜로 출력 -->
-                                                    {{ comment.created_at | date:'m월 d일' }}
-                                                    {% else %}
-                                                    <!-- 7일이 지나기 전이라면 함수 대입한 결과 -->
-                                                    {{ comment.created_string }}
-                                                    {% endif %}
-                                                </p>
-                                            </div>
-                                            <p id="comment-{{ sub_comment.pk }}-update-hide">{{ sub_comment.content }}
-                                            </p>
-                                            <div id="comment-{{ sub_comment.pk }}-update-form" class="update-form">
-                                                <textarea id="comment-{{ sub_comment.pk }}-update-content"
-                                                    type="text">{{ sub_comment.content }}</textarea>
-                                                <div class="buttons-update">
-                                                    <button id="comment-{{ sub_comment.pk }}-update-cancel"
-                                                        data-comment-id="{{ sub_comment.pk }}"
-                                                        onclick="updateCommentCancel(this.id)">취소</button>
-                                                    <button id="comment-{{ sub_comment.pk }}-update-btn"
-                                                        class="update-comment" data-article-id="{{ article.pk }}"
-                                                        data-comment-id="{{ sub_comment.pk }}"
-                                                        onclick="updateComment(this.id)">작성
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% if user.pk == sub_comment.user_id %}
-                                        <div id="comment-{{ sub_comment.pk}}-update-buttons" class="buttons">
-                                            <button id="comment-{{ sub_comment.pk }}-update"
-                                                data-article-id="{{ article.pk }}"
-                                                data-comment-id="{{ sub_comment.pk }}"
-                                                onclick="getUpdateComment(this.id)">수정
-                                            </button>
-                                            <button id="comment-{{ sub_comment.pk }}-delete"
-                                                data-article-id="{{ article.pk }}"
-                                                data-comment-id="{{ sub_comment.pk }}"
-                                                onclick="deleteComment(this.id)">삭제
-                                            </button>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+                        <div id="comment-{{ comment.pk }}-create-sub-comment" class="sub-comment-create">
+                            <form id="comment-{{ comment.pk }}-create-sub-comment-form"
+                                data-article-id="{{ article.pk }}" data-parent-id="{{ comment.pk }}"
+                                data-country-id="{{ country_code }}" onsubmit="submitSubComment(this.id)">
+                                <div class="mb-3">
+                                    <label class="form-label" for="id_content">Content</label><input type="text"
+                                        name="content" maxlength="150" class="form-control" placeholder="Content"
+                                        required="" id="id_content">
                                 </div>
-                                {% endfor %}
-                            </div>
-                            <div id="comment-{{ comment.pk }}-create-sub-comment" class="sub-comment-create">
-                                <form id="comment-{{ comment.pk }}-create-sub-comment-form"
-                                    data-article-id="{{ article.pk }}" data-parent-id="{{ comment.pk }}"
-                                    data-country-id="{{ country_code }}" onsubmit="submitSubComment(this.id)">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="id_content">Content</label><input type="text"
-                                            name="content" maxlength="150" class="form-control" placeholder="Content"
-                                            required="" id="id_content">
-                                    </div>
-                                    <input type="submit" value="제출">
-                                </form>
-                            </div>
+                                <input type="submit" value="제출">
+                            </form>
                         </div>
                     </div>
-                    {% endif %}
-                    {% empty %}
-                    <span id="comment-none">작성된 댓글이 없습니다.</span>
-                    {% endfor %}
                 </div>
+                {% endif %}
+                {% empty %}
+                <span id="comment-none">작성된 댓글이 없습니다.</span>
+                {% endfor %}
+            </div>
+        </a>
+    </div>
+    <!-- 사이드바 리모컨 -->
+    <div class="side-bar">
+        <div class="remote">
+            {% if user == article.user %}
+            <a href="{% url 'communities:review_update' country_code article.pk %}">
+                <span class="material-icons">
+                    edit
+                </span>
+            </a>
+            <hr>
+            <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
+                {% csrf_token %}
+                <span id="review_delete" class="material-icons">
+                    delete
+                </span>
+            </form>
+            {% else %}
+            <hr>
+            <span class="material-icons md-18">
+                thumb_up_alt
+            </span>
+            {% endif %}
+            <hr>
+            <a href="{% url 'communities:review' country_code %}">
+                <span class="material-icons">
+                    arrow_back
+                </span>
             </a>
         </div>
-        <!-- 사이드바 리모컨 -->
-        <div class="side-bar">
-            <div class="remote">
-                {% if user == article.user %}
-                <a href="{% url 'communities:review_update' country_code article.pk %}">
-                    <span class="material-icons">
-                        edit
-                    </span>
-                </a>
-                <hr>
-                <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
-                    {% csrf_token %}
-                    <span id="review_delete" class="material-icons">
-                        delete
-                    </span>
-                </form>
-                {% else %}
-                <a href="#comment">
-                    <span class="material-icons md-18">
-                        chat_bubble_outline
-                    </span>
-                </a>
-                <hr>
-                <span class="material-icons md-18">
-                    thumb_up_alt
-                </span>
-                {% endif %}
-                <hr>
-                <a href="{% url 'communities:review' country_code %}">
-                    <span class="material-icons">
-                        arrow_back
-                    </span>
-                </a>
-            </div>
-        </div>
     </div>
+</div>
 
-    <script>
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+<nav id="test">
+    <div class="nav-wrapper">
+        {% if request.user.is_authenticated %}
+        <div class="hearts-wrapper" style="display: flex; align-items:center;">
+            <!-- 좋아요 -->
+            {% if request.user in article.like_users.all %}
+            <div class="heart-fill like" id="heart" data-country-code="{{ country_code }}"
+                data-article-id="{{ article.pk }}">
+            </div>
+            {% else %}
+            <div class="heart like" id="heart" data-country-code="{{ country_code }}"
+                data-article-id="{{ article.pk }}">
+            </div>
+            {% endif %}
+            <span class="article-like">{{ article.like_users.count }}</span>
+        </div>
+        {% endif %}
+        <a href="#comment">
+            <span class="material-icons md-18">
+                chat_bubble_outline
+            </span>
+        </a>
+    </div>
+</nav>
 
-        const like = function (e) {
+<script>
+    const noneLikeBtn = document.querySelector('#none-login')
+    noneLikeBtn.addEventListener('click', function (e) {
+        e.target.classList.toggle("vibration")
+        setTimeout(function () {
+            alert("로그인이 필요한 서비스입니다.")
+            e.target.classList.remove("vibration")
+        }, 300)
+    })
+</script>
 
-
-
-
-        }
-
-        const heart = document.querySelector('#heart')
+<!-- 좋아요 -->
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const hearts = document.querySelectorAll('.like')
+    const articleLikes = document.querySelectorAll('.article-like')
+    console.log(hearts, articleLikes)
+    hearts.forEach((heart) => {
         heart.addEventListener('click', function (e) {
             axios({
                 method: 'post',
@@ -275,103 +307,112 @@
                     'X-CSRFToken': csrftoken
                 }
             }).then(response => {
+                articleLikes[0].innerText = response.data.like_count
+                articleLikes[1].innerText = response.data.like_count
                 if (response.data.likes === true) {
-                    heart.classList.toggle("heartis")
-                    heart.classList.add("heart-fill")
+                    hearts[0].classList.toggle("heartis")
+                    hearts[0].classList.add("heart-fill")
+                    hearts[1].classList.toggle("heartis")
+                    hearts[1].classList.add("heart-fill")
+
                 } else if (response.data.likes === "confirm") {
-                    heart.classList.toggle("vibration")
+                    hearts[0].classList.toggle("vibration")
                     setTimeout(function () {
                         alert("본인 게시글은 좋아요할 수 없습니다.")
-                        heart
-                            .classList
-                            .remove("vibration")
+                        hearts[0].classList.remove("vibration")
+                    }, 300)
+                    hearts[1].classList.toggle("vibration")
+                    setTimeout(function () {
+                        alert("본인 게시글은 좋아요할 수 없습니다.")
+                        hearts[1].classList.remove("vibration")
                     }, 300)
                 }
                 else {
-                    heart.classList.remove("heartis")
-                    heart.classList.remove("heart-fill")
-                    heart.classList.add("heart")
+                    hearts[0].classList.remove("heartis")
+                    hearts[0].classList.remove("heart-fill")
+                    hearts[0].classList.add("heart")
+                    hearts[1].classList.remove("heartis")
+                    hearts[1].classList.remove("heart-fill")
+                    hearts[1].classList.add("heart")
                 }
             })
         })
+    })
 
-    </script>
+</script>
 
-    <nav id="test">
-        <span><span style="color: #428ce8;">{{ article.articlecomment_set.count }}</span>개의 댓글</span>
-    </nav>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        let conPK = '{{ country_code }}';
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    let conPK = '{{ country_code }}';
 
-        function displayedAt(createdAt) {
-            let time = new Date(createdAt)
-            const milliSeconds = new Date() - time
-            const seconds = milliSeconds / 1000
-            if (seconds < 60)
-                return `방금 전`
-            const minutes = seconds / 60
-            if (minutes < 60)
-                return `${Math.floor(minutes)}분 전`
-            const hours = minutes / 60
-            if (hours < 24)
-                return `${Math.floor(hours)}시간 전`
-            const days = hours / 24
-            if (days < 7)
-                return `${Math.floor(days)}일 전`
-            const weeks = days / 7
-            if (weeks < 5)
-                return `${Math.floor(weeks)}주 전`
-            const months = days / 30
-            if (months < 12)
-                return `${Math.floor(months)}개월 전`
-            const years = days / 365
-            return `${Math.floor(years)}년 전`
+    function displayedAt(createdAt) {
+        let time = new Date(createdAt)
+        const milliSeconds = new Date() - time
+        const seconds = milliSeconds / 1000
+        if (seconds < 60)
+            return `방금 전`
+        const minutes = seconds / 60
+        if (minutes < 60)
+            return `${Math.floor(minutes)}분 전`
+        const hours = minutes / 60
+        if (hours < 24)
+            return `${Math.floor(hours)}시간 전`
+        const days = hours / 24
+        if (days < 7)
+            return `${Math.floor(days)}일 전`
+        const weeks = days / 7
+        if (weeks < 5)
+            return `${Math.floor(weeks)}주 전`
+        const months = days / 30
+        if (months < 12)
+            return `${Math.floor(months)}개월 전`
+        const years = days / 365
+        return `${Math.floor(years)}년 전`
+    }
+
+    const getDisplay = function () {
+        const subComListAll = document.querySelectorAll('.sub-comment-list')
+        const displayObj = {}
+        for (let n = 0; n < subComListAll.length; n++) {
+            let subcomId = subComListAll[n].dataset.commentId
+            displayObj[`${subcomId}`] = getComputedStyle(subComListAll[n]).display
+            // displayObj.base = getDisplay(subComListAll[n])
+            // console.log(`${n}번째 댓글 영역입니다.`)
         }
+        return displayObj
+    }
 
-        const getDisplay = function () {
-            const subComListAll = document.querySelectorAll('.sub-comment-list')
-            const displayObj = {}
-            for (let n = 0; n < subComListAll.length; n++) {
-                let subcomId = subComListAll[n].dataset.commentId
-                displayObj[`${subcomId}`] = getComputedStyle(subComListAll[n]).display
-                // displayObj.base = getDisplay(subComListAll[n])
-                // console.log(`${n}번째 댓글 영역입니다.`)
-            }
-            return displayObj
-        }
+    const submitComment = function (e) {
+        event.preventDefault();
+        // 현재 답글 영역값 저장
+        const baseDisplay = getDisplay()
+        const commentForm = document.querySelector(`#${e}`);
 
-        const submitComment = function (e) {
-            event.preventDefault();
-            // 현재 답글 영역값 저장
-            const baseDisplay = getDisplay()
-            const commentForm = document.querySelector(`#${e}`);
+        const pk = event.target.dataset.articleId;
+        const country = event.target.dataset.countryId;
+        console.log("댓글 생성 이벤트 발생")
 
-            const pk = event.target.dataset.articleId;
-            const country = event.target.dataset.countryId;
-            console.log("댓글 생성 이벤트 발생")
+        axios({
+            method: 'post',
+            url: `/communities/${conPK}/review/${pk}/review_detail/comment_create/`,
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            data: new FormData(commentForm)
+        }).then(response => {
 
-            axios({
-                method: 'post',
-                url: `/communities/${conPK}/review/${pk}/review_detail/comment_create/`,
-                headers: {
-                    'X-CSRFToken': csrftoken
-                },
-                data: new FormData(commentForm)
-            }).then(response => {
+            console.log(response)
 
-                console.log(response)
+            const commentList = document.querySelector(`#comment-list-${pk}`)
 
-                const commentList = document.querySelector(`#comment-list-${pk}`)
+            commentList.textContent = "";
 
-                commentList.textContent = "";
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
 
-                const commentCount = document.querySelector('.comment_count')
-                commentCount.innerText = response.data.comments_data.length
-
-                for (let i = 0; i < response.data.comments_data.length; i++) {
-                    let date = displayedAt(response.data.comments_data[i].created_at)
-                    commentList.insertAdjacentHTML('beforeend', `
+            for (let i = 0; i < response.data.comments_data.length; i++) {
+                let date = displayedAt(response.data.comments_data[i].created_at)
+                commentList.insertAdjacentHTML('beforeend', `
                     <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
                         <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
                         <!-- 작성자 프로필 사진-->
@@ -433,9 +474,9 @@
                         </div>
                     </div>`)
 
-                    const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
-                    if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
-                        commentWrapper.insertAdjacentHTML('beforeend', `
+                const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
+                if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
+                    commentWrapper.insertAdjacentHTML('beforeend', `
                 <div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
                     <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -444,18 +485,18 @@
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
                     </button>
                 </div>`)
-                    }
+                }
 
-                    if ("sub_comments_data" in response.data.comments_data[i]) {
-                        const comment = response
-                            .data
-                            .comments_data[i]
-                        const subAll = comment.sub_comments_data
+                if ("sub_comments_data" in response.data.comments_data[i]) {
+                    const comment = response
+                        .data
+                        .comments_data[i]
+                    const subAll = comment.sub_comments_data
 
-                        for (let j = 0; j < subAll.length; j++) {
-                            let sub_date = displayedAt(subAll[j].created_at)
-                            const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
-                            subSection.insertAdjacentHTML('beforeend', `
+                    for (let j = 0; j < subAll.length; j++) {
+                        let sub_date = displayedAt(subAll[j].created_at)
+                        const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
+                        subSection.insertAdjacentHTML('beforeend', `
                         <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                             <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                                 <div class="comment-user">
@@ -490,9 +531,9 @@
                             </div>
                         `)
 
-                            const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-                            if (subAll[j].user_pk === subAll[j].request_user_pk) {
-                                subCommentWrapper.insertAdjacentHTML('beforeend', `
+                        const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
+                        if (subAll[j].user_pk === subAll[j].request_user_pk) {
+                            subCommentWrapper.insertAdjacentHTML('beforeend', `
                         <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
                             <button id="comment-${subAll[j].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                                 data-comment-id="${subAll[j].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -501,103 +542,103 @@
                                 data-comment-id="${subAll[j].comment_pk}" onclick="deleteComment(this.id)">삭제
                             </button>
                         </div>`)
-                            }
                         }
                     }
                 }
+            }
 
-                // 저장된 답글 영역으로 돌려주기
-                for (let m = 0; m < response.data.comments_data.length; m++) {
-                    let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
-                    const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
-                    // console.log(subComLi)
-                    // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
-                    const base = baseDisplay[
-                        `${response
-                            .data
-                            .comments_data[m]
-                            .comment_pk}`
-                    ]
-                    subComLi.style.cssText = `display: ${base}`
-                    if (subComLi.style.display === "block") {
-                        getSubBtn.innerText = "숨기기"
-                    } else {
-                        getSubBtn.innerText = "답글달기"
-                    }
+            // 저장된 답글 영역으로 돌려주기
+            for (let m = 0; m < response.data.comments_data.length; m++) {
+                let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+                const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+                // console.log(subComLi)
+                // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
+                const base = baseDisplay[
+                    `${response
+                        .data
+                        .comments_data[m]
+                        .comment_pk}`
+                ]
+                subComLi.style.cssText = `display: ${base}`
+                if (subComLi.style.display === "block") {
+                    getSubBtn.innerText = "숨기기"
+                } else {
+                    getSubBtn.innerText = "답글달기"
                 }
-                commentForm.reset();
-            })
-        }
+            }
+            commentForm.reset();
+        })
+    }
 
-        // 수정 버튼
-        const getUpdateComment = function (e) {
-            console.log(e)
-            const btNs = document.querySelector(`#${e}-buttons`)
-            const updateCommentForm = document.querySelector(`#${e}-form`);
-            const commentContent = document.querySelector(`#${e}-hide`);
-            const commentBase = document
-                .querySelector(`#${e}-hide`)
-                .innerText;
-            const commentUpdateContent = document.querySelector(`#${e}-content`)
-            btNs.style.display = "none";
-            commentContent.style.display = "none";
-            updateCommentForm.style.display = "block";
-        }
+    // 수정 버튼
+    const getUpdateComment = function (e) {
+        console.log(e)
+        const btNs = document.querySelector(`#${e}-buttons`)
+        const updateCommentForm = document.querySelector(`#${e}-form`);
+        const commentContent = document.querySelector(`#${e}-hide`);
+        const commentBase = document
+            .querySelector(`#${e}-hide`)
+            .innerText;
+        const commentUpdateContent = document.querySelector(`#${e}-content`)
+        btNs.style.display = "none";
+        commentContent.style.display = "none";
+        updateCommentForm.style.display = "block";
+    }
 
-        const test = function (e) {
-            console.log("이벤트 발생")
-        }
+    const test = function (e) {
+        console.log("이벤트 발생")
+    }
 
-        // 작성 취소
-        const updateCommentCancel = function (e) {
-            const comPk = event.target.dataset.commentId
-            const btNs = document.querySelector(`#comment-${comPk}-update-buttons`)
-            const updateCommentForm = document.querySelector(`#comment-${comPk}-update-form`);
-            const commentContent = document.querySelector(`#comment-${comPk}-update-hide`)
-            const commentBase = document
-                .querySelector(`#comment-${comPk}-update-hide`)
-                .innerText;
-            const updateBase = document
-                .querySelector(`#comment-${comPk}-update-content`)
-                .innerText;
-            commentContent.style.display = "block";
-            updateCommentForm.style.display = "none";
-            btNs.style.display = "";
-        }
+    // 작성 취소
+    const updateCommentCancel = function (e) {
+        const comPk = event.target.dataset.commentId
+        const btNs = document.querySelector(`#comment-${comPk}-update-buttons`)
+        const updateCommentForm = document.querySelector(`#comment-${comPk}-update-form`);
+        const commentContent = document.querySelector(`#comment-${comPk}-update-hide`)
+        const commentBase = document
+            .querySelector(`#comment-${comPk}-update-hide`)
+            .innerText;
+        const updateBase = document
+            .querySelector(`#comment-${comPk}-update-content`)
+            .innerText;
+        commentContent.style.display = "block";
+        updateCommentForm.style.display = "none";
+        btNs.style.display = "";
+    }
 
-        // 댓글 수정
-        const updateComment = function (e) {
-            const commentValue = document
-                .querySelector(`#comment-${event.target.dataset.commentId}-update-content`)
-                .value;
-            const pk = event.target.dataset.articleId;
-            const coPk = event.target.dataset.commentId;
-            const country = event.target.dataset.countryId;
-            const baseDisplay = getDisplay()
+    // 댓글 수정
+    const updateComment = function (e) {
+        const commentValue = document
+            .querySelector(`#comment-${event.target.dataset.commentId}-update-content`)
+            .value;
+        const pk = event.target.dataset.articleId;
+        const coPk = event.target.dataset.commentId;
+        const country = event.target.dataset.countryId;
+        const baseDisplay = getDisplay()
 
-            axios({
-                method: 'post',
-                url: `/communities/${conPK}/review/${pk}/review_detail/${coPk}/comment_update/`,
-                headers: {
-                    'X-CSRFToken': csrftoken
-                },
-                data: {
-                    'content': commentValue
-                }
-            }).then(response => {
+        axios({
+            method: 'post',
+            url: `/communities/${conPK}/review/${pk}/review_detail/${coPk}/comment_update/`,
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            data: {
+                'content': commentValue
+            }
+        }).then(response => {
 
-                console.log(response)
+            console.log(response)
 
-                const commentList = document.querySelector(`#comment-list-${pk}`)
+            const commentList = document.querySelector(`#comment-list-${pk}`)
 
-                commentList.textContent = "";
+            commentList.textContent = "";
 
-                const commentCount = document.querySelector('.comment_count')
-                commentCount.innerText = response.data.comments_data.length
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
 
-                for (let i = 0; i < response.data.comments_data.length; i++) {
-                    let date = displayedAt(response.data.comments_data[i].created_at)
-                    commentList.insertAdjacentHTML('beforeend', `
+            for (let i = 0; i < response.data.comments_data.length; i++) {
+                let date = displayedAt(response.data.comments_data[i].created_at)
+                commentList.insertAdjacentHTML('beforeend', `
                     <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
                         <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
                         <!-- 작성자 프로필 사진-->
@@ -659,9 +700,9 @@
                         </div>
                     </div>`)
 
-                    const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
-                    if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
-                        commentWrapper.insertAdjacentHTML('beforeend', `
+                const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
+                if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
+                    commentWrapper.insertAdjacentHTML('beforeend', `
                 <div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
                     <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -670,18 +711,18 @@
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
                     </button>
                 </div>`)
-                    }
+                }
 
-                    if ("sub_comments_data" in response.data.comments_data[i]) {
-                        const comment = response
-                            .data
-                            .comments_data[i]
-                        const subAll = comment.sub_comments_data
+                if ("sub_comments_data" in response.data.comments_data[i]) {
+                    const comment = response
+                        .data
+                        .comments_data[i]
+                    const subAll = comment.sub_comments_data
 
-                        for (let j = 0; j < subAll.length; j++) {
-                            let sub_date = displayedAt(subAll[j].created_at)
-                            const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
-                            subSection.insertAdjacentHTML('beforeend', `
+                    for (let j = 0; j < subAll.length; j++) {
+                        let sub_date = displayedAt(subAll[j].created_at)
+                        const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
+                        subSection.insertAdjacentHTML('beforeend', `
                         <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                             <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                                 <div class="comment-user">
@@ -715,9 +756,9 @@
                                 </div>
                             </div>`)
 
-                            const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-                            if (subAll[j].user_pk === subAll[j].request_user_pk) {
-                                subCommentWrapper.insertAdjacentHTML('beforeend', `
+                        const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
+                        if (subAll[j].user_pk === subAll[j].request_user_pk) {
+                            subCommentWrapper.insertAdjacentHTML('beforeend', `
                         <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
                             <button id="comment-${subAll[j].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                                 data-comment-id="${subAll[j].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -726,72 +767,72 @@
                                 data-comment-id="${subAll[j].comment_pk}" onclick="deleteComment(this.id)">삭제
                             </button>
                         </div>`)
-                            }
                         }
-
                     }
 
                 }
 
-                for (let m = 0; m < response.data.comments_data.length; m++) {
-                    let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
-                    const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
-                    // console.log(subComLi)
-                    // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
-                    const base = baseDisplay[
-                        `${response
-                            .data
-                            .comments_data[m]
-                            .comment_pk}`
-                    ]
-                    subComLi.style.cssText = `display: ${base}`
-                    if (subComLi.style.display === "block") {
-                        getSubBtn.innerText = "숨기기"
-                    } else {
-                        getSubBtn.innerText = "답글달기"
-                    }
+            }
+
+            for (let m = 0; m < response.data.comments_data.length; m++) {
+                let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+                const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+                // console.log(subComLi)
+                // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
+                const base = baseDisplay[
+                    `${response
+                        .data
+                        .comments_data[m]
+                        .comment_pk}`
+                ]
+                subComLi.style.cssText = `display: ${base}`
+                if (subComLi.style.display === "block") {
+                    getSubBtn.innerText = "숨기기"
+                } else {
+                    getSubBtn.innerText = "답글달기"
                 }
-            })
-        }
+            }
+        })
+    }
 
-        // 댓글 삭제
-        const deleteComment = function (e) {
-            const pk = event.target.dataset.articleId;
-            const coPk = event.target.dataset.commentId;
-            const country = event.target.dataset.countryId;
-            const baseDisplay = getDisplay()
-            console.log(baseDisplay)
+    // 댓글 삭제
+    const deleteComment = function (e) {
+        const pk = event.target.dataset.articleId;
+        const coPk = event.target.dataset.commentId;
+        const country = event.target.dataset.countryId;
+        const baseDisplay = getDisplay()
+        console.log(baseDisplay)
 
-            if (confirm("정말 삭제하시겠습니까?!") === true) {
-                axios({
-                    method: 'post',
-                    url: `/communities/${conPK}/review/${pk}/review_detail/${coPk}/comment_delete/`,
-                    headers: {
-                        'X-CSRFToken': csrftoken
-                    }
-                }).then(response => {
+        if (confirm("정말 삭제하시겠습니까?!") === true) {
+            axios({
+                method: 'post',
+                url: `/communities/${conPK}/review/${pk}/review_detail/${coPk}/comment_delete/`,
+                headers: {
+                    'X-CSRFToken': csrftoken
+                }
+            }).then(response => {
 
-                    console.log(response)
+                console.log(response)
 
-                    const commentList = document.querySelector(`#comment-list-${pk}`)
+                const commentList = document.querySelector(`#comment-list-${pk}`)
 
-                    commentList.textContent = "";
+                commentList.textContent = "";
 
-                    // 비동기 삭제 후 댓글이 하나도 없을 경우
-                    if (!response.data.comments_data.length) {
-                        commentList.insertAdjacentHTML('beforeend', `
+                // 비동기 삭제 후 댓글이 하나도 없을 경우
+                if (!response.data.comments_data.length) {
+                    commentList.insertAdjacentHTML('beforeend', `
                     <span id="comment-none">작성된 댓글이 없습니다.</span>`)
-                        const commentCount = document.querySelector('.comment_count')
-                        commentCount.innerText = 0
-                        return
-                    }
-
                     const commentCount = document.querySelector('.comment_count')
-                    commentCount.innerText = response.data.comments_data.length
+                    commentCount.innerText = 0
+                    return
+                }
 
-                    for (let i = 0; i < response.data.comments_data.length; i++) {
-                        let date = displayedAt(response.data.comments_data[i].created_at)
-                        commentList.insertAdjacentHTML('beforeend', `
+                const commentCount = document.querySelector('.comment_count')
+                commentCount.innerText = response.data.comments_data.length
+
+                for (let i = 0; i < response.data.comments_data.length; i++) {
+                    let date = displayedAt(response.data.comments_data[i].created_at)
+                    commentList.insertAdjacentHTML('beforeend', `
                                 <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
                                     <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
                                     <!-- 작성자 프로필 사진-->
@@ -853,9 +894,9 @@
                                     </div>
                                 </div>`)
 
-                        const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
-                        if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
-                            commentWrapper.insertAdjacentHTML('beforeend', `
+                    const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
+                    if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
+                        commentWrapper.insertAdjacentHTML('beforeend', `
                                 <div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
                                     <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -864,18 +905,18 @@
                                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
                                     </button>
                                 </div>`)
-                        }
+                    }
 
-                        if ("sub_comments_data" in response.data.comments_data[i]) {
-                            const comment = response
-                                .data
-                                .comments_data[i]
-                            const subAll = comment.sub_comments_data
+                    if ("sub_comments_data" in response.data.comments_data[i]) {
+                        const comment = response
+                            .data
+                            .comments_data[i]
+                        const subAll = comment.sub_comments_data
 
-                            for (let j = 0; j < subAll.length; j++) {
-                                let sub_date = displayedAt(subAll[j].created_at)
-                                const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
-                                subSection.insertAdjacentHTML('beforeend', `
+                        for (let j = 0; j < subAll.length; j++) {
+                            let sub_date = displayedAt(subAll[j].created_at)
+                            const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
+                            subSection.insertAdjacentHTML('beforeend', `
                                     <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                                         <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                                             <div class="comment-user">
@@ -909,9 +950,9 @@
                                             </div>
                                         </div>`)
 
-                                const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-                                if (subAll[j].user_pk === subAll[j].request_user_pk) {
-                                    subCommentWrapper.insertAdjacentHTML('beforeend', `
+                            const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
+                            if (subAll[j].user_pk === subAll[j].request_user_pk) {
+                                subCommentWrapper.insertAdjacentHTML('beforeend', `
                                 <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
                                     <button id="comment-${subAll[j].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                                         data-comment-id="${subAll[j].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -920,89 +961,89 @@
                                         data-comment-id="${subAll[j].comment_pk}" onclick="deleteComment(this.id)">삭제
                                     </button>
                                 </div>`)
-                                }
                             }
                         }
                     }
-                    for (let m = 0; m < response.data.comments_data.length; m++) {
-                        let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
-                        const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
-                        // console.log(subComLi)
-                        // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
-                        const base = baseDisplay[
-                            `${response
-                                .data
-                                .comments_data[m]
-                                .comment_pk}`
-                        ]
-                        subComLi.style.cssText = `display: ${base}`
-                        // console.log(base, response.data.comments_data[m].comment_pk)
-                        console.log(subComLi, 6, response.data.comments_data[m].comment_pk)
-                        if (subComLi.style.display === "block") {
-                            getSubBtn.innerText = "숨기기"
-                        } else {
-                            getSubBtn.innerText = "답글달기"
-                        }
+                }
+                for (let m = 0; m < response.data.comments_data.length; m++) {
+                    let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+                    const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+                    // console.log(subComLi)
+                    // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
+                    const base = baseDisplay[
+                        `${response
+                            .data
+                            .comments_data[m]
+                            .comment_pk}`
+                    ]
+                    subComLi.style.cssText = `display: ${base}`
+                    // console.log(base, response.data.comments_data[m].comment_pk)
+                    console.log(subComLi, 6, response.data.comments_data[m].comment_pk)
+                    if (subComLi.style.display === "block") {
+                        getSubBtn.innerText = "숨기기"
+                    } else {
+                        getSubBtn.innerText = "답글달기"
                     }
+                }
 
-                })
-            }
+            })
         }
+    }
 
-        // 대댓글 생성 창 띄우기
-        const getCreateSubComment = function (e) {
-            const getSubBtn = document.querySelector(`#${e}`)
-            const subCommentList = document.querySelector(`#${e}-commentlist`)
-            // style = 엘리먼트 스타일로 들어감
-            if (subCommentList.style.display === "block") {
-                getSubBtn.innerText = "답글달기"
-                subCommentList.style.display = "none"
-            } else {
-                getSubBtn.innerText = "숨기기"
-                subCommentList.style.display = "block"
-            }
+    // 대댓글 생성 창 띄우기
+    const getCreateSubComment = function (e) {
+        const getSubBtn = document.querySelector(`#${e}`)
+        const subCommentList = document.querySelector(`#${e}-commentlist`)
+        // style = 엘리먼트 스타일로 들어감
+        if (subCommentList.style.display === "block") {
+            getSubBtn.innerText = "답글달기"
+            subCommentList.style.display = "none"
+        } else {
+            getSubBtn.innerText = "숨기기"
+            subCommentList.style.display = "block"
         }
+    }
 
-        // 대댓글 생성
-        const submitSubComment = function (e) {
-            event.preventDefault();
-            // 현재 답글 영역값 저장
-            const baseDisplay = getDisplay()
-            const commentForm = document.querySelector(`#${e}`);
-            const articlePk = event.target.dataset.articleId;
-            const parentPk = event.target.dataset.parentId;
-            console.log("답글 이벤트 발생")
-            console.log(baseDisplay)
+    // 대댓글 생성
+    const submitSubComment = function (e) {
+        event.preventDefault();
+        // 현재 답글 영역값 저장
+        const baseDisplay = getDisplay()
+        const commentForm = document.querySelector(`#${e}`);
+        const articlePk = event.target.dataset.articleId;
+        const parentPk = event.target.dataset.parentId;
+        console.log("답글 이벤트 발생")
+        console.log(baseDisplay)
 
-            axios({
-                method: 'post',
-                url: `/communities/${conPK}/review/${articlePk}/review_detail/${parentPk}/sub_comment_create/`,
-                headers: {
-                    'X-CSRFToken': csrftoken
-                },
-                data: new FormData(commentForm)
-            }).then(response => {
+        axios({
+            method: 'post',
+            url: `/communities/${conPK}/review/${articlePk}/review_detail/${parentPk}/sub_comment_create/`,
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            data: new FormData(commentForm)
+        }).then(response => {
 
-                console.log(response)
+            console.log(response)
 
-                const commentList = document.querySelector(`#comment-list-${articlePk}`)
+            const commentList = document.querySelector(`#comment-list-${articlePk}`)
 
-                commentList.textContent = "";
-                /* console.log(parentPk, response.data.parents_set)
-                                                                                                                        const parentNum = Number(parentPk)
-      
-                                                                                                                        console.log(typeof arr[0], typeof parentPk)
-                                                                                                                        if (!response.data.parents_set.includes(parentNum)) {
-                                                                                                                            alert("삭제된 댓글입니다.")
-                                                                                                                            console.log("hi")
-                                                                                                                        } */
+            commentList.textContent = "";
+            /* console.log(parentPk, response.data.parents_set)
+                                                                                                                    const parentNum = Number(parentPk)
+  
+                                                                                                                    console.log(typeof arr[0], typeof parentPk)
+                                                                                                                    if (!response.data.parents_set.includes(parentNum)) {
+                                                                                                                        alert("삭제된 댓글입니다.")
+                                                                                                                        console.log("hi")
+                                                                                                                    } */
 
-                const commentCount = document.querySelector('.comment_count')
-                commentCount.innerText = response.data.comments_data.length
+            const commentCount = document.querySelector('.comment_count')
+            commentCount.innerText = response.data.comments_data.length
 
-                for (let i = 0; i < response.data.comments_data.length; i++) {
-                    let date = displayedAt(response.data.comments_data[i].created_at)
-                    commentList.insertAdjacentHTML('beforeend', `
+            for (let i = 0; i < response.data.comments_data.length; i++) {
+                let date = displayedAt(response.data.comments_data[i].created_at)
+                commentList.insertAdjacentHTML('beforeend', `
                     <div class="comment-row" id="comment-${response.data.comments_data[i].comment_pk}-row">
                         <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
                         <!-- 작성자 프로필 사진-->
@@ -1064,9 +1105,9 @@
                         </div>
                     </div>`)
 
-                    const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
-                    if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
-                        commentWrapper.insertAdjacentHTML('beforeend', `
+                const commentWrapper = document.querySelector(`#comment-${response.data.comments_data[i].comment_pk}-wrapper`)
+                if (response.data.comments_data[i].user_pk === response.data.comments_data[i].request_user_pk) {
+                    commentWrapper.insertAdjacentHTML('beforeend', `
                 <div id="comment-${response.data.comments_data[i].comment_pk}-update-buttons" class="buttons">
                     <button id="comment-${response.data.comments_data[i].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -1075,18 +1116,18 @@
                         data-comment-id="${response.data.comments_data[i].comment_pk}" onclick="deleteComment(this.id)">삭제
                     </button>
                 </div>`)
-                    }
+                }
 
-                    if ("sub_comments_data" in response.data.comments_data[i]) {
-                        const comment = response
-                            .data
-                            .comments_data[i]
-                        const subAll = comment.sub_comments_data
+                if ("sub_comments_data" in response.data.comments_data[i]) {
+                    const comment = response
+                        .data
+                        .comments_data[i]
+                    const subAll = comment.sub_comments_data
 
-                        for (let j = 0; j < subAll.length; j++) {
-                            let sub_date = displayedAt(subAll[j].created_at)
-                            const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
-                            subSection.insertAdjacentHTML('beforeend', `
+                    for (let j = 0; j < subAll.length; j++) {
+                        let sub_date = displayedAt(subAll[j].created_at)
+                        const subSection = document.querySelector(`#comment-${comment.comment_pk}-sub-comments-section`)
+                        subSection.insertAdjacentHTML('beforeend', `
                         <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                             <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                                 <div class="comment-user">
@@ -1120,9 +1161,9 @@
                                 </div>
                             </div>`)
 
-                            const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-                            if (subAll[j].user_pk === subAll[j].request_user_pk) {
-                                subCommentWrapper.insertAdjacentHTML('beforeend', `
+                        const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
+                        if (subAll[j].user_pk === subAll[j].request_user_pk) {
+                            subCommentWrapper.insertAdjacentHTML('beforeend', `
                         <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
                             <button id="comment-${subAll[j].comment_pk}-update" data-article-id="${response.data.comments_data[i].article_id}"
                                 data-comment-id="${subAll[j].comment_pk}" onclick="getUpdateComment(this.id)">수정
@@ -1131,93 +1172,93 @@
                                 data-comment-id="${subAll[j].comment_pk}" onclick="deleteComment(this.id)">삭제
                             </button>
                         </div>`)
-                            }
                         }
                     }
                 }
+            }
 
-                // 저장된 답글 영역으로 돌려주기
-                for (let m = 0; m < response.data.comments_data.length; m++) {
-                    let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
-                    const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
-                    // console.log(subComLi)
-                    // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
-                    const base = baseDisplay[
-                        `${response
-                            .data
-                            .comments_data[m]
-                            .comment_pk}`
-                    ]
-                    subComLi.style.cssText = `display: ${base}`
-                    if (subComLi.style.display === "block") {
-                        getSubBtn.innerText = "숨기기"
-                    } else {
-                        getSubBtn.innerText = "답글달기"
-                    }
+            // 저장된 답글 영역으로 돌려주기
+            for (let m = 0; m < response.data.comments_data.length; m++) {
+                let subComLi = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}-commentlist`)
+                const getSubBtn = document.querySelector(`#subcomment-${response.data.comments_data[m].comment_pk}`)
+                // console.log(subComLi)
+                // console.log(baseDisplay[`${response.data.comments_data[m].comment_pk}`])
+                const base = baseDisplay[
+                    `${response
+                        .data
+                        .comments_data[m]
+                        .comment_pk}`
+                ]
+                subComLi.style.cssText = `display: ${base}`
+                if (subComLi.style.display === "block") {
+                    getSubBtn.innerText = "숨기기"
+                } else {
+                    getSubBtn.innerText = "답글달기"
                 }
+            }
 
-            })
+        })
+    }
+
+    // 디테일 리모컨바
+    const commentSection = document.querySelector('.comment-section')
+    const nav = document.querySelector('#test')
+    document.addEventListener('scroll', function () {
+        const header1 = document.querySelector('.detail-meta-section')
+        if (header1.getBoundingClientRect().top < 0 && commentSection.getBoundingClientRect().top > document.documentElement.clientHeight) {
+            nav
+                .classList
+                .add('fix');
+            nav.style.visibility = "visible"
+            nav
+                .classList
+                .remove('removed');
+        } else {
+            nav
+                .classList
+                .remove('fix');
+            nav
+                .classList
+                .add('removed');
         }
+    })
 
-        // 디테일 리모컨바
-        const commentSection = document.querySelector('.comment-section')
-        const nav = document.querySelector('#test')
-        document.addEventListener('scroll', function () {
-            const header1 = document.querySelector('.detail-meta-section')
-            if (header1.getBoundingClientRect().top < 0 && commentSection.getBoundingClientRect().top > document.documentElement.clientHeight) {
-                nav
-                    .classList
-                    .add('fix');
-                nav.style.visibility = "visible"
-                nav
-                    .classList
-                    .remove('removed');
-            } else {
-                nav
-                    .classList
-                    .remove('fix');
-                nav
-                    .classList
-                    .add('removed');
-            }
-        })
-
-        /* window.onload = () => {
-                                                const commentft = document.querySelector('.comment-ft');
-  
-                                                // 스크롤 이벤트를 감지하는 이벤트 리스너를 만들어줍니다.
-                                                window.addEventListener('scroll', function () {
-                                                    console.log('스크롤 이벤트 감지!!');
-  
-                                                    //뷰포트 총 길이 = 현재 보이는 화면의 바닥 좌표
-                                                    let viewheight = document.documentElement.clientHeight
-  
-                                                    // 뷰포트 시작점과 푸터까지의 거리
-                                                    const distanceFromViewport = commentft.getBoundingClientRect().top;
-                                                    if (distanceFromViewport > viewheight) {
-                                                        document.getElementById("test").classList.remove("remove")
-                                                        document.getElementById("test").classList.add("fix")
-                                                    } else {
-                                                        document.getElementById("test").classList.remove("fix")
-                                                        document.getElementById("test").classList.add("remove")
-                                                    } {
-                                                        console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);
-                                                    } {
-  
-                                                    } {
-                                                        console.log('뷰포트의 총 높이', viewheight);
-                                                    }
-  
-                                                });
-                                            }; */
-    </script>
-    <script>
-        const reviewDelete = document.querySelector('#review_delete')
-        reviewDelete.addEventListener('click', function (e) {
-            if (confirm("정말로 삭제하시겠습니까?")) {
-                const deleteForm = document.querySelector('#delete_form')
-                deleteForm.submit();
-            }
-        })
-    </script>
-    {% endblock body %}
+    /* window.onload = () => {
+                                            const commentft = document.querySelector('.comment-ft');
+ 
+                                            // 스크롤 이벤트를 감지하는 이벤트 리스너를 만들어줍니다.
+                                            window.addEventListener('scroll', function () {
+                                                console.log('스크롤 이벤트 감지!!');
+ 
+                                                //뷰포트 총 길이 = 현재 보이는 화면의 바닥 좌표
+                                                let viewheight = document.documentElement.clientHeight
+ 
+                                                // 뷰포트 시작점과 푸터까지의 거리
+                                                const distanceFromViewport = commentft.getBoundingClientRect().top;
+                                                if (distanceFromViewport > viewheight) {
+                                                    document.getElementById("test").classList.remove("remove")
+                                                    document.getElementById("test").classList.add("fix")
+                                                } else {
+                                                    document.getElementById("test").classList.remove("fix")
+                                                    document.getElementById("test").classList.add("remove")
+                                                } {
+                                                    console.log('뷰포트 시작점과 푸터까지의 거리', distanceFromViewport);
+                                                } {
+ 
+                                                } {
+                                                    console.log('뷰포트의 총 높이', viewheight);
+                                                }
+ 
+                                            });
+                                        }; */
+</script>
+<script>
+    const reviewDelete = document.querySelector('#review_delete')
+    reviewDelete.addEventListener('click', function (e) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            const deleteForm = document.querySelector('#delete_form')
+            deleteForm.submit();
+        }
+    })
+</script>
+{% endblock body %}

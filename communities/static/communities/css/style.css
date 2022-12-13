@@ -329,18 +329,21 @@ span,
 }
 
 .detail-user {
-    width: 32%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 8px 0px;
+    align-items: center;
 }
 
 @media (min-width: 1024px) {
     .detail-user {
-        width: 20%;
         display: flex;
         align-items: center;
         justify-content: space-around;
+    }
+
+    .detail-user > * {
+        margin: 0px 5px;
     }
 
     .detail-img-div {
@@ -356,7 +359,7 @@ span,
 .detail-content {
     padding: 0px 10px;
     min-height: 470px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .detail-content p img {
@@ -370,16 +373,15 @@ span,
     0% {
         transform: translateY(0px)
     }
-
-    100% {
-        transform: translateY(70px)
+    100%{
+      transform: translateY(60px)
     }
-}
-
-/* 올라오는 애니메이션 */
-@keyframes slide-2 {
-    0% {
-        transform: translateY(70px)
+  }
+  
+  /* 올라오는 애니메이션 */
+  @keyframes slide-2 {
+    0%{
+      transform: translateY(60px)
     }
 
     100% {
@@ -398,6 +400,7 @@ span,
     background: white;
     backdrop-filter: blur(1px);
     box-shadow: 1px 0px 3px 1px rgb(0 0 0 / 10%);
+    padding: 14px 0 14px 20px;
 }
 
 .fix {
@@ -825,38 +828,54 @@ span,
     bottom: 0;
 }
 
+.hearts-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.nav-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.article-like {
+    position: absolute;
+    left: 40px;
+}
+
 .heart {
-    width: 100px;
-    height: 100px;
-    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-    background-position: 0 0;
     cursor: pointer;
-    /* animation: fave-heart 1s steps(28); */
-}
+    height: 50px;
+    width: 50px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:2900%;
+  }
+  
+  .heart:hover {
+    background-position:right;
+  }
 
-.heart-fill {
-    width: 100px;
-    height: 100px;
-    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-    background-position: 0 0;
+  .heart-fill {
     cursor: pointer;
-    background-position: -2800px 0;
-}
-
-.heartis {
-    background-position: -2800px 0;
-    transition: background 1s steps(28);
-}
-
-@keyframes fave-heart {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: -2800px 0;
-    }
-}
+    height: 50px;
+    width: 50px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-repeat:no-repeat;
+    background-size:2900%;
+    background-position: right;
+  }
+  
+  .heartis {
+    animation: heart-burst .8s steps(28) 1;
+  }
+  
+  @keyframes heart-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+  }
 
 .heart.vibration {
     animation: vibration .1s 2;
