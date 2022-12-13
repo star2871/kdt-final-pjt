@@ -105,28 +105,22 @@ span,
 /* .text {
     padding: 20px;
 } */
-.best-review {
+.likes {
     display: flex;
-}
-
-.rank {
-    display: flex;
+    -webkit-box-align: center;
     align-items: center;
-    margin: 5px 0px;
-    letter-spacing: 0.5px;
-    font-size: 13px;
+    font-size: 12px;
+    padding-left: 5px;
 }
 
-.rank_num {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 3px;
-    text-align: center;
-    background-color: #428ce8;
-    color: white;
-    font-size: 8px;
-    margin: 0px 5px;
+.likes svg {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.5rem;
+}
+
+.review-row:active {
+    background: #428de84d;
 }
 
 /* 글쓰기 버튼 */

@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm
 from .models import Article, Country, Feed, FeedImages, ArticleComment
+from countries.models import Country
 from accounts.models import User
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
@@ -33,17 +34,19 @@ def main(request):
     return render(request, 'communities/main.html', context)
 
 def review(request, country_code):
-    articles = Article.objects.filter(category="review").order_by("-pk")
+    # 현재 페이지의 국가코드와 동일한 게시물(리뷰) 뽑기
+    reviews = Article.objects.filter(country__country_code=country_code, category="review").order_by("-pk")
+    advices = Article.objects.filter(country__country_code=country_code, category="advice").order_by("-pk")
+    # 베스트 게시글
+    best_reviews = reviews.order_by("-like_users")[0:10]
+    best_advices = advices.order_by("-like_users")[0:10]
+    print(best_reviews)
     context = {
-        "articles": articles,
+        "reviews": reviews,
+        "best_reviews" : best_reviews,
+        "advices" : advices,
+        "best_advices" : best_advices,
         "country_code" : country_code,
-        "country" : {
-            "JP" : "일본",
-            "US" : "미국",
-            "AU" : "호주",
-            "ES" : "스페인",
-            "GB" : "영국",            
-        }
     }
     return render(request, 'communities/index.html', context)
 
