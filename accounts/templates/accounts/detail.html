@@ -272,7 +272,7 @@
     <p style="font-size: 24px; font-weight: 700; color: rgba(255, 255, 255, 1)">{{ user.nick_name }}</p>
     <p style="font-size: 18px; font-weight: 400; color:rgba(255, 255, 255, 0.5);">{{user.date_joined|date:'Y년 m월 d일'}}
     </p>
-    {% if request.user.is_authenticated %}
+    {% if request.user == user %}
     <a href="{% url 'accounts:update' %}"
       style="text-decoration: none; color: rgba(255, 255, 255, 0.6); margin-right: 6px; font-size: 14px;">편집</a>
     <a href=" {% url 'accounts:logout' %}"
