@@ -73,7 +73,7 @@ def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.articlecomment_set.order_by("-pk")
     comment_count = 0
-    
+
     for comment in comments:
         if comment.parent_id == None:
             comment_count += 1
@@ -255,7 +255,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
                                 'created_at': sub.created_at,
                                 'updated_at': sub.updated_at,
                                 'article_id': sub.article_id,
-                                'parent': sub.parent.pk                    
+                                'parent': sub.parent.pk
                     })
                     
                 comments_data.append(
@@ -495,9 +495,9 @@ def article_sub_comment_update(request, article_pk, comment_pk, country_code):
                                 'created_at': sub.created_at,
                                 'updated_at': sub.updated_at,
                                 'article_id': sub.article_id,
-                                'parent': sub.parent.pk                    
+                                'parent': sub.parent.pk
                     })
-                        
+
                     comments_data.append(
                         {
                             'created_string': co.created_string,
@@ -514,7 +514,7 @@ def article_sub_comment_update(request, article_pk, comment_pk, country_code):
                             'like': co.like.count(),
                             'sub_comments_data' : sub_comments_data
                         })
-                            
+
                 else:
                     comments_data.append
                     (
@@ -536,7 +536,7 @@ def article_sub_comment_update(request, article_pk, comment_pk, country_code):
             'comments_data' : comments_data,
         }
         return JsonResponse(context)
-                            
+
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
@@ -688,7 +688,7 @@ def feed_delete(request, feed_pk, country_code):
             'feeds_data': feeds_data
         }
         return JsonResponse(context)
-    
+
 
 ## 피드 수정
 def feed_update(request, feed_pk, country_code):

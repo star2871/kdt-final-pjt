@@ -4,7 +4,7 @@ import requests
 
 def index(request):
     countries = Country.objects.all()
-    return render(request, 'countries/index.html', {'countries': countries,})
+    return render(request, 'countries/index.html', {'countries': countries})
 
 def country_detail_view(request, country_code):
     # 날씨
