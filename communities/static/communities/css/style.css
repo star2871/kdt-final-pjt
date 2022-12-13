@@ -764,14 +764,15 @@ span,
     background-color: transparent;
 }
 
-.update-form {
+.feed-update-form {
     display: none;
 }
 
-.update-form>textarea {
+
+.feed-update-form > textarea {
     font-size: 14px;
     resize: none;
-    height: 130px;
+    height: 60px;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -780,25 +781,26 @@ span,
     margin-bottom: 30px;
 }
 
-.update-form>textarea:focus {
+
+.feed-update-form > textarea:focus {
     outline: none;
 }
 
 /* 댓글 수정, 작성취소 버튼 */
 
-.update-form button {
+.feed-update-form button {
     padding: 0px 2rem;
     border: 0;
     line-height: 30px;
     border-radius: 3px;
 }
 
-.update-form button:not(.update-feed) {
+.feed-update-form button:not(.update-feed) {
     color: #3c7ed2;
     background-color: transparent;
 }
 
-.update-form button:hover:not(.update-feed:hover) {
+.feed-update-form button:hover:not(.update-feed:hover) {
     color: #3c7ed2;
     background-color: #cccccc52;
 }
@@ -829,6 +831,30 @@ span,
     border-radius: 3px;
     bottom: 0;
 }
+
+#feed-comment-none {
+    width: 100%;
+    display: block;
+    text-align: center;
+    line-height: 100px;
+    opacity: 0.4;
+    font-weight: 300;
+}
+
+.feed-comment-list {
+    display: none;
+    margin: auto;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #cccccc21;
+}
+
+.feed-comment-list .comment-main > p {
+    min-height: 36px;
+}
+
+.feed-comment-list .comment-wrapper {
+    min-height: 0;
 
 .hearts-wrapper:not(.nav-wrapper .hearts-wrapper) {
     display: flex;
@@ -963,4 +989,5 @@ span,
         font-size: 2.5rem !important;
         font-weight: 500;
     }
+
 }
