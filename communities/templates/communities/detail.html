@@ -285,7 +285,7 @@
             <span class="material-icons md-18">
                 chat_bubble_outline
             </span>
-            <span id="comment-count">댓글
+            <span class="comment_count">댓글
                 {{ article.articlecomment_set.count }}개</span>
         </a>
     </div>
@@ -572,6 +572,11 @@
             }
         }
 
+        // 댓글 수 반영
+        const commentCounts = document.querySelectorAll('.comment_count')
+        commentCounts[0].innerText = response.data.comments_data.length
+        commentCounts[1].innerText = response.data.comments_data.length
+
         return
 
     }
@@ -615,8 +620,6 @@
 
             commentList.textContent = "";
 
-            const commentCount = document.querySelector('.comment_count')
-            commentCount.innerText = response.data.comments_data.length
             createCommentList(response, commentList, baseDisplay)
             commentForm.reset();
         })
@@ -681,8 +684,6 @@
             console.log(response)
             const commentList = document.querySelector(`#comment-list-${pk}`)
             commentList.textContent = "";
-            const commentCount = document.querySelector('.comment_count')
-            commentCount.innerText = response.data.comments_data.length
             createCommentList(response, commentList, baseDisplay)
         })
     }
@@ -714,13 +715,13 @@
                 if (!response.data.comments_data.length) {
                     commentList.insertAdjacentHTML('beforeend', `
                     <span id="comment-none">작성된 댓글이 없습니다.</span>`)
-                    const commentCount = document.querySelector('.comment_count')
-                    commentCount.innerText = 0
+                    const commentCounts = document.querySelectorAll('.comment_count')
+                    commentCounts[0].innerText = 0
+                    commentCounts[1].innerText = 0
+
                     return
                 }
 
-                const commentCount = document.querySelector('.comment_count')
-                commentCount.innerText = response.data.comments_data.length
                 createCommentList(response, commentList, baseDisplay)
 
             })
@@ -770,8 +771,6 @@
                             alert("삭제된 댓글입니다.")
                             console.log("hi")
                         } */
-            const commentCount = document.querySelector('.comment_count')
-            commentCount.innerText = response.data.comments_data.length
             createCommentList(response, commentList, baseDisplay)
 
         })
