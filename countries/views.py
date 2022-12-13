@@ -115,10 +115,7 @@ def country_detail_view(request, country_code):
     #     'exchange_code' : exchange_code,
     # }
     
-
-    
-    
-    festivals = Festival.objects.all()
+    festivals = Festival.objects.filter(country__country_code=country_code,).order_by("-pk")
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
