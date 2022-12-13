@@ -135,22 +135,24 @@
       <div class="summernote-div" cols="40" placeholder="Content" rows="10" width="100%" height="480">
         <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0" width="100%" height="480"
           style="height: 480px;"></iframe>
+        <input type="number" name="grade" value="1" class="form-control" placeholder="Grade" id="id_grade">
+        <input type="file" name="image" accept="image/*" class="form-control" id="id_image">
       </div>
+      <section class="main2">
+        <header class="nav-bar d-flex align-items-center justify-content-center"
+          style="bottom: 0px; box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; background-color: white; padding: 0 48px; box-sizing: border-box; max-width: 733px;">
+          <section class="container d-flex justify-content-between align-items-center"
+            style="z-index: 10; width: 733px; height: 64px;">
+            <a href="#">뒤로가기</a>
+            <div class="text-right">
+              <button class="btn btn-primary" type="submit" id="write" class="btn btn-sm"
+                style="background-color: #0061FF">작성하기</button>
+            </div>
+          </section>
+        </header>
+      </section>
+    </section>
 
-    </section>
-    <section class="main2">
-      <header class="nav-bar d-flex align-items-center justify-content-center"
-        style="z-index: 10; position: fixed; bottom: 0px; box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; background-color: white; padding: 0 48px; box-sizing: border-box; max-width: 733px;">
-        <section class="container d-flex justify-content-between align-items-center"
-          style="width: 733px; height: 64px;">
-          <a href="#">뒤로가기</a>
-          <div class="text-right">
-            <button class="btn btn-primary" type="submit" id="write" class="btn btn-sm"
-              style="background-color: #0061FF">작성하기</button>
-          </div>
-        </section>
-      </header>
-    </section>
   </form>
 </body>
 
