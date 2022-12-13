@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
+from countries.models import Country
 from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm, FeedCommentForm
 from .models import Article, Country, Feed, FeedImages, ArticleComment, FeedComment
 from accounts.models import User
@@ -33,17 +34,19 @@ def main(request):
     return render(request, 'communities/main.html', context)
 
 def review(request, country_code):
-    articles = Article.objects.filter(category="review").order_by("-pk")
+    # 현재 페이지의 국가코드와 동일한 게시물(리뷰) 뽑기
+    reviews = Article.objects.filter(country__country_code=country_code, category="review").order_by("-pk")
+    advices = Article.objects.filter(country__country_code=country_code, category="advice").order_by("-pk")
+    # 베스트 게시글
+    best_reviews = reviews.order_by("-like_users")[0:10]
+    best_advices = advices.order_by("-like_users")[0:10]
+    print(best_reviews)
     context = {
-        "articles": articles,
+        "reviews": reviews,
+        "best_reviews" : best_reviews,
+        "advices" : advices,
+        "best_advices" : best_advices,
         "country_code" : country_code,
-        "country" : {
-            "JP" : "일본",
-            "US" : "미국",
-            "AU" : "호주",
-            "ES" : "스페인",
-            "GB" : "영국",            
-        }
     }
     return render(request, 'communities/index.html', context)
 
@@ -113,10 +116,16 @@ def review_update(request, article_pk, country_code):
                 article_.save()
                 return redirect("communities:detail", country_code, article_pk)
         else:
+            # 기존 날짜 데이터 가져오기
+            article_start = article.travel_start.strftime("%Y-%m-%d")
+            article_end = article.travel_end.strftime("%Y-%m-%d")
             form = ArticleForm(instance=article)
+            print(article_end)
         context = {
             "article": article,
             "article_form": form,
+            "article_start" : article_start,
+            "article_end" : article_end,
         }
         return render(request, "communities/form.html", context)
     return redirect("communities:review_detail", country_code, article_pk)

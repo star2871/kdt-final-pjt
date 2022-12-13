@@ -3,187 +3,109 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-<link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
-<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
-<!-- 후기 페이지 -->
-{% if request.resolver_match.url_name == 'review' %}
-<!-- 커뮤니티 메인 -->
-{% if country_code == "JP" %}
-<div class="community-header"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/일본사진1.jpg' %}');">
-  <h1 class=" index-text" data-country-code="일본"></h1>
-  {% elif country_code == "US" %}
-  <div class="community-header"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/미국사진1.jpg'%}');">
-    <h1 class="index-text" data-country-code="미국"></h1>
-    {% elif country_code == "AU" %}
-    <div class="community-header"
-      style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/호주-australia-시드니-2.jpg' %}');">
-      <h1 class="index-text" data-country-code="호주"></h1>
-      {% elif country_code == "ES" %}
-      <div class="community-header"
-        style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/스페인사진.jpg'%}');">
-        <h1 class="index-text" data-country-code="스페인"></h1>
+    <!-- 후기 페이지 -->
+    {% if request.resolver_match.url_name == 'review' %}
+        <!-- 커뮤니티 메인 -->
+        {% if country_code == "JP" %}
+            <div class="community-header"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/일본사진1.jpg' %}');">
+            <video muted autoplay loop>
+                <source src="{% static 'communities/video/JP.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class=" index-text" data-country-code="일본"></h1>
+        {% elif country_code == "US" %}
+            <div class="community-header"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/미국사진1.jpg' %}');">
+            <video muted autoplay loop>
+                <source src="{% static 'communities/video/US.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class="index-text" data-country-code="미국"></h1>
+        {% elif country_code == "AU" %}
+            <div class="community-header"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/호주-australia-시드니-2.jpg' %}');">
+            <video muted autoplay loop>
+                <source src="{% static 'communities/video/AU.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class="index-text" data-country-code="호주"></h1>
+        {% elif country_code == "ES" %}
+            <div class="community-header"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/스페인사진.jpg' %}');">
+            <video muted autoplay loop>
+                <source src="{% static 'communities/video/ES.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class="index-text" data-country-code="스페인"></h1>
         {% elif country_code == "GB" %}
-        <div class="community-header"
-          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/영국 사진 3.jpg'%}');">
-          <h1 class="index-text" data-country-code="영국"></h1>
-          {% endif %}
-        </div>
+            <div class="community-header"
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/영국 사진 3.jpg' %}');">
+            <video muted autoplay loop>
+                <source src="{% static 'communities/video/UK.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class="index-text" data-country-code="영국"></h1>
+        {% endif %}
+    </div>
         <!-- 커뮤니티 메인 -->
 
 
         <!-- 커뮤니티 공지사항 -->
         <div style="max-width: 733px; background-color: white; margin: 0 auto;">
-          <section style="padding: 0 18px">
-            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">공지사항
-            </h2>
-            <div
-              style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
-              <ul style="padding-top: 30px; padding: 0px;">
-                <div class="reviews-row" style="padding: 0">asdasd
+            <section style="padding: 0 18px">
+                <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">공지사항
+                </h2>
+                <div
+                        style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
+                    <ul style="padding-top: 30px; padding: 0px;">
+                        <div class="reviews-row" style="padding: 0">asdasd
+                        </div>
+                    </ul>
                 </div>
-              </ul>
-            </div>
-          </section>
+            </section>
 
           <!-- 테스트-->
           <section style="margin-top: 45px; padding: 0 18px">
             <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
             <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+              {% for review in best_reviews %}
               <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
+                <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}"></a>
                 <div class="sc-lbhJGD jhNfXV">
-                  <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                    <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                    <div class="description-wrapper">
-                      <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를
-                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                      </p>
+                  <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}">
+                    <h4>{{ review.title }}</h4>
+                    <div class="description-wrapper" style="overflow:hidden; height: calc(63px + 1.5rem);">
+                      {{ review.content | safe }}
                     </div>
                   </a>
                   <div class="sub-info">
-                    <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                      <!-- -->개의 댓글
+                    <span>{{ review.created_at }}</span><span class="separator">·</span><span>
+                      {{ review.articlecomment_set.count }} <!-- -->개의 댓글
                     </span>
                   </div>
                 </div>
                 <div class="sc-iNGGcK UXOKy">
-                  <a class="userinfo" href="/@tosspayments"><img
-                      src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                      alt="user thumbnail of tosspayments">
+                  <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}"">
+                    <img src=" {{ review.user.profile_image.url }}" alt="user thumbnail of tosspayments">
                     <span>by
-                      <b>tosspayments</b></span></a>
+                      <b>{{ review.user.nick_name }}</b></span></a>
                   <div class="likes">
                     <svg width="24" height="24" viewbox="0 0 24 24">
                       <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                    </svg>53
+                    </svg>{{ review.like_users.count }}
                   </div>
                 </div>
               </div>
-
-              <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                <div class="sc-lbhJGD jhNfXV">
-                  <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                    <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                    <div class="description-wrapper">
-                      <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를
-                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                      </p>
-                    </div>
-                  </a>
-                  <div class="sub-info">
-                    <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                      <!-- -->개의 댓글
-                    </span>
-                  </div>
-                </div>
-                <div class="sc-iNGGcK UXOKy">
-                  <a class="userinfo" href="/@tosspayments"><img
-                      src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                      alt="user thumbnail of tosspayments">
-                    <span>by
-                      <b>tosspayments</b></span></a>
-                  <div class="likes">
-                    <svg width="24" height="24" viewbox="0 0 24 24">
-                      <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                    </svg>53
-                  </div>
-                </div>
-              </div>
-
-              <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                <div class="sc-lbhJGD jhNfXV">
-                  <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                    <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                    <div class="description-wrapper">
-                      <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를
-                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                      </p>
-                    </div>
-                  </a>
-                  <div class="sub-info">
-                    <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                      <!-- -->개의 댓글
-                    </span>
-                  </div>
-                </div>
-                <div class="sc-iNGGcK UXOKy">
-                  <a class="userinfo" href="/@tosspayments"><img
-                      src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                      alt="user thumbnail of tosspayments">
-                    <span>by
-                      <b>tosspayments</b></span></a>
-                  <div class="likes">
-                    <svg width="24" height="24" viewbox="0 0 24 24">
-                      <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                    </svg>53
-                  </div>
-                </div>
-              </div>
-
-              <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요"></a>
-                <div class="sc-lbhJGD jhNfXV">
-                  <a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-                    <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-                    <div class="description-wrapper">
-                      <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를
-                        시작하려고 해요. 좀 더 쉽고 재밌는 컨텐츠로 결제 연동을 학습할 수 있도록 도울게요.
-
-                      </p>
-                    </div>
-                  </a>
-                  <div class="sub-info">
-                    <span>2022년 11월 29일</span><span class="separator">·</span><span>2
-                      <!-- -->개의 댓글
-                    </span>
-                  </div>
-                </div>
-                <div class="sc-iNGGcK UXOKy">
-                  <a class="userinfo" href="/@tosspayments"><img
-                      src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-                      alt="user thumbnail of tosspayments">
-                    <span>by
-                      <b>tosspayments</b></span></a>
-                  <div class="likes">
-                    <svg width="24" height="24" viewbox="0 0 24 24">
-                      <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                    </svg>53
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </section>
           <!-- 커뮤니티 베스트리뷰 -->
@@ -205,34 +127,31 @@
             <div
               style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
               <ul style="padding-top: 15px; padding: 0px;">
-                {% for article in articles %}
+                {% for review in reviews %}
                 <div class="review-row">
                   <div class="row">
                     <div class="col-8" style="padding:0">
-                      <a href="{% url 'communities:detail' country_code article.pk %}"
+                      <a href="{% url 'communities:detail' country_code review.pk %}"
                         style="text-decoration: none; color: rgb(51, 51, 51)">
                         <p class="review-title mb-0">
-                          {{ article.title }}
+                          {{ review.title }}
                         </p>
                       </a>
                       <!-- 닉네임|작성일 -->
-                      <p class="review-date">{{ article.user }}|{{ article.created_at }}</p>
-                      <div class="icons-wrapper">
-                        <div class="icons">
-                          <!-- 좋아요 -->
-                          <div class="icon">
-                            <span class="material-icons md-18">
-                              thumb_up_alt
-                            </span>
-                            <span>{{ article.like_users.count }}</span>
-                          </div>
+                      <p class="review-date">{{ review.user }}|{{ review.created_at }}</p>
+                      <div class="like-wrapper">
+                        <!-- 좋아요 -->
+                        <div class="likes">
+                          <svg width="24" height="24" viewbox="0 0 24 24">
+                            <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                          </svg>{{ review.like_users.count }}
                         </div>
                       </div>
                     </div>
                     <div class="col-4 review-list">
-                      {% if article.image %}
+                      {% if review.image %}
                       <div>
-                        <img class="review-img" src="{{ article.image.url }}" alt="">
+                        <img class="review-img" src="{{ review.image.url }}" alt="">
                       </div>
                       {% endif %}
                     </div>
@@ -250,39 +169,39 @@
 
         <!-- 전체 글 목록 -->
 
-        {% elif request.resolver_match.url_name == 'advice' %}
+    {% elif request.resolver_match.url_name == 'advice' %}
         <h1>
-          꿀팁
+            꿀팁
         </h1>
-        {% elif request.resolver_match.url_name == 'feed' %}
+    {% elif request.resolver_match.url_name == 'feed' %}
         <h1>
-          피드
+            피드
         </h1>
-        {% endif %}
+    {% endif %}
 
-        <script>
-          const text = document.querySelector(".index-text")
-          const content = `여행 전날 ${text
-            .dataset
-            .countryCode} 커뮤니티입니다.`
-          console
-            .log(text.dataset)
-          let index = 0;
+<script>
+    const text = document.querySelector(".index-text")
+    const content = `여행 전날 ${text
+        .dataset
+        .countryCode} 커뮤니티입니다.`
+    console
+        .log(text.dataset)
+    let index = 0;
 
-          function printNumbers(from, to) {
-            let current = from;
+    function printNumbers(from, to) {
+        let current = from;
 
-            let timerId = setInterval(function () {
-              text.textContent += content[index]
-              console.log(text.textContent)
-              if (text.textContent == to) {
+        let timerId = setInterval(function () {
+            text.textContent += content[index]
+            console.log(text.textContent)
+            if (text.textContent == to) {
                 clearInterval(timerId);
                 text.style.cssText = "border: 0; animation: none;"
-              }
-              index++;
-            }, 100);
-          }
+            }
+            index++;
+        }, 100);
+    }
 
-          setTimeout(printNumbers, 500, text, content);
-        </script>
-        {% endblock %}
+    setTimeout(printNumbers, 500, text, content);
+</script>
+{% endblock %}
