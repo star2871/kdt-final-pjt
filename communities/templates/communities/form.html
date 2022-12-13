@@ -105,18 +105,26 @@
           id="id_title" style="border: 0px; color: #212529; font-weight: 700;" class="main-title">
       </div>
       <div class="bar"></div>
-      {% if request.resolver_match.url_name == 'review_create' or request.resolver_match.url_name == 'review_update' %}
       <div class="d-grid" style="grid-template-columns: 4.5fr 1fr 4.5fr; margin: 1rem 0;">
         <div class="date-input">
+          {% if request.resolver_match.url_name == 'review_create' %}
           <!-- <label for="travel_start">여행시작:</label> -->
           <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일" required />
+          {% else %}
+          <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일"
+            value="{{ article_start }}" required />
+          {% endif %}
         </div>
-        <div class="d-flex justify-content-center align-items-center"">~</div>
-      <div class=" date-input">
+        <div class="d-flex justify-content-center align-items-center">~</div>
+        <div class=" date-input">
+          {% if request.resolver_match.url_name == 'review_create' %}
           <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일" required />
+          {% else %}
+          <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일"
+            value="{{ article_end }}" required />
+          {% endif %}
         </div>
       </div>
-      {% endif %}
       <textarea name="content" cols="40" rows="10" class="form-control" placeholder="Content" id="id_content"
         hidden="true" style="display: none;"></textarea>
       <script>
