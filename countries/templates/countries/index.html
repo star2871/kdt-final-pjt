@@ -31,13 +31,11 @@
     <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가 선택</h2>
     <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
       {% for country in countries %}
-      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; min-height: 310px;"><a class="sc-jgrJph dYjA-dM"
-          href="/{{ country.country_code }}">
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;"><a
+          class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
           <img src="{{ country.country_image.url }}"></a>
         <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
             <h4>{{ country.country_name }} {{ country.country_code }}</h4>
-            <div class="description-wrapper">
-            </div>
           </a>
 
         </div>
