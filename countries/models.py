@@ -24,7 +24,7 @@ class Country(models.Model):
         upload_to="media/",
         blank=True,
         null=True,
-        processors=[ResizeToFill(300, 300)],
+        processors=[ResizeToFill(240, 250)],
         format="JPEG",
         options={"quality": 100},
     )
