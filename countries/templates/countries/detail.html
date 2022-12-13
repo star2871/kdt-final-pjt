@@ -16,7 +16,8 @@
     <article
       style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
       <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} - 기한없음</span>
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} -
+          {{country.country_name}}</span>
       </div>
       <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
         <li style="display: flex; flex-direction: column; padding: 10px 30px;">
@@ -46,14 +47,20 @@
 
 <section style="margin-top: 24px; padding: 0 18px">
   <div class="rollingbanner" style="margin: 0 auto;">
-    <div class="title"></div>
+    <div class="title">소식 > </div>
     <div class="wrap">
       <ul>
-        {% for country_new in country_news %}
-        <a href="{{ country_new.url }}">
-          <li>{{ country_new.title }}</li>
-        </a>
-        {% endfor %}
+        <li class="current"><a href="https://www.yna.co.kr/view/AKR20221213042800073?section=international/japan">일본 여권,
+            안보문서 개정안 합의…정부는 자위대 재편 착수</a></li>
+        <li class="next"><a
+            href="https://www.yna.co.kr/view/AKR20221213025300087?section=international/north-america">미국·멕시코 외교관계 수립
+            200주년…"내년 1월 정상회담"</a></li>
+        <li><a href="https://www.voakorea.com/s?k=%EC%8A%A4%ED%8E%98%EC%9D%B8&tab=all&pi=1&r=any&pp=10">스페인 주재 우크라대사관 등에
+            ‘편지 폭탄’ 테러…직원 부상</a></li>
+        <li><a href="http://www.topdigital.com.au/news/articleView.html?idxno=14798">호주-한국 정부 및 민간 채널로 활발한 협력 진행 중</a>
+        </li>
+        <li class="prev"><a href="https://www.yna.co.kr/view/AKR20221212148951085">영국 눈·추위에 교통대란…12년 만에 강추위(종합)
+          </a></li>
       </ul>
     </div>
   </div>
@@ -229,8 +236,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </section>
 
@@ -306,6 +311,16 @@
           <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin: 70px 0; padding: 0 18px">
+  <div style="margin: 17px auto 0; max-width: 732px;">
+    <div style="text-align: center;">
+      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p><a
+        style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+        href="{% url 'communities:review' country.country_code %}">커뮤니티</a>
     </div>
   </div>
 </section>

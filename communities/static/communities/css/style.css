@@ -51,22 +51,31 @@ span,
     .community-header {
         height: 100vh;
         background-size: cover;
-        background-repeat: no-repeat;   
+        background-repeat: no-repeat;
         background-position: center;
     }
 }
 
-.index-text{
-    display: inline; vertical-align: middle;
+.index-text {
+    display: inline;
+    vertical-align: middle;
     border-right: .05em solid black;
     color: white;
     animation: cursor 0.4s ease infinite;
-  }
-  
+}
+
 @keyframes cursor {
-    0%{border-right: 1px solid transparent} 
-    50%{border-right: 1px solid #000} 
-    100%{border-right: 1px solid transparent} 
+    0% {
+        border-right: 1px solid transparent
+    }
+
+    50% {
+        border-right: 1px solid #000
+    }
+
+    100% {
+        border-right: 1px solid transparent
+    }
 }
 
 
@@ -166,12 +175,14 @@ span,
     background-color: white;
     padding: 7px 12px;
 }
+
 .comments-row {
     border-bottom: 1px solid rgb(235, 237, 244);
     height: 120px;
     background-color: white;
     padding: 7px 12px;
 }
+
 .base-badge {
     border-radius: 9px;
     border: solid 1px rgba(0, 0, 0, 0.075);
@@ -183,11 +194,14 @@ span,
     padding: 0px 4px;
     line-height: 13px;
 }
-.review-row a:hover, .comments-row a {
+
+.review-row a:hover,
+.comments-row a {
     color: rgb(51, 51, 51, 0.5)
 }
 
-.review-row a, .comments-row a:hover {
+.review-row a,
+.comments-row a:hover {
     color: rgba(51, 51, 51)
 }
 
@@ -315,18 +329,21 @@ span,
 }
 
 .detail-user {
-    width: 32%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 8px 0px;
+    align-items: center;
 }
 
 @media (min-width: 1024px) {
     .detail-user {
-        width: 20%;
         display: flex;
         align-items: center;
         justify-content: space-around;
+    }
+
+    .detail-user > * {
+        margin: 0px 5px;
     }
 
     .detail-img-div {
@@ -342,32 +359,35 @@ span,
 .detail-content {
     padding: 0px 10px;
     min-height: 470px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .detail-content p img {
     max-width: 100% !important;
 }
+
 /* 리모컨 */
 
 /* 내려가는 애니메이션 */
 @keyframes slide-1 {
-    0%{
-      transform: translateY(0px)
+    0% {
+        transform: translateY(0px)
     }
     100%{
-      transform: translateY(70px)
+      transform: translateY(60px)
     }
   }
+  
   /* 올라오는 애니메이션 */
   @keyframes slide-2 {
     0%{
-      transform: translateY(70px)
+      transform: translateY(60px)
     }
-    100%{
-      transform: translateY(0px)
+
+    100% {
+        transform: translateY(0px)
     }
-  }
+}
 
 /* 올라올 때 */
 #test {
@@ -380,16 +400,17 @@ span,
     background: white;
     backdrop-filter: blur(1px);
     box-shadow: 1px 0px 3px 1px rgb(0 0 0 / 10%);
+    padding: 14px 0 14px 20px;
 }
 
 .fix {
     position: fixed;
     animation: slide-2 0.5s ease
-  }
+}
 
-  /* 내려갈 때 */
+/* 내려갈 때 */
 
-  .removed {
+.removed {
     animation: slide-1 0.5s ease;
     animation-fill-mode: forwards;
 }
@@ -466,7 +487,7 @@ span,
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 
-.comment-row:hover > .comment-wrapper .buttons {
+.comment-row:hover>.comment-wrapper .buttons {
     display: flex;
     width: 12%;
     justify-content: space-between;
@@ -486,7 +507,7 @@ span,
     padding: 0px 14px;
 }
 
-.comment-main > p {
+.comment-main>p {
     min-height: 55px;
 }
 
@@ -498,7 +519,7 @@ span,
     margin-bottom: 1rem;
 }
 
-.comment-user-date > p { 
+.comment-user-date>p {
     margin-bottom: 0;
 }
 
@@ -528,13 +549,13 @@ span,
     padding-right: 8px;
 }
 
-.buttons > button {
+.buttons>button {
     border: 0px;
     color: #3c7ed2;
     background-color: transparent;
 }
 
-.buttons > button:hover {
+.buttons>button:hover {
     text-decoration: underline;
     color: #3c7ed2;
     background-color: transparent;
@@ -544,7 +565,7 @@ span,
     display: none;
 }
 
-.update-form > textarea {
+.update-form>textarea {
     font-size: 14px;
     resize: none;
     height: 130px;
@@ -556,16 +577,17 @@ span,
     margin-bottom: 30px;
 }
 
-.update-form > textarea:focus {
+.update-form>textarea:focus {
     outline: none;
 }
+
 /* 댓글 수정, 작성취소 버튼 */
 
 .update-form button {
     padding: 0px 2rem;
-    border : 0;
+    border: 0;
     line-height: 30px;
-    border-radius: 3px;    
+    border-radius: 3px;
 }
 
 .update-form button:not(.update-comment) {
@@ -600,9 +622,9 @@ span,
 .subcomment-btn {
     position: absolute;
     padding: 0px 2rem;
-    border : 0;
+    border: 0;
     line-height: 30px;
-    border-radius: 3px; 
+    border-radius: 3px;
     bottom: 0;
 }
 
@@ -615,7 +637,7 @@ span,
     background-color: #cccccc21;
 }
 
-.sub-comment-list .comment-main > p {
+.sub-comment-list .comment-main>p {
     min-height: 36px;
 }
 
@@ -666,7 +688,7 @@ span,
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 
-.feed-row:hover > .feed-wrapper .buttons {
+.feed-row:hover>.feed-wrapper .buttons {
     display: flex;
     width: 12%;
     justify-content: space-between;
@@ -686,7 +708,7 @@ span,
     padding: 0px 14px;
 }
 
-.feed-main > p {
+.feed-main>p {
     min-height: 55px;
 }
 
@@ -698,7 +720,7 @@ span,
     margin-bottom: 1rem;
 }
 
-.feed-user-date > p { 
+.feed-user-date>p {
     margin-bottom: 0;
 }
 
@@ -728,13 +750,13 @@ span,
     padding-right: 8px;
 }
 
-.buttons > button {
+.buttons>button {
     border: 0px;
     color: #3c7ed2;
     background-color: transparent;
 }
 
-.buttons > button:hover {
+.buttons>button:hover {
     text-decoration: underline;
     color: #3c7ed2;
     background-color: transparent;
@@ -744,7 +766,7 @@ span,
     display: none;
 }
 
-.update-form > textarea {
+.update-form>textarea {
     font-size: 14px;
     resize: none;
     height: 130px;
@@ -756,16 +778,17 @@ span,
     margin-bottom: 30px;
 }
 
-.update-form > textarea:focus {
+.update-form>textarea:focus {
     outline: none;
 }
+
 /* 댓글 수정, 작성취소 버튼 */
 
 .update-form button {
     padding: 0px 2rem;
-    border : 0;
+    border: 0;
     line-height: 30px;
-    border-radius: 3px;    
+    border-radius: 3px;
 }
 
 .update-form button:not(.update-feed) {
@@ -799,52 +822,83 @@ span,
 .feed-comment-btn {
     position: absolute;
     padding: 0px 2rem;
-    border : 0;
+    border: 0;
     line-height: 30px;
-    border-radius: 3px; 
+    border-radius: 3px;
     bottom: 0;
 }
 
+.hearts-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.nav-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.article-like {
+    position: absolute;
+    left: 40px;
+}
+
 .heart {
-    width: 100px;
-    height: 100px;
-    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-    background-position: 0 0;
     cursor: pointer;
-    /* animation: fave-heart 1s steps(28); */
+    height: 50px;
+    width: 50px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:2900%;
   }
+  
+  .heart:hover {
+    background-position:right;
+  }
+
   .heart-fill {
-    width: 100px;
-    height: 100px;
-    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-    background-position: 0 0;
     cursor: pointer;
-    background-position: -2800px 0 ;
+    height: 50px;
+    width: 50px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-repeat:no-repeat;
+    background-size:2900%;
+    background-position: right;
   }
-
+  
   .heartis {
-    background-position: -2800px 0;
-    transition: background 1s steps(28);
+    animation: heart-burst .8s steps(28) 1;
   }
-  @keyframes fave-heart {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: -2800px 0;
-    }
+  
+  @keyframes heart-burst {
+    from {background-position:left;}
+    to { background-position:right;}
   }
 
-  .heart.vibration {
+.heart.vibration {
     animation: vibration .1s 2;
-  }
-  
-  @keyframes vibration {
+}
+
+@keyframes vibration {
     from {
-      transform: rotate(5deg);
+        transform: rotate(5deg);
     }
+
     to {
-      transform: rotate(-5deg);
+        transform: rotate(-5deg);
     }
-  }
-  
+}
+
+.index-text {
+    font-size: 1.4rem !important;
+    font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+    .index-text {
+        font-size: 2.5rem !important;
+        font-weight: 500;
+    }
+}

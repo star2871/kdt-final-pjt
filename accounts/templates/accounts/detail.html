@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'white.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
 {% block body %}
@@ -261,7 +261,7 @@
   }
 </style>
 
-<article class="d-flex align-items-center profile">
+<article class="profile d-flex align-items-center">
   {% if user.profile_image %}
   <div class="text-center">
     <img src="{{ user.profile_image.url}}" class="profile-image-border" alt="{{ user.profile_image }}"
@@ -270,8 +270,14 @@
   {% endif %}
   <div class="text-start">
     <p style="font-size: 24px; font-weight: 700; color: rgba(255, 255, 255, 1)">{{ user.nick_name }}</p>
-    <p style="font-size: 14px; font-weight: 400; color:rgba(255, 255, 255, 0.5);">{{user.date_joined|date:'Y년 m월 d일'}}
+    <p style="font-size: 18px; font-weight: 400; color:rgba(255, 255, 255, 0.5);">{{user.date_joined|date:'Y년 m월 d일'}}
     </p>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'accounts:update' %}"
+      style="text-decoration: none; color: rgba(255, 255, 255, 0.6); margin-right: 6px; font-size: 14px;">편집</a>
+    <a href=" {% url 'accounts:logout' %}"
+      style='text-decoration:none; color: rgba(255, 255, 255, 0.6); font-size: 14px;'>로그아웃</a>
+    {% endif %}
   </div>
 </article>
 
@@ -466,10 +472,10 @@
     {% endfor %}
   </div>
   {% endif %}
-  
+
   <!-- 좋아요 게시글 -->
   <div class="tab-content">
-   {% for d in likes_article %}
+    {% for d in likes_article %}
     <div>
       <span>{{ d }}</span>
     </div>

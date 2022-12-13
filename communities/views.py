@@ -218,7 +218,9 @@ def article_likes(request, country_code, article_pk):
             likes = True
     else:
         likes = "confirm"
-    return JsonResponse({"likes": likes,})
+    return JsonResponse({"likes": likes,
+                         "like_count" : article.like_users.count(),
+                         })
 
 ## 댓글 수정
 def article_comment_update(request, article_pk, comment_pk, country_code):

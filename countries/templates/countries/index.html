@@ -31,13 +31,11 @@
     <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가 선택</h2>
     <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
       {% for country in countries %}
-      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; min-height: 310px;"><a class="sc-jgrJph dYjA-dM"
-          href="/{{ country.country_code }}">
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;"><a
+          class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
           <img src="{{ country.country_image.url }}"></a>
         <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
             <h4>{{ country.country_name }} {{ country.country_code }}</h4>
-            <div class="description-wrapper">
-            </div>
           </a>
 
         </div>
@@ -46,58 +44,6 @@
         </div>
       </div>
       {% endfor %}
-
-      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; min-height: 310px;"><a class="sc-jgrJph dYjA-dM"
-          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-        </a>
-        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-            <div class="description-wrapper">
-              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
-                더
-                쉽고 재밌는 컨텐츠로 결제
-                연동을
-                학습할
-                수 있도록 도울게요.
-
-              </p>
-            </div>
-          </a>
-          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
-              <!-- -->개의 댓글
-            </span></div>
-        </div>
-        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
-              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
-        </div>
-      </div>
-
-      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; min-height: 310px;"><a class="sc-jgrJph dYjA-dM"
-          href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-        </a>
-        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/@tosspayments/토스페이먼츠-기술-블로그에-오신-것을-환영해요">
-            <h4>토스페이먼츠 기술 블로그에 오신 것을 환영해요</h4>
-            <div class="description-wrapper">
-              <p style="color: #495057; white-space: normal;">토스페이먼츠는 PG를 연동하는 개발자 경험을 수호하는 활동의 일환으로 기술 블로그를 시작하려고 해요. 좀
-                더
-                쉽고 재밌는 컨텐츠로 결제
-                연동을
-                학습할
-                수 있도록 도울게요.
-
-              </p>
-            </div>
-          </a>
-          <div class="sub-info"><span>2022년 11월 29일</span><span class="separator">·</span><span>2
-              <!-- -->개의 댓글
-            </span></div>
-        </div>
-        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/@tosspayments"><img
-              src="https://velog.velcdn.com/images/tosspayments/profile/b8fbda89-6591-41ea-b280-582674fcff7a/image.jpg"
-              alt="user thumbnail of tosspayments"><span>by <b>tosspayments</b></span></a>
-        </div>
-      </div>
     </div>
   </section>
 </body>
