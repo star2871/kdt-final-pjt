@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArticleForm, AdviceForm, FeedForm, FeedImageForm, ArticleCommentForm, FeedCommentForm
 from .models import Article, Country, Feed, FeedImages, ArticleComment, FeedComment
 from accounts.models import User
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from google_auth_oauthlib.flow import InstalledAppFlow
 import datetime
@@ -22,11 +23,27 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 # Create your views here.
 ## 리뷰 파트
 ## 리뷰 인덱스
+def main(request):
+    articles = Article.objects.all()
+
+    context = {
+        'articles': articles
+    }
+
+    return render(request, 'communities/main.html', context)
+
 def review(request, country_code):
     articles = Article.objects.filter(category="review").order_by("-pk")
     context = {
         "articles": articles,
         "country_code" : country_code,
+        "country" : {
+            "JP" : "일본",
+            "US" : "미국",
+            "AU" : "호주",
+            "ES" : "스페인",
+            "GB" : "영국",            
+        }
     }
     return render(request, 'communities/index.html', context)
 
@@ -56,7 +73,7 @@ def detail(request, article_pk, country_code):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.articlecomment_set.order_by("-pk")
     comment_count = 0
-    
+
     for comment in comments:
         if comment.parent_id == None:
             comment_count += 1
@@ -189,6 +206,22 @@ def article_comment_create(request, article_pk, country_code):
         }
     return JsonResponse(context)
 
+@login_required
+def article_likes(request, country_code, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    if not request.user == article.user:
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
+            likes = False
+        else:
+            article.like_users.add(request.user)
+            likes = True
+    else:
+        likes = "confirm"
+    return JsonResponse({"likes": likes,
+                         "like_count" : article.like_users.count(),
+                         })
+
 ## 댓글 수정
 def article_comment_update(request, article_pk, comment_pk, country_code):
     if request.user.is_authenticated:
@@ -222,7 +255,7 @@ def article_comment_update(request, article_pk, comment_pk, country_code):
                                 'created_at': sub.created_at,
                                 'updated_at': sub.updated_at,
                                 'article_id': sub.article_id,
-                                'parent': sub.parent.pk                    
+                                'parent': sub.parent.pk
                     })
                     
                 comments_data.append(
@@ -446,7 +479,7 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
 #             if comment.parent_id == None:
 #                 img = f'/media/{comment.user.profile_image}'
 #                 sub_comments = co.articlecomment_set.all()
-                
+               
 #                 sub_comments_data = []
 #                 if len(sub_comments):
 #                     for sub in sub_comments:
@@ -503,7 +536,6 @@ def article_sub_comment_create(request, article_pk, country_code, comment_pk):
 #             'comments_data' : comments_data,
 #         }
 #         return JsonResponse(context)
-                            
 
 ## 대댓글 삭제
 def sub_comment_delete(request, article_pk, comment_pk, country_code):
@@ -694,7 +726,7 @@ def feed_delete(request, feed_pk, country_code):
             'feeds_data': feeds_data
         }
         return JsonResponse(context)
-    
+
 
 ## 피드 수정
 def feed_update(request, feed_pk, country_code):
@@ -1023,6 +1055,7 @@ def calendar(request):
 
 def search(request):
     keyword = request.GET.get("keyword", "")  # 검색어
+    countries = Country.objects.all()
 
     if keyword:
         articles = Article.objects.filter(
@@ -1031,5 +1064,6 @@ def search(request):
         context = {
             "articles": articles,
             "keyword": keyword,
+            "countries": countries,
         }
         return render(request, "communities/search.html", context)
