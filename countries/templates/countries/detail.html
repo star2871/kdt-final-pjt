@@ -5,504 +5,519 @@
 <style>
 </style>
 {% block body %}
-<section class="detail-top" style="background-color: #0061FF; height: 395px; padding: 24px 0">
-  <div style="padding: 0 18px">
-    <div style="max-width: 732px; margin:0 auto; display: flex; align-items: center;">
-      <p class="gif-icon">
-      </p>
-      <div id="date" style="margin-left: 5px; font-size: 19px; font-weight: 700; letter-spacing: -0.5px; color:white">
-      </div>
-    </div>
-    <article
-      style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
-      <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
-        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일'}} -
-          {{country.country_name}}</span>
-      </div>
-      <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
-        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">비자(VISA) 정보</p>
-          <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.visa }}</h3>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">국가 방역정책</p>
-          <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.quarantine }}</h3>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">백신접종 필수여부</p>
-          <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.vaccine }}</h3>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">해외입국자 격리여부</p>
-          <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.isolation}}</h3>
-        </li>
-        <li style="display: flex; flex-direction: column; padding: 10px 30px;">
-          <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">기타 정보</p>
-          <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.etc }}</h3>
-        </li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-<section style="margin-top: 24px; padding: 0 18px">
-  <div class="rollingbanner" style="margin: 0 auto;">
-    <div class="title">소식 > </div>
-    <div class="wrap">
-      <ul>
-        <li class="current"><a href="https://www.yna.co.kr/view/AKR20221213042800073?section=international/japan">일본 여권,
-            안보문서 개정안 합의…정부는 자위대 재편 착수</a></li>
-        <li class="next"><a
-            href="https://www.yna.co.kr/view/AKR20221213025300087?section=international/north-america">미국·멕시코 외교관계 수립
-            200주년…"내년 1월 정상회담"</a></li>
-        <li><a href="https://www.voakorea.com/s?k=%EC%8A%A4%ED%8E%98%EC%9D%B8&tab=all&pi=1&r=any&pp=10">스페인 주재 우크라대사관 등에
-            ‘편지 폭탄’ 테러…직원 부상</a></li>
-        <li><a href="http://www.topdigital.com.au/news/articleView.html?idxno=14798">호주-한국 정부 및 민간 채널로 활발한 협력 진행 중</a>
-        </li>
-        <li class="prev"><a href="https://www.yna.co.kr/view/AKR20221212148951085">영국 눈·추위에 교통대란…12년 만에 강추위(종합)
-          </a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section style="margin-top: 45px; padding: 0 18px">
-  <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">날씨 정보</h2>
-  <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-    <div
-      style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
-      <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city1 }}</span>
-        <div class="box">
-          <article class="media d-flex">
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.0|slice:'5:10'}}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.0|floatformat:0 }}°
-                C</span>
+    <section class="detail-top" style="background-color: #0061FF; height: 395px; padding: 24px 0">
+        <div style="padding: 0 18px">
+            <div style="max-width: 732px; margin:0 auto; display: flex; align-items: center;">
+                <p class="gif-icon">
+                </p>
+                <div id="date"
+                     style="margin-left: 5px; font-size: 19px; font-weight: 700; letter-spacing: -0.5px; color:white">
+                </div>
             </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.8|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.6|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.16|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.16|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.24|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.24|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time1.32|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.32|floatformat:0 }}°
-                C</span>
-            </div>
-          </article>
+            <article
+                    style="max-width: 732px; height: 305px; background-color: white; border-radius: 22px; margin: 0 auto; margin-top: 1rem; padding: 26px 0;">
+                <div style="border-bottom: 1px solid rgb(191, 191, 191); max-width: 682px; margin: 0 30px; padding-bottom: 10px">
+        <span style="font-size: 14px; font-weight: 700">{{ country.updated_at|date:'m월 d일' }} -
+            {{ country.country_name }}</span>
+                </div>
+                <ul style="padding-top: 15px; max-height: 216px; overflow-y: scroll;">
+                    <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">비자(VISA) 정보</p>
+                        <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.visa }}</h3>
+                    </li>
+                    <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">국가 방역정책</p>
+                        <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.quarantine }}</h3>
+                    </li>
+                    <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">백신접종 필수여부</p>
+                        <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.vaccine }}</h3>
+                    </li>
+                    <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">해외입국자 격리여부</p>
+                        <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.isolation }}</h3>
+                    </li>
+                    <li style="display: flex; flex-direction: column; padding: 10px 30px;">
+                        <p style="font-size: 12px; color: rgba(0, 0, 0, 0.4)">기타 정보</p>
+                        <h3 style="margin-top: 3px; font-size: 22px; font-weight: 700;">{{ country.etc }}</h3>
+                    </li>
+                </ul>
+            </article>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div
-      style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
-      <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city2 }}</span>
-        <div class="box">
-          <article class="media d-flex">
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time2.0|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.0 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.0|floatformat:0 }}°
-                C</span>
+    <section style="margin-top: 24px; padding: 0 18px">
+        <div class="rollingbanner" style="margin: 0 auto;">
+            <div class="title">소식 ></div>
+            <div class="wrap">
+                <ul>
+                    <li class="current"><a
+                            href="https://www.yna.co.kr/view/AKR20221213042800073?section=international/japan">일본 여권,
+                        안보문서 개정안 합의…정부는 자위대 재편 착수</a></li>
+                    <li class="next"><a
+                            href="https://www.yna.co.kr/view/AKR20221213025300087?section=international/north-america">미국·멕시코
+                        외교관계 수립
+                        200주년…"내년 1월 정상회담"</a></li>
+                    <li><a href="https://www.voakorea.com/s?k=%EC%8A%A4%ED%8E%98%EC%9D%B8&tab=all&pi=1&r=any&pp=10">스페인
+                        주재 우크라대사관 등에
+                        ‘편지 폭탄’ 테러…직원 부상</a></li>
+                    <li><a href="http://www.topdigital.com.au/news/articleView.html?idxno=14798">호주-한국 정부 및 민간 채널로 활발한
+                        협력 진행 중</a>
+                    </li>
+                    <li class="prev"><a href="https://www.yna.co.kr/view/AKR20221212148951085">영국 눈·추위에 교통대란…12년 만에
+                        강추위(종합)
+                    </a></li>
+                </ul>
             </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time2.8|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.8 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.8|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time2.16|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.16 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.16|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time2.24|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.24 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.24|floatformat:0 }}°
-                C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time2.32|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon2.32 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.32|floatformat:0 }}°
-                C</span>
-            </div>
-          </article>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div
-      style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
-      <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-        <span class="title" style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city3 }}</span>
-        <div class="box">
-          <article class="media d-flex">
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time3.0|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.0 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.0|floatformat:0 }}°
+    <section style="margin-top: 45px; padding: 0 18px">
+        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">날씨 정보</h2>
+        <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+            <div
+                    style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
+                <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+                    <span class="title"
+                          style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city1 }}</span>
+                    <div class="box">
+                        <article class="media d-flex">
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time1.0|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon1.0 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.0|floatformat:0 }}°
                 C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time3.8|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.8 }}.png" style="width: 60px; height: 50px;"
-                  alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.8|floatformat:0 }}°
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time1.8|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon1.8 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.6|floatformat:0 }}°
                 C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time3.16|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.16 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.16|floatformat:0 }}°
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time1.16|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon1.16 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.16|floatformat:0 }}°
                 C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time3.24|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.24 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.24|floatformat:0 }}°
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time1.24|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon1.24 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.24|floatformat:0 }}°
                 C</span>
-            </div>
-            <div class="media-left mx-1 d-flex flex-column align-items-center">
-              <span class="mt-2">{{ weather.time3.32|slice:'5:10' }}</span>
-              <figure class="image is-50x50 m-0">
-                <img src="http://openweathermap.org/img/wn/{{ weather.icon3.32 }}.png"
-                  style="width: 60px; height: 50px;" alt="Image">
-              </figure>
-              <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.32|floatformat:0 }}°
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time1.32|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon1.32 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature1.32|floatformat:0 }}°
                 C</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
-          </article>
+
+            <div
+                    style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
+                <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+                    <span class="title"
+                          style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city2 }}</span>
+                    <div class="box">
+                        <article class="media d-flex">
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time2.0|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon2.0 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.0|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time2.8|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon2.8 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.8|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time2.16|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon2.16 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.16|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time2.24|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon2.24 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.24|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time2.32|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon2.32 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature2.32|floatformat:0 }}°
+                C</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                    style="margin: 8px 8px 0; padding: 16px 15px; background-color: white; border-radius: 16px; max-width: 732px; height: 165px;">
+                <div class="title" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+                    <span class="title"
+                          style="font-size: 17px; color:rgb(61, 61, 61); font-weight: 700;">{{ weather.city3 }}</span>
+                    <div class="box">
+                        <article class="media d-flex">
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time3.0|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon3.0 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.0|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time3.8|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon3.8 }}.png"
+                                         style="width: 60px; height: 50px;"
+                                         alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.8|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time3.16|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon3.16 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.16|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time3.24|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon3.24 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.24|floatformat:0 }}°
+                C</span>
+                            </div>
+                            <div class="media-left mx-1 d-flex flex-column align-items-center">
+                                <span class="mt-2">{{ weather.time3.32|slice:'5:10' }}</span>
+                                <figure class="image is-50x50 m-0">
+                                    <img src="http://openweathermap.org/img/wn/{{ weather.icon3.32 }}.png"
+                                         style="width: 60px; height: 50px;" alt="Image">
+                                </figure>
+                                <span style="font-weight: 600; color: rgb(61, 61, 61)">{{ weather.temperature3.32|floatformat:0 }}°
+                C</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section style="margin-top: 45px; padding: 0 18px">
-  <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">축제 정보</h2>
-  <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-    {% for festival in festivals %}
-    <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 370px; background-color: white;">
-      <img src="{{ festival.festival_image.url }}" style="object-fit: cover; height: 250px;">
-      <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM">
-          <h4>{{ festival.festival_name}}</h4>
-        </a>
-        <div class="sub-info"><span>{{ festival.period }}</span></div>
-      </div>
-      <div class="sc-iNGGcK UXOKy"><a class="userinfo"><img src="{{ festival.country.flag_image.url }}"
-            style="object-fit: cover;"><span>by <b>{{ festival.country.country_eng_name }}</b></span></a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+    <section style="margin-top: 45px; padding: 0 18px">
+        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">축제 정보</h2>
+        <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+            {% for festival in festivals %}
+                <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 370px; background-color: white;">
+                    <img src="{{ festival.festival_image.url }}" style="object-fit: cover; height: 250px;">
+                    <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM">
+                        <h4>{{ festival.festival_name }}</h4>
+                    </a>
+                        <div class="sub-info"><span>{{ festival.period }}</span></div>
+                    </div>
+                    <div class="sc-iNGGcK UXOKy"><a class="userinfo"><img src="{{ festival.country.flag_image.url }}"
+                                                                          style="object-fit: cover;"><span>by <b>{{ festival.country.country_eng_name }}</b></span></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 
 
-<!-- 현지시간 새로고침 누르면 그 시간대로 새로고침 된다. -->
-<section style="margin-top: 45px; padding: 0 18px;">
-  <div style="margin: 0 auto; display: flex; justify-content: center;">
-    <div style="min-width: 165px; width: 366px; margin: 0 15px 0 0 ">
-      <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700;">현지 시간</h2>
-      <div class="d-flex justify-content-start align-items-center" style="padding: 16px 15px; background-color: white;
+    <!-- 현지시간 새로고침 누르면 그 시간대로 새로고침 된다. -->
+    <section style="margin-top: 45px; padding: 0 18px;">
+        <div style="margin: 0 auto; display: flex; justify-content: center;">
+            <div style="min-width: 165px; width: 366px; margin: 0 15px 0 0 ">
+                <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700;">현지 시간</h2>
+                <div class="d-flex justify-content-start align-items-center" style="padding: 16px 15px; background-color: white;
         border-radius: 16px; height: 113px; margin: 8px 0 0">
-        <div class="title d-flex align-items-center" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
-          <!-- 일본 시계-->
-          <!-- <p> {{country.country_name}} </p> -->
-          <p class='country-code' style='display:none;'>{{country.country_code}}</p>
-          <div class="moving-clock me-3" style="display: inline-block; width: 30px; height: 30px"></div>
-          <div class="layer-intro" id="pic-JP">
-            <h5 class="clock-JP clock"></h5>
-          </div>
-          <!-- 스페인 시계-->
-          <div class="layer-intro" id="pic-ES">
-            <h5 class="clock-ES clock"></h5>
-          </div>
-          <!-- 미국 동부 시계-->
-          <div class="layer-intro" id="pic-US">
-            <h5 class="clock-US clock"></h5>
-          </div>
-          <!-- 영국 시계-->
-          <div class="layer-intro" id="pic-GB">
-            <h5 class="clock-GB clock"></h5>
-          </div>
-          <!-- 호주 동부 시계-->
-          <div class="layer-intro" id="pic-AU">
-            <h5 class="clock-AU clock"></h5>
-          </div>
+                    <div class="title d-flex align-items-center" style="font-size: .825rem; color:rgba(0, 0, 0, 0.4);">
+                        <!-- 일본 시계-->
+                        <!-- <p> {{country.country_name}} </p> -->
+                        <p class='country-code' style='display:none;'>{{ country.country_code }}</p>
+                        <div class="moving-clock me-3" style="display: inline-block; width: 30px; height: 30px"></div>
+                        <div class="layer-intro" id="pic-JP">
+                            <h5 class="clock-JP clock"></h5>
+                        </div>
+                        <!-- 스페인 시계-->
+                        <div class="layer-intro" id="pic-ES">
+                            <h5 class="clock-ES clock"></h5>
+                        </div>
+                        <!-- 미국 동부 시계-->
+                        <div class="layer-intro" id="pic-US">
+                            <h5 class="clock-US clock"></h5>
+                        </div>
+                        <!-- 영국 시계-->
+                        <div class="layer-intro" id="pic-GB">
+                            <h5 class="clock-GB clock"></h5>
+                        </div>
+                        <!-- 호주 동부 시계-->
+                        <div class="layer-intro" id="pic-AU">
+                            <h5 class="clock-AU clock"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 환율 api 횟수 제한 250회 이므로 발표때 새로 받아와야한다. -->
+            <div style="min-width: 165px; width: 366px; height: 113px;">
+                <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">환율 정보</h2>
+                <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 113px;">
+                    <div class="title d-flex justify-content-start"
+                         style="font-size: .825rem; color:rgba(0, 0, 0, 0.4); flex-direction: column;">
+                        <!-- 환율 나오는 곳 -->
+                        <div style="margin: 0; font-size: 14px; font-weight: 500; color: rgb(61, 61, 61);">
+                            {{ country.exchange_rate_code }} · KRW 환율
+                        </div>
+                        <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">
+                            {{ exchange.country_exchange|floatformat:2 }}<span>원</span></div>
+                        <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{ country.updated_at|date:'m월 d일 P' }}
+                            기준
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- 환율 api 횟수 제한 250회 이므로 발표때 새로 받아와야한다. -->
-    <div style="min-width: 165px; width: 366px; height: 113px;">
-      <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">환율 정보</h2>
-      <div style="margin: 8px auto 0; padding: 16px 15px; background-color: white; border-radius: 16px; height: 113px;">
-        <div class="title d-flex justify-content-start"
-          style="font-size: .825rem; color:rgba(0, 0, 0, 0.4); flex-direction: column;">
-          <!-- 환율 나오는 곳 -->
-          <div style="margin: 0; font-size: 14px; font-weight: 500; color: rgb(61, 61, 61);">
-            {{ country.exchange_rate_code }} · KRW 환율</div>
-          <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">
-            {% comment %} {{ exchange.country_exchange|floatformat:2 }}<span>원</span></div> {% endcomment %}
-          <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
+    </section>
+
+    <section style="margin: 70px 0; padding: 0 18px">
+        <div style="margin: 17px auto 0; max-width: 732px;">
+            <div style="text-align: center;">
+                <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p>
+                <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+                   href="{% url 'communities:review' country.country_code %}">후기</a>
+                <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+                   href="{% url 'communities:advice' country.country_code %}">꿀팁</a>
+                <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
+                   href="{% url 'communities:feed' country.country_code %}">담벼락</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section style="margin: 70px 0; padding: 0 18px">
-  <div style="margin: 17px auto 0; max-width: 732px;">
-    <div style="text-align: center;">
-      <p style="color: rgba(0, 0, 0, 0.6); font-size: 13px; font-weight: 400;">여행자들의 모든 후기를 볼 수 있습니다. </p>
-      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
-        href="{% url 'communities:review' country.country_code %}">후기</a>
-      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
-        href="{% url 'communities:advice' country.country_code %}">꿀팁</a>
-      <a style="text-decoration: none; font-size: 13px; color:#0061FF" class="badge" target="_blank"
-        href="{% url 'communities:feed' country.country_code %}">담벼락</a>
-    </div>
-  </div>
-</section>
+    <script>
+        // clock-kr 클래스를 clock_kr 변수에 저장
+        const time = document.querySelector('.country-code').innerText
+        if (time == 'JP') {
+            document.querySelector('.clock-JP').style.display = 'block'
+        } else if (time == 'ES') {
+            document.querySelector('.clock-ES').style.display = 'block'
+        } else if (time == 'US') {
+            document.querySelector('.clock-US').style.display = 'block'
+        } else if (time == 'GB') {
+            document.querySelector('.clock-GB').style.display = 'block'
+        } else if (time == 'AU') {
+            document.querySelector('.clock-AU').style.display = 'block'
+        }
+        var clock_JP = document.querySelector(".clock-JP");
+        var clock_ES = document.querySelector(".clock-ES");
+        var clock_US = document.querySelector(".clock-US");
+        var clock_GB = document.querySelector(".clock-GB");
+        var clock_AU = document.querySelector(".clock-AU");
 
-<script>
-  // clock-kr 클래스를 clock_kr 변수에 저장
-  const time = document.querySelector('.country-code').innerText
-  if (time == 'JP') {
-    document.querySelector('.clock-JP').style.display = 'block'
-  }
-  else if (time == 'ES') {
-    document.querySelector('.clock-ES').style.display = 'block'
-  }
-  else if (time == 'US') {
-    document.querySelector('.clock-US').style.display = 'block'
-  }
-  else if (time == 'GB') {
-    document.querySelector('.clock-GB').style.display = 'block'
-  }
-  else if (time == 'AU') {
-    document.querySelector('.clock-AU').style.display = 'block'
-  }
-  var clock_JP = document.querySelector(".clock-JP");
-  var clock_ES = document.querySelector(".clock-ES");
-  var clock_US = document.querySelector(".clock-US");
-  var clock_GB = document.querySelector(".clock-GB");
-  var clock_AU = document.querySelector(".clock-AU");
+        function getTime() {
+            // 자바스크립트에서 현재 시간 받아서 상수 curr에 저장
+            const curr = new Date();
+            // 표준시간 UTC 구하기
+            const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
 
-  function getTime() {
-    // 자바스크립트에서 현재 시간 받아서 상수 curr에 저장 
-    const curr = new Date();
-    // 표준시간 UTC 구하기
-    const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+            // UTC to KST 일본 (UTC + 9시간)
+            const JP_TIME_DIFF = 9 * 60 * 60 * 1000;
+            const JP_curr = new Date(utc + JP_TIME_DIFF);
 
-    // UTC to KST 일본 (UTC + 9시간)
-    const JP_TIME_DIFF = 9 * 60 * 60 * 1000;
-    const JP_curr = new Date(utc + JP_TIME_DIFF);
+            // UTC to CET 스페인 (UTC + 1시간)
+            const ES_TIME_DIFF = 1 * 60 * 60 * 1000;
+            const ES_curr = new Date(utc + ES_TIME_DIFF);
 
-    // UTC to CET 스페인 (UTC + 1시간)
-    const ES_TIME_DIFF = 1 * 60 * 60 * 1000;
-    const ES_curr = new Date(utc + ES_TIME_DIFF);
+            // UTC to CET 미국 동부 시간 (UTC - 5시간)
+            const US_TIME_DIFF = 5 * 60 * 60 * 1000;
+            const US_curr = new Date(utc - US_TIME_DIFF);
 
-    // UTC to CET 미국 동부 시간 (UTC - 5시간)
-    const US_TIME_DIFF = 5 * 60 * 60 * 1000;
-    const US_curr = new Date(utc - US_TIME_DIFF);
+            // UTC to KST 영국 (UTC)
+            const GB_curr = new Date(utc);
 
-    // UTC to KST 영국 (UTC)
-    const GB_curr = new Date(utc);
-
-    // UTC to CET 호주 (UTC + 10시간)
-    const AU_TIME_DIFF = 10 * 60 * 60 * 1000;
-    const AU_curr = new Date(utc + AU_TIME_DIFF);
+            // UTC to CET 호주 (UTC + 10시간)
+            const AU_TIME_DIFF = 10 * 60 * 60 * 1000;
+            const AU_curr = new Date(utc + AU_TIME_DIFF);
 
 
-    // 시, 분, 초 변수 저장
-    let JP_hr = JP_curr.getHours();
-    let JP_mm = JP_curr.getMinutes();
-    let JP_se = JP_curr.getSeconds();
-    let ES_hr = ES_curr.getHours();
-    let ES_mm = ES_curr.getMinutes();
-    let ES_se = ES_curr.getSeconds();
-    let US_hr = US_curr.getHours();
-    let US_mm = US_curr.getMinutes();
-    let US_se = US_curr.getSeconds();
-    let GB_hr = GB_curr.getHours();
-    let GB_mm = GB_curr.getMinutes();
-    let GB_se = GB_curr.getSeconds();
-    let AU_hr = AU_curr.getHours();
-    let AU_mm = AU_curr.getMinutes();
-    let AU_se = AU_curr.getSeconds();
-    //am, pm 표시
-    var JP_ampm = JP_hr >= 12 ? "pm" : "am";
-    var ES_ampm = ES_hr >= 12 ? "pm" : "am";
-    var US_ampm = US_hr >= 12 ? "pm" : "am";
-    var GB_ampm = GB_hr >= 12 ? "pm" : "am";
-    var AU_ampm = AU_hr >= 12 ? "pm" : "am";
-    // 10이하 숫자일때 보기 좋게 숫자 앞에 0 추가
-    clock_JP.innerHTML =
-      `${JP_hr < 10 ? `0${JP_hr}` : JP_hr}:${JP_mm < 10 ? `0${JP_mm}` : JP_mm}:${JP_se < 10 ? `0${JP_se}` : JP_se}`;
-    clock_ES.innerHTML =
-      `${ES_hr < 10 ? `0${ES_hr}` : ES_hr}:${ES_mm < 10 ? `0${ES_mm}` : ES_mm}:${ES_se < 10 ? `0${ES_se}` : ES_se} `;
-    clock_US.innerHTML =
-      `${US_hr < 10 ? `0${US_hr}` : US_hr}:${US_mm < 10 ? `0${US_mm}` : US_mm}:${US_se < 10 ? `0${US_se}` : US_se} `;
-    clock_GB.innerHTML =
-      `${GB_hr < 10 ? `0${GB_hr}` : GB_hr}:${GB_mm < 10 ? `0${GB_mm}` : GB_mm}:${GB_se < 10 ? `0${GB_se}` : GB_se} `;
-    clock_AU.innerHTML =
-      `${AU_hr < 10 ? `0${AU_hr}` : AU_hr}:${AU_mm < 10 ? `0${AU_mm}` : AU_mm}:${AU_se < 10 ? `0${AU_se}` : AU_se}`;
+            // 시, 분, 초 변수 저장
+            let JP_hr = JP_curr.getHours();
+            let JP_mm = JP_curr.getMinutes();
+            let JP_se = JP_curr.getSeconds();
+            let ES_hr = ES_curr.getHours();
+            let ES_mm = ES_curr.getMinutes();
+            let ES_se = ES_curr.getSeconds();
+            let US_hr = US_curr.getHours();
+            let US_mm = US_curr.getMinutes();
+            let US_se = US_curr.getSeconds();
+            let GB_hr = GB_curr.getHours();
+            let GB_mm = GB_curr.getMinutes();
+            let GB_se = GB_curr.getSeconds();
+            let AU_hr = AU_curr.getHours();
+            let AU_mm = AU_curr.getMinutes();
+            let AU_se = AU_curr.getSeconds();
+            //am, pm 표시
+            var JP_ampm = JP_hr >= 12 ? "pm" : "am";
+            var ES_ampm = ES_hr >= 12 ? "pm" : "am";
+            var US_ampm = US_hr >= 12 ? "pm" : "am";
+            var GB_ampm = GB_hr >= 12 ? "pm" : "am";
+            var AU_ampm = AU_hr >= 12 ? "pm" : "am";
+            // 10이하 숫자일때 보기 좋게 숫자 앞에 0 추가
+            clock_JP.innerHTML =
+                `${JP_hr < 10 ? `0${JP_hr}` : JP_hr}:${JP_mm < 10 ? `0${JP_mm}` : JP_mm}:${JP_se < 10 ? `0${JP_se}` : JP_se}`;
+            clock_ES.innerHTML =
+                `${ES_hr < 10 ? `0${ES_hr}` : ES_hr}:${ES_mm < 10 ? `0${ES_mm}` : ES_mm}:${ES_se < 10 ? `0${ES_se}` : ES_se} `;
+            clock_US.innerHTML =
+                `${US_hr < 10 ? `0${US_hr}` : US_hr}:${US_mm < 10 ? `0${US_mm}` : US_mm}:${US_se < 10 ? `0${US_se}` : US_se} `;
+            clock_GB.innerHTML =
+                `${GB_hr < 10 ? `0${GB_hr}` : GB_hr}:${GB_mm < 10 ? `0${GB_mm}` : GB_mm}:${GB_se < 10 ? `0${GB_se}` : GB_se} `;
+            clock_AU.innerHTML =
+                `${AU_hr < 10 ? `0${AU_hr}` : AU_hr}:${AU_mm < 10 ? `0${AU_mm}` : AU_mm}:${AU_se < 10 ? `0${AU_se}` : AU_se}`;
 
-    // 시간별로 사진 바꾸기
-    // pic-JP 아이디를 obj_JP 변수에 저장
-    var obj_JP = document.getElementById("pic-JP");
-    var obj_ES = document.getElementById("pic-ES");
-    var obj_US = document.getElementById("pic-US");
-    var obj_GB = document.getElementById("pic-GB");
-    var obj_AU = document.getElementById("pic-AU");
+            // 시간별로 사진 바꾸기
+            // pic-JP 아이디를 obj_JP 변수에 저장
+            var obj_JP = document.getElementById("pic-JP");
+            var obj_ES = document.getElementById("pic-ES");
+            var obj_US = document.getElementById("pic-US");
+            var obj_GB = document.getElementById("pic-GB");
+            var obj_AU = document.getElementById("pic-AU");
 
 
-    // 7시 초과 18시 미만일 때 obj_JP 변수의 클래스를 seoul-day로 바꿈
-    if (JP_hr > 7 && JP_hr < 18) {
-      obj_JP.setAttribute("class", "Tokyo-day");
-    } else {
-      obj_JP.setAttribute("class", "Tokyo-night");
-    }
-    if (ES_hr > 7 && ES_hr < 18) {
-      obj_ES.setAttribute("class", "Madrid-day");
-    } else {
-      obj_ES.setAttribute("class", "Madrid-night");
-    }
-    if (US_hr > 7 && US_hr < 18) {
-      obj_US.setAttribute("class", "New York-day");
-    } else {
-      obj_US.setAttribute("class", "New York-night");
-    }
-    if (GB_hr > 7 && GB_hr < 18) {
-      obj_GB.setAttribute("class", "London-day");
-    } else {
-      obj_GB.setAttribute("class", "London-night");
-    }
-    if (AU_hr > 7 && AU_hr < 18) {
-      obj_AU.setAttribute("class", "Sydney-day");
-    } else {
-      obj_AU.setAttribute("class", "Sydney-night");
-    }
-  }
-  // 1초마다 함수를 업데이트
-  setInterval(getTime, 1000);
-  // 오늘 날짜 가져오기
-  let today = new Date();
+            // 7시 초과 18시 미만일 때 obj_JP 변수의 클래스를 seoul-day로 바꿈
+            if (JP_hr > 7 && JP_hr < 18) {
+                obj_JP.setAttribute("class", "Tokyo-day");
+            } else {
+                obj_JP.setAttribute("class", "Tokyo-night");
+            }
+            if (ES_hr > 7 && ES_hr < 18) {
+                obj_ES.setAttribute("class", "Madrid-day");
+            } else {
+                obj_ES.setAttribute("class", "Madrid-night");
+            }
+            if (US_hr > 7 && US_hr < 18) {
+                obj_US.setAttribute("class", "New York-day");
+            } else {
+                obj_US.setAttribute("class", "New York-night");
+            }
+            if (GB_hr > 7 && GB_hr < 18) {
+                obj_GB.setAttribute("class", "London-day");
+            } else {
+                obj_GB.setAttribute("class", "London-night");
+            }
+            if (AU_hr > 7 && AU_hr < 18) {
+                obj_AU.setAttribute("class", "Sydney-day");
+            } else {
+                obj_AU.setAttribute("class", "Sydney-night");
+            }
+        }
 
-  let year = today.getFullYear(); // 년도
-  let month = today.getMonth() + 1;  // 월
-  let date = today.getDate();  // 날짜
+        // 1초마다 함수를 업데이트
+        setInterval(getTime, 1000);
+        // 오늘 날짜 가져오기
+        let today = new Date();
 
-  document.getElementById('date').innerHTML = (year + '년 ' + month + '월 ' + date + '일' + ' 여행수칙');
-</script>
+        let year = today.getFullYear(); // 년도
+        let month = today.getMonth() + 1;  // 월
+        let date = today.getDate();  // 날짜
 
-<script>
-  const deg = 6;
-  const hour = document.querySelector(".hour");
-  const min = document.querySelector(".min");
-  const sec = document.querySelector(".sec");
+        document.getElementById('date').innerHTML = (year + '년 ' + month + '월 ' + date + '일' + ' 여행수칙');
+    </script>
 
-  const setClock = () => {
-    let day = new Date();
-    let hh = day.getHours() * 30;
-    let mm = day.getMinutes() * deg;
-    let ss = day.getSeconds() * deg;
+    <script>
+        const deg = 6;
+        const hour = document.querySelector(".hour");
+        const min = document.querySelector(".min");
+        const sec = document.querySelector(".sec");
 
-    hour.style.transform = `rotateZ(${hh + mm / 12}deg)`;
-    min.style.transform = `rotateZ(${mm}deg)`;
-    sec.style.transform = `rotateZ(${ss}deg)`;
-  };
+        const setClock = () => {
+            let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
 
-  // first time
-  setClock();
-  // Update every 1000 ms
-  setInterval(setClock, 1000);
+            hour.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+            min.style.transform = `rotateZ(${mm}deg)`;
+            sec.style.transform = `rotateZ(${ss}deg)`;
+        };
 
-  const switchTheme = (evt) => {
-    const switchBtn = evt.target;
-    if (switchBtn.textContent.toLowerCase() === "light") {
-      switchBtn.textContent = "dark";
-      // localStorage.setItem("theme", "dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      switchBtn.textContent = "light";
-      // localStorage.setItem("theme", "light"); //add this
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  };
+        // first time
+        setClock();
+        // Update every 1000 ms
+        setInterval(setClock, 1000);
 
-  const switchModeBtn = document.querySelector(".switch-btn");
-  switchModeBtn.addEventListener("click", switchTheme, false);
+        const switchTheme = (evt) => {
+            const switchBtn = evt.target;
+            if (switchBtn.textContent.toLowerCase() === "light") {
+                switchBtn.textContent = "dark";
+                // localStorage.setItem("theme", "dark");
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else {
+                switchBtn.textContent = "light";
+                // localStorage.setItem("theme", "light"); //add this
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        };
 
-  let currentTheme = "dark";
-  // currentTheme = localStorage.getItem("theme")
-  //  ? localStorage.getItem("theme")
-  //  : null;
+        const switchModeBtn = document.querySelector(".switch-btn");
+        switchModeBtn.addEventListener("click", switchTheme, false);
 
-  if (currentTheme) {
-    document.documentElement.setAttribute("data-theme", currentTheme);
-    switchModeBtn.textContent = currentTheme;
-  }
-</script>
+        let currentTheme = "dark";
+        // currentTheme = localStorage.getItem("theme")
+        //  ? localStorage.getItem("theme")
+        //  : null;
+
+        if (currentTheme) {
+            document.documentElement.setAttribute("data-theme", currentTheme);
+            switchModeBtn.textContent = currentTheme;
+        }
+    </script>
 {% endblock %}
