@@ -3,9 +3,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="{% static 'img/fabicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>Document</title>
     <style>
@@ -26,34 +27,34 @@
 </head>
 
 <body>
-    <div id="load">
-        <img src="{% static 'images/loading.gif' %}" alt="loading">
-    </div>
-    <div class="map">{% include 'map.html' %}</div>
-    <section style="margin-top: 45px; padding: 0 18px">
-        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가 선택</h2>
-        <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-            {% for country in countries %}
+<div id="load">
+    <img src="{% static 'images/loading.gif' %}" alt="loading">
+</div>
+<div class="map">{% include 'map.html' %}</div>
+<section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가 선택</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+        {% for country in countries %}
             <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;"><a
                     class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
-                    <img src="{{ country.country_image.url }}"></a>
+                <img src="{{ country.country_image.url }}"></a>
                 <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM" href="/{{ country.country_code }}">
-                        <h4>{{ country.country_name }} {{country.country_eng_name }}</h4>
-                    </a>
+                    <h4>{{ country.country_name }} {{ country.country_eng_name }}</h4>
+                </a>
 
                 </div>
                 <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="/{{ country.country_code }}"><img
-                            src="{{ country.flag_image.url }}" alt="user thumbnail of tosspayments"><span>by <b>
+                        src="{{ country.flag_image.url }}" alt="user thumbnail of tosspayments"><span>by <b>
                                 {{ country.country_eng_name }}</b></span></a>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    </section>
+        {% endfor %}
+    </div>
+</section>
 </body>
 <script src="{% static 'js/index_map_click.js' %}"></script>
 <script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 <script type="text/javascript">
 
     window.onbeforeunload = function () {
@@ -78,7 +79,7 @@
         text-align: center;
     }
 
-    #load>img {
+    #load > img {
         position: absolute;
         top: 50%;
         left: 50%;

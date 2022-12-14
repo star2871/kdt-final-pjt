@@ -306,34 +306,7 @@
     }
   }
 </script> -->
-<script>
-    // 소식 스크롤링
-    document.addEventListener('DOMContentLoaded', () => {
-        var interval = window.setInterval(rollingCallback, 3000);
-    })
 
-    function rollingCallback() {
-        //.prev 클래스 삭제
-        document.querySelector('.rollingbanner .prev').classList.remove('prev');
-
-        //.current -> .prev
-        let current = document.querySelector('.rollingbanner .current');
-        current.classList.remove('current');
-        current.classList.add('prev');
-
-        //.next -> .current
-        let next = document.querySelector('.rollingbanner .next');
-        //다음 목록 요소가 널인지 체크
-        if (next.nextElementSibling == null) {
-            document.querySelector('.rollingbanner ul li:first-child').classList.add('next');
-        } else {
-            //목록 처음 요소를 다음 요소로 선택
-            next.nextElementSibling.classList.add('next');
-        }
-        next.classList.remove('next');
-        next.classList.add('current');
-    }
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
