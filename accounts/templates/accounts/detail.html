@@ -386,7 +386,7 @@
 </section>
 
 <div class="main-container"
-  style="background-color: white; border-radius: 12px; max-width: 550px; margin: 20px auto 0;">
+  style="background-color: white; border-radius: 12px; max-width: 733px; margin: 20px auto 0;">
   <ul class="list" style="font-size: 14px;">
     <li class="tab-button blue">작성 게시글</li>
     {% if request.user == user %}
@@ -495,7 +495,8 @@
       <div class="review-row">
         <div class="row">
           <div class="col-8" style="padding:5px">
-            <a href="{% url 'communities:detail' advice.country.country_code advice.pk %}" style="text-decoration: none;">
+            <a href="{% url 'communities:detail' advice.country.country_code advice.pk %}"
+              style="text-decoration: none;">
               <p class="review-title mb-0">
                 {{ advice.title }}
               </p>
