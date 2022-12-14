@@ -85,9 +85,9 @@
     data-group="{{ article.country.country_name }}">
     <a href="{% url 'communities:detail' article.country.country_code article.pk %}">
       {% if article.image %}
-      <img src="{{ article.image.url }}" style="object-fit: cover; height: 250px;">
+      <img src="{{ article.image.url }}" style="object-fit: cover; width: 320px; height: 240px;">
       {% else %}
-      <img src="{% static '/images/none_avatar.jpg' %}" style="width: 100%; height: 240px; object-fit: cover;"
+      <img src="{% static '/images/none_avatar.jpg' %}" style="width: 320px; height: 240px; object-fit: cover;"
         alt="img">
       {% endif %}
     </a>
