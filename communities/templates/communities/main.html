@@ -77,7 +77,7 @@
     </div>
   </section>
 
-  <!-- 테스트-->
+  <!-- 커뮤니티 -->
   <section style="margin-top: 45px; padding: 0 18px">
     <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 커뮤니티</h2>
     <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
@@ -87,6 +87,49 @@
           <img src="{{ country.country_image.url }}"></a>
         <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
             href="{% url 'communities:review' country.country_code %}">
+            <h4>{{ country.country_name }}</h4>
+          </a>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="{% url 'countries:detail' country.country_code %}"><img
+              src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- 꿀팁 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 꿀팁</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      {% for country in countries %}
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;"><a
+          class="sc-jgrJph dYjA-dM" href="{% url 'communities:advice' country.country_code %}">
+          <img src="{{ country.country_image.url }}"></a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
+            href="{% url 'communities:advice' country.country_code %}">
+            <h4>{{ country.country_name }}</h4>
+          </a>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="{% url 'countries:detail' country.country_code %}"><img
+              src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+
+  <!-- 피드 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 피드</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      {% for country in countries %}
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;"><a
+          class="sc-jgrJph dYjA-dM" href="{% url 'communities:feed' country.country_code %}">
+          <img src="{{ country.country_image.url }}"></a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
+            href="{% url 'communities:feed' country.country_code %}">
             <h4>{{ country.country_name }}</h4>
           </a>
         </div>

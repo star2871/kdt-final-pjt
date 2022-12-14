@@ -100,6 +100,7 @@
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <section class="main">
+      {% if request.resolver_match.url_name == 'review_create' %}
       <div style="margin-bottom: 1rem;">
         <input type="text" name="title" maxlength="80" class="form-control p-0" placeholder="제목을 입력하세요" required=""
           id="id_title" style="border: 0px; color: #212529; font-weight: 700;" class="main-title">
@@ -107,22 +108,12 @@
       <div class="bar"></div>
       <div class="d-grid" style="grid-template-columns: 4.5fr 1fr 4.5fr; margin: 1rem 0;">
         <div class="date-input">
-          {% if request.resolver_match.url_name == 'review_create' %}
           <!-- <label for="travel_start">여행시작:</label> -->
           <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일" required />
-          {% else %}
-          <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일"
-            value="{{ article_start }}" required />
-          {% endif %}
         </div>
         <div class="d-flex justify-content-center align-items-center">~</div>
         <div class=" date-input">
-          {% if request.resolver_match.url_name == 'review_create' %}
           <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일" required />
-          {% else %}
-          <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일"
-            value="{{ article_end }}" required />
-          {% endif %}
         </div>
       </div>
       <textarea name="content" cols="40" rows="10" class="form-control" placeholder="Content" id="id_content"
@@ -143,9 +134,66 @@
       <div class="summernote-div" cols="40" placeholder="Content" rows="10" width="100%" height="480">
         <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0" width="100%" height="480"
           style="height: 480px;"></iframe>
-        <input type="number" name="grade" value="1" class="form-control" placeholder="Grade" id="id_grade">
-        <input type="file" name="image" accept="image/*" class="form-control" id="id_image">
+        <div class="mb-3"><label class="form-label" for="id_image">대표 이미지를 설정해주세요.</label><input type="file"
+            name="image" accept="image/*" class="form-control" id="id_image"></div>
       </div>
+
+      {% else %}
+      <div style="margin-bottom: 1rem;">
+        <input type="text" name="title" maxlength="80" class="form-control p-0" placeholder="제목을 입력하세요" required
+          id="id_title" style="border: 0px; color: #212529; font-weight: 700;" class="main-title"
+          value="{{ article.title }}">
+      </div>
+      <div class="bar"></div>
+      <div class="d-grid" style="grid-template-columns: 4.5fr 1fr 4.5fr; margin: 1rem 0;">
+        <div class="date-input">
+          <!-- <label for="travel_start">여행시작:</label> -->
+          <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일"
+            value="{{ article_start }}" required />
+        </div>
+        <div class="d-flex justify-content-center align-items-center">~</div>
+        <div class=" date-input">
+          <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일"
+            value="{{ article_end }}" required />
+        </div>
+      </div>
+      <textarea name="content" cols="40" rows="10" class="form-control" placeholder="Content" id="id_content"
+        hidden="true" style="display: none;">{{ article.content|safe }}</textarea>
+      <script>
+        var settings_id_content = { "width": "100%", "height": "480", "lang": "ko-KR", "toolbar": [["style", ["style"]], ["font", ["bold", "underline", "clear"]], ["color", ["color"]], ["fontsize", ["fontsize"]], ["table", ["table"]], ["insert", ["link", "picture"]], ["view", ["codeview", "help"]]], "url": { "language": "/static/summernote/lang/summernote-en-US.min.js", "upload_attachment": "/summernote/upload_attachment/" } };
+      </script>
+      <style>
+        iframe.note-fullscreen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw !important;
+          height: 100vh !important;
+          z-index: 4000;
+        }
+      </style>
+      <div class="summernote-div" cols="40" placeholder="Content" rows="10" width="100%" height="480">
+        <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0" width="100%" height="480"
+          style="height: 480px;"></iframe>
+        <div class="mb-3"><label class="form-label" for="id_image">대표 이미지를 설정해주세요.</label><input type="file"
+            name="image" accept="image/*" class="form-control" id="id_image">
+
+          <div class="row mt-1">
+            <div class="col-auto">
+              현재:&nbsp;<a 현재:&nbsp;<a href="{{ article.image.url }}">{{ article.image.url|slice:"7:" }}</a>
+            </div>
+
+            <div class="col-auto">
+              <div class="form-check">
+                <input type="checkbox" name="image-clear" id="image-clear_id" class="form-check-input">
+                <label for="image-clear_id" class="form-check-label">취소</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
       <section class="main2">
         <header class="nav-bar d-flex align-items-center justify-content-center"
           style="bottom: 0px; box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; background-color: white; padding: 0 48px; box-sizing: border-box; max-width: 733px;">
