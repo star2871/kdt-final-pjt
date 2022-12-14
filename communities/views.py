@@ -38,16 +38,12 @@ def main(request):
 def review(request, country_code):
     # 현재 페이지의 국가코드와 동일한 게시물(리뷰) 뽑기
     reviews = Article.objects.filter(country__country_code=country_code, category="review").order_by("-pk")
-    advices = Article.objects.filter(country__country_code=country_code, category="advice").order_by("-pk")
     # 베스트 게시글
     best_reviews = reviews.order_by("-like_users")[0:10]
-    best_advices = advices.order_by("-like_users")[0:10]
     print(best_reviews)
     context = {
-        "reviews": reviews,
-        "best_reviews" : best_reviews,
-        "advices" : advices,
-        "best_advices" : best_advices,
+        "articles": reviews,
+        "best_articles" : best_reviews,
         "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
@@ -69,7 +65,8 @@ def review_create(request, country_code):
     else:
         article_form = ArticleForm()
     context = {
-        'article_form': article_form
+        'article_form': article_form,
+        "country_code" : country_code,
     }
     return render(request, 'communities/form.html', context=context)
 
@@ -128,6 +125,7 @@ def review_update(request, article_pk, country_code):
             "article_form": form,
             "article_start" : article_start,
             "article_end" : article_end,
+            'country_code': country_code,
         }
         return render(request, "communities/form.html", context)
     return redirect("communities:review_detail", country_code, article_pk)
@@ -560,9 +558,11 @@ def sub_comment_delete(request, article_pk, comment_pk, country_code):
 ## 꿀팁 파트
 ## 꿀팁 인덱스
 def advice(request, country_code):
-    articles = Article.objects.filter(category="advice").order_by("-pk")
+    advices = Article.objects.filter(country__country_code=country_code, category="advice").order_by("-pk")
+    best_advices = advices.order_by("-like_users")[0:10]
     context = {
-        "articles": articles,
+        "articles": advices,
+        "best_articles" : best_advices,
         "country_code" : country_code,
     }
     return render(request, 'communities/index.html', context)
@@ -582,15 +582,38 @@ def advice_create(request, country_code):
     else:
         article_form = AdviceForm()
     context = {
-        'article_form': article_form
+        'article_form': article_form,
+        "country_code" : country_code,
     }
-    return render(request, 'communities/form.html', context=context)
+    return render(request, 'communities/advice_form.html', context=context)
 
+## 리뷰 수정
+def advice_update(request, article_pk, country_code):
+    article = get_object_or_404(Article, pk=article_pk)
+    if article.user == request.user:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, request.FILES, instance=article)
+            if form.is_valid:
+                article_ = form.save(commit=False)
+                country = Country.objects.get(country_code=country_code)
+                article_.country = country
+                article_.category = "advice"
+                article_.save()
+                return redirect("communities:detail", country_code, article_pk)
+        else:
+            form = ArticleForm(instance=article)
+        context = {
+            "article": article,
+            "article_form": form,
+            'country_code': country_code,
+        }
+        return render(request, "communities/advice_form.html", context)
+    return redirect("communities:review_detail", country_code, article_pk)
 
 ## 피드 파트
 ## 피드 인덱스
 def feed(request, country_code):
-    feeds = Feed.objects.filter(category="feed").order_by("-pk")
+    feeds = Feed.objects.filter(country__country_code=country_code, category="feed").order_by("-pk")
     feeds_images = FeedImages.objects.all()
     feed_form = FeedForm()
     feed_comment_form = FeedCommentForm()

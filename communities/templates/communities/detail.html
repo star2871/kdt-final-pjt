@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'white.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 {% block css %}
@@ -243,11 +243,19 @@
     <div class="side-bar">
         {% if user == article.user %}
         <div class="remote">
+            {% if article.category == 'review' %}
             <a href="{% url 'communities:review_update' country_code article.pk %}">
                 <span class="material-icons">
                     edit
                 </span>
             </a>
+            {% else %}
+            <a href="{% url 'communities:advice_update' country_code article.pk %}">
+                <span class="material-icons">
+                    edit
+                </span>
+            </a>
+            {% endif %}
             <hr>
             <form action="{% url 'communities:delete' country_code article.pk %}" method="POST" id="delete_form">
                 {% csrf_token %}
