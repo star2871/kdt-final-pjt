@@ -303,7 +303,7 @@
           <div style="margin: 0; font-size: 14px; font-weight: 500; color: rgb(61, 61, 61);">
             {{ country.exchange_rate_code }} · KRW 환율</div>
           <div style="margin: 4px 0 0;font-size: 22px; font-weight:500; color: #0061FF">
-            {{ country.exchange_rate }}<span>원</span></div>
+            {{ exchange.country_exchange|floatformat:2 }}<span>원</span></div>
           <div style="margin: 4px 0 0;font-size: 13px; color: #9ba2ab">{{country.updated_at|date:'m월 d일 P'}} 기준</div>
         </div>
       </div>
