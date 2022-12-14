@@ -17,7 +17,7 @@
             {{ article.title }}
         </div>
         <div class="detail-meta-section">
-            <div class="detail-user">
+            <a href="{% url 'accounts:detail' user.pk %}" class="detail-user">
                 <!-- 프로필사진이 있을 경우 나중에 수정할 것: accounts에서 프사 없으면 자동으로 설정되도록 해주기 = 프사없을 일 없음.-->
                 <div class="detail-img-div">
                     <img src="{{ article.user.profile_image.url }}" alt="" class="profile-img">
@@ -37,7 +37,7 @@
                     {{ article.created_string }}
                     {% endif %}
                 </div>
-            </div>
+            </a>
             <!-- 여행 기간 -->
             <div class="detail-date">
                 <!-- 달력 아이콘 -->
@@ -102,14 +102,14 @@
                 <div class="comment-row" id="comment-{{ comment.pk }}-row">
                     <div class="comment-wrapper" id="comment-{{ comment.pk }}-wrapper">
                         <div class="comment-user">
-                            <div class="comment-img-div">
+                            <a class="comment-img-div" href="{% url 'accounts:detail' comment.user.pk %}">
                                 {% if not comment.user.profile_image %}
                                 <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
                                     class="comment-profile-img">
                                 {% else %}
                                 <img src="{{ comment.user.profile_image.url }}" alt="" class="comment-profile-img">
                                 {% endif %}
-                            </div>
+                            </a>
                         </div>
                         <div class="comment-main">
                             <div class="comment-user-date">
@@ -161,7 +161,8 @@
                             <div class="comment-row" id="comment-{{ sub_comment.pk }}-row">
                                 <div class="comment-wrapper" id="comment-{{ sub_comment.pk }}-wrapper">
                                     <div class="comment-user">
-                                        <div class="comment-img-div">
+                                        <a class="comment-img-div"
+                                            href="{% url 'accounts:detail' sub_comment.user.pk %}">
                                             {% if not comment.user.profile_image %}
                                             <img src="https://dummyimage.com/48x48/ededed/0011ff" alt="프사 없을 시 사진"
                                                 class="comment-profile-img">
@@ -169,7 +170,7 @@
                                             <img src="{{ sub_comment.user.profile_image.url }}" alt=""
                                                 class="comment-profile-img">
                                             {% endif %}
-                                        </div>
+                                        </a>
                                     </div>
                                     <div class="comment-main">
                                         <div class="comment-user-date">
@@ -294,7 +295,7 @@
                 chat_bubble_outline
             </span>
             <span class="comment_count">댓글
-                {{ article.articlecomment_set.count }}개</span>
+                {{ comment_count }}개</span>
         </a>
     </div>
 </nav>
@@ -437,9 +438,9 @@
             <div class="comment-wrapper" id="comment-${response.data.comments_data[i].comment_pk}-wrapper">
             <!-- 작성자 프로필 사진-->
               <div class="comment-user">
-                <div class="comment-img-div">
+                <a class="comment-img-div" href="/accounts/${response.data.comments_data[i].user_pk}">
                   <img src="${response.data.comments_data[i].img_url}" alt="" class="comment-profile-img">
-                </div>
+                </a>
               </div>
               <!-- 댓글 주요 영역 -->
               <div class="comment-main">
@@ -520,9 +521,9 @@
               <div class="comment-row" id="comment-${subAll[j].comment_pk}-row">
                   <div class="comment-wrapper" id="comment-${subAll[j].comment_pk}-wrapper">
                     <div class="comment-user">
-                      <div class="comment-img-div">
+                      <a class="comment-img-div" href="/accounts/${subAll[j].user_pk}">
                         <img src="${subAll[j].img_url}" alt="" class="comment-profile-img">
-                      </div>
+                      </a>
                     </div>
                     <div class="comment-main">
                       <div class="comment-user-date">
@@ -583,7 +584,7 @@
         // 댓글 수 반영
         const commentCounts = document.querySelectorAll('.comment_count')
         commentCounts[0].innerText = response.data.comments_data.length
-        commentCounts[1].innerText = response.data.comments_data.length
+        commentCounts[1].innerText = `댓글 ${response.data.comments_data.length}개`
 
         return
 
