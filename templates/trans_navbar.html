@@ -21,47 +21,44 @@
 <body>
   <header class="nav-bar d-flex align-items-center" style="z-index: 1;">
     <section class="container d-flex justify-content-between align-items-center" style="max-width: 732px">
-      <h1><a href="{% url 'countries:index' %}" style="text-decoration: none;" title="여행전날">여행전날</a></h1>
+      <h1>
+        <a href="{% url 'countries:index' %}" style="text-decoration: none;" title="여행전날">여행전날</a>
+      </h1>
       <div class="d-flex align-items-center">
-        <a style="height: 24px;"><span class="material-symbols-outlined search-icn">
+        <a style="height: 24px;">
+          <span class="material-symbols-outlined search-icn">
             search
-          </span></a>
+          </span>
+        </a>
         <ul class="large-menu px-1 align-items-center">
-          <li><a href="{% url 'countries:index' %}" style="text-decoration: none; ">메인</a></li>
+          <li>
+            <a href="{% url 'countries:index' %}" style="text-decoration: none; ">메인</a>
+          </li>
           <li>
             <a href="{% url 'communities:main' %}" style="text-decoration: none;">커뮤니티</a>
-            </div>
-          </li>
-          {% if request.user.is_authenticated %}
-          <li>
-            <div style="display: inline-block;">
-              <a class='d-flex' href="{% url 'accounts:detail' request.user.pk %}" style='text-decoration-line:none;'>
-                <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;"
-                  alt="{{ request.user.profile_image }}">
-                <!-- <p class="mb-0 ms-2 font-space">{{ request.user }}님</p> -->
-              </a>
-            </div>
-          </li>
-          {% else %}
-          <li>
-            <a href="{% url 'accounts:login' %}" style='text-decoration:none;'>
-              로그인
-            </a>
-          </li>
-          <!-- <li>
-              <a href="{% url 'accounts:signup' %}" class="font-space text-black" style='text-decoration:none;'>
-                Signup
-              </a>
-            </li> -->
-          {% endif %}
+      </div>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li>
+        <div style="display: inline-block;">
+          <a class='d-flex' href="{% url 'accounts:detail' request.user.pk %}" style='text-decoration-line:none;'>
+            <img src="{{ request.user.profile_image.url }}" style="width: 33px; height: 33px; border-radius: 10rem;"
+              alt="{{ request.user.profile_image }}">
+            <!-- <p class="mb-0 ms-2 font-space">{{ request.user }}님</p> -->
+          </a>
+        </div>
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'accounts:login' %}" style='text-decoration:none;'>
+          로그인
+        </a>
+      </li>
+      <!-- <li> <a href="{% url 'accounts:signup' %}" class="font-space text-black" style='text-decoration:none;'> Signup </a> </li> -->
+      {% endif %}
 
-
-          <!-- {% if request.user.is_authenticated %}
-            <li>
-              <a href="{% url 'accounts:logout' %}" style='text-decoration:none;'>Logout</a>
-            </li>
-            {% endif %} -->
-        </ul>
+      <!-- {% if request.user.is_authenticated %} <li> <a href="{% url 'accounts:logout' %}" style='text-decoration:none;'>Logout</a> </li> {% endif %} -->
+      </ul>
 
       </div>
       <div class="small-menu">
@@ -81,44 +78,52 @@
       </div>
       <div class="search-bg">
         <div class="bg-dk">
-          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+          <div class="circle-group left">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient03">
+                <lineargradient id="circle-gradient03">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
-            </svg></div>
-          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+            </svg>
+          </div>
+          <div class="circle-group right">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient04">
+                <lineargradient id="circle-gradient04">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
-            </svg></div>
+            </svg>
+          </div>
         </div>
         <div class="bg-lt">
-          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+          <div class="circle-group left">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient03">
+                <lineargradient id="circle-gradient03">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
-            </svg></div>
-          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+            </svg>
+          </div>
+          <div class="circle-group right">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient04">
+                <lineargradient id="circle-gradient04">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
-            </svg></div>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -135,53 +140,85 @@
       </div>
       <div class="search-bg">
         <div class="bg-dk">
-          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+          <div class="circle-group left">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient03">
+                <lineargradient id="circle-gradient03">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
-            </svg></div>
-          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+            </svg>
+          </div>
+          <div class="circle-group right">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient04">
+                <lineargradient id="circle-gradient04">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
-            </svg></div>
+            </svg>
+          </div>
         </div>
         <div class="bg-lt">
-          <div class="circle-group left"><svg viewBox="0 0 600 600" width="600" height="600">
+          <div class="circle-group left">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient03">
+                <lineargradient id="circle-gradient03">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient03)" rx="300"></rect>
-            </svg></div>
-          <div class="circle-group right"><svg viewBox="0 0 600 600" width="600" height="600">
+            </svg>
+          </div>
+          <div class="circle-group right">
+            <svg viewbox="0 0 600 600" width="600" height="600">
               <defs>
-                <linearGradient id="circle-gradient04">
+                <lineargradient id="circle-gradient04">
                   <stop offset="0%" stop-color="#fff" stop-opacity="1"></stop>
                   <stop offset="50%" stop-color="#f2f3f9" stop-opacity="1"></stop>
-                </linearGradient>
+                </lineargradient>
               </defs>
               <rect width="600" height="600" fill="url(#circle-gradient04)" rx="300"></rect>
-            </svg></div>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <ul class="list-group">
-    <li class="list-group-item"><a href="{% url 'countries:index' %}"
-        style="text-decoration: none; color: rgb(51, 51, 51)">메인<a /></li>
-    <li class="list-group-item"><a href="{% url 'communities:main' %}"
-        style="text-decoration: none; color: rgb(51, 51, 51)">커뮤니티</a></li>
+    <li class="list-group-item">
+      <a href="{% url 'countries:index' %}" style="text-decoration: none; color: rgb(51, 51, 51)">메인<a />
+    </li>
+    <li class="list-group-item">
+      {% if request.resolver_match.url_name == 'main' %}
+      <a href="{% url 'communities:main' %}" style="text-decoration: none; color: rgb(51, 51, 51)">커뮤니티</a>
+      {% endif %}
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseOne">
+              커뮤니티
+            </button>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body">
+                <a href="" id="link-1">후기</a>
+                <hr>
+                <a href="" id="link-2">꿀팁</a>
+                <hr>
+                <a href="" id="link-3">피드</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </li>
     <li class="list-group-item">내 스케쥴</li>
   </ul>
 
@@ -336,6 +373,24 @@
         .classList
         .add('current');
     }
+  </script>
+  <script>
+    // 현재 url에서 국가코드 뽑아오는 함수
+    const urlPath = new URL(location.href).href
+    console.log(urlPath)
+    // console.log(urlPath.slice(0, 37))
+    const url = urlPath.slice(0, 37)
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const link1 = document.querySelector('#link-1')
+      const link2 = document.querySelector('#link-2')
+      const link3 = document.querySelector('#link-3')
+      link1.href = url + 'review/'
+      link2.href = url + 'advice/'
+      link3.href = url + 'feed/'
+      // link1.href = urlPath
+
+    })
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
