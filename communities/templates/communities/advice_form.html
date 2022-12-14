@@ -100,22 +100,13 @@
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <section class="main">
-      {% if request.resolver_match.url_name == 'review_create' %}
+      {% if request.resolver_match.url_name == 'advice_create' %}
       <div style="margin-bottom: 1rem;">
         <input type="text" name="title" maxlength="80" class="form-control p-0" placeholder="제목을 입력하세요" required=""
           id="id_title" style="border: 0px; color: #212529; font-weight: 700;" class="main-title">
       </div>
       <div class="bar"></div>
-      <div class="d-grid" style="grid-template-columns: 4.5fr 1fr 4.5fr; margin: 1rem 0;">
-        <div class="date-input">
-          <!-- <label for="travel_start">여행시작:</label> -->
-          <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일" required />
-        </div>
-        <div class="d-flex justify-content-center align-items-center">~</div>
-        <div class=" date-input">
-          <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일" required />
-        </div>
-      </div>
+      
       <textarea name="content" cols="40" rows="10" class="form-control" placeholder="Content" id="id_content"
         hidden="true" style="display: none;"></textarea>
       <script>
@@ -145,18 +136,7 @@
           value="{{ article.title }}">
       </div>
       <div class="bar"></div>
-      <div class="d-grid" style="grid-template-columns: 4.5fr 1fr 4.5fr; margin: 1rem 0;">
-        <div class="date-input">
-          <!-- <label for="travel_start">여행시작:</label> -->
-          <input id="travel_start" type="date" name="start" class="form-control" data-placeholder="출발일"
-            value="{{ article_start }}" required />
-        </div>
-        <div class="d-flex justify-content-center align-items-center">~</div>
-        <div class=" date-input">
-          <input id=" travel_end" type="date" name="end" class="form-control" data-placeholder="도착일"
-            value="{{ article_end }}" required />
-        </div>
-      </div>
+      
       <textarea name="content" cols="40" rows="10" class="form-control" placeholder="Content" id="id_content"
         hidden="true" style="display: none;">{{ article.content|safe }}</textarea>
       <script>
@@ -176,7 +156,8 @@
         <iframe id="id_content_iframe" src="/summernote/editor/id_content/" frameborder="0" width="100%" height="480"
           style="height: 480px;"></iframe>
         <div class="mb-3"><label class="form-label" for="id_image">대표 이미지를 설정해주세요.</label><input type="file"
-          name="image" accept="image/*" class="form-control" id="id_image"></div>
+            name="image" accept="image/*" class="form-control" id="id_image">
+
           {% if article.image %}
           <div class="row mt-1">
             <div class="col-auto">
@@ -199,8 +180,8 @@
           style="bottom: 0px; box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px; background-color: white; padding: 0 48px; box-sizing: border-box; max-width: 733px;">
           <section class="container d-flex justify-content-between align-items-center"
             style="z-index: 10; width: 733px; height: 64px;">
-            {% if request.resolver_match.url_name == 'review_create' %}
-            <a href="{% url 'communities:review' country_code %}">뒤로가기</a>
+            {% if request.resolver_match.url_name == 'advice_create' %}
+            <a href="{% url 'communities:advice' country_code %}">뒤로가기</a>
             {% else %}
             <a href="{% url 'communities:detail' country_code article.pk %}">뒤로가기</a>
             {% endif %}
@@ -213,43 +194,7 @@
       </section>
     </section>
 
-</form>
-<div id="load">
-    <img src="{% static 'images/loading.gif' %}" alt="loading">
-</div>
-<script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
-        crossorigin="anonymous"></script>
-<script type="text/javascript">
-
-    window.onbeforeunload = function () {
-        $('#load').show();
-    }  //현재 페이지에서 다른 페이지로 넘어갈 때 표시해주는 기능
-    $(window).load(function () {          //페이지가 로드 되면 로딩 화면을 없애주는 것
-        $('#load').hide();
-    });
-</script>
-
-<style type="text/css">
-    #load {
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: fixed;
-        display: block;
-        opacity: 0.8;
-        background: white;
-        z-index: 99;
-        text-align: center;
-    }
-
-    #load > img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 100;
-    }
-</style>
+  </form>
 </body>
 
 </html>

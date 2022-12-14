@@ -11,6 +11,7 @@ urlpatterns = [
     path("<str:country_code>/review/<int:article_pk>/review_update", views.review_update, name="review_update"),
     path("<str:country_code>/advice/", views.advice, name="advice"),
     path("<str:country_code>/advice/advice_create", views.advice_create, name="advice_create"),
+    path("<str:country_code>/advice/<int:article_pk>/advice_update", views.advice_update, name="advice_update"),
     path("<str:country_code>/feed/", views.feed, name="feed"),
     path("<str:country_code>/feed/feed_create/", views.feed_create, name="feed_create"),
     path("<str:country_code>/feed/<int:feed_pk>/feed_delete/", views.feed_delete, name="feed_delete"),
