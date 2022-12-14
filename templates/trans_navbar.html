@@ -28,7 +28,10 @@
           </span></a>
         <ul class="large-menu px-1 align-items-center">
           <li><a href="{% url 'countries:index' %}" style="text-decoration: none; ">메인</a></li>
-          <li><a href="{% url 'communities:main' %}" style="text-decoration: none;">커뮤니티</a></li>
+          <li>
+            <a href="{% url 'communities:main' %}" style="text-decoration: none;">커뮤니티</a>
+            </div>
+          </li>
           {% if request.user.is_authenticated %}
           <li>
             <div style="display: inline-block;">
