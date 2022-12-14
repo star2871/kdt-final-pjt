@@ -3,175 +3,169 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
-    <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
+<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
-    <!-- 후기 페이지 -->
-    <div id="carouselExampleInterval" style="max-width:1900px; margin:0 auto 0;" class="carousel slide"
-         data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="3000">
-                <div class="community-header"
-                     style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/main.jpeg' %}');">
-                    <h1 class=" index-text" data-country-code="일본"></h1>
-                </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <a href="{% url 'communities:review' 'JP' %}">
-                    <div class="community-header"
-                         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/jp_main.jpg' %}');">
-                        <h1 class=" index-text" data-country-code="일본"><b>일본</b>은 지금? 따뜻한 오키나와로 떠나보세요</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <a href="{% url 'communities:review' 'AU' %}">
-                    <div class="community-header"
-                         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/au_main.jpg' %}');">
-                        <h1 class=" index-text" data-country-code="일본"><b>호주</b> 시드니의 오페라하우스입니다</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <a href="{% url 'communities:review' 'ES' %}">
-                    <div class="community-header"
-                         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/es_main.jpg' %}');">
-                        <h1 class=" index-text" data-country-code="일본"><b>스페인</b>의 12월은 우리나라의 늦가을과 같습니다</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <a href="{% url 'communities:review' 'UK' %}">
-                    <div class="community-header"
-                         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/uk_main.jpg' %}');">
-                        <h1 class=" index-text" data-country-code="일본">12월 26일부터 <b>EPL</b>이 재개됩니다</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <a href="{% url 'communities:review' 'US' %}">
-                    <div class="community-header"
-                         style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/us_main.jpg' %}');">
-                        <h1 class=" index-text" data-country-code="일본">미국여행 지금 가보시는건 어때요?</h1>
-                    </div>
-                </a>
-            </div>
+<!-- 후기 페이지 -->
+<div id="carouselExampleInterval" style="max-width:1900px; margin:0 auto 0;" class="carousel slide"
+  data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="3000">
+      <div class="community-header"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/main.jpeg' %}');">
+        <h1 class=" index-text" data-country-code="일본"></h1>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <a href="{% url 'communities:review' 'JP' %}">
+        <div class="community-header"
+          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/jp_main.jpg' %}');">
+          <h1 class=" index-text" data-country-code="일본"><b>일본</b>은 지금? 따뜻한 오키나와로 떠나보세요</h1>
         </div>
+      </a>
     </div>
-
-    <!-- 커뮤니티 공지사항 -->
-    <div style="max-width: 733px; background-color: white; margin: 0 auto;">
-        <section style="padding: 0 18px">
-            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
-                공지사항</h2>
-            <div
-                    style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
-                <ul style="padding-top: 30px; padding: 0px;">
-                    <div class="reviews-row" style="padding: 0">asdasd
-                    </div>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 커뮤니티 -->
-        <section style="margin-top: 45px; padding: 0 18px">
-            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 커뮤니티</h2>
-            <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-                {% for country in countries %}
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
-                        <a
-                                class="sc-jgrJph dYjA-dM" href="{% url 'communities:review' country.country_code %}">
-                            <img src="{{ country.country_image.url }}"></a>
-                        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
-                                                         href="{% url 'communities:review' country.country_code %}">
-                            <h4>{{ country.country_name }}</h4>
-                        </a>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy"><a class="userinfo"
-                                                        href="{% url 'countries:detail' country.country_code %}"><img
-                                src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
-
-        <!-- 꿀팁 -->
-        <section style="margin-top: 45px; padding: 0 18px">
-            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 꿀팁</h2>
-            <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-                {% for country in countries %}
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
-                        <a
-                                class="sc-jgrJph dYjA-dM" href="{% url 'communities:advice' country.country_code %}">
-                            <img src="{{ country.country_image.url }}"></a>
-                        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
-                                                         href="{% url 'communities:advice' country.country_code %}">
-                            <h4>{{ country.country_name }}</h4>
-                        </a>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy"><a class="userinfo"
-                                                        href="{% url 'countries:detail' country.country_code %}"><img
-                                src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
-
-
-        <!-- 피드 -->
-        <section style="margin-top: 45px; padding: 0 18px">
-            <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 피드</h2>
-            <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-                {% for country in countries %}
-                    <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
-                        <a
-                                class="sc-jgrJph dYjA-dM" href="{% url 'communities:feed' country.country_code %}">
-                            <img src="{{ country.country_image.url }}"></a>
-                        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
-                                                         href="{% url 'communities:feed' country.country_code %}">
-                            <h4>{{ country.country_name }}</h4>
-                        </a>
-                        </div>
-                        <div class="sc-iNGGcK UXOKy"><a class="userinfo"
-                                                        href="{% url 'countries:detail' country.country_code %}"><img
-                                src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
-        <!-- 커뮤니티 베스트리뷰 -->
-        <!-- 커뮤니티 리뷰 -->
-
+    <div class="carousel-item" data-bs-interval="3000">
+      <a href="{% url 'communities:review' 'AU' %}">
+        <div class="community-header"
+          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/au_main.jpg' %}');">
+          <h1 class=" index-text" data-country-code="일본"><b>호주</b> 시드니의 오페라하우스입니다</h1>
+        </div>
+      </a>
     </div>
-    <script>
-        const text = document.querySelector(".index-text")
-        const content = `여행을 준비하는 당신을 위해 ☺️`
-        console
-            .log(text.dataset)
-        let index = 0;
+    <div class="carousel-item" data-bs-interval="3000">
+      <a href="{% url 'communities:review' 'ES' %}">
+        <div class="community-header"
+          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/es_main.jpg' %}');">
+          <h1 class=" index-text" data-country-code="일본"><b>스페인</b>의 12월은 우리나라의 늦가을과 같습니다</h1>
+        </div>
+      </a>
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <a href="{% url 'communities:review' 'UK' %}">
+        <div class="community-header"
+          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/uk_main.jpg' %}');">
+          <h1 class=" index-text" data-country-code="일본">12월 26일부터 <b>EPL</b>이 재개됩니다</h1>
+        </div>
+      </a>
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
+      <a href="{% url 'communities:review' 'US' %}">
+        <div class="community-header"
+          style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/us_main.jpg' %}');">
+          <h1 class=" index-text" data-country-code="일본">미국여행 지금 가보시는건 어때요?</h1>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
-        function printNumbers(from, to) {
-            let current = from;
+<!-- 커뮤니티 공지사항 -->
+<div style="max-width: 733px; background-color: white; margin: 0 auto;">
+  <section style="padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
+      공지사항</h2>
+    <div
+      style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
+      <ul style="padding-top: 30px; padding: 0px;">
+        <div class="reviews-row" style="padding: 0">asdasd
+        </div>
+      </ul>
+    </div>
+  </section>
 
-            let timerId = setInterval(function () {
-                text.textContent += content[index]
-                console.log(text.textContent)
-                if (text.textContent == to) {
-                    clearInterval(timerId);
-                    text.style.cssText = "border: 0; animation: none;"
-                }
-                index++;
-            }, 100);
-        }
+  <!-- 커뮤니티 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 커뮤니티</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      {% for country in countries %}
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
+        <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:review' country.country_code %}">
+          <img src="{{ country.country_image.url }}"></a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
+            href="{% url 'communities:review' country.country_code %}">
+            <h4>{{ country.country_name }} {{ country.country_eng_name }}</h4>
+          </a>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="{% url 'countries:detail' country.country_code %}"><img
+              src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 
-        setTimeout(printNumbers, 500, text, content);
-    </script>
+  <!-- 꿀팁 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 꿀팁</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      {% for country in countries %}
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
+        <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:advice' country.country_code %}">
+          <img src="{{ country.country_image.url }}"></a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
+            href="{% url 'communities:advice' country.country_code %}">
+            <h4>{{ country.country_name }} {{ country.country_eng_name }}</h4>
+          </a>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="{% url 'countries:detail' country.country_code %}"><img
+              src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+
+  <!-- 피드 -->
+  <section style="margin-top: 45px; padding: 0 18px">
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 피드</h2>
+    <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+      {% for country in countries %}
+      <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
+        <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:feed' country.country_code %}">
+          <img src="{{ country.country_image.url }}"></a>
+        <div class="sc-lbhJGD jhNfXV"><a class="sc-jgrJph dYjA-dM"
+            href="{% url 'communities:feed' country.country_code %}">
+            <h4>{{ country.country_name }} {{ country.country_eng_name }}</h4>
+          </a>
+        </div>
+        <div class="sc-iNGGcK UXOKy"><a class="userinfo" href="{% url 'countries:detail' country.country_code %}"><img
+              src="{{ country.flag_image.url }}" alt=""><span>by <b>{{ country.country_eng_name }}</b></span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  <!-- 커뮤니티 베스트리뷰 -->
+  <!-- 커뮤니티 리뷰 -->
+
+</div>
+<script>
+  const text = document.querySelector(".index-text")
+  const content = `여행을 준비하는 당신을 위해 ☺️`
+  console
+    .log(text.dataset)
+  let index = 0;
+
+  function printNumbers(from, to) {
+    let current = from;
+
+    let timerId = setInterval(function () {
+      text.textContent += content[index]
+      console.log(text.textContent)
+      if (text.textContent == to) {
+        clearInterval(timerId);
+        text.style.cssText = "border: 0; animation: none;"
+      }
+      index++;
+    }, 100);
+  }
+
+  setTimeout(printNumbers, 500, text, content);
+</script>
 {% endblock %}
