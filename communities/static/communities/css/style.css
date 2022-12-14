@@ -319,7 +319,15 @@ video {
     justify-content: flex-start;
     padding: 8px 0px;
     align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
+
+.detail-user:hover {
+    color: inherit;
+    opacity: 0.8
+}
+
 
 @media (min-width: 1024px) {
     .detail-user {
@@ -472,9 +480,8 @@ video {
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 
-.comment-row:hover>.comment-wrapper .buttons {
+.comment-row > .comment-wrapper:hover .buttons {
     display: flex;
-    width: 12%;
     justify-content: space-between;
 
 }
@@ -484,7 +491,10 @@ video {
     width: 48px;
     height: 48px;
     border-radius: 50%;
+}
 
+.comment-img-div:hover {
+    opacity: 0.8;
 }
 
 .comment-main {
@@ -538,12 +548,26 @@ video {
     border: 0px;
     color: #3c7ed2;
     background-color: transparent;
+    margin: 0px 10px;
 }
 
 .buttons>button:hover {
     text-decoration: underline;
     color: #3c7ed2;
     background-color: transparent;
+}
+
+a[name="comment"] input[value="제출"], .comment-section input[value="제출"] {
+    background: #3c7ed2;
+    padding: 0px 2rem;
+    border: 0;
+    border-radius: 3px;
+    line-height: 30px;
+    color: white;
+}
+
+a[name="comment"] input[value="제출"]:hover, .comment-section input[value="제출"]:hover {
+    opacity: 0.8;
 }
 
 .update-form {
