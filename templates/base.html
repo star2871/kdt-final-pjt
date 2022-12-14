@@ -13,7 +13,8 @@
 
     {% block css %}{% endblock css %}
 
-</head>
+  </head>
+
 
 <body>
 <header class="nav-bar d-flex align-items-center" style="z-index: 1;">
@@ -68,6 +69,7 @@
     }
 
     #load > img {
+
         position: absolute;
         top: 50%;
         left: 50%;
@@ -119,6 +121,7 @@
         current.classList.remove('current');
         current.classList.add('prev');
 
+
         //.next -> .current
         let next = document.querySelector('.rollingbanner .next');
         //다음 목록 요소가 널인지 체크
@@ -136,5 +139,6 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 </body>
+
 
 </html>
