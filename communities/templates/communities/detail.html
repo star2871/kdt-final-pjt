@@ -316,7 +316,6 @@
 
     const hearts = document.querySelectorAll('.like')
     const articleLikes = document.querySelectorAll('.article-like')
-    console.log(hearts, articleLikes)
     hearts.forEach((heart) => {
         heart.addEventListener('click', function (e) {
             axios({
@@ -603,7 +602,6 @@
 
         const pk = event.target.dataset.articleId;
         const country = event.target.dataset.countryId;
-        console.log("댓글 생성 이벤트 발생")
 
         axios({
             method: 'post',
@@ -614,7 +612,6 @@
             data: new FormData(commentForm)
         }).then(response => {
 
-            console.log(response)
 
             const commentList = document.querySelector(`#comment-list-${pk}`)
 
@@ -627,7 +624,6 @@
 
     // 수정 버튼
     const getUpdateComment = function (e) {
-        console.log(e)
         const btNs = document.querySelector(`#${e}-buttons`)
         const updateCommentForm = document.querySelector(`#${e}-form`);
         const commentContent = document.querySelector(`#${e}-hide`);
@@ -640,9 +636,7 @@
         updateCommentForm.style.display = "block";
     }
 
-    const test = function (e) {
-        console.log("이벤트 발생")
-    }
+
 
     // 작성 취소
     const updateCommentCancel = function (e) {
@@ -681,7 +675,6 @@
                 'content': commentValue
             }
         }).then(response => {
-            console.log(response)
             const commentList = document.querySelector(`#comment-list-${pk}`)
             commentList.textContent = "";
             createCommentList(response, commentList, baseDisplay)
@@ -694,7 +687,6 @@
         const coPk = event.target.dataset.commentId;
         const country = event.target.dataset.countryId;
         const baseDisplay = getDisplay()
-        console.log(baseDisplay)
 
         if (confirm("정말 삭제하시겠습니까?!") === true) {
             axios({
@@ -704,8 +696,6 @@
                     'X-CSRFToken': csrftoken
                 }
             }).then(response => {
-
-                console.log(response)
 
                 const commentList = document.querySelector(`#comment-list-${pk}`)
 
@@ -750,8 +740,7 @@
         const commentForm = document.querySelector(`#${e}`);
         const articlePk = event.target.dataset.articleId;
         const parentPk = event.target.dataset.parentId;
-        console.log("답글 이벤트 발생")
-        console.log(baseDisplay)
+
 
         axios({
             method: 'post',
@@ -761,7 +750,7 @@
             },
             data: new FormData(commentForm)
         }).then(response => {
-            console.log(response)
+
             const commentList = document.querySelector(`#comment-list-${articlePk}`)
             commentList.textContent = "";
             /* console.log(parentPk, response.data.parents_set)
@@ -831,7 +820,6 @@
     const reviewDeleteBtns = document.querySelectorAll('#review_delete')
     reviewDeleteBtns.forEach((btn) => {
         btn.addEventListener('click', function (e) {
-            console.log("hi")
             if (confirm("정말로 삭제하시겠습니까?")) {
                 const deleteForm = document.querySelector('#delete_form')
                 deleteForm.submit();

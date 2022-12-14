@@ -193,7 +193,6 @@
 
             let timerId = setInterval(function () {
               text.textContent += content[index]
-              console.log(text.textContent)
               if (text.textContent == to) {
                 clearInterval(timerId);
                 text.style.cssText = "border: 0; animation: none;"

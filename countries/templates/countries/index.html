@@ -6,6 +6,8 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>비포트립 :: 여행전날 체크하자</title>
+    <link rel="shortcut icon" href="{% static 'img/fabicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>Document</title>
     <style>
@@ -62,6 +64,13 @@
     $(window).load(function () {          //페이지가 로드 되면 로딩 화면을 없애주는 것
         $('#load').hide();
     });
+
+    window.onpageshow = function (e) {
+        if (e.persisted) {
+            //페이지가 로드 되면 로딩 화면을 없애주는 것
+            document.getElementById('load').style.display = 'none';
+        }
+    }
 </script>
 
 <style type="text/css">
