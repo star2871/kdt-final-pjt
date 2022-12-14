@@ -144,27 +144,25 @@
   <!-- 커뮤니티 베스트리뷰 -->
   <!-- 커뮤니티 리뷰 -->
 
-</div>
-<script>
-  const text = document.querySelector(".index-text")
-  const content = `여행을 준비하는 당신을 위해 ☺️`
-  console
-    .log(text.dataset)
-  let index = 0;
+    </div>
+    <script>
+        const text = document.querySelector(".index-text")
+        const content = `여행을 준비하는 당신을 위해 ☺️`
+
+        let index = 0;
 
   function printNumbers(from, to) {
     let current = from;
 
-    let timerId = setInterval(function () {
-      text.textContent += content[index]
-      console.log(text.textContent)
-      if (text.textContent == to) {
-        clearInterval(timerId);
-        text.style.cssText = "border: 0; animation: none;"
-      }
-      index++;
-    }, 100);
-  }
+            let timerId = setInterval(function () {
+                text.textContent += content[index]
+                if (text.textContent == to) {
+                    clearInterval(timerId);
+                    text.style.cssText = "border: 0; animation: none;"
+                }
+                index++;
+            }, 100);
+        }
 
   setTimeout(printNumbers, 500, text, content);
 </script>

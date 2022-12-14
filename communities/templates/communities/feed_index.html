@@ -12,7 +12,7 @@
 {% block body %}
 
   <!-- 피드 메인 -->
-  <div class="community-header"></div>
+
 
   <!-- 피드 공지사항 -->
   <div style="max-width: 733px; background-color: white; margin: 0 auto;">
@@ -188,7 +188,6 @@
     //국가 코드 선언
     //국가 코드 선언
     let conPK = '{{ country_code }}';
-    console.log(conPK)
 
     function displayedAt(createdAt) {
       let time = new Date(createdAt)
@@ -348,7 +347,6 @@
             `)
 
             const subCommentWrapper = document.querySelector(`#comment-${subAll[j].comment_pk}-wrapper`)
-            console.log(subCommentWrapper)
             if (subAll[j].user_pk === subAll[j].request_user_pk) {
               subCommentWrapper.insertAdjacentHTML('beforeend', `
               <div id="comment-${subAll[j].comment_pk}-update-buttons" class="buttons">
@@ -415,7 +413,6 @@
         },
         data: new FormData(feedForm)
       }).then(response => {
-        console.log(response)
         const feedList = document.querySelector(`#feed-list`)
         feedList.textContent = "";
         crateFeedList(response, feedList, baseDisplay)
@@ -436,7 +433,6 @@
               'X-CSRFToken': csrftoken
           }
         }).then(response => {
-          console.log(response)
           const feedList = document.querySelector(`#feed-list`)
           feedList.textContent = "";
           crateFeedList(response, feedList, baseDisplay)
@@ -447,7 +443,6 @@
     // 피드 수정폼 보이기
     // 피드 수정폼 보이기
     const getUpdateFeed = function (e) {
-        console.log(e)
         const btNs = document.querySelector(`#${e}-buttons`)
         const updateFeedForm = document.querySelector(`#${e}-form`);
         const feedContent = document.querySelector(`#${e}-hide`);
@@ -478,7 +473,6 @@
       const feedValue = document.querySelector(`#feed-${event.target.dataset.feedId}-update-content`).value;
       const pk = event.target.dataset.feedId;
       const baseDisplay = getDisplay()
-      console.log(feedValue, pk)
       // const baseDisplay = getDisplay()
       axios({
         method: 'post',
@@ -490,7 +484,6 @@
           'content': feedValue
         }
       }).then(response => {
-        console.log(response)
         const feedList = document.querySelector(`#feed-list`)
         feedList.textContent = "";
         crateFeedList(response, feedList, baseDisplay)
@@ -519,7 +512,6 @@
       const baseDisplay = getDisplay()
       const commentForm = document.querySelector(`#${e}`);
       const feedPk = event.target.dataset.feedId;
-      console.log("댓글 생성 이벤트 발생")
       axios({
         method: 'post',
         url: `/communities/${conPK}/feed/${feedPk}/feed_comment_create/`,
@@ -528,7 +520,6 @@
         },
         data: new FormData(commentForm)
       }).then(response => {
-        console.log(response)
         const feedList = document.querySelector(`#feed-list`)
         feedList.textContent = "";
         crateFeedList(response, feedList, baseDisplay)
@@ -538,7 +529,6 @@
 
     // 댓글 수정창 열기
     const getUpdateComment = function (e) {
-      console.log(e)
       const btNs = document.querySelector(`#${e}-buttons`)
       const updateCommentForm = document.querySelector(`#${e}-form`);
       const commentContent = document.querySelector(`#${e}-hide`);
@@ -578,7 +568,6 @@
             'content': commentValue
         }
       }).then(response => {
-        console.log(response)
         const feedList = document.querySelector(`#feed-list`)
         feedList.textContent = "";
         crateFeedList(response, feedList, baseDisplay)
@@ -590,7 +579,6 @@
       const pk = event.target.dataset.feedId;
       const coPk = event.target.dataset.commentId;
       const baseDisplay = getDisplay()
-      console.log(baseDisplay)
 
       if (confirm("정말 삭제하시겠습니까?!") === true) {
         axios({
@@ -600,7 +588,6 @@
               'X-CSRFToken': csrftoken
           }
         }).then(response => {
-          console.log(response)
           const feedList = document.querySelector(`#feed-list`)
           feedList.textContent = "";
           crateFeedList(response, feedList, baseDisplay)
