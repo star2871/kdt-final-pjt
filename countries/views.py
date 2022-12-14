@@ -80,45 +80,45 @@ def country_detail_view(request, country_code):
     }
     # 환율 
     # url에서 나중에 발표할때 날짜 바꿔야 한다, 또한 250번만 가져올 수있으므로 api_key를 다시 받아야한다.
-    # url = "https://api.apilayer.com/exchangerates_data/2022-12-13&base=KRW"
+    url = "https://api.apilayer.com/exchangerates_data/2022-12-13&base=KRW"
    
-    # headers = {
-    #     "apikey":'4uRZaoBihyNtPoOeHE9VM0YACEGJEUUM'
-    # }
-    # response = requests.get(url, headers=headers).json()
-    # exchange_code = ''
-    # if country_code == "JP":
-    #     exchange_code = '엔'
-    #     response['rates']=100/response['rates']['JPY']
-    #     100/response['rates']
-    # elif country_code == 'US':
-    #     exchange_code = '달러'
-    #     response['rates']=1/response['rates']['USD']
-    #     1/response['rates']
-    # elif country_code == 'AU':
-    #     exchange_code = '호주달러'
-    #     response['rates']=1/response['rates']["AUD"]
-    #     1/response['rates']
-    # elif country_code == 'GB':
-    #     exchange_code = '파운드'
-    #     response['rates']=1/response['rates']["GBP"]
-    #     1/response['rates']
-    # elif country_code == 'ES':
-    #     exchange_code = '유로'
-    #     response['rates']=1/response['rates']["EUR"]
-    #     1/response['rates']
+    headers = {
+        "apikey":'4uRZaoBihyNtPoOeHE9VM0YACEGJEUUM'
+    }
+    response = requests.get(url, headers=headers).json()
+    exchange_code = ''
+    if country_code == "JP":
+        exchange_code = '엔'
+        response['rates']=100/response['rates']['JPY']
+        100/response['rates']
+    elif country_code == 'US':
+        exchange_code = '달러'
+        response['rates']=1/response['rates']['USD']
+        1/response['rates']
+    elif country_code == 'AU':
+        exchange_code = '호주달러'
+        response['rates']=1/response['rates']["AUD"]
+        1/response['rates']
+    elif country_code == 'GB':
+        exchange_code = '파운드'
+        response['rates']=1/response['rates']["GBP"]
+        1/response['rates']
+    elif country_code == 'ES':
+        exchange_code = '유로'
+        response['rates']=1/response['rates']["EUR"]
+        1/response['rates']
 
     
-    # exchange = {
-    #     'base_country': response['base'],
-    #     'country_exchange' : response['rates'],
-    #     'exchange_code' : exchange_code,
-    # }
+    exchange = {
+        'base_country': response['base'],
+        'country_exchange' : response['rates'],
+        'exchange_code' : exchange_code,
+    }
     
     festivals = Festival.objects.filter(country__country_code=country_code,).order_by("-pk")
     country = Country.objects.get(country_code=country_code)
     country_news = Country_news.objects.filter(country_code=country_code)
     return render(request , 'countries/detail.html', {'country': country,
-    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2, 'city_weather3':city_weather3, 'weather':weather, 'festivals': festivals,})
+    'country_news': country_news,'city_weather1':city_weather1, 'city_weather2':city_weather2, 'city_weather3':city_weather3, 'weather':weather, 'festivals': festivals, 'exchange': exchange, 'exchange_code': exchange_code,})
     # 환율 넣을때 넣어야 할 부분
     # 'exchange': exchange, 'exchange_code': exchange_code,
