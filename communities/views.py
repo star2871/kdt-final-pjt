@@ -14,7 +14,7 @@ from django.forms import modelformset_factory
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseForbidden
 import json
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.contrib.auth.decorators import login_required
 
 creds_filename = 'credentials.json'
@@ -39,7 +39,7 @@ def review(request, country_code):
     # 현재 페이지의 국가코드와 동일한 게시물(리뷰) 뽑기
     reviews = Article.objects.filter(country__country_code=country_code, category="review").order_by("-pk")
     # 베스트 게시글
-    best_reviews = reviews.order_by("-like_users")[0:10]
+    best_reviews = reviews.annotate(like_count=Count('like_users')).order_by("-like_count")[0:10]
     print(best_reviews)
     context = {
         "articles": reviews,
@@ -559,7 +559,7 @@ def sub_comment_delete(request, article_pk, comment_pk, country_code):
 ## 꿀팁 인덱스
 def advice(request, country_code):
     advices = Article.objects.filter(country__country_code=country_code, category="advice").order_by("-pk")
-    best_advices = advices.order_by("-like_users")[0:10]
+    best_advices = advices.annotate(like_count=Count('like_users')).order_by("-like_count")[0:10]
     context = {
         "articles": advices,
         "best_articles" : best_advices,
