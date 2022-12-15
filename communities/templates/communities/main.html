@@ -80,7 +80,7 @@
 
   <!-- 커뮤니티 -->
   <section style="margin-top: 45px; padding: 0 18px">
-    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 커뮤니티</h2>
+    <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">국가별 후기</h2>
     <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
       {% for country in countries %}
       <div class="sc-gSQFLo eYZFXY" style="min-width: 240px; max-height: 350px; background-color: white;">
@@ -144,25 +144,25 @@
   <!-- 커뮤니티 베스트리뷰 -->
   <!-- 커뮤니티 리뷰 -->
 
-    </div>
-    <script>
-        const text = document.querySelector(".index-text")
-        const content = `여행을 준비하는 당신을 위해 ☺️`
+</div>
+<script>
+  const text = document.querySelector(".index-text")
+  const content = `여행을 준비하는 당신을 위해 ☺️`
 
-        let index = 0;
+  let index = 0;
 
   function printNumbers(from, to) {
     let current = from;
 
-            let timerId = setInterval(function () {
-                text.textContent += content[index]
-                if (text.textContent == to) {
-                    clearInterval(timerId);
-                    text.style.cssText = "border: 0; animation: none;"
-                }
-                index++;
-            }, 100);
-        }
+    let timerId = setInterval(function () {
+      text.textContent += content[index]
+      if (text.textContent == to) {
+        clearInterval(timerId);
+        text.style.cssText = "border: 0; animation: none;"
+      }
+      index++;
+    }, 100);
+  }
 
   setTimeout(printNumbers, 500, text, content);
 </script>
