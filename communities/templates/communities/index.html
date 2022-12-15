@@ -3,153 +3,108 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
-    <link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/trans_navbar.css' %}">
+<link rel="stylesheet" href="{% static 'communities/css/style.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock css %}
 
 {% block body %}
-    <!-- 후기 페이지 -->
+<!-- 후기 페이지 -->
 
-    <!-- 커뮤니티 메인 -->
-    {% if country_code == "JP" %}
-        <div class="community-header"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/일본사진1.jpg' %}');">
-        <video muted="muted" autoplay="autoplay" loop="loop">
-            <source src="{% static 'communities/video/JP.mp4' %}" type="video/mp4">
-            <strong>Your browser does not support the video tag.</strong>
-        </video>
-        <h1 class=" index-text" data-country-code="일본"></h1>
+<!-- 커뮤니티 메인 -->
+{% if country_code == "JP" %}
+<div class="community-header"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static '/images/일본사진1.jpg' %}');">
+    <video muted="muted" autoplay="autoplay" loop="loop">
+        <source src="{% static 'communities/video/JP.mp4' %}" type="video/mp4">
+        <strong>Your browser does not support the video tag.</strong>
+    </video>
+    <h1 class=" index-text" data-country-code="일본"></h1>
     {% elif country_code == "US" %}
-        <div class="community-header"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/미국사진1.jpg' %}');">
+    <div class="community-header"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/미국사진1.jpg' %}');">
         <video muted="muted" autoplay="autoplay" loop="loop">
             <source src="{% static 'communities/video/US.mp4' %}" type="video/mp4">
             <strong>Your browser does not support the video tag.</strong>
         </video>
         <h1 class="index-text" data-country-code="미국"></h1>
-    {% elif country_code == "AU" %}
+        {% elif country_code == "AU" %}
         <div class="community-header"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/호주-australia-시드니-2.jpg' %}');">
-        <video muted="muted" autoplay="autoplay" loop="loop">
-            <source src="{% static 'communities/video/AU.mp4' %}" type="video/mp4">
-            <strong>Your browser does not support the video tag.</strong>
-        </video>
-        <h1 class="index-text" data-country-code="호주"></h1>
-    {% elif country_code == "ES" %}
-        <div class="community-header"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/스페인사진.jpg' %}');">
-        <video muted="muted" autoplay="autoplay" loop="loop">
-            <source src="{% static 'communities/video/ES.mp4' %}" type="video/mp4">
-            <strong>Your browser does not support the video tag.</strong>
-        </video>
-        <h1 class="index-text" data-country-code="스페인"></h1>
-    {% elif country_code == "GB" %}
-        <div class="community-header"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/영국 사진 3.jpg' %}');">
-        <video muted="muted" autoplay="autoplay" loop="loop">
-            <source src="{% static 'communities/video/UK.mp4' %}" type="video/mp4">
-            <strong>Your browser does not support the video tag.</strong>
-        </video>
-        <h1 class="index-text" data-country-code="영국"></h1>
-    {% endif %}
-</div>
-<!-- 커뮤니티 메인 -->
-
-<!-- 커뮤니티 공지사항 -->
-<div style="max-width: 733px; background-color: white; margin: 0 auto;">
-    <section style="padding: 0 18px">
-        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">공지사항
-        </h2>
-        <div style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
-            <ul style="padding-top: 30px; padding: 0px;">
-                <div class="reviews-row" style="padding: 0">asdasd
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/호주-australia-시드니-2.jpg' %}');">
+            <video muted="muted" autoplay="autoplay" loop="loop">
+                <source src="{% static 'communities/video/AU.mp4' %}" type="video/mp4">
+                <strong>Your browser does not support the video tag.</strong>
+            </video>
+            <h1 class="index-text" data-country-code="호주"></h1>
+            {% elif country_code == "ES" %}
+            <div class="community-header"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/스페인사진.jpg' %}');">
+                <video muted="muted" autoplay="autoplay" loop="loop">
+                    <source src="{% static 'communities/video/ES.mp4' %}" type="video/mp4">
+                    <strong>Your browser does not support the video tag.</strong>
+                </video>
+                <h1 class="index-text" data-country-code="스페인"></h1>
+                {% elif country_code == "GB" %}
+                <div class="community-header"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url('{% static 'images/영국 사진 3.jpg' %}');">
+                    <video muted="muted" autoplay="autoplay" loop="loop">
+                        <source src="{% static 'communities/video/UK.mp4' %}" type="video/mp4">
+                        <strong>Your browser does not support the video tag.</strong>
+                    </video>
+                    <h1 class="index-text" data-country-code="영국"></h1>
+                    {% endif %}
                 </div>
-            </ul>
-        </div>
-    </section>
+                <!-- 커뮤니티 메인 -->
 
-    <!-- 테스트-->
-    <section style="margin-top: 45px; padding: 0 18px">
-        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
-        <div style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
-            {% for review in best_articles %}
-                <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
-                    <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}"></a>
-                    <div class="sc-lbhJGD jhNfXV">
-                        <a class="sc-jgrJph dYjA-dM" href="{% url 'communities:detail' country_code review.pk %}">
-                            <h4>{{ review.title }}</h4>
-                            <div class="description-wrapper">
-                                {{ review.content | striptags }}
-                            </div>
-                        </a>
-                        <div class="sub-info">
-                            <span>{{ review.created_at }}</span><span class="separator">·</span>
-                            <span>
-                          {{ review.articlecomment_set.count }}
-                                <!-- -->개의 댓글
-                        </span>
+                <!-- 커뮤니티 공지사항 -->
+                <div style="max-width: 733px; background-color: white; margin: 0 auto;">
+                    <section style="padding: 0 18px">
+                        <h2
+                            style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; padding-top: 45px;">
+                            공지사항
+                        </h2>
+                        <div
+                            style="margin: 8px auto 0;  background-color: white; border-radius: 16px; max-width: 732px; max-height: 184px; padding: 12px 0 0;">
+                            <ul style="padding-top: 30px; padding: 0px;">
+                                <div class="reviews-row" style="padding: 0">공지사항 없음
+                                </div>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="sc-iNGGcK UXOKy">
-                        <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}">
-                            <img src="{{ review.user.profile_image.url }}" alt="user thumbnail of tosspayments">
-                            <span>by
-                          <b>{{ review.user.nick_name }}</b></span></a>
-                        <div class="likes">
-                            <svg width="24" height="24" viewbox="0 0 24 24">
-                                <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
-                            </svg>
-                            {{ review.like_users.count }}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-    <!-- 커뮤니티 베스트리뷰 -->
+                    </section>
 
-    <!-- 커뮤니티 리뷰 -->
-    <section style="margin-top: 45px; padding: 0 18px">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">리뷰목록</h2>
-            <!-- <div class="create-wrapper"> <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;"> <div class="create"> 리뷰작성 <img class="plane" src="{% static 'communities/img/create.png' %}" alt=""> </div> </a> </div> -->
-            <div class="create-wrapper">
-                {% if request.resolver_match.url_name == 'review' %}
-                    <a href="{% url 'communities:review_create' country_code %}"
-                       style="text-decoration: none; color:rgb(51, 51, 51)">
-                        <div class="m-create" style="font-size: 14px;">
-                            후기작성
-                        </div>
-                    </a>
-                {% else %}
-                    <a href="{% url 'communities:advice_create' country_code %}"
-                       style="text-decoration: none; color:rgb(51, 51, 51)">
-                        <div class="m-create" style="font-size: 14px;">
-                            꿀팁작성
-                        </div>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
-        <div style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
-            <ul style="padding-top: 15px; padding: 0px;">
-                {% for review in articles %}
-                    <div class="review-row">
-                        <div class="row">
-                            <div class="col-8" style="padding:0">
-                                <a href="{% url 'communities:detail' country_code review.pk %}"
-                                   style="text-decoration: none; color: rgb(51, 51, 51)">
-                                    <p class="review-title mb-0">
-                                        {{ review.title }}
-                                    </p>
-                                </a>
-                                <!-- 닉네임|작성일 -->
-                                <p class="review-date">{{ review.user.nick_name }}|{{ review.created_at }}</p>
-                                <div class="like-wrapper">
-                                    <!-- 좋아요 -->
+                    <!-- 테스트-->
+                    <section style="margin-top: 45px; padding: 0 18px">
+                        <h2 style="font-size: 19px; max-width: 732px; margin: 0 auto; font-weight: 700; ">베스트리뷰</h2>
+                        <div
+                            style="max-width: 733px; margin: 0 auto; display: flex; white-space: nowrap; overflow-x: scroll;">
+                            {% for review in best_articles %}
+                            <div class="sc-gSQFLo eYZFXY" style="min-width: 320px; min-height: 210px;">
+                                <a class="sc-jgrJph dYjA-dM"
+                                    href="{% url 'communities:detail' country_code review.pk %}"></a>
+                                <div class="sc-lbhJGD jhNfXV">
+                                    <a class="sc-jgrJph dYjA-dM"
+                                        href="{% url 'communities:detail' country_code review.pk %}">
+                                        <h4>{{ review.title }}</h4>
+                                        <div class="description-wrapper">
+                                            {{ review.content | striptags }}
+                                        </div>
+                                    </a>
+                                    <div class="sub-info">
+                                        <span>{{ review.created_at }}</span><span class="separator">·</span>
+                                        <span>
+                                            {{ review.articlecomment_set.count }}
+                                            <!-- -->개의 댓글
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="sc-iNGGcK UXOKy">
+                                    <a class="userinfo" href="{% url 'accounts:detail' review.user.pk %}">
+                                        <img src="{{ review.user.profile_image.url }}"
+                                            alt="user thumbnail of tosspayments">
+                                        <span>by
+                                            <b>{{ review.user.nick_name }}</b></span></a>
                                     <div class="likes">
                                         <svg width="24" height="24" viewbox="0 0 24 24">
                                             <path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
@@ -158,47 +113,102 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4 review-list">
-                                {% if review.image %}
-                                    <div>
-                                        <img class="review-img" src="{{ review.image.url }}" alt="">
+                            {% endfor %}
+                        </div>
+                    </section>
+                    <!-- 커뮤니티 베스트리뷰 -->
+
+                    <!-- 커뮤니티 리뷰 -->
+                    <section style="margin-top: 45px; padding: 0 18px">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 style="font-size: 19px; max-width: 732px; font-weight: 700;">리뷰목록</h2>
+                            <!-- <div class="create-wrapper"> <a href="{% url 'communities:review_create' country_code %}" style="text-decoration: none;"> <div class="create"> 리뷰작성 <img class="plane" src="{% static 'communities/img/create.png' %}" alt=""> </div> </a> </div> -->
+                            <div class="create-wrapper">
+                                {% if request.resolver_match.url_name == 'review' %}
+                                <a href="{% url 'communities:review_create' country_code %}"
+                                    style="text-decoration: none; color:rgb(51, 51, 51)">
+                                    <div class="m-create" style="font-size: 14px;">
+                                        후기작성
                                     </div>
+                                </a>
+                                {% else %}
+                                <a href="{% url 'communities:advice_create' country_code %}"
+                                    style="text-decoration: none; color:rgb(51, 51, 51)">
+                                    <div class="m-create" style="font-size: 14px;">
+                                        꿀팁작성
+                                    </div>
+                                </a>
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </ul>
-        </div>
-    </section>
-</div>
+                        <div
+                            style="margin: 8px auto 0; padding: 13px 0; background-color: white; border-radius: 16px; max-width: 732px; overflow-y: scroll">
+                            <ul style="padding-top: 15px; padding: 0px;">
+                                {% for review in articles %}
+                                <div class="review-row">
+                                    <div class="row">
+                                        <div class="col-8" style="padding:0">
+                                            <a href="{% url 'communities:detail' country_code review.pk %}"
+                                                style="text-decoration: none; color: rgb(51, 51, 51)">
+                                                <p class="review-title mb-0">
+                                                    {{ review.title }}
+                                                </p>
+                                            </a>
+                                            <!-- 닉네임|작성일 -->
+                                            <p class="review-date">{{ review.user.nick_name }}|{{ review.created_at }}
+                                            </p>
+                                            <div class="like-wrapper">
+                                                <!-- 좋아요 -->
+                                                <div class="likes">
+                                                    <svg width="24" height="24" viewbox="0 0 24 24">
+                                                        <path fill="currentColor"
+                                                            d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path>
+                                                    </svg>
+                                                    {{ review.like_users.count }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 review-list">
+                                            {% if review.image %}
+                                            <div>
+                                                <img class="review-img" src="{{ review.image.url }}" alt="">
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </section>
+                </div>
 
-<!-- <div class="container"> <div class="review-wrapper"> <div class="notion-card"> <div class="text"> <p class="fw-bold">공지 사항</p> <hr> 새로운 사항이 생겼습니다. <hr> 새로운 공지사항2 </div> </div> <div class="notion-card"> <div class="text"> <p class="fw-bold">베스트 리뷰</p> <hr> <div class="best-review row row-cols-2 g-4"> <div class="col best-box"> <div class="rank"> <span class="rank_num">1</span>내용입니다. </div> <div class="rank"> <span class="rank_num">2</span>내용입니다. </div> <div class="rank"> <span class="rank_num">3</span>내용입니다. </div> </div> <div class="col best-box"> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> </div> </div> </div> </div> -->
+                <!-- <div class="container"> <div class="review-wrapper"> <div class="notion-card"> <div class="text"> <p class="fw-bold">공지 사항</p> <hr> 새로운 사항이 생겼습니다. <hr> 새로운 공지사항2 </div> </div> <div class="notion-card"> <div class="text"> <p class="fw-bold">베스트 리뷰</p> <hr> <div class="best-review row row-cols-2 g-4"> <div class="col best-box"> <div class="rank"> <span class="rank_num">1</span>내용입니다. </div> <div class="rank"> <span class="rank_num">2</span>내용입니다. </div> <div class="rank"> <span class="rank_num">3</span>내용입니다. </div> </div> <div class="col best-box"> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> <p>내용입니다.</p> </div> </div> </div> </div> -->
 
-<!-- 글쓰기 -->
+                <!-- 글쓰기 -->
 
-<!-- 전체 글 목록 -->
+                <!-- 전체 글 목록 -->
 
-<script>
-    const text = document.querySelector(".index-text")
-    const content = `여행전날 ${text
-        .dataset
-        .countryCode} 커뮤니티입니다.`
-    let index = 0;
+                <script>
+                    const text = document.querySelector(".index-text")
+                    const content = `여행전날 ${text
+                        .dataset
+                        .countryCode} 커뮤니티입니다.`
+                    let index = 0;
 
-    function printNumbers(from, to) {
-        let current = from;
+                    function printNumbers(from, to) {
+                        let current = from;
 
-        let timerId = setInterval(function () {
-            text.textContent += content[index]
-            if (text.textContent == to) {
-                clearInterval(timerId);
-                text.style.cssText = "border: 0; animation: none;"
-            }
-            index++;
-        }, 130);
-    }
+                        let timerId = setInterval(function () {
+                            text.textContent += content[index]
+                            if (text.textContent == to) {
+                                clearInterval(timerId);
+                                text.style.cssText = "border: 0; animation: none;"
+                            }
+                            index++;
+                        }, 130);
+                    }
 
-    setTimeout(printNumbers, 500, text, content);
-</script>
-{% endblock %}
+                    setTimeout(printNumbers, 500, text, content);
+                </script>
+                {% endblock %}
